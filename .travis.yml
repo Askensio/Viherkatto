@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.0.0
+script: bundle exec rspec specs
+  
+  
+notifications: 
+  email: false
+  irc: 
+    channels:
+    - ircnet.eversible.com#tmskanava
+    use_notice: true
+    skip_join: true
+    template:
+    - "----"
+    - "%{message}"
+    - "%{repository}/%{branch}#%{build_number} (%{author})"
+    - "Build details : %{build_url}"
+    - "----"
