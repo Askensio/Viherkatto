@@ -6,7 +6,7 @@ describe "Pages" do
 
     it "should have the content 'Sample App'" do
       visit '/pages/home'
-      page.should have_content('Pages#home')
+      page.should have_content('Viherkattotietokanta')
     end
   end
 end
