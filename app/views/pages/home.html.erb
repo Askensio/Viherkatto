@@ -1,3 +1,4 @@
+<!--
 <div class="center hero-unit">
   <h1>Viherkattotietokanta</h1>
 
@@ -6,8 +7,10 @@
   </h2>
   	<%= link_to "Rekisteröidy", '#', class: "btn btn-large btn-primary" %>
 </div>
-
-<div class="row">
+//-->
+<%= render 'layouts/carousel' %>
+<div class="container">
+<div class="row-fluid">
 <div class="span4">
 <h2><a href="#">Viherkattosuunnittelija</a></h2>
 <p>Viherkattoa suunnitteleva pystyy applikaation avulla saamaan ehdotuksia mahdollisista toteutuksista antamalla ohjelmalle erilaisia kriteerejä.
@@ -22,5 +25,13 @@
 <p>Kattavampaa tietoa täältä.</p>
 </div>
 </div>
+</div>
 
+    <script>
+      $(document).ready(function(){
+        $('.carousel').carousel({
+          interval: 8000
+        });
+      });
+    </script>
 <%= yield :javascript_includes %>

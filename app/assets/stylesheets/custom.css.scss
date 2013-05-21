@@ -13,7 +13,6 @@ html {
 
 body {
   padding-top: 60px;
-  background-color: #C7E1BA;
 }
 
 section {
@@ -67,7 +66,6 @@ p {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
   font-weight: bold;
   line-height: 1;
   &:hover {
@@ -163,8 +161,8 @@ footer {
     .carousel-caption {
       background-color: transparent;
       position: static;
-      max-width: 550px;
-      padding: 0 20px;
+      max-width: 400px;
+      padding: 0 90px;
       margin-top: 200px;
     }
     .carousel-caption h1,
@@ -173,8 +171,48 @@ footer {
       line-height: 1.25;
       color: #fff;
       text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      text-align: left;
+
     }
     .carousel-caption .btn {
       margin-top: 10px;
     }
 
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 10px 50px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+    h1 a {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      text-align: left;
+    }
+
+    h1 a:hover {
+      margin: 0;
+      line-height: 1.25;
+      color: #C0C0C0;
+      text-shadow: 0 1px 1px rgba(20,20,20,.4);
+      text-align: left;
+      text-decoration: none;
+    }
