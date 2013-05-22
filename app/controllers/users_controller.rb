@@ -3,9 +3,7 @@
 class UsersController < ApplicationController
 
   def new
-
     @user = User.new
-    @positions = %w( Yksityisurakoitsija Yritys Tutkija Muu )
   end
 
   def create

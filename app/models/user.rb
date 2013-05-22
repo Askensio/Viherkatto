@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   VALID_PHONE_REGEX = /\A\d{2,4}-?\d{4,}/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  validates :phone, presence: true, format: {with: VALID_PHONE_REGEX}
+  validates :phone, format: {with: VALID_PHONE_REGEX}
   validates :password, presence: true, length: { minimum: 8 }
   validates :password_confirmation, presence: true
 

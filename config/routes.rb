@@ -6,6 +6,7 @@ Viherkatto::Application.routes.draw do
 
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
+  match '/uloskirjaus', to: 'sessions#destroy'
 
   get "pages/home"
   root :to => 'pages#home'

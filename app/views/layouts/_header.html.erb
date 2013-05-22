@@ -5,8 +5,12 @@
       <nav>
         <ul class="nav pull-left">
           <li><%= link_to "Yhteystiedot",    '#' %></li>
-          <li><%= link_to "Kirjaudu", kirjaudu_path %></li>
-          <li><%= link_to "Rekisteröidy", rekisteroidy_path %></li>
+          <% if signed_in? %>
+              <li><%= link_to "Uloskirjaus", uloskirjaus_path %></li>
+          <% else %>
+              <li><%= link_to "Kirjaudu", kirjaudu_path %></li>
+              <li><%= link_to "Rekisteröidy", rekisteroidy_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

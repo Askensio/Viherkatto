@@ -110,7 +110,7 @@ describe User do
     before do
       @user.phone = "04465666"
     end
-    it {should_not be_valid}
+    it {should be_valid}
     end
 
   describe "when password is not present" do

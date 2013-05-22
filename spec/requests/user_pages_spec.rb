@@ -31,6 +31,7 @@ describe 'User pages' do
       before do
         fill_in "user_name",         with: "Example User"
         fill_in "user_email",        with: "user@example.com"
+        fill_in "user_phone",        with: "05012345678"
         fill_in "user_password",     with: "foobar12"
         fill_in "user_password_confirmation", with: "foobar12"
       end

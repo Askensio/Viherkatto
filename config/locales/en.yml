@@ -6,6 +6,7 @@ en:
         name: "Nimi"
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
+        phone: "Puhelinnumero"
 
     errors:
       models:
@@ -23,3 +24,6 @@ en:
               confirmation: "ei vastaa vahvistusta."
             password_confirmation:
               blank: "puuttuu."
+            phone:
+              blank: "puuttuu."
+              invalid: "on virheellinen."

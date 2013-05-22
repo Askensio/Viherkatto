@@ -25,5 +25,18 @@ describe "Authentication" do
         it { should_not have_selector('div.alert.alert-error') }
       end
     end
+
+    describe "with valid information" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+
+      it { should have_selector('title', text:'Etusivu') }
+      it { should have_selector('div.alert.alert-success', text: 'Tervetuloa') }
+
+      describe "followed by signout" do
+        before { click_link "Uloskirjaus" }
+        it { should have_link('Kirjaudu') }
+      end
+    end
   end
 end
