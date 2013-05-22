@@ -1,4 +1,3 @@
-@import "bootstrap";
 
 /* mixins, variables, etc. */
 
@@ -80,11 +79,11 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  color: $grayMediumLight;
   a {
-    color: $gray;
+    color: $grayMediumLight;
     &:hover {
-      color: $grayDarker;
+      color: $grayMediumLight;
     }
   }
   small {

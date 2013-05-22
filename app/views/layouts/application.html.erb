@@ -2,6 +2,8 @@
 <html>
   <head>
     <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag    "bootstrap", media: "all" %>
+    <%= stylesheet_link_tag    "bootstrap-responsive", media: "all" %>
     <%= stylesheet_link_tag    "custom", media: "all" %>
     <%= csrf_meta_tags %>
   </head>
