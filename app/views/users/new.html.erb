@@ -1,5 +1,7 @@
 <% provide(:title, 'Rekisteröityminen') %>
+<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
 <h1>Rekisteröityminen</h1>
+
 
 <div class="row">
   <div class="span5 offset3">
@@ -12,6 +14,12 @@
         <%= f.label :email %>
         <%= f.text_field :email %>
 
+        <%= f.label :phone %>
+        <%= f.text_field :phone%>
+
+        <%= f.label :profession %>
+        <%= select :user, :profession, @positions, {}, :class => "selectpicker"%>
+
         <%= f.label :password %>
         <%= f.password_field :password %>
 
@@ -22,3 +30,7 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_include_tag "bootstrap-select" %>
+
+<script>$('.selectpicker').selectpicker();</script>

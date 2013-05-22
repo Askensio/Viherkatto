@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com",
+    @user = User.new(name: "Example User", email: "user@example.com", phone: "044-1234567", profession: "researcher",
                      password: "foobar12", password_confirmation: "foobar12")
   end
 
@@ -11,6 +11,8 @@ describe User do
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
+  it { should respond_to(:phone)}
+  it { should respond_to(:profession)}
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
@@ -85,6 +87,31 @@ describe User do
 
     it { should_not be_valid }
   end
+
+  describe "when phonenumber is correct" do
+    it {should be_valid}
+  end
+
+  describe "when phonenumber misses numbers" do
+    before do
+      @user.phone = "0-999"
+    end
+    it {should_not be_valid}
+  end
+
+  describe "when phonenumber has too many characters" do
+    before do
+      @user.phone = "4444--00000"
+    end
+    it {should_not be_valid}
+  end
+
+  describe "when - is omitted" do
+    before do
+      @user.phone = "04465666"
+    end
+    it {should_not be_valid}
+    end
 
   describe "when password is not present" do
     before { @user.password = @user.password_confirmation = " " }
