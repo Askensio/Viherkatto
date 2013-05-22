@@ -1,5 +1,25 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        email: "Sähköpostiosoite"
+        name: "Nimi"
+        password: "Salasana"
+        password_confirmation: "Salasanan vahvistus"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "puuttuu."
+              invalid: "on virheellinen."
+              taken: "on jo käytössä."
+            name:
+              blank: "puuttuu."
+            password:
+              blank: "puuttuu."
+              too_short: "liian lyhyt (väh 8 merkkiä)."
+              confirmation: "ei vastaa vahvistusta."
+            password_confirmation:
+              blank: "puuttuu."

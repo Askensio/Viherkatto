@@ -1,0 +1,15 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "etusivu", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-left">
+          <li><%= link_to "Yhteystiedot",    '#' %></li>
+          <li><%= link_to "Kirjaudu", '#' %></li>
+          <li><%= link_to "Rekisteröidy", rekisteroityminen_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <%= javascript_include_tag "jquery" %>
+</header>

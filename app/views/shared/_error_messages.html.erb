@@ -1,0 +1,20 @@
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        Syöttämissäsi tiedoissa oli
+        <%= @user.errors.count %>
+        <% if @user.errors.count > 1 %>
+            virhettä.
+        <% else %>
+            virhe.
+        <% end %>
+      </div>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+            <% if msg != "Password digest can't be blank" %>
+                <li>* <%= msg %></li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
