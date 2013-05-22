@@ -3,8 +3,9 @@
 class UsersController < ApplicationController
 
   def new
+
     @user = User.new
-    @ammatit = %w( donkey dog cat dolphin eagle )
+    @positions = %w( Yksityisurakoitsija Yritys Tutkija Muu )
   end
 
   def create
@@ -15,6 +16,5 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
-
   end
 end
