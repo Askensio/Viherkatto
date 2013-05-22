@@ -9,10 +9,6 @@
   	<%= link_to "Rekisteröidy", '#', class: "btn btn-large btn-primary" %>
 </div>
 //-->
-
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
 <%= render 'layouts/carousel' %>
 <div class="container">
   <div class="row-fluid">

@@ -45,7 +45,7 @@ h1 {
 
 h2 {
   font-size: 1.7em;
-  letter-spacing: pb 0x;
+  letter-spacing: pb 0 x;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -55,7 +55,6 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
-
 
 /* header */
 
@@ -84,12 +83,12 @@ footer {
   color: $grayLight;
   a {
     color: $gray;
-    &:hover { 
+    &:hover {
       color: $grayDarker;
     }
-  }  
-  small { 
-    float: left; 
+  }
+  small {
+    float: left;
   }
   ul {
     float: right;
@@ -108,8 +107,8 @@ footer {
   margin-bottom: 30px;
   background-color: #9CB770;
   -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
 
 .hero-unit h1 {
@@ -128,95 +127,105 @@ footer {
 }
 
 /* Carousel */
-    /* Carousel base class */
-    .carousel {
-      margin-bottom: 60px;
-    }
+/* Carousel base class */
+.carousel {
+  margin-bottom: 60px;
+}
 
-    .carousel .container {
-      position: relative;
-      z-index: 9;
-    }
+.carousel .container {
+  position: relative;
+  z-index: 9;
+}
 
-    .carousel-control {
-      height: 80px;
-      margin-top: 0;
-      font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      background-color: transparent;
-      border: 0;
-      z-index: 10;
-    }
+.carousel-control {
+  height: 80px;
+  margin-top: 0;
+  font-size: 120px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+  background-color: transparent;
+  border: 0;
+  z-index: 10;
+}
 
-    .carousel .item {
-      height: 500px;
-    }
-    .carousel img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 500px;
-    }
+.carousel .item {
+  height: 500px;
+}
 
-    .carousel-caption {
-      background-color: transparent;
-      position: static;
-      max-width: 400px;
-      padding: 0 90px;
-      margin-top: 200px;
-    }
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      text-align: left;
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
 
-    }
-    .carousel-caption .btn {
-      margin-top: 10px;
-    }
+.carousel-caption {
+  background-color: transparent;
+  position: static;
+  max-width: 400px;
+  padding: 0 90px;
+  margin-top: 200px;
+}
 
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
+.carousel-caption h1,
+.carousel-caption .lead {
+  margin: 0;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+  text-align: left;
 
-    /* Special class on .container surrounding .navbar, used for positioning it into place. */
-    .navbar-inner {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-    }
+}
 
-    /* Navbar links: increase padding for taller navbar */
-    .navbar .nav > li > a {
-      padding: 10px 50px;
-    }
+.carousel-caption .btn {
+  margin-top: 10px;
+}
 
-    /* Offset the responsive button for proper vertical alignment */
-    .navbar .btn-navbar {
-      margin-top: 10px;
-    }
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
 
-    h1 a {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      text-align: left;
-    }
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
 
-    h1 a:hover {
-      margin: 0;
-      line-height: 1.25;
-      color: #C0C0C0;
-      text-shadow: 0 1px 1px rgba(20,20,20,.4);
-      text-align: left;
-      text-decoration: none;
-    }
+.navbar-inverse .navbar-inner {
+  background-color: rgb(46, 70, 46); /* background color will be black for all browsers */
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+/* Navbar links: increase padding for taller navbar */
+.navbar .nav > li > a {
+  padding: 10px 50px;
+}
+
+/* Offset the responsive button for proper vertical alignment */
+.navbar .btn-navbar {
+  margin-top: 10px;
+}
+
+h1 a {
+  margin: 0;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .4);
+  text-align: left;
+}
+
+h1 a:hover {
+  margin: 0;
+  line-height: 1.25;
+  color: #C0C0C0;
+  text-shadow: 0 1px 1px rgba(20, 20, 20, .4);
+  text-align: left;
+  text-decoration: none;
+}
 
 /* forms */
 

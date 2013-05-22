@@ -12,6 +12,9 @@
         <%= f.label :email %>
         <%= f.text_field :email %>
 
+        <%= f.label :profession %>
+        <%= select(:user, :profession, @ammatit) %>
+
         <%= f.label :password %>
         <%= f.password_field :password %>
 

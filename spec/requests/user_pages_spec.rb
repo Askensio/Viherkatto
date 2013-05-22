@@ -8,7 +8,7 @@ describe 'User pages' do
 
   describe 'signup' do
 
-    before { visit rekisteroityminen_path }
+    before { visit rekisteroidy_path }
 
     it { should have_selector('title', text: 'Rekisteröityminen' ) }
 

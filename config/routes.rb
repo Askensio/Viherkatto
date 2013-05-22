@@ -2,7 +2,10 @@ Viherkatto::Application.routes.draw do
 
   resources :users
 
-  match '/rekisteroityminen',  to: 'users#new'
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/rekisteroidy',  to: 'users#new'
+  match '/kirjaudu', to: 'sessions#new'
 
   get "pages/home"
   root :to => 'pages#home'

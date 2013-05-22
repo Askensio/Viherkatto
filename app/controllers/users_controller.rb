@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @ammatit = %w( donkey dog cat dolphin eagle )
   end
 
   def create
