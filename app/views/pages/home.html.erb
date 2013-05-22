@@ -1,3 +1,4 @@
+<% provide(:title, 'Etusivu') %>
 <!--
 <div class="center hero-unit">
   <h1>Viherkattotietokanta</h1>
@@ -8,30 +9,39 @@
   	<%= link_to "Rekisteröidy", '#', class: "btn btn-large btn-primary" %>
 </div>
 //-->
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 <%= render 'layouts/carousel' %>
 <div class="container">
-<div class="row-fluid">
-<div class="span4">
-<h2><a href="#">Viherkattosuunnittelija</a></h2>
-<p>Viherkattoa suunnitteleva pystyy applikaation avulla saamaan ehdotuksia mahdollisista toteutuksista antamalla ohjelmalle erilaisia kriteerejä.
-</p>
-</div>
-<div class="span4">
-<h2><a href="#">Valmiit viherkatot</a></h2>
-<p>Täällä pääset selaamaan muiden esittelemiä viherkattoprojekteja ja lisäämään palveluun tiedot omasta viherkatostasi.</p>
-</div>
-<div class="span4">
-<h2><a href="#">Tietopankki</a></h2>
-<p>Kattavampaa tietoa täältä.</p>
-</div>
-</div>
+  <div class="row-fluid">
+    <div class="span4">
+      <h2><a href="#">Viherkattosuunnittelija</a></h2>
+
+      <p>Viherkattoa suunnitteleva pystyy applikaation avulla saamaan ehdotuksia mahdollisista toteutuksista antamalla
+        ohjelmalle erilaisia kriteerejä.
+      </p>
+    </div>
+    <div class="span4">
+      <h2><a href="#">Valmiit viherkatot</a></h2>
+
+      <p>Täällä pääset selaamaan muiden esittelemiä viherkattoprojekteja ja lisäämään palveluun tiedot omasta
+        viherkatostasi.</p>
+    </div>
+    <div class="span4">
+      <h2><a href="#">Tietopankki</a></h2>
+
+      <p>Kattavampaa tietoa täältä.</p>
+    </div>
+  </div>
 </div>
 
-    <script>
-      $(document).ready(function(){
+<script>
+    $(document).ready(function () {
         $('.carousel').carousel({
-          interval: 8000
+            interval: 8000
         });
-      });
-    </script>
+    });
+</script>
 <%= yield :javascript_includes %>
