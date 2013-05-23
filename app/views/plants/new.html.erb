@@ -1,0 +1,41 @@
+<% provide(:title, 'Kasvien lisäys') %>
+<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
+<h1>Kasvien lisäys</h1>
+
+
+<div class="row">
+  <div class="span5 offset3">
+    <%= form_for(@plant) do |f| %>
+        <%= render 'shared/error_plants' %>
+        <%= f.label "Nimi" %>
+        <%= f.text_field :name %>
+
+        <%= f.label "Väri" %>
+        <%= select :plant, :colour, colours, {}, :class => "selectpicker show-menu-arrow span5"%>
+
+        <%= f.label "Nättiys (0 - 2)" %>
+        <%= f.text_field :aestethic_appeal %>
+
+        <%= f.label "Valon tarve" %>
+        <%= select :plant, :light_requirement, [['Varjoinen',1],['Puolivarjo',2], ['Aurinkoinen',3]], {}, :class => "selectpicker show-menu-arrow"%>
+
+        <%= f.label "Hoidon tarve" %>
+        <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow"%>
+
+        <%= f.label "Minimipaksuus pohjalle (cm)" %>
+        <%= f.text_field :min_soil_thickness %>
+
+        <%= f.label "Paino (kg/m2)" %>
+        <%= f.text_field :weight %>
+
+        <%= f.label "Huomioita" %>
+        <%= f.text_field :note %>
+
+        <%= f.submit "Lisää uusi kasvi", class: "btn btn-large btn-custom" %>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_include_tag "bootstrap-select" %>
+
+<script>$('.selectpicker').selectpicker();</script>

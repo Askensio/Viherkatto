@@ -1,0 +1,18 @@
+<% if @plant.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        Syöttämissäsi tiedoissa oli
+        <%= @plant.errors.count %>
+        <% if @plant.errors.count > 1 %>
+            virhettä.
+        <% else %>
+            virhe.
+        <% end %>
+      </div>
+      <ul>
+        <% @plant.errors.full_messages.each do |msg| %>
+            <li>* <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
