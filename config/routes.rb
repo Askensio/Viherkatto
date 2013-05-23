@@ -10,6 +10,8 @@ Viherkatto::Application.routes.draw do
   match '/kirjaudu', to: 'sessions#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
+  match '/add_base', to: 'bases#new'
+
   get "pages/home"
   root :to => 'pages#home'
 
