@@ -88,16 +88,12 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when phonenumber is correct" do
-    it {should be_valid}
-  end
+  describe("when phonenumber is correct") { it { should be_valid } }
 
-  describe "when phonenumber misses numbers" do
-    before do
-      @user.phone = "0-999"
-    end
-    it {should_not be_valid}
-  end
+  describe("when phonenumber misses numbers") {
+    before { @user.phone = "0-999" }
+    it { should_not be_valid }
+  }
 
   describe "when phonenumber has too many characters" do
     before do
@@ -111,7 +107,14 @@ describe User do
       @user.phone = "04465666"
     end
     it {should be_valid}
+  end
+
+  describe "when phonenumber is empty" do
+    before do
+      @user.phone = ""
     end
+    it {should be_valid}
+  end
 
   describe "when password is not present" do
     before { @user.password = @user.password_confirmation = " " }

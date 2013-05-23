@@ -7,6 +7,7 @@ en:
         password: "Salasana"
         password_confirmation: "Salasanan vahvistus"
         phone: "Puhelinnumero"
+        profession: "Käyttäjärooli"
 
     errors:
       models:

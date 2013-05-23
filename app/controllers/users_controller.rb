@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     params[:user][:profession]
     if @user.save
-      flash[:success] = "Tervetuloa käyttämään Viherkattotietokantaa!"
+      flash[:success] = "Tervetuloa käyttämään Viherkattotietokantaa " << @user.name.to_s << "!"
       redirect_to root_url
     else
       render 'new'

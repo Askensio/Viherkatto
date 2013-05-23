@@ -1,36 +1,47 @@
 <% provide(:title, 'Rekisteröityminen') %>
 
+<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
+
+
 <h1>Rekisteröityminen</h1>
 
 
 <div class="row">
   <div class="span5 offset3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for (@user) do |f| %>
         <%= render 'shared/error_messages' %>
 
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+        <%= f.label :name%>
+        <%= f.text_field :name, :class =>  "span4"%> <i class = "icon-exclamation-sign"></i> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna nimesi"><i class= "icon-question-sign"></i></a>
 
-        <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.label :email%>
+        <%= f.text_field :email, :class =>  "span4" %> <i class = "icon-exclamation-sign"></i> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna sähköpostiosoitteesi muodossa sana@sana.verkkotunnus"><i class= "icon-question-sign"></i></a>
 
         <%= f.label :phone %>
-        <%= f.text_field :phone%>
+        <%= f.text_field :phone, :class =>  "span4" %> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna puhelinnumerosi"><i class= "icon-question-sign"></i></a>
 
         <%= f.label :profession %>
-        <%= select :user, :profession, positions, {}, :class => "selectpicker show-menu-arrow"%>
+        <%= select :user, :profession, positions, {}, :class => "selectpicker title= 'Olen...' show-menu-arrow show-tick"%> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Missä ominaisuudessa käytät viherkattotietokantaa?"><i class= "icon-question-sign"></i></a>
 
-        <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.label :password%>
+        <%= f.password_field :password , :class =>  "span4" %> <i class = "icon-exclamation-sign"></i> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna salasanasi. Vähimmäispituus on 8 merkkiä"><i class= "icon-question-sign"></i></a>
 
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation %>
+        <%= f.label :password_confirmation%>
+        <%= f.password_field :password_confirmation, :class =>  "span4" %> <i class = "icon-exclamation-sign"></i> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Varmista salasanasi"><i class= "icon-question-sign"></i></a>
 
         <%= f.submit "Rekisteröidy", class: "btn btn-large btn-custom" %>
     <% end %>
+    <i class = "icon-exclamation-sign"></i> = Pakollinen kenttä
   </div>
 </div>
 
 <%= javascript_include_tag "bootstrap-select" %>
-
+<%= javascript_include_tag "bootstrap-tooltip" %>
 <script>$('.selectpicker').selectpicker();</script>
+<script type="text/javascript">
+    $(function () {
+        $(".qmark").tooltip();
+    });
+</script>
+
+
