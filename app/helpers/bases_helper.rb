@@ -1,0 +1,2 @@
+module BasesHelper
+end

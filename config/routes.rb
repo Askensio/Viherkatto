@@ -1,5 +1,7 @@
 Viherkatto::Application.routes.draw do
 
+  get "bases/new"
+
   resources :users
 
   resources :sessions, only: [:new, :create, :destroy]
