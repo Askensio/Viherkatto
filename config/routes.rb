@@ -1,7 +1,5 @@
 Viherkatto::Application.routes.draw do
 
-  get "bases/new"
-
   resources :users
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -10,9 +8,11 @@ Viherkatto::Application.routes.draw do
   match '/kirjaudu', to: 'sessions#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
+  get 'bases/new'
   match '/add_base', to: 'bases#new'
+  match '/bases', to: 'bases#show'
 
-  get "pages/home"
+  get 'pages/home'
   root :to => 'pages#home'
 
 
