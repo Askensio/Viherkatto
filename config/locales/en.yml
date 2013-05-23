@@ -9,6 +9,13 @@ en:
         phone: "Puhelinnumero"
         profession: "Käyttäjärooli"
 
+      base:
+        material: "Materiaali"
+        thickness: "Paksuus"
+        weight: "Paino"
+        absorbancy: "Vedenimukyky"
+        note: "Lisähuomioita"
+
     errors:
       models:
         user:
@@ -28,3 +35,4 @@ en:
             phone:
               blank: "puuttuu."
               invalid: "on virheellinen."
+
