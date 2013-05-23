@@ -1,3 +1,27 @@
 <% provide(:title, 'Pohja') %>
 
 <h1>Pohja</h1>
+
+<div class="row">
+  <div class="span5 offset3">
+    <%= form_for(@base) do |f| %>
+
+      <%= f.label :material %>
+      <%= f.text_field :material %>
+
+      <%= f.label :thickness %>
+      <%= f.text_field :thickness %>
+
+      <%= f.label :weight %>
+      <%= f.text_field :weight %>
+
+      <%= f.label :absorbancy %>
+      <%= f.text_field :absorbancy %>
+
+      <%= f.label :note %>
+      <%= f.text_field :note %>
+
+      <%= f.submit "Lisää pohja", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

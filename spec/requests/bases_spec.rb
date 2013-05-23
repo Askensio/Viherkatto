@@ -10,6 +10,8 @@ describe 'Bases' do
 
     before { visit add_base_path }
 
+    let(:submit) { "Lisää pohja" }
+
     it "should have the content 'Pohja'" do
       page.should have_content('Pohja')
     end
