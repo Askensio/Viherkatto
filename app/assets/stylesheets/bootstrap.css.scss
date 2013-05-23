@@ -4704,7 +4704,6 @@ input[type="submit"].btn.btn-mini {
   left: 9px;
   display: inline-block;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
   border-left: 7px solid transparent;
   border-bottom-color: rgba(0, 0, 0, 0.2);
   content: '';
@@ -4716,7 +4715,7 @@ input[type="submit"].btn.btn-mini {
   left: 10px;
   display: inline-block;
   border-right: 6px solid transparent;
-  border-bottom: 6px solid #ffffff;
+  border-bottom: 6px solid transparent;
   border-left: 6px solid transparent;
   content: '';
 }

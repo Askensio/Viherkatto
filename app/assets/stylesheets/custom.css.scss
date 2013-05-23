@@ -71,7 +71,12 @@ p {
     color: white;
     text-decoration: none;
   }
+ }
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+  color: #ffffff;
+  background-color: #2e462e;
 }
+rekisteroidy
 
 /* footer */
 
