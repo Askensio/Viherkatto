@@ -1,0 +1,20 @@
+<% provide :title, 'Kirjaudu' %>
+<h1>Kirjaudu järjestelmään</h1>
+<div class="row">
+  <div class="span5 offset3">
+    <%= form_for :session, url: sessions_path do |f| %>
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.submit "Kirjaudu", class: "btn btn-large btn-custom" %>
+    <% end %>
+
+    <p>Uusi käyttäjä? <%= link_to "Rekisteröidy kättäjäksi!", rekisteroidy_path %></p>
+  </div>
+</div>

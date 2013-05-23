@@ -1,4 +1,20 @@
 Viherkatto::Application.routes.draw do
+
+  #get "plants/new"
+
+  resources :users
+  resources :plants
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/rekisteroidy',  to: 'users#new'
+  match '/kirjaudu', to: 'sessions#new'
+  match '/add_plant', to: 'plants#new'
+  match '/uloskirjaus', to: 'sessions#destroy'
+
+  get "pages/home"
+  root :to => 'pages#home'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

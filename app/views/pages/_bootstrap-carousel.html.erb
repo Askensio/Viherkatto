@@ -1,0 +1,39 @@
+    <!-- Carousel
+    ================================================== -->
+    <%= javascript_include_tag "bootstrap-carousel" %>
+    <%= javascript_include_tag "bootstrap-transition" %>
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= link_to image_tag("greenroof1.jpg", alt: "Rails") %>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1><a href="http://www.luomus.fi/kasvitiede/tutkimus/viherkatot/">Viides ulottuvuus</a></h1>
+              <p class="lead">Viherkatot osaksi kaupunkia
+              tieteidenvälinen tutkimushanke</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <%= link_to image_tag("greenroof2.jpg", alt: "Rails") %>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1><a href="http://www.greenroofs.org/index.php/about">GRHC</a></h1>
+              <p class="lead">Green roofs for healthy cities</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <%= link_to image_tag("greenroof3.JPG", alt: "Rails") %>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>One more for good measure.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->
+
