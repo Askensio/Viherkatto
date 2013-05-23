@@ -643,3 +643,171 @@ AbstractController::ActionNotFound (The action 'index' could not be found for Us
 
 
   Rendered /cs/fs/home/eotava/.rbenv/versions/1.9.3-p392/lib/ruby/gems/1.9.1/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/unknown_action.erb within rescues/layout (0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-05-23 15:40:17 +0300
+Processing by PagesController#home as HTML
+  Rendered pages/_bootstrap-carousel.html.erb (4.9ms)
+  Rendered pages/home.html.erb within layouts/application (95.3ms)
+  [1m[36mUser Load (5.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."remember_token" IS NULL LIMIT 1[0m
+  Rendered layouts/_header.html.erb (52.8ms)
+Completed 200 OK in 268ms (Views: 251.9ms | ActiveRecord: 16.1ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /bootstrap.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-responsive.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /bootstrap-responsive.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /bootstrap-carousel.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /bootstrap-transition.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/greenroof2.jpg" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /greenroof2.jpg - 304 Not Modified (3ms)
+
+
+Started GET "/assets/greenroof3.JPG" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /greenroof3.JPG - 304 Not Modified (1ms)
+
+
+Started GET "/assets/greenroof1.jpg" for 127.0.0.1 at 2013-05-23 15:40:18 +0300
+Served asset /greenroof1.jpg - 304 Not Modified (76ms)
+
+
+Started GET "/bases" for 127.0.0.1 at 2013-05-23 15:40:22 +0300
+Processing by BasesController#index as HTML
+  [1m[35mBase Load (5.2ms)[0m  SELECT "bases".* FROM "bases" 
+  Rendered bases/index.html.erb within layouts/application (2.1ms)
+  [1m[36mUser Load (5.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."remember_token" IS NULL LIMIT 1[0m
+  Rendered layouts/_header.html.erb (7.2ms)
+Completed 200 OK in 90ms (Views: 58.7ms | ActiveRecord: 16.3ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:23 +0300
+Served asset /bootstrap.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:23 +0300
+Served asset /custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:23 +0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-responsive.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:23 +0300
+Served asset /bootstrap-responsive.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:23 +0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/bases/1" for 127.0.0.1 at 2013-05-23 15:40:25 +0300
+Processing by BasesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mBase Load (5.4ms)[0m  SELECT "bases".* FROM "bases" WHERE "bases"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered bases/show.html.erb within layouts/application (0.2ms)
+  [1m[36mUser Load (5.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."remember_token" IS NULL LIMIT 1[0m
+  Rendered layouts/_header.html.erb (6.6ms)
+Completed 200 OK in 99ms (Views: 63.7ms | ActiveRecord: 10.6ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:25 +0300
+Served asset /bootstrap.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:25 +0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:25 +0300
+Served asset /custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap-responsive.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:25 +0300
+Served asset /bootstrap-responsive.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:25 +0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/bases/1" for 127.0.0.1 at 2013-05-23 15:40:31 +0300
+Processing by BasesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mBase Load (5.8ms)[0m  SELECT "bases".* FROM "bases" WHERE "bases"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered bases/show.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (5.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."remember_token" IS NULL LIMIT 1[0m
+  Rendered layouts/_header.html.erb (6.2ms)
+Completed 200 OK in 73ms (Views: 61.5ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/assets/bootstrap-responsive.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:31 +0300
+Served asset /bootstrap-responsive.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:31 +0300
+Served asset /bootstrap.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:31 +0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:31 +0300
+Served asset /custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:31 +0300
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/bases/1" for 127.0.0.1 at 2013-05-23 15:40:35 +0300
+Processing by BasesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mBase Load (5.2ms)[0m  SELECT "bases".* FROM "bases" WHERE "bases"."id" = ? LIMIT 1  [["id", "1"]]
+  Rendered bases/show.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (5.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."remember_token" IS NULL LIMIT 1[0m
+  Rendered layouts/_header.html.erb (6.6ms)
+Completed 200 OK in 50ms (Views: 38.0ms | ActiveRecord: 10.5ms)
+
+
+Started GET "/assets/bootstrap-responsive.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:35 +0300
+Served asset /bootstrap-responsive.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/bootstrap.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:35 +0300
+Served asset /bootstrap.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:35 +0300
+Served asset /bootstrap.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/custom.css?body=1" for 127.0.0.1 at 2013-05-23 15:40:35 +0300
+Served asset /custom.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-05-23 15:40:35 +0300
+Served asset /jquery.js - 304 Not Modified (1ms)
