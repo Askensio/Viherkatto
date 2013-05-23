@@ -8,7 +8,12 @@ describe 'Plant pages' do
 
   describe 'addition' do
 
-    before { visit add_plant_path }
+    let(:admin) {FactoryGirl.create(:admin)}
+
+    before do
+      sign_in admin
+      visit add_plant_path
+    end
 
     it { should have_selector('title', text: 'Kasvien lisäys') }
 
