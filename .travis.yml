@@ -21,3 +21,9 @@ notifications:
     - "%{repository}/%{branch}#%{build_number} (%{author})"
     - "Build details : %{build_url}"
     - "----"
+
+# whitelist
+branches:
+  only:
+    - master
+    - develop
