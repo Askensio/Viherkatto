@@ -11,9 +11,9 @@ en:
 
       base:
         material: "Materiaali"
-        thickness: "Paksuus"
-        weight: "Paino"
-        absorbancy: "Vedenimukyky"
+        thickness: "Paksuus (cm)"
+        weight: "Paino (kg/m2)"
+        absorbancy: "Vedenimukyky (l/m2)"
         note: "Lisähuomioita"
 
     errors:

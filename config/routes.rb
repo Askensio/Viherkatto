@@ -1,13 +1,15 @@
 Viherkatto::Application.routes.draw do
 
+  #get "plants/new"
+
   resources :users
-
+  resources :plants
   resources :bases
-
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
+  match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
   get 'bases/new'
