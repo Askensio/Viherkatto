@@ -9,7 +9,6 @@ class PlantsController < ApplicationController
   end
 
   def index
-    #@plants = Plant.all
     @plants = Plant.paginate(page: params[:page])
   end
 
