@@ -27,14 +27,3 @@ branches:
   only:
     - master
     - develop
-
-env:
-  global:
-    secure: "Boa7mIucDkkRVyRtagSDc0dZJ2hEdGg725yWmd9xJh+2WyenaqESdGEZFtUG\nMJuaWEiH7G889ya2yaJC65kI5NsNuIprXT84J5ylu1ExaBMKuHAV/zoHkmxT\nkzvvUYAufRK1keJojOPO1HJ7D9mtAecTCyrcu5M+1ss7LDi3jxk="
-
-after_script:
-  - gem install heroku
-  - yes | ruby travis_deployer.rb
-  - heroku keys:clear
-  - yes | heroku keys:add
-  - git push heroku master # or whatever your heroku push looks like
