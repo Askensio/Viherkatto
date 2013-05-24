@@ -59,12 +59,5 @@ describe 'Plant pages' do
     end
   end
 
-  describe 'view' do
-    plant = FactoryGirl.create(:plant)
-    let(:plant) { Plant.find_by_name("plant.name") }
-    before { visit plant_path(plant) }
-    it { should have_selector('h1', text: plant.name) }
-  end
-
-
+  #view describe kuntoon
 end
