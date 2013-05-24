@@ -1,5 +1,6 @@
 class Plant < ActiveRecord::Base
   attr_accessible :aestethic_appeal, :colour, :light_requirement, :maintenance, :min_soil_thickness, :name, :note, :weight
+  attr_readonly :id
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :aestethic_appeal, presence: true, :inclusion => {:in => (0...5)}, :numericality => {:only_integer => true}
