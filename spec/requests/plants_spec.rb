@@ -62,6 +62,4 @@ describe 'Plant pages' do
     before { visit plant_path(plant) }
     it { should have_selector('h1', text: plant.name) }
   end
-
-
 end
