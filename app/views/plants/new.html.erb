@@ -7,28 +7,28 @@
   <div class="span5 offset3">
     <%= form_for(@plant) do |f| %>
         <%= render 'shared/error_plants' %>
-        <%= f.label "Name" %>
+        <%= f.label "name" %>
         <%= f.text_field :name %>
 
-        <%= f.label "Colour" %>
+        <%= f.label "colour" %>
         <%= select :plant, :colour, colours, {}, :class => "selectpicker show-menu-arrow span5"%>
 
-        <%= f.label "Aestethic appeal (0-2)" %>
+        <%= f.label "aestethic appeal (0-2)" %>
         <%= f.text_field :aestethic_appeal %>
 
-        <%= f.label "Light requirement" %>
+        <%= f.label "light requirement" %>
         <%= select :plant, :light_requirement, [['Varjoinen',1],['Puolivarjo',2], ['Aurinkoinen',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
 
-        <%= f.label "Maintenance" %>
+        <%= f.label "maintenance" %>
         <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
 
-        <%= f.label "Minimum soil thickness (cm)" %>
+        <%= f.label "minimum soil thickness (cm)" %>
         <%= f.text_field :min_soil_thickness %>
 
-        <%= f.label "Weight (kg/m2)" %>
+        <%= f.label "weight (kg/m2)" %>
         <%= f.text_field :weight %>
 
-        <%= f.label "Notes" %>
+        <%= f.label "notes" %>
         <%= f.text_field :note %>
 
         <%= f.submit "Lisää uusi kasvi", class: "btn btn-large btn-custom" %>

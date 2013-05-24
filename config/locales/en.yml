@@ -9,14 +9,18 @@ en:
         phone: "Puhelinnumero"
         profession: "Käyttäjärooli"
       plant:
-        Name: "Nimi"
-        Colour: "Väri"
-        Aestethic appeal (0-2): "Nättiys (0-2)"
-        Light requirement: "Valon tarve"
-        Maintenance: "Hoidon tarve"
-        Minimum soil thickness (cm): "Minimipaksuus pohjalle (cm)"
-        Weight (kg/m2): "Paino (kg/m2)"
-        Notes: "Huomioita"
+        name: "Nimi"
+        colour: "Väri"
+        aestethic appeal (0-2): "Nättiys (0-2)"
+        aestethic_appeal: "Nättiys"
+        light requirement: "Valon tarve"
+        maintenance: "Hoidon tarve"
+        minimum soil thickness (cm): "Minimipaksuus pohjalle (cm)"
+        min_soil_thickness: "Minimipaksuus pohjalle"
+        weight (kg/m2): "Paino (kg/m2)"
+        weight: "Paino"
+        notes: "Huomioita"
+
 
     errors:
       models:
@@ -37,3 +41,33 @@ en:
             phone:
               blank: "puuttuu."
               invalid: "on virheellinen."
+        plant:
+          attributes:
+            name:
+                blank: "puuttuu."
+                too_long: "on liian pitkä."
+            aestethic_appeal:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
+            colour:
+                blank: "puuttuu"
+                too_long: "on liian pitkä."
+            min_soil_thickness:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
+            maintenance:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
+            weight:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
+            note:
+                too_long: "on liian pitkä"
+            light_requirement:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
