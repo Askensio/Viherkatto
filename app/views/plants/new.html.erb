@@ -10,6 +10,9 @@
         <%= f.label "name" %>
         <%= f.text_field :name %>
 
+        <%= f.label "latin name" %>
+        <%= f.text_field :latin_name %>
+
         <%= f.label "colour" %>
         <%= select :plant, :colour, colours, {}, :class => "selectpicker show-menu-arrow span5"%>
 
@@ -21,6 +24,9 @@
 
         <%= f.label "maintenance" %>
         <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
+
+        <%= f.label "coverage" %>
+        <%= select :plant, :coverage, [['Pieni',1],['Keskisuuri',2], ['Suuri',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
 
         <%= f.label "minimum soil thickness (cm)" %>
         <%= f.text_field :min_soil_thickness %>

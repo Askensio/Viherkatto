@@ -37,6 +37,8 @@ describe 'Plant pages' do
         fill_in "plant_name", with: "Example Plant"
         select "Varjoinen", :from => "plant_light_requirement"
         select "Helppo", :from => "plant_maintenance"
+        select "Pieni", :from => "coverage"
+        fill_in "latin_name", with: "Plantus plantus"
         fill_in "plant_aestethic_appeal", with: 1
         fill_in "plant_min_soil_thickness", with: 1
         fill_in "plant_weight", with: 1
