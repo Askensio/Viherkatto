@@ -59,5 +59,6 @@ describe 'Plant pages' do
     end
   end
 
-  #view describe kuntoon
+  #view describe kuntoon älä taistele enää factorygirlia vaan kirjoita käsin
+
 end

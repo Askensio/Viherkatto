@@ -11,6 +11,7 @@ en:
       plant:
         name: "Nimi"
         latin_name: "Nimi latinaksi"
+        latin name: "Nimi latinaksi"
         colour: "Väri"
         aestethic appeal (0-2): "Nättiys (0-2)"
         aestethic_appeal: "Nättiys"
