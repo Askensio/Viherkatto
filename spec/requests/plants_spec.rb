@@ -37,8 +37,8 @@ describe 'Plant pages' do
         fill_in "plant_name", with: "Example Plant"
         select "Varjoinen", :from => "plant_light_requirement"
         select "Helppo", :from => "plant_maintenance"
-        select "Pieni", :from => "coverage"
-        fill_in "latin_name", with: "Plantus plantus"
+        select "Pieni", :from => "plant_coverage"
+        fill_in "plant_latin_name", with: "Plantus plantus"
         fill_in "plant_aestethic_appeal", with: 1
         fill_in "plant_min_soil_thickness", with: 1
         fill_in "plant_weight", with: 1
@@ -60,7 +60,8 @@ describe 'Plant pages' do
   end
 
   describe 'view' do
-    let(:plant) { FactoryGirl.create(:plant) }
+    plant = FactoryGirl.create(:plant)
+    let(:plant) { Plant.find_by_name("plant.name") }
     before { visit plant_path(plant) }
     it { should have_selector('h1', text: plant.name) }
   end
