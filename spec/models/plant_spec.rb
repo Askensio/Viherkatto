@@ -101,4 +101,6 @@ describe Plant do
     it { should be_valid }
   end
 
+  #testit coverage ja latin_name
+
 end
