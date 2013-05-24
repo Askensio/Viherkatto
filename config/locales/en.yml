@@ -10,6 +10,7 @@ en:
         profession: "Käyttäjärooli"
       plant:
         name: "Nimi"
+        latin_name: "Nimi latinaksi"
         colour: "Väri"
         aestethic appeal (0-2): "Nättiys (0-2)"
         aestethic_appeal: "Nättiys"
@@ -20,7 +21,7 @@ en:
         weight (kg/m2): "Paino (kg/m2)"
         weight: "Paino"
         notes: "Huomioita"
-
+        coverage: "Peittävyys"
 
     errors:
       models:
@@ -46,6 +47,9 @@ en:
             name:
                 blank: "puuttuu."
                 too_long: "on liian pitkä."
+            latin_name:
+                blank: "puuttuu."
+                too_long: "on liian pitkä."
             aestethic_appeal:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
@@ -54,6 +58,10 @@ en:
                 blank: "puuttuu"
                 too_long: "on liian pitkä."
             min_soil_thickness:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
+            coverage:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
