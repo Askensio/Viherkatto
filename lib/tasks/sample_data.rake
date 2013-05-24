@@ -31,6 +31,26 @@ namespace :db do
                     note: note)
     end
 
+    Base.create!(material: "kivimurska",
+                 thickness: 60,
+                 weight: 100,
+                 absorbancy: 30,
+                 note: "Hyvin kestävä")
+
+    99.times do |n|
+      material = Faker::Lorem.words(1)
+      thickness = 20
+      weight = 60
+      absorbancy = 100
+      note = Faker::Lorem.sentences(sentence_count = 1)
+
+      Base.create!(material: material,
+                   thickness: thickness,
+                   weight: weight,
+                   absorbancy: absorbancy,
+                   note: note)
+    end
+
 
     admin = User.create!(name: "Example User",
                          email: "admin@foo.bar",
