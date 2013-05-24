@@ -8,6 +8,15 @@ en:
         password_confirmation: "Salasanan vahvistus"
         phone: "Puhelinnumero"
         profession: "Käyttäjärooli"
+      plant:
+        Name: "Nimi"
+        Colour: "Väri"
+        Aestethic appeal (0-2): "Nättiys (0-2)"
+        Light requirement: "Valon tarve"
+        Maintenance: "Hoidon tarve"
+        Minimum soil thickness (cm): "Minimipaksuus pohjalle (cm)"
+        Weight (kg/m2): "Paino (kg/m2)"
+        Notes: "Huomioita"
 
     errors:
       models:
