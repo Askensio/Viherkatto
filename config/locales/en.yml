@@ -1,4 +1,10 @@
 en:
+  colour_categories:
+    Blue: "Sininen"
+    Red: "Punainen"
+    Yellow: "Keltainen"
+    Green: "Vihreä"
+
   activerecord:
     attributes:
       user:
@@ -10,12 +16,11 @@ en:
         profession: "Käyttäjärooli"
       plant:
         name: "Nimi"
-        latin_name: "Nimi latinaksi"
-        latin name: "Nimi latinaksi"
+        latin_name: "Latinankielinen nimi"
         colour: "Väri"
         aestethic appeal (0-2): "Nättiys (0-2)"
         aestethic_appeal: "Nättiys"
-        light requirement: "Valon tarve"
+        light_requirement: "Valon tarve"
         maintenance: "Hoidon tarve"
         minimum soil thickness (cm): "Minimipaksuus pohjalle (cm)"
         min_soil_thickness: "Minimipaksuus pohjalle"

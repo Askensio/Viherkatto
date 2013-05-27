@@ -1,7 +1,11 @@
 class Plant < ActiveRecord::Base
   attr_accessible :coverage, :latin_name, :aestethic_appeal, :colour, :light_requirement, :maintenance, :min_soil_thickness, :name, :note, :weight
 
-  validates :name, presence: true, length: { maximum: 50 }
+  def translated_colour_category
+    I18n.t(colour, :scope => :colour_categories)
+  end
+
+  validates :name, presence: true, length: { maximum: 100 }
   validates :aestethic_appeal, presence: true, :inclusion => {:in => (0...5)}, :numericality => {:only_integer => true}
   validates :colour, presence: true, length: { maximum: 50 }
   validates :maintenance, presence: true, :inclusion => {:in => (0...3)}, :numericality => {:only_integer => true}

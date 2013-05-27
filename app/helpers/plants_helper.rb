@@ -9,4 +9,8 @@ module PlantsHelper
   def colours
     %w( Blue Red Green Yellow White)
   end
+
+  def colour_categories
+    I18n.t(:colour_categories).map { |key, value| [ value, key.to_s ] }
+  end
 end

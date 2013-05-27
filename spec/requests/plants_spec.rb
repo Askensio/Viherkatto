@@ -59,7 +59,6 @@ describe 'Plant pages' do
     end
   end
 
-  #view describe kuntoon älä taistele enää factorygirlia vaan kirjoita käsin
   describe 'view' do
     let(:admin) {FactoryGirl.create(:admin)}
 
