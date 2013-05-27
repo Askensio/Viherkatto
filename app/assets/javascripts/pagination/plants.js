@@ -58,21 +58,21 @@ $(document).ready(function () {
         var deleteElement = $('<a href=\"#\" id=\"/plants/' + entry.id + '\">' + 'poista' + '</a>').click(
             function(e) {
                 console.log(e.target.getAttribute('id'))
-                console.log(document.cookie)
-                var url = e.target.getAttribute('id')
-                $.ajax({
-                        headers: {
-                            'Cookie': document.cookie
-                        },
-                        url: url,
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        type: 'DELETE',
-                        success: function(result) {
-                            console.log("lol")
-                        }
-                     });
+//                console.log(document.cookie)
+//                var url = e.target.getAttribute('id')
+//                $.ajax({
+//                        headers: {
+//                            'Cookie': document.cookie
+//                        },
+//                        url: url,
+//                        xhrFields: {
+//                            withCredentials: true
+//                        },
+//                        type: 'DELETE',
+//                        success: function(result) {
+//                            console.log("lol")
+//                        }
+//                     });
 
             })
 
