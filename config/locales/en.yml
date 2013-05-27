@@ -93,3 +93,17 @@ en:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
+
+        base:
+          attributes:
+            material:
+                blank: "puuttuu."
+            thickness:
+                blank: "puuttuu."
+                not_a_number: "ei ole numero."
+            weight:
+                blank: "puuttuu."
+                not_a_number: "ei ole numero."
+            absorbancy:
+                blank: "puuttuu."
+                not_a_number: "ei ole numero."

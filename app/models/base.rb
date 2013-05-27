@@ -1,9 +1,9 @@
 class Base < ActiveRecord::Base
   attr_accessible :absorbancy, :material, :thickness, :weight
 
-  validates :absorbancy, numericality: true, allow_blank: false
+  validates :absorbancy, allow_blank: false, numericality: true
   validates :material, presence: true
-  validates :thickness, numericality: true, allow_blank: false
-  validates :weight, numericality: true, allow_blank: false
+  validates :thickness, allow_blank: false, numericality: true
+  validates :weight, allow_blank: false, numericality: true
 
 end

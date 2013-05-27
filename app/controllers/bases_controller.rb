@@ -7,35 +7,15 @@ class BasesController < ApplicationController
     @base = Base.new
   end
 
-=begin
-def create
-    @base = Base.new(params[:base])
-    if @base.save
-      redirect_to @base
-    else
-      render 'new'
-    end
-  end
-=end
-
-=begin
-  def create
-    result = Base.find(params[:base])
-    if result.nil?
-      @base = Base.new(params[:base])
-      if @base.save
-        redirect_to @base
-      end
-    else
-      render 'new'
-    end
-  end
-=end
-
   def create
     @base = Base.find_or_initialize_by_material_and_thickness_and_absorbancy_and_weight(params[:base][:material], params[:base][:thickness], params[:base][:absorbancy], params[:base][:weight])
+    isNew = @base.new_record?
     if @base.save
-      redirect_to @base
+      if isNew
+        redirect_to @base
+      else
+        redirect_to bases_path
+      end
     else
       render 'new'
     end
