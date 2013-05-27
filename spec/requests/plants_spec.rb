@@ -83,7 +83,7 @@ describe 'Plant pages' do
 
         it { should have_selector('h1', text: 'Kasvin päivitys') }
 
-        describe "Changing latin name works" do
+        describe "Changing latin name and updating works" do
 
           before do
             fill_in "plant_latin_name", with: "yolo swaggings"
