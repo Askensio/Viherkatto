@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -40,21 +42,18 @@ namespace :db do
     Base.create!(material: "kivimurska",
                  thickness: 60,
                  weight: 100,
-                 absorbancy: 30,
-                 note: "Hyvin kestävä")
+                 absorbancy: 30)
 
     99.times do |n|
       material = Faker::Lorem.words(1)
       thickness = 20
       weight = 60
       absorbancy = 100
-      note = Faker::Lorem.sentences(sentence_count = 1)
 
       Base.create!(material: material,
                    thickness: thickness,
                    weight: weight,
-                   absorbancy: absorbancy,
-                   note: note)
+                   absorbancy: absorbancy)
     end
 
 

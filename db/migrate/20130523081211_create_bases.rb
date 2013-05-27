@@ -5,7 +5,6 @@ class CreateBases < ActiveRecord::Migration
       t.integer :weight
       t.string :material
       t.integer :absorbancy
-      t.string :note
 
       t.timestamps
     end
