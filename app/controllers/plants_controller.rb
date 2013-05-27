@@ -2,7 +2,7 @@
 
 class PlantsController < ApplicationController
 
-  before_filter :admin_user, only: [:new,:create,:update,:destroy]
+  before_filter :admin_user, only: [:new,:create,:update,:destroy, :edit]
 
   #respond_to :html, :xml, :json
 
@@ -24,6 +24,10 @@ class PlantsController < ApplicationController
     @plant = Plant.new
   end
 
+  def edit
+    @plant = Plant.find(params[:id])
+  end
+
   def create
     @plant = Plant.new(params[:plant])
     if @plant.save
@@ -35,14 +39,16 @@ class PlantsController < ApplicationController
   end
 
   def update
+    @plant = Plant.find(params[:id])
+    if @plant.update_attributes(params[:plant])
+      # Handle a successful update.
+      redirect_to plant_url
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-  end
-
-  private
-
-  def admin_user
-    redirect_to root_url unless signed_in? && current_user.admin?
+    Plant.find(params[:id]).destroy
   end
 end

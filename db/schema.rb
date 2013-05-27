@@ -12,7 +12,8 @@
 # It's strongly recommended to check this file into your version control system.
 
 
-ActiveRecord::Schema.define(:version => 20130522134131) do
+ActiveRecord::Schema.define(:version => 20130527062401) do
+
 
   create_table "plants", :force => true do |t|
     t.string   "name"
@@ -29,6 +30,19 @@ ActiveRecord::Schema.define(:version => 20130522134131) do
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "plants", ["name"], :name => "index_plants_on_name", :unique => true
+
+  create_table "roofs", :force => true do |t|
+    t.integer  "declination"
+    t.integer  "load_capacity"
+    t.string   "enviroment"
+    t.integer  "area"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "roofs", ["declination", "load_capacity", "enviroment", "area"], :name => "roof_index", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -41,14 +55,14 @@ ActiveRecord::Schema.define(:version => 20130522134131) do
     t.datetime "updated_at",                         :null => false
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
   create_table "bases", :force => true do |t|
     t.integer  "thickness"
     t.integer  "weight"
     t.string   "material"
     t.integer  "absorbancy"
-    t.string   "note"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
 end
