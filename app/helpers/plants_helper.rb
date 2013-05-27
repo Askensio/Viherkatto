@@ -2,8 +2,22 @@
 
 module PlantsHelper
 
-  def lightness
-    @lightness = %w( a b c )
+  def coverageLevel(index)
+    @coverage = %w( Pieni Keskisuuri Suuri )
+
+    @level = @coverage[index]
+  end
+
+  def lightness(index)
+    @lightness = %w( Varjoinen Puolivarjo Aurinkoinen )
+
+    @light = @lightness[index]
+  end
+
+  def maintenanceLevel(index)
+    @maintenance = %w( Helppo Keskivaikea Vaikea )
+
+    @level = @maintenance[index]
   end
 
   def colours
