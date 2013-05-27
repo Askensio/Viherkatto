@@ -3,10 +3,24 @@ class BasesController < ApplicationController
     @base = Base.new
   end
 
-  def create
+=begin
+def create
     @base = Base.new(params[:base])
     if @base.save
       redirect_to @base
+    else
+      render 'new'
+    end
+  end
+=end
+
+  def create
+    result = Base.find_or_create(:material => params[:base][:material])
+    if result.nil?
+      @base = Base.new(params[:base])
+      if @base.save
+        redirect_to @base
+      end
     else
       render 'new'
     end

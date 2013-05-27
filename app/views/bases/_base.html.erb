@@ -1,5 +1,3 @@
 <li>
-
-  ID: <%= base.id %> (<%= base.material %>, paksuus <%= base.thickness %> cm)
-
+  <%= link_to base.material + ", paksuus #{base.thickness} cm, vedenimukyky #{base.absorbancy} l/m2", base %>
 </li>
