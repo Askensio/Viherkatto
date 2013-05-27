@@ -8,7 +8,7 @@ describe 'Plant pages' do
 
   describe 'addition' do
 
-    let(:admin) {FactoryGirl.create(:admin)}
+    let(:admin) { FactoryGirl.create(:admin) }
 
     before do
       sign_in admin
@@ -59,30 +59,38 @@ describe 'Plant pages' do
     end
   end
 
-  describe 'view' do
-    let(:admin) {FactoryGirl.create(:admin)}
+  describe 'Pages' do
+
+    let(:admin) { FactoryGirl.create(:admin) }
 
     before do
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
-      @test_plant.save()
-      visit plant_path(@test_plant.id)
-    end
 
-    it { should have_selector('h1', text: 'Example Plant') }
-  end
-
-  describe 'edit' do
-    let(:admin) {FactoryGirl.create(:admin)}
-
-    before do
       sign_in admin
       @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
       @test_plant.save()
-      visit edit_plant_path(@test_plant)
+
     end
 
-    describe "page" do
-      it { should have_selector('h1', text: 'Kasvin päivitys') }
+    describe 'view' do
+
+      before { visit plant_path(@test_plant.id) }
+
+      it { should have_selector('h1', text: 'Example Plant') }
+
+      describe "Edit-page" do
+
+        before { visit edit_plant_path(@test_plant) }
+
+        it { should have_selector('h1', text: 'Kasvin päivitys') }
+      end
+
+      describe "Index-page" do
+
+        before { visit plants_path }
+
+        it { should have_selector("title", :content => "Kasvit") }
+        it { should have_selector("a", :content => "Example Plant") }
+      end
     end
   end
 end
