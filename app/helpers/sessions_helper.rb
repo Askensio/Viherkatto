@@ -14,6 +14,10 @@ module SessionsHelper
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
 
+  def admin_user
+    redirect_to root_url unless signed_in? && current_user.admin?
+  end
+
   def current_user?(user)
     user == current_user
   end
@@ -36,3 +40,4 @@ end
 def store_location
   session[:return_to] = request.url
 end
+

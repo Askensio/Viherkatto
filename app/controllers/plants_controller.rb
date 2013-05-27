@@ -2,7 +2,7 @@
 
 class PlantsController < ApplicationController
 
-  before_filter :admin_user, only: [:new,:create,:update,:destroy]
+  before_filter :admin_user, only: [:new,:create,:update,:destroy, :edit]
 
   #respond_to :html, :xml, :json
 
@@ -49,11 +49,6 @@ class PlantsController < ApplicationController
   end
 
   def destroy
-  end
-
-  private
-
-  def admin_user
-    redirect_to root_url unless signed_in? && current_user.admin?
+    Plant.find(params[:id]).destroy
   end
 end

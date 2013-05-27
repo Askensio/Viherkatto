@@ -42,10 +42,50 @@ $(document).ready(function () {
             });
         });
     }
-
+                                                                                                                   //\"/plants/' + entry.id + '\" data-confirm=\"Vahvistus\" data-method=\"delete\" rel=\"nofollow\"
     // Function that creates a single list element in the plant list
     function addPlantElement(entry) {
 
-        $('.plant-list').append('<li><a href=\"/plants/' + entry.id + '\">' + entry.name + '</a></li>');
+                                                                      //data-confirm="Vahvistus" data-method="delete" rel="no-follow"
+
+        var listElement = $('<li></li>')
+
+        var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '</a>')
+        listElement.append(plantLink)
+
+        listElement.append(' | ')
+
+        var deleteElement = $('<a href=\"#\" id=\"/plants/' + entry.id + '\">' + 'poista' + '</a>').click(
+            function(e) {
+                console.log(e.target.getAttribute('id'))
+                //var url = e.target.getAttribute('id')
+                //$.ajax({
+                //        url: url,
+                //        type: 'DELETE',
+                //        success: function(result) {
+                //            console.log("lol")
+                //        }
+                //     });
+
+            })
+
+        listElement.append(deleteElement).append(' | ')
+
+        var editElement = $('<a href=\"/plants/' + entry.id + '/edit\">' + 'muokkaa' + '</a>')
+
+        listElement.append(editElement)
+
+        $('.plant-list').append(listElement)
+    }
+         //ajaxCall('/plants/' + entry.id)
+    function ajaxCall(url) {
+        console.log(url)
+        //$.ajax({
+        //    url: url,
+        //    type: 'DELETE',
+        //    success: function(result) {
+        //        getPlants()
+        //    }
+        // });
     }
 });
