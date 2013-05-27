@@ -76,31 +76,33 @@ describe 'Plant pages' do
       before { visit plant_path(@test_plant.id) }
 
       it { should have_selector('h1', text: 'Example Plant') }
+      it { should have_selector('title', text: 'Kasvinäkymä') }
+      it { should have_content("Plantus Examplus") }
+    end
 
-      describe "Edit-page" do
+    describe "Edit-page" do
 
-        before { visit edit_plant_path(@test_plant) }
+      before { visit edit_plant_path(@test_plant) }
 
-        it { should have_selector('h1', text: 'Kasvin päivitys') }
+      it { should have_selector('h1', text: 'Kasvin päivitys') }
 
-        describe "Changing latin name and updating works" do
+      describe "Changing latin name and updating works" do
 
-          before do
-            fill_in "plant_latin_name", with: "yolo swaggings"
-            click_button "Päivitä"
-          end
-          it { should have_content("yolo swaggings")}
-
+        before do
+          fill_in "plant_latin_name", with: "yolo swaggings"
+          click_button "Päivitä"
         end
+        it { should have_content("yolo swaggings") }
+
       end
+    end
 
-      describe "Index-page" do
+    describe "Index-page" do
 
-        before { visit plants_path }
+      before { visit plants_path }
 
-        it { should have_selector("title", :content => "Kasvit") }
-        it { should have_selector("a", :content => "Example Plant") }
-      end
+      it { should have_selector("title", :content => "Kasvit") }
+      it { should have_selector("a", :content => "Example Plant") }
     end
   end
 end
