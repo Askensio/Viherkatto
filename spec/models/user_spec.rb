@@ -29,6 +29,7 @@ describe User do
       @user.toggle!(:admin)
     end
 
+
     it { should be_admin }
   end
 
