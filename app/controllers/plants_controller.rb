@@ -2,7 +2,9 @@
 
 class PlantsController < ApplicationController
 
-  before_filter :admin_user, only: [:index,:new,:create,:update,:destroy]
+  before_filter :admin_user, only: [:new,:create,:update,:destroy]
+
+  #respond_to :html, :xml, :json
 
   def show
     @plant = Plant.find(params[:id])
@@ -10,6 +12,12 @@ class PlantsController < ApplicationController
 
   def index
     @plants = Plant.paginate(page: params[:page])
+    respond_to do |format|
+      @plants = Plant.paginate(page: params[:page])
+      format.html { render :html => @plants}  # index.html.erb
+      @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
+      format.json  { render :json => {count: @plants.total_entries, plants: @jsonPlants } }
+    end
   end
 
   def new

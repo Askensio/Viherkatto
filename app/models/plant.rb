@@ -1,5 +1,6 @@
 class Plant < ActiveRecord::Base
   attr_accessible :coverage, :latin_name, :aestethic_appeal, :colour, :light_requirement, :maintenance, :min_soil_thickness, :name, :note, :weight
+  attr_readonly :id
 
   def translated_colour_category
     I18n.t(colour, :scope => :colour_categories)

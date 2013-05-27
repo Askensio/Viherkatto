@@ -1,14 +1,4 @@
 <% provide(:title, 'Etusivu') %>
-<!--
-<div class="center hero-unit">
-  <h1>Viherkattotietokanta</h1>
-
-  <h2>
-  	Palvelu tarjoaa työkalut viherkattojen suunnittelemiseen, valmiiden toteutusten jakamiseen muiden katseltavaksi ja erillisen tietopankin, josta löytää syventävämpää tietoa moderneista viherkattoratkaisuista.
-  </h2>
-  	<%= link_to "Rekisteröidy", '#', class: "btn btn-large btn-primary" %>
-</div>
-//-->
 
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>

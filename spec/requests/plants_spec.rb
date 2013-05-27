@@ -69,7 +69,5 @@ describe 'Plant pages' do
     end
 
     it { should have_selector('h1', text: 'Example Plant') }
-
-
   end
 end
