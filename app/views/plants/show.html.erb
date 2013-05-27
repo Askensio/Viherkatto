@@ -8,25 +8,29 @@
       <%= @plant.name %>
     </h1>
 
-    <p>Latin name:              <%= @plant.latin_name %></p>
-
-    <p>Colour:                  <%= @plant.colour %></p>
-
-    <p>Aestethic appeal:        <%= @plant.aestethic_appeal %></p>
-
-    <p>Coverage:                <%= coverageLevel(@plant.coverage) %></p>
-
-    <p>Light requirement:       <%= lightness(@plant.light_requirement) %></p>
-
-    <p>Maintenance requirement: <%= maintenanceLevel(@plant.maintenance) %></p>
-
-    <p>Weight (kg/m2):          <%= @plant.weight %></p>
-
-    <p>Minimum soil thickness:  <%= @plant.min_soil_thickness %></p>
-
-    <p>Note:                    <%= @plant.note %></p>
 
 
+    <table>
+
+    <tr><td>Latinankielinen nimi:</td>               <td><%= @plant.latin_name %></td></tr>
+
+      <tr><td>Väri:</td>                             <td><%= @plant.colour %></td></tr>
+
+      <tr><td>Nättiys:</td>                          <td><%= @plant.aestethic_appeal %></td></tr>
+
+      <tr><td>Peittävyys:</td>                       <td><%= coverageLevel(@plant.coverage) %></td></tr>
+
+      <tr><td>Valontarve:</td>                       <td><%= lightness(@plant.light_requirement) %></td></tr>
+
+      <tr><td>Hoidontarve:</td>                      <td><%= maintenanceLevel(@plant.maintenance) %></td></tr>
+
+      <tr><td>Paino (kg/m2):</td>                    <td><%= @plant.weight %></td></tr>
+
+      <tr><td>Minimipaksuus pohjalle:</td>           <td><%= @plant.min_soil_thickness %></td></tr>
+
+      <tr><td>Huomioita:</td>                        <td><%= @plant.note %></td></tr>
+
+    </table>
   </div>
 </div>
 
