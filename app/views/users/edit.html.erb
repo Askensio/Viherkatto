@@ -1,21 +1,18 @@
-<% provide(:title, 'Rekisteröityminen') %>
-
+<% provide(:title, "Muokkaa tietoja") %>
 <%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
-
-
-<h1>Rekisteröityminen</h1>
-
+<h1>Päivitä tietojasi täältä</h1>
 
 <div class="row">
   <div class="span5 offset3">
-    <%= form_for (@user) do |f| %>
+    <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages' %>
 
-        <%= f.label :name, h('Nimi *')%>
+        <%= f.label :name %>
         <%= f.text_field :name, :class =>  "span4"%>
 
-        <%= f.label :email, h('Sähköpostiosoite *')%>
-        <%= f.text_field :email, :class =>  "span4" %> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna sähköpostiosoitteesi muodossa sana@sana.verkkotunnus"><i class= "icon-question-sign"></i></a>
+
+        <%= f.label :email %>
+        <%= f.text_field :email, :class=>  "span4" %>
 
         <%= f.label :phone %>
         <%= f.text_field :phone, :class =>  "span4" %>
@@ -23,14 +20,14 @@
         <%= f.label :profession %>
         <%= select :user, :profession, positions, {}, :class => "selectpicker title= 'Olen...' show-menu-arrow show-tick span4"%> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Missä ominaisuudessa käytät viherkattotietokantaa?"><i class= "icon-question-sign"></i></a>
 
-        <%= f.label :password, h('Salasana *')%>
-        <%= f.password_field :password , :class =>  "span4" %> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna salasanasi. Vähimmäispituus on 8 merkkiä"><i class= "icon-question-sign"></i></a>
+        <%= f.label :password %>
+        <%= f.password_field :password, :class =>  "span4" %>
 
-        <%= f.label :password_confirmation, h('Salasanan vahvistus *')%>
+        <%= f.label :password_confirmation, "Vahvista salasana" %>
         <%= f.password_field :password_confirmation, :class =>  "span4" %>
-        <%= f.submit "Rekisteröidy", class: "btn btn-large btn-custom" %>
+
+        <%= f.submit "Tallenna muutokset", class: "btn btn-custom" %>
     <% end %>
-    <i class = "icon-exclamation-sign"></i> = Pakollinen kenttä
   </div>
 </div>
 
@@ -42,5 +39,3 @@
         $(".qmark").tooltip();
     });
 </script>
-
-

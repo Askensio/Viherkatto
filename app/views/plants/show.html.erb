@@ -1,13 +1,35 @@
-<h1>
-<%= @plant.name %>
-</h1>
+<% provide(:title, 'Kasvinäkymä') %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 
-<p>Latin name:              <%= @plant.latin_name %></p>
-<p>Colour:                  <%= @plant.colour %></p>
-<p>Aestethic appeal:        <%= @plant.aestethic_appeal %></p>
-<p>Coverage:                <%= @plant.coverage %></p>
-<p>Light requirement:       <%= @plant.light_requirement %></p>
-<p>Maintenance requirement: <%= @plant.maintenance %></p>
-<p>Weight (kg/m2)           <%= @plant.weight %></p>
-<p>Minimum soil thickness   <%= @plant.min_soil_thickness %></p>
-<p>Note                     <%= @plant.note %></p>
+<div class="row">
+  <div class="span5 offset1">
+
+    <h1>
+      <%= @plant.name %>
+    </h1>
+
+    <p>Latin name:              <%= @plant.latin_name %></p>
+
+    <p>Colour:                  <%= @plant.colour %></p>
+
+    <p>Aestethic appeal:        <%= @plant.aestethic_appeal %></p>
+
+    <p>Coverage:                <%= coverageLevel(@plant.coverage) %></p>
+
+    <p>Light requirement:       <%= lightness(@plant.light_requirement) %></p>
+
+    <p>Maintenance requirement: <%= maintenanceLevel(@plant.maintenance) %></p>
+
+    <p>Weight (kg/m2):          <%= @plant.weight %></p>
+
+    <p>Minimum soil thickness:  <%= @plant.min_soil_thickness %></p>
+
+    <p>Note:                    <%= @plant.note %></p>
+
+
+  </div>
+</div>
+
+<%= javascript_include_tag "bootstrap-select" %>
+
+<script>$('.selectpicker').selectpicker();</script>
