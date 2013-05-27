@@ -82,6 +82,16 @@ describe 'Plant pages' do
         before { visit edit_plant_path(@test_plant) }
 
         it { should have_selector('h1', text: 'Kasvin päivitys') }
+
+        describe "Changing latin name and updating works" do
+
+          before do
+            fill_in "plant_latin_name", with: "yolo swaggings"
+            click_button "Päivitä"
+          end
+          it { should have_content("yolo swaggings")}
+
+        end
       end
 
       describe "Index-page" do
