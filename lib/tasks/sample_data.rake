@@ -4,6 +4,8 @@ namespace :db do
 
     Plant.create!(name: "Example Plant",
                   aestethic_appeal: 1,
+                  latin_name: "Plantus Examplus",
+                  coverage: 1,
                   colour: "Blue",
                   light_requirement: 1,
                   maintenance: 1,
@@ -13,15 +15,19 @@ namespace :db do
 
     99.times do |n|
       name = Faker::Lorem.words(2).join(" ")
+      latin_name = Faker::Lorem.words(2).join(" ")
       appeal = 1
       colour = "Green"
       maintenance = 1
+      coverage = 1
       thickness = 1
       light = 1
       weight = 1
       note = "asd"
 
       Plant.create!(name: name,
+                    latin_name: latin_name,
+                    coverage: coverage,
                     aestethic_appeal: appeal,
                     colour: colour,
                     maintenance: maintenance,

@@ -11,6 +11,7 @@ class PlantsController < ApplicationController
   end
 
   def index
+    @plants = Plant.paginate(page: params[:page])
     respond_to do |format|
       @plants = Plant.paginate(page: params[:page])
       format.html { render :html => @plants}  # index.html.erb
@@ -42,6 +43,6 @@ class PlantsController < ApplicationController
   private
 
   def admin_user
-    redirect_to root_url unless current_user.admin?
+    redirect_to root_url unless signed_in? && current_user.admin?
   end
 end
