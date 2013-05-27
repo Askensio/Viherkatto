@@ -4,8 +4,8 @@ namespace :db do
 
 
     99.times do |n|
-      name = Faker::Lorem.words(2).join(" ")
-      latin_name = Faker::Lorem.words(2).join(" ")
+      name = Faker::Lorem.words(4).join(" ")
+      latin_name = Faker::Lorem.words(4).join(" ")
       appeal = 1
       colour = "Green"
       maintenance = 2
