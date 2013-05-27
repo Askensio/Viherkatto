@@ -24,6 +24,10 @@ class PlantsController < ApplicationController
     @plant = Plant.new
   end
 
+  def edit
+    @plant = Plant.find(params[:id])
+  end
+
   def create
     @plant = Plant.new(params[:plant])
     if @plant.save
@@ -35,6 +39,13 @@ class PlantsController < ApplicationController
   end
 
   def update
+    @plant = Plant.find(params[:id])
+    if @plant.update_attributes(params[:plant])
+      # Handle a successful update.
+      redirect_to plant_url
+    else
+      render 'edit'
+    end
   end
 
   def destroy

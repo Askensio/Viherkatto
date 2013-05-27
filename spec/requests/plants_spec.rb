@@ -63,11 +63,25 @@ describe 'Plant pages' do
     let(:admin) {FactoryGirl.create(:admin)}
 
     before do
-      @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
-      @plant.save()
-      visit plant_path(@plant.id)
+      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
+      @test_plant.save()
+      visit plant_path(@test_plant.id)
     end
 
     it { should have_selector('h1', text: 'Example Plant') }
+  end
+
+  describe 'edit' do
+    let(:admin) {FactoryGirl.create(:admin)}
+
+    before do
+      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
+      @test_plant.save()
+      visit edit_plant_path(@test_plant)
+    end
+
+    describe "page" do
+      it { should have_selector('h1', text: 'Kasvin päivitys') }
+    end
   end
 end
