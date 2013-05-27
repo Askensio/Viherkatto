@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Plant do
 
   before do
-    @plant = Plant.new(name: "Example Plant", aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
   end
 
   subject { @plant }
@@ -18,6 +18,31 @@ describe Plant do
 
   describe "when name is not present" do
     before { @plant.name = " " }
+    it { should_not be_valid }
+  end
+
+  describe "When name is valid" do
+    before { @plant.name = "Hieno Kasvi" }
+    it { should be_valid }
+  end
+
+  describe "When name is too long" do
+    before { @plant.name = "a" * 101 }
+    it { should_not be_valid }
+  end
+
+  describe "when latin name is not present" do
+    before { @plant.latin_name = " " }
+    it { should_not be_valid }
+  end
+
+  describe "When latin name is valid" do
+    before { @plant.latin_name = "El Bueno" }
+    it { should be_valid }
+  end
+
+  describe "When latin name is too long" do
+    before { @plant.latin_name = "a" * 101 }
     it { should_not be_valid }
   end
 
@@ -99,6 +124,21 @@ describe Plant do
   describe "When note is not too long" do
     before { @plant.note = "testi 123 testi 123" }
     it { should be_valid }
+  end
+
+  describe "When coverage is not a number" do
+    before { @plant.coverage = "lalala" }
+    it { should_not be_valid }
+  end
+
+  describe "When coverage is a number" do
+    before { @plant.coverage = 1 }
+    it { should be_valid }
+  end
+
+  describe "When coverage is negative" do
+    before { @plant.coverage = -123 }
+    it { should_not be_valid }
   end
 
 end

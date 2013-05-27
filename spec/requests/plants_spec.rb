@@ -37,6 +37,8 @@ describe 'Plant pages' do
         fill_in "plant_name", with: "Example Plant"
         select "Varjoinen", :from => "plant_light_requirement"
         select "Helppo", :from => "plant_maintenance"
+        select "Pieni", :from => "plant_coverage"
+        fill_in "plant_latin_name", with: "Plantus plantus"
         fill_in "plant_aestethic_appeal", with: 1
         fill_in "plant_min_soil_thickness", with: 1
         fill_in "plant_weight", with: 1
@@ -58,10 +60,14 @@ describe 'Plant pages' do
   end
 
   describe 'view' do
-    let(:plant) { FactoryGirl.create(:plant) }
-    before { visit plant_path(plant) }
-    it { should have_selector('h1', text: plant.name) }
+    let(:admin) {FactoryGirl.create(:admin)}
+
+    before do
+      @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
+      @plant.save()
+      visit plant_path(@plant.id)
+    end
+
+    it { should have_selector('h1', text: 'Example Plant') }
   end
-
-
 end
