@@ -34,7 +34,7 @@ describe "Authentication" do
       it { should have_selector('div.alert.alert-success', text: 'Tervetuloa') }
 
       describe "followed by signout" do
-        before { click_link "Uloskirjaus" }
+        before { click_link "Kirjaudu ulos" }
         it { should have_link('Kirjaudu') }
       end
     end
