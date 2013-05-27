@@ -26,73 +26,45 @@ $(document).ready(function () {
 
             var entry_count = data["count"];
             var plants = data["plants"];
-
             // If it is the first time that the view is loaded then the pagination will be rendered also.
             if (firstLoad) {
                 paginate(entry_count, per_page)
                 firstLoad = false;
             }
-
             // Clears the plant list.
             $('.plant-list').empty();
-
             // And lists the queried plants.
             $.each(plants, function (i, item) {
                 addPlantElement(item);
             });
         });
     }
-                                                                                                                   //\"/plants/' + entry.id + '\" data-confirm=\"Vahvistus\" data-method=\"delete\" rel=\"nofollow\"
-    // Function that creates a single list element in the plant list
+
     function addPlantElement(entry) {
 
-                                                                      //data-confirm="Vahvistus" data-method="delete" rel="no-follow"
-
-        var listElement = $('<li></li>')
-
-        var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '</a>')
-        listElement.append(plantLink)
-
-        listElement.append(' | ')
-
+        var listElement = $('<li></li>');
+        var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '</a>');
+        listElement.append(plantLink);
+        listElement.append(' | ');
         var deleteElement = $('<a href=\"#\" id=\"/plants/' + entry.id + '\">' + 'poista' + '</a>').click(
-            function(e) {
+            function (e) {
                 console.log(e.target.getAttribute('id'))
-                console.log(document.cookie)
                 var url = e.target.getAttribute('id')
                 $.ajax({
-                        headers: {
-                            'Cookie': document.cookie
-                        },
-                        url: url,
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        type: 'DELETE',
-                        success: function(result) {
-                            console.log("lol")
-                        }
-                     });
+                    url: url,
+                    type: 'DELETE',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+                    },
+                    success: function (result) {
+                        getPlants()
+                    }
+                });
 
-            })
-
-        listElement.append(deleteElement).append(' | ')
-
-        var editElement = $('<a href=\"/plants/' + entry.id + '/edit\">' + 'muokkaa' + '</a>')
-
-        listElement.append(editElement)
-
-        $('.plant-list').append(listElement)
-    }
-         //ajaxCall('/plants/' + entry.id)
-    function ajaxCall(url) {
-        console.log(url)
-        //$.ajax({
-        //    url: url,
-        //    type: 'DELETE',
-        //    success: function(result) {
-        //        getPlants()
-        //    }
-        // });
+            });
+        listElement.append(deleteElement).append(' | ');
+        var editElement = $('<a href=\"/plants/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
+        listElement.append(editElement);
+        $('.plant-list').append(listElement);
     }
 });
