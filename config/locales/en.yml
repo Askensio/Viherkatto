@@ -31,10 +31,9 @@ en:
 
       base:
         material: "Materiaali"
-        thickness: "Paksuus (cm)"
-        weight: "Paino (kg/m2)"
-        absorbancy: "Vedenimukyky (l/m2)"
-        note: "Lisähuomioita"
+        thickness: "Paksuus"
+        weight: "Paino"
+        absorbancy: "Vedenimukyky"
 
     errors:
       models:
@@ -100,10 +99,10 @@ en:
                 blank: "puuttuu."
             thickness:
                 blank: "puuttuu."
-                not_a_number: "ei ole numero."
+                not_a_number: ": arvon kuuluu olla numero."
             weight:
                 blank: "puuttuu."
-                not_a_number: "ei ole numero."
+                not_a_number: ": arvon kuuluu olla numero."
             absorbancy:
                 blank: "puuttuu."
-                not_a_number: "ei ole numero."
+                not_a_number: ": arvon kuuluu olla numero."
