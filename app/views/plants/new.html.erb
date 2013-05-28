@@ -20,7 +20,7 @@
         <%= f.text_field :aestethic_appeal %>
 
         <%= f.label :light_requirement %>
-        <%= select :plant, :light_requirement, [['Varjoinen',1],['Puolivarjo',2], ['Aurinkoinen',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
+        <%= select :plant, :light_id, [['Varjoinen',Light.find(1)],['Puolivarjo',Light.find(2)], ['Aurinkoinen',Light.find(3)]], {}, :class => "selectpicker show-menu-arrow span5"%>
 
         <%= f.label :maintenance %>
         <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow span5"%>

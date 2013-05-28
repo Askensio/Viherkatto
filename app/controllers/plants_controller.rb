@@ -40,7 +40,7 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
-    if @plant.update_attributes(params[:plant])
+    if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
       # Handle a successful update.
       redirect_to plant_url
     else
