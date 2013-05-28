@@ -24,10 +24,10 @@ describe 'Bases' do
 
     describe "with valid information" do
       before do
-        fill_in "Absorbancy", with: 100
-        fill_in "Material", with: "kivimurska"
-        fill_in "Thickness", with: 100
-        fill_in "Weight", with: 100
+        fill_in "base_absorbancy", with: 100
+        fill_in "base_material", with: "kivimurska"
+        fill_in "base_thickness", with: 100
+        fill_in "base_weight", with: 100
       end
       it "should add the base" do
         expect { click_button submit }.to change(Base, :count).by(1)

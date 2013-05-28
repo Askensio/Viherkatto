@@ -35,10 +35,10 @@ namespace :db do
                  absorbancy: 30)
 
     99.times do |n|
-      material = Faker::Lorem.words(1)
-      thickness = 20
-      weight = 60
-      absorbancy = 100
+      material = Faker::Lorem.words(1).join(" ")
+      thickness = n*10
+      weight = thickness+10
+      absorbancy = weight+10
 
       Base.create!(material: material,
                    thickness: thickness,
