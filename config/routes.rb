@@ -15,6 +15,8 @@ Viherkatto::Application.routes.draw do
   match '/add_base', to: 'bases#new'
 
   get 'pages/home'
+  get 'pages/contacts'
+  match '/contacts', to: 'pages#contacts'
   root :to => 'pages#home'
 
 
