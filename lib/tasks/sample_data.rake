@@ -2,27 +2,17 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
-    Plant.create!(name: "Example Plant",
-                  aestethic_appeal: 1,
-                  latin_name: "Plantus Examplus",
-                  coverage: 1,
-                  colour: "Blue",
-                  light_requirement: 1,
-                  maintenance: 1,
-                  min_soil_thickness: 1,
-                  weight: 1,
-                  note: "Totally fabulous plant")
 
     99.times do |n|
-      name = Faker::Lorem.words(2).join(" ")
-      latin_name = Faker::Lorem.words(2).join(" ")
+      name = Faker::Lorem.words(4).join(" ")
+      latin_name = Faker::Lorem.words(4).join(" ")
       appeal = 1
       colour = "Green"
-      maintenance = 1
+      maintenance = 2
       coverage = 1
-      thickness = 1
-      light = 1
-      weight = 1
+      thickness = n+1
+      light = 2
+      weight = n+1
       note = "asd"
 
       Plant.create!(name: name,

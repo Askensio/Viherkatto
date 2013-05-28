@@ -50,5 +50,6 @@ class PlantsController < ApplicationController
 
   def destroy
     Plant.find(params[:id]).destroy
+    render :nothing => true
   end
 end
