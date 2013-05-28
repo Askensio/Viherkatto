@@ -1,2 +1,17 @@
-<h1>Greenroofs#new</h1>
-<p>Find me in app/views/greenroofs/new.html.erb</p>
+
+<% provide(:title, 'Kasvit') %>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<p class="content"></p>
+<div id="plant-search">
+  <form class="navbar-search"><label>Hae kasveja: <input id="search" type="text"></label></form>
+
+
+  <ul class="plant-list">
+  </ul>
+</div>
+
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "livesearch" %>
