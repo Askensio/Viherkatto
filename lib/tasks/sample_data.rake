@@ -29,7 +29,7 @@ namespace :db do
                     note: note)
     end
 
-    Base.create!(material: "kivimurska",
+    Base.create!(material: "Kivimurska",
                  thickness: 60,
                  weight: 100,
                  absorbancy: 30)

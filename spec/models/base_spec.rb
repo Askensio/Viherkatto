@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Base do
   before do
-    @base = Base.new(absorbancy: 100, material: "kivimurska", thickness: 100, weight: 100)
+    @base = Base.new(absorbancy: 100, material: "Kivimurska", thickness: 100, weight: 100)
   end
 
   subject { @base }

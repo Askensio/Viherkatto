@@ -6,19 +6,7 @@
   <div class="span5 offset4">
     <%= form_for(@base) do |f| %>
       <%= render 'shared/error_bases' %>
-
-      <%= f.label :material, "Materiaali *" %>
-      <%= f.text_field :material, :class =>  "span4" %>
-
-      <%= f.label :thickness, "Paksuus (cm) *" %>
-      <%= f.text_field :thickness, :class =>  "span4" %>
-
-      <%= f.label :absorbancy, "Vedenimukyky (l/m2) *" %>
-      <%= f.text_field :absorbancy, :class =>  "span4" %>
-
-      <%= f.label :weight, "Paino (kg/m2) *" %>
-      <%= f.text_field :weight, :class =>  "span4" %>
-
+      <%= render 'shared/base_form_fields' %>
       <%= f.submit "Lisää pohja", class: "btn btn-large btn-custom" %>
     <% end %>
     * = Pakollinen kenttä

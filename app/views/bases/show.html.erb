@@ -2,21 +2,28 @@
 
 <div class="row">
 
-  <div class="span4 offset2">
+  <div class="span4 offset3">
 
     <h1>ID <%= @base.id %></h1>
 
-    <ul class="span4">
-
-      <li><u>Materiaali:</u>       <%= @base.material %></li>
-
-      <li><u>Paksuus:</u>          <%= @base.thickness %> cm</li>
-
-      <li><u>Vedenimukyky:</u>     <%= @base.absorbancy %> l/m2</li>
-
-      <li><u>Paino:</u>            <%= @base.weight %> kg/m2</li>
-
-    </ul>
+    <table class="table">
+      <tr>
+        <td>Materiaali</td>
+        <td><%= @base.material %></td>
+      </tr>
+      <tr>
+        <td>Paksuus</td>
+        <td><%= @base.thickness %> cm</td>
+      </tr>
+      <tr>
+        <td>Vedenimukyky</td>
+        <td><%= @base.absorbancy %> l/m2</td>
+      </tr>
+      <tr>
+        <td>Paino</td>
+        <td><%= @base.weight %> kg/m2</td>
+      </tr>
+    </table>
 
   </div>
 

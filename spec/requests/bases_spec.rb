@@ -25,7 +25,7 @@ describe 'Bases' do
     describe "with valid information" do
       before do
         fill_in "base_absorbancy", with: 100
-        fill_in "base_material", with: "kivimurska"
+        fill_in "base_material", with: "Kivimurska"
         fill_in "base_thickness", with: 100
         fill_in "base_weight", with: 100
       end

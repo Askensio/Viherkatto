@@ -3,6 +3,8 @@
 class BasesController < ApplicationController
   require 'will_paginate/array'
 
+  before_filter :admin_user, only: [:new,:create,:update,:destroy, :edit]
+
   def new
     @base = Base.new
   end
