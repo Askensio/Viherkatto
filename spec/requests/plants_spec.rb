@@ -69,14 +69,27 @@ describe 'Plant pages' do
       @test_plant.save()
     end
 
-    describe 'view' do
+    describe 'view without admin rights' do
 
-      before { visit plant_path(@test_plant.id) }
+      before do
+        visit '/uloskirjaus'
+        visit plant_path(@test_plant.id)
+      end
 
       it { should have_selector('h1', text: 'Example Plant') }
       it { should have_selector('title', text: 'Kasvinäkymä') }
       it { should have_selector('label', for: 'plant_latin_name') }
-      it { should have_selector('label', content: 'Plantus Examplus')}
+      it { should have_selector('label', content: 'Plantus Examplus') }
+      it { should_not have_selector('a', text: "Muokkaa") }
+    end
+
+    describe 'view with admin rights' do
+      before do
+        sign_in admin
+        visit plant_path(@test_plant.id)
+      end
+
+      it { should have_selector('a', text: "Muokkaa") }
     end
 
     describe "Edit-page" do
@@ -92,7 +105,7 @@ describe 'Plant pages' do
           fill_in "plant_latin_name", with: "yolo swaggings"
           click_button "Päivitä"
         end
-        it { should have_selector('label', content: 'yolo swaggings')}
+        it { should have_selector('label', content: 'yolo swaggings') }
 
       end
     end
