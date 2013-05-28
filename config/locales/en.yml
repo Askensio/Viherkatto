@@ -28,6 +28,10 @@ en:
         weight: "Paino"
         notes: "Huomioita"
         coverage: "Peittävyys"
+        Blue: "Sininen"
+        Red: "Punainen"
+        Yellow: "Keltainen"
+        Green: "Vihreä"
 
       base:
         material: "Materiaali"
