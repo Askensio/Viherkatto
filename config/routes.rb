@@ -11,6 +11,8 @@ Viherkatto::Application.routes.draw do
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
+  get "pages/contacts"
+  match '/contacts', to: 'pages#contacts'
   get "pages/home"
   root :to => 'pages#home'
 
