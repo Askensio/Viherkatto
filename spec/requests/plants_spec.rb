@@ -64,11 +64,9 @@ describe 'Plant pages' do
     let(:admin) { FactoryGirl.create(:admin) }
 
     before do
-
       sign_in admin
       @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
       @test_plant.save()
-
     end
 
     describe 'view' do
@@ -77,13 +75,15 @@ describe 'Plant pages' do
 
       it { should have_selector('h1', text: 'Example Plant') }
       it { should have_selector('title', text: 'Kasvinäkymä') }
-      it { should have_content("Plantus Examplus") }
+      it { should have_selector('label', for: 'plant_latin_name') }
+      it { should have_selector('label', content: 'Plantus Examplus')}
     end
 
     describe "Edit-page" do
 
       before { visit edit_plant_path(@test_plant) }
 
+      it { should have_selector('h1', text: 'Kasvin päivitys') }
       it { should have_selector('h1', text: 'Kasvin päivitys') }
 
       describe "Changing latin name and updating works" do
@@ -92,7 +92,7 @@ describe 'Plant pages' do
           fill_in "plant_latin_name", with: "yolo swaggings"
           click_button "Päivitä"
         end
-        it { should have_content("yolo swaggings") }
+        it { should have_selector('label', content: 'yolo swaggings')}
 
       end
     end
