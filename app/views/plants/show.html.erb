@@ -8,29 +8,66 @@
       <%= @plant.name %>
     </h1>
 
+    <%= form_for(@plant) do |f| %>
+        <%= render 'shared/error_plants' %>
+        <table class="table">
+          <tr>
+            <td><%= f.label :name %></td>
+            <td><%= f.label @plant.name %></td>
+          </tr>
 
+          <tr>
+            <td><%= f.label :latin_name %></td>
+            <td><%= f.label @plant.latin_name %></td>
+          </tr>
 
-    <table>
+          <tr>
+            <td><%= f.label :colour %></td>
+            <td><%= f.label @plant.colour %></td>
+          </tr>
 
-    <tr><td>Latinankielinen nimi:</td>               <td><%= @plant.latin_name %></td></tr>
+          <tr>
+            <td><%= f.label :aestethic_appeal %></td>
+            <td><%= f.label @plant.aestethic_appeal %></td>
+          </tr>
 
-      <tr><td>Väri:</td>                             <td><%= @plant.colour %></td></tr>
+          <tr>
+            <td><%= f.label :light_requirement %></td>
+            <td><%= f.label lightness(@plant.light_requirement) %></td>
+          </tr>
 
-      <tr><td>Nättiys:</td>                          <td><%= @plant.aestethic_appeal %></td></tr>
+          <tr>
+            <td><%= f.label :maintenance %></td>
+            <td><%= f.label maintenanceLevel(@plant.maintenance) %></td>
+          </tr>
 
-      <tr><td>Peittävyys:</td>                       <td><%= coverageLevel(@plant.coverage) %></td></tr>
+          <tr>
+            <td><%= f.label :coverage %></td>
+            <td><%= f.label coverageLevel(@plant.coverage) %></td>
+          </tr>
 
-      <tr><td>Valontarve:</td>                       <td><%= lightness(@plant.light_requirement) %></td></tr>
+          <tr>
+            <td><%= f.label :min_soil_thickness %></td>
+            <td><%= f.label @plant.min_soil_thickness %></td>
+          </tr>
 
-      <tr><td>Hoidontarve:</td>                      <td><%= maintenanceLevel(@plant.maintenance) %></td></tr>
+          <tr>
+            <td><%= f.label :weight %></td>
+            <td><%= f.label @plant.weight %></td>
+          </tr>
 
-      <tr><td>Paino (kg/m2):</td>                    <td><%= @plant.weight %></td></tr>
+          <tr>
+            <td><%= f.label :note %></td>
+            <td><%= f.label @plant.note %></td>
+          </tr>
 
-      <tr><td>Minimipaksuus pohjalle:</td>           <td><%= @plant.min_soil_thickness %></td></tr>
+        </table>
+    <% end %>
 
-      <tr><td>Huomioita:</td>                        <td><%= @plant.note %></td></tr>
+    <% if signed_in? && current_user.admin? %>
+        <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
+    <% end %>
 
-    </table>
   </div>
 </div>
 
