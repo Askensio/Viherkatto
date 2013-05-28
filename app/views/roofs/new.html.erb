@@ -1,0 +1,20 @@
+<% provide(:title, 'Katon lisäys') %>
+<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
+
+<h1>Katon lisäys</h1>
+
+
+
+<div class="row">
+  <div class="span4 offset3">
+    <%= form_for (@roof) do |f| %>
+        <%= render 'shared/forms/roof_form_fields' %>
+        <%= f.submit "Lisää", class: "btn btn-custom" %>
+    <% end %>
+
+  </div>
+</div>
+
+<%= javascript_include_tag "bootstrap-select" %>
+<%= javascript_include_tag "bootstrap-tooltip" %>
+<script>$('.selectpicker').selectpicker();</script>

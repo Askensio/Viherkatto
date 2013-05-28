@@ -1,10 +1,9 @@
 Viherkatto::Application.routes.draw do
 
-  #get "plants/new"
-
   resources :users
   resources :plants
   resources :bases, except: :destroy
+  resources :roofs, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/rekisteroidy',  to: 'users#new'
