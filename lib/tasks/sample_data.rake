@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -45,6 +47,27 @@ namespace :db do
                    email: email,
                    password: password,
                    password_confirmation: password)
+    end
+
+    Environment.create!(name: "Merenranta")
+    Environment.create!(name: "Pelto")
+    Environment.create!(name: "Metsä")
+    Environment.create!(name: "Kaupunki")
+    Environment.create!(name: "Muu")
+
+    id = 1
+    20.times do |n|
+      id = id + 1
+      if(id > 4)
+        id = 1
+      end
+      area = n
+      declination = n
+      load_capacity = 10*n
+
+      @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
+      @roof.environments << Environment.find(id)
+      @roof.save
     end
 
   end
