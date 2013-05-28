@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527062401) do
+ActiveRecord::Schema.define(:version => 20130528104937) do
+
+  create_table "lights", :force => true do |t|
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "plants", :force => true do |t|
     t.string   "name"
@@ -22,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20130527062401) do
     t.integer  "min_soil_thickness"
     t.integer  "weight"
     t.integer  "coverage"
-    t.integer  "light_requirement"
+    t.integer  "light_id"
     t.string   "note"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false

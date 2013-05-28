@@ -5,6 +5,9 @@ class CreateRoofs < ActiveRecord::Migration
       t.integer :load_capacity
       t.string :enviroment
       t.integer :area
+      t.references :light
+
+
 
       t.timestamps
     end
