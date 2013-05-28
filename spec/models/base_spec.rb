@@ -4,14 +4,13 @@ require 'spec_helper'
 
 describe Base do
   before do
-    @base = Base.new(absorbancy: 100, material: "kivimurska", note: "Aika hyvä ja kestävä materiaali.", thickness: 100, weight: 100)
+    @base = Base.new(absorbancy: 100, material: "kivimurska", thickness: 100, weight: 100)
   end
 
   subject { @base }
 
   it { should respond_to(:absorbancy) }
   it { should respond_to(:material) }
-  it { should respond_to(:note) }
   it { should respond_to(:thickness) }
   it { should respond_to(:weight) }
 

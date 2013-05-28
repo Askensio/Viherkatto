@@ -1,1 +1,19 @@
-<%= @base.id %> <%= @base.material %> <%= @base.thickness %> <%= @base.weight %> <%= @base.absorbancy %>
+<% provide(:title, 'Pohjanäkymä') %>
+
+<div class="row">
+
+  <div class="span5 offset1">
+
+    <h1>ID <%= @base.id %></h1>
+
+    <p><u>Materiaali:</u>       <%= @base.material %></p>
+
+    <p><u>Paksuus:</u>          <%= @base.thickness %> cm</p>
+
+    <p><u>Vedenimukyky:</u>     <%= @base.absorbancy %> l/m2</p>
+
+    <p><u>Paino:</u>            <%= @base.weight %> kg/m2</p>
+
+  </div>
+
+</div>

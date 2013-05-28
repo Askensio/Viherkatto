@@ -28,7 +28,6 @@ describe 'Bases' do
         fill_in "Material", with: "kivimurska"
         fill_in "Thickness", with: 100
         fill_in "Weight", with: 100
-        fill_in "Note", with: "Aika hyvä ja kestävä materiaali."
       end
       it "should add the base" do
         expect { click_button submit }.to change(Base, :count).by(1)
