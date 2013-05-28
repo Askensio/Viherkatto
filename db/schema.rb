@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(:version => 20130527062401) do
     t.datetime "updated_at",         :null => false
   end
 
-  add_index "plants", ["name"], :name => "index_plants_on_name", :unique => true
-
   create_table "roofs", :force => true do |t|
     t.integer  "declination"
     t.integer  "load_capacity"
@@ -52,7 +50,5 @@ ActiveRecord::Schema.define(:version => 20130527062401) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

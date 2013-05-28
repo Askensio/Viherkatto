@@ -1,5 +1,7 @@
 Viherkatto::Application.routes.draw do
 
+  get "greenroofs/new"
+
   #get "plants/new"
 
   resources :users
