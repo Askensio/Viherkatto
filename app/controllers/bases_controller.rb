@@ -3,7 +3,7 @@
 class BasesController < ApplicationController
   require 'will_paginate/array'
 
-  before_filter :admin_user, only: [:new,:create,:update,:destroy, :edit]
+  before_filter :admin_user, only: [:new,:create,:update,:edit]
 
   def new
     @base = Base.new
@@ -34,4 +34,14 @@ class BasesController < ApplicationController
   def edit
     @base = Base.find(params[:id])
   end
+
+  def update
+    @base = Base.find(params[:id])
+    if @base.update_attributes(params[:base])
+       redirect_to @base
+    else
+       render 'edit'
+    end
+  end
+
 end

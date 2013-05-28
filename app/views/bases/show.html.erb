@@ -4,7 +4,7 @@
 
   <div class="span4 offset3">
 
-    <h1>ID <%= @base.id %></h1>
+    <h1>Pohja <%= @base.id %></h1>
 
     <table class="table">
       <tr>
@@ -24,6 +24,11 @@
         <td><%= @base.weight %> kg/m2</td>
       </tr>
     </table>
+
+    <% if signed_in? && current_user.admin? %>
+        <%= link_to "Muokkaa", edit_basis_path, class: "btn btn-large btn-custom" %>
+    <% end %>
+    <%= link_to "Takaisin", bases_path, class: "btn btn-large btn-custom" %>
 
   </div>
 

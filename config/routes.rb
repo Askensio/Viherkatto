@@ -4,7 +4,7 @@ Viherkatto::Application.routes.draw do
 
   resources :users
   resources :plants
-  resources :bases
+  resources :bases, except: :destroy
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/rekisteroidy',  to: 'users#new'
@@ -12,9 +12,7 @@ Viherkatto::Application.routes.draw do
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
-  get 'bases/new'
   match '/add_base', to: 'bases#new'
-  match '/bases', to: 'bases#show'
 
   get 'pages/home'
   root :to => 'pages#home'
