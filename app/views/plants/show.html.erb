@@ -2,30 +2,71 @@
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 
 <div class="row">
-  <div class="span5 offset1">
+  <div class="span5 offset3">
 
     <h1>
       <%= @plant.name %>
     </h1>
 
-    <p>Latin name:              <%= @plant.latin_name %></p>
+    <%= form_for(@plant) do |f| %>
+        <%= render 'shared/error_plants' %>
+        <table class="table">
+          <tr>
+            <td><%= f.label :name %></td>
+            <td><%= f.label @plant.name %></td>
+          </tr>
 
-    <p>Colour:                  <%= @plant.colour %></p>
+          <tr>
+            <td><%= f.label :latin_name %></td>
+            <td><%= f.label @plant.latin_name %></td>
+          </tr>
 
-    <p>Aestethic appeal:        <%= @plant.aestethic_appeal %></p>
+          <tr>
+            <td><%= f.label :colour %></td>
+            <td><%= f.label @plant.colour %></td>
+          </tr>
 
-    <p>Coverage:                <%= coverageLevel(@plant.coverage) %></p>
+          <tr>
+            <td><%= f.label :aestethic_appeal %></td>
+            <td><%= f.label @plant.aestethic_appeal %></td>
+          </tr>
 
-    <p>Light requirement:       <%= lightness(@plant.light_requirement) %></p>
+          <tr>
+            <td><%= f.label :light_requirement %></td>
+            <td><%= f.label lightness(@plant.light_requirement) %></td>
+          </tr>
 
-    <p>Maintenance requirement: <%= maintenanceLevel(@plant.maintenance) %></p>
+          <tr>
+            <td><%= f.label :maintenance %></td>
+            <td><%= f.label maintenanceLevel(@plant.maintenance) %></td>
+          </tr>
 
-    <p>Weight (kg/m2):          <%= @plant.weight %></p>
+          <tr>
+            <td><%= f.label :coverage %></td>
+            <td><%= f.label coverageLevel(@plant.coverage) %></td>
+          </tr>
 
-    <p>Minimum soil thickness:  <%= @plant.min_soil_thickness %></p>
+          <tr>
+            <td><%= f.label :min_soil_thickness %></td>
+            <td><%= f.label @plant.min_soil_thickness %></td>
+          </tr>
 
-    <p>Note:                    <%= @plant.note %></p>
+          <tr>
+            <td><%= f.label :weight %></td>
+            <td><%= f.label @plant.weight %></td>
+          </tr>
 
+          <tr>
+            <td><%= f.label :note %></td>
+            <td><%= f.label @plant.note %></td>
+          </tr>
+
+        </table>
+    <% end %>
+
+    <% if signed_in? && current_user.admin? %>
+        <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
+    <% end %>
 
   </div>
 </div>
