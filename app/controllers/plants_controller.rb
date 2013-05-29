@@ -15,8 +15,17 @@ class PlantsController < ApplicationController
     respond_to do |format|
       @plants = Plant.paginate(page: params[:page])
       format.html { render :html => @plants}  # index.html.erb
-      @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
+      if params[:page].present?
+        @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        @jsonPlants = Plant.all
+      end
+
+      #if :per_page.present?
       format.json  { render :json => {count: @plants.total_entries, plants: @jsonPlants } }
+      #else
+      #format.json { render :json => {count: @plants} }
+      #end
     end
   end
 

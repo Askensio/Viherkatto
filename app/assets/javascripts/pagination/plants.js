@@ -83,4 +83,46 @@ $(document).ready(function () {
         listElement.append(editElement);
         $('.plant-list').append(listElement);
     }
+
+    function addPlantElementForSearch(entry) {
+
+        var listElement = $('<li></li>');
+        var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '  </a>');
+        listElement.append(plantLink);
+        listElement.append('<i class=\"icon-plus pull-right\"></i>');
+        $('.plant-list').append(listElement);
+    }
+
+
+    var $cells = $("li");
+    var plantdata = [];
+
+    $("#search").keyup(function() {
+        $('.plant-list').empty();
+      //  var val = $.trim(this.value).toUpperCase();
+      //  if (val === "")
+      //      $cells.parent().show();
+      //  else {
+      //      $cells.parent().hide();
+       //     $cells.filter(function() {
+      //          return -1 != $(this).text().toUpperCase().indexOf(val); }).parent().show();
+        //}
+       if (plantdata.length === 0) {
+           $.getJSON("/plants.json", function (data) {
+               plantdata = data["plants"];
+               console.log(plantdata);
+           });
+       }
+
+       $.each(plantdata, function (i, item) {
+            var searchword = $("#search").val();
+            if ( item.name.toLocaleLowerCase().indexOf(searchword) >= 0 ) {
+                addPlantElementForSearch(item);
+            }
+            console.log(searchword);
+            console.log(item.name);
+       });
+    });
+
 });
+
