@@ -26,7 +26,7 @@ $(document).ready(function () {
 
         if(onDelete) reloadPaginateNeeded = onDelete;
 
-        $.getJSON("/plants.json?page=" + page, function (data) {
+        $.getJSON("/plants.json", function (data) {
 
             var entry_count = data["count"];
             var plants = data["plants"];
@@ -96,7 +96,7 @@ $(document).ready(function () {
             }
         );
         var listElement = $('<li class="pull-left"></li>');
-        listElement.append(chosenOne.clone());
+        listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
         $('.chosen-list').append(listElement).append('<br>');
         console.log(parent)
         //parent.remove()

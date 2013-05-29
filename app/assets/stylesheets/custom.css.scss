@@ -263,13 +263,18 @@ input {
 }
 
 #chosenOnes {
-  width: 400px;
-  border-style:solid;
-  border-width:1px;
+  width: 250px;
+  font-family:Arial, Helvetica, Times;
+  /*border-style:solid;
+  border-width:1px;*/
+  border-radius: 15px;
+  background-color: #9CB770;
   position: fixed;
   right: 50px;
   top: 60px;
   li {
     font-size: 0.9em;
+    font-weight:bold;
+
   }
 }
