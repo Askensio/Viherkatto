@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -32,6 +34,23 @@ namespace :db do
 
     end
 
+    Base.create!(material: "Kivimurska",
+                 thickness: 60,
+                 weight: 100,
+                 absorbancy: 30)
+
+    99.times do |n|
+      material = Faker::Lorem.words(1).join(" ")
+      thickness = n*10
+      weight = thickness+10
+      absorbancy = weight+10
+
+      Base.create!(material: material,
+                   thickness: thickness,
+                   weight: weight,
+                   absorbancy: absorbancy)
+    end
+
 
     admin = User.create!(name: "Example User",
                          email: "admin@foo.bar",
@@ -50,6 +69,27 @@ namespace :db do
                    email: email,
                    password: password,
                    password_confirmation: password)
+    end
+
+    Environment.create!(name: "Merenranta")
+    Environment.create!(name: "Pelto")
+    Environment.create!(name: "Metsä")
+    Environment.create!(name: "Kaupunki")
+    Environment.create!(name: "Muu")
+
+    id = 1
+    20.times do |n|
+      id = id + 1
+      if(id > 4)
+        id = 1
+      end
+      area = n
+      declination = n
+      load_capacity = 10*n
+
+      @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
+      @roof.environments << Environment.find(id)
+      @roof.save
     end
 
   end

@@ -5,11 +5,12 @@ require 'spec_helper'
 describe Roof do
   before do
 
+
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @roof = Roof.new(area: 50, declination: 10, enviroment: 'Keskellä metsää.', load_capacity: 480)
+    @roof = Roof.new(area: 50, declination: 10, load_capacity: 480)
     @roof.update_attribute(:light_id, 2)
   end
 
@@ -17,7 +18,6 @@ describe Roof do
 
   it { should respond_to(:area) }
   it { should respond_to(:declination) }
-  it { should respond_to(:enviroment)}
   it { should respond_to(:load_capacity)}
 
   it { should be_valid }
@@ -65,21 +65,6 @@ describe Roof do
   describe 'when load capacity is present and valid' do
     before { @roof.load_capacity = 500 }
     it { should be_valid }
-  end
-
-  describe 'when enviroment is not present' do
-    before { @roof.enviroment = " " }
-    it { should_not be_valid }
-  end
-
-  describe 'when enviroment is present' do
-    before { @roof.enviroment = "Merenranta" }
-    it { should be_valid }
-  end
-
-  describe 'when enviroment variable is too long' do
-    before { @roof.enviroment = "a" * 201 }
-    it { should_not be_valid }
   end
 
   describe "when roof with same specs already exists" do

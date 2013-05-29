@@ -1,0 +1,17 @@
+<%= fields_for (@roof) do |f| %>
+
+    <%= render 'shared/error_messages_roof' %>
+
+    <%= f.label :area, h('Pinta-ala m2 *')%>
+    <%= f.text_field :area, :class =>  "span4"%>
+
+    <%= f.label :declination, h('Kaltevuusaste *')%>
+    <%= f.text_field :declination, :class =>  "span4" %>
+
+    <%= f.label :environment %>
+    <%= collection_select :environment, :id, Environment.all, :id, :name, {} ,:class => "selectpicker show-menu-arrow show-tick span4" ,:multiple => '' %>
+
+    <%= f.label :load_capacity, h('Kantavuus kg/m2 *')%>
+    <%= f.text_field :load_capacity , :class =>  "span4" %>
+
+<% end %>

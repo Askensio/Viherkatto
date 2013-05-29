@@ -33,6 +33,12 @@ en:
         Yellow: "Keltainen"
         Green: "Vihreä"
 
+      base:
+        material: "Materiaali"
+        thickness: "Paksuus"
+        weight: "Paino"
+        absorbancy: "Vedenimukyky"
+
     errors:
       models:
         user:
@@ -52,6 +58,7 @@ en:
             phone:
               blank: "puuttuu."
               invalid: "on virheellinen."
+
         plant:
           attributes:
             name:
@@ -89,3 +96,17 @@ en:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
+
+        base:
+          attributes:
+            material:
+                blank: "puuttuu."
+            thickness:
+                blank: "puuttuu."
+                not_a_number: ": arvon kuuluu olla numero."
+            weight:
+                blank: "puuttuu."
+                not_a_number: ": arvon kuuluu olla numero."
+            absorbancy:
+                blank: "puuttuu."
+                not_a_number: ": arvon kuuluu olla numero."

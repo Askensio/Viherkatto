@@ -1,0 +1,15 @@
+<%= fields_for(@base) do |f| %>
+
+  <%= f.label :material, "Materiaali *" %>
+  <%= f.text_field :material, :class =>  "span4" %>
+
+  <%= f.label :thickness, "Paksuus (cm) *" %>
+  <%= f.text_field :thickness, :class =>  "span4" %>
+
+  <%= f.label :absorbancy, "Vedenimukyky (l/m2) *" %>
+  <%= f.text_field :absorbancy, :class =>  "span4" %>
+
+  <%= f.label :weight, "Paino (kg/m2) *" %>
+  <%= f.text_field :weight, :class =>  "span4" %>
+
+<% end %>
