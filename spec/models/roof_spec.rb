@@ -59,14 +59,4 @@ describe Roof do
     before { @roof.load_capacity = 500 }
     it { should be_valid }
   end
-
-  describe "when roof with same specs already exists" do
-    before do
-      @roof.save
-      @roof_with_same_specs = @roof.dup
-    end
-    it 'should not allow to save an other with same specs' do
-      expect { @roof_with_same_specs.save }.to raise_error
-    end
-  end
 end

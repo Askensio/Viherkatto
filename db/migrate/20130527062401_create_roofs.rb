@@ -9,7 +9,6 @@ class CreateRoofs < ActiveRecord::Migration
     end
 
     add_index :roofs, [:declination, :load_capacity, :area],
-              :unique => true,
               :name => 'roof_index'
   end
 end
