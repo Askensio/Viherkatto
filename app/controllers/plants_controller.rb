@@ -2,7 +2,7 @@
 
 class PlantsController < ApplicationController
 
-  before_filter :admin_user, only: [:new,:create,:update,:destroy, :edit]
+  before_filter :admin_user, only: [:new, :create, :update, :destroy, :edit]
 
   #respond_to :html, :xml, :json
 
@@ -14,9 +14,9 @@ class PlantsController < ApplicationController
     @plants = Plant.paginate(page: params[:page])
     respond_to do |format|
       @plants = Plant.paginate(page: params[:page])
-      format.html { render :html => @plants}  # index.html.erb
+      format.html { render :html => @plants } # index.html.erb
       @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
-      format.json  { render :json => {count: @plants.total_entries, plants: @jsonPlants } }
+      format.json { render :json => {count: @plants.total_entries, plants: @jsonPlants} }
     end
   end
 
@@ -31,6 +31,9 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
     if @plant.save
+      if @plant.light_id.nil?
+        @plant.update_attribute(:light_id, 1)
+      end
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
     else
@@ -40,7 +43,7 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
-    if @plant.update_attributes(params[:plant])
+    if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
       # Handle a successful update.
       redirect_to plant_url
     else

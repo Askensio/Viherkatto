@@ -9,7 +9,7 @@ class CreatePlants < ActiveRecord::Migration
       t.integer :min_soil_thickness
       t.integer :weight
       t.integer :coverage
-      t.integer :light_requirement
+      t.references :light
       t.string :note
 
       t.timestamps

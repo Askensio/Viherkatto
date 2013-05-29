@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(:version => 20130528144225) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "lights", :force => true do |t|
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "locations", :force => true do |t|
     t.integer  "roof_id"
     t.integer  "environment_id"
@@ -47,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20130528144225) do
     t.integer  "min_soil_thickness"
     t.integer  "weight"
     t.integer  "coverage"
-    t.integer  "light_requirement"
+    t.integer  "light_id"
     t.string   "note"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
@@ -59,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130528144225) do
     t.integer  "declination"
     t.integer  "load_capacity"
     t.integer  "area"
+    t.integer  "light_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

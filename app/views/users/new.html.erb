@@ -21,7 +21,7 @@
         <%= f.text_field :phone, :class =>  "span4" %>
 
         <%= f.label :profession %>
-        <%= select :user, :profession, positions, {}, :class => "selectpicker title= 'Olen...' show-menu-arrow show-tick span4"%> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Missä ominaisuudessa käytät viherkattotietokantaa?"><i class= "icon-question-sign"></i></a>
+        <%= select :user, :profession, positions, {}, :class => "selectpicker show-menu-arrow show-tick span4"%> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Missä ominaisuudessa käytät viherkattotietokantaa?"><i class= "icon-question-sign"></i></a>
 
         <%= f.label :password, h('Salasana *')%>
         <%= f.password_field :password , :class =>  "span4" %> <a class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Anna salasanasi. Vähimmäispituus on 8 merkkiä"><i class= "icon-question-sign"></i></a>
@@ -30,7 +30,7 @@
         <%= f.password_field :password_confirmation, :class =>  "span4" %>
         <%= f.submit "Rekisteröidy", class: "btn btn-large btn-custom" %>
     <% end %>
-    <i class = "icon-exclamation-sign"></i> = Pakollinen kenttä
+    * = Pakollinen kenttä
   </div>
 </div>
 
