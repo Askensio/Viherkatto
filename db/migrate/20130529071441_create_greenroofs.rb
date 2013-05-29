@@ -1,11 +1,10 @@
 class CreateGreenroofs < ActiveRecord::Migration
   def change
     create_table :greenroofs do |t|
-      t.string :name
-      t.string :content
-      t.belongs_to :user
-      t.has_many :plants
-      t.has_one :roof
+      t.string :address
+      t.integer :purpose
+      t.string :note
+      t.integer :user_id
 
       t.timestamps
     end

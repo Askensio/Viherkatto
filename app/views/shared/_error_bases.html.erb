@@ -1,0 +1,18 @@
+<% if @base.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        Syöttämissäsi tiedoissa oli
+        <%= @base.errors.count %>
+        <% if @base.errors.count > 1 %>
+            virhettä.
+        <% else %>
+            virhe.
+        <% end %>
+      </div>
+      <ul>
+        <% @base.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

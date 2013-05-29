@@ -1,21 +1,22 @@
 Viherkatto::Application.routes.draw do
 
-  get "greenroofs/new"
-
-  #get "plants/new"
-
   resources :users
   resources :plants
+  resources :bases, except: :destroy
+  resources :roofs, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :greenroofs
 
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
-  get "pages/contacts"
+  match '/add_base', to: 'bases#new'
+
+  get 'pages/home'
+  get 'pages/contacts'
   match '/contacts', to: 'pages#contacts'
-  get "pages/home"
   root :to => 'pages#home'
 
 
