@@ -13,8 +13,7 @@ class PlantsController < ApplicationController
   def index
     respond_to do |format|
       @plants = Plant.paginate(page: params[:page])
-      format.html { render :html => @plants } # index.html.erb
-
+      format.html { render :html => @plants}  # index.html.erb
       if params[:page].present?
         @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
       else
@@ -98,6 +97,13 @@ class PlantsController < ApplicationController
       @jsonPlants -= @jsonPlantsDub
 
       format.json { render :json => {count: @plants.total_entries, plants: @jsonPlants} }
+=======
+      #if :per_page.present?
+      format.json  { render :json => {count: @plants.total_entries, plants: @jsonPlants } }
+      #else
+      #format.json { render :json => {count: @plants} }
+      #end
+>>>>>>> viherkaton_lisays
     end
   end
 
