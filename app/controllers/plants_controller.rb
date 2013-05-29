@@ -30,6 +30,9 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(params[:plant])
+    if !@plant.light_id.nil?
+    @plant.update_attribute(:light_id, params[:light][:id])
+    end
     if @plant.save
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url

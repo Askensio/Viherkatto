@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130528104937) do
     t.integer  "load_capacity"
     t.string   "enviroment"
     t.integer  "area"
+    t.integer  "light_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

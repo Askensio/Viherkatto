@@ -28,6 +28,7 @@ namespace :db do
                     min_soil_thickness: thickness,
                     weight: weight,
                     note: note)
+      @plant.update_attribute(:light_id, light)
 
     end
 

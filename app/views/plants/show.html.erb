@@ -33,7 +33,7 @@
 
           <tr>
             <td><%= f.label :light%></td>
-            <td><%= f.label @plant.light.desc%></td>
+            <td><%= f.label Light.find(@plant.light_id).desc %></td>
           </tr>
 
           <tr>

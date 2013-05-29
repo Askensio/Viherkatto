@@ -3,7 +3,12 @@ require 'spec_helper'
 describe Plant do
 
   before do
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
+    Light.create!(desc: "Varjoisa")
+    Light.create!(desc: "Puolivarjoisa")
+    Light.create!(desc: "Aurinkoinen")
+
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, note: "Totally fabulous plant")
+    @plant.update_attribute(:light_id, 1);
   end
 
   subject { @plant }
