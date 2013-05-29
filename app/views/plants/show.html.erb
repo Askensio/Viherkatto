@@ -32,8 +32,8 @@
           </tr>
 
           <tr>
-            <td><%= f.label :light_requirement %></td>
-            <td><%= f.label lightness(@plant.light_requirement) %></td>
+            <td><%= f.label :light%></td>
+            <td><%= f.label Light.find(@plant.light_id).desc %></td>
           </tr>
 
           <tr>

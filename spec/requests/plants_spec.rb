@@ -4,6 +4,10 @@ require 'spec_helper'
 
 describe 'Plant pages' do
 
+  Light.create!(desc: "Varjoisa")
+  Light.create!(desc: "Puolivarjoisa")
+  Light.create!(desc: "Aurinkoinen")
+
   subject { page }
 
   describe 'addition' do
@@ -35,7 +39,7 @@ describe 'Plant pages' do
     describe "with valid information" do
       before do
         fill_in "plant_name", with: "Example Plant"
-        select "Varjoinen", :from => "plant_light_requirement"
+        select "Varjoisa", :from => "light_id"
         select "Helppo", :from => "plant_maintenance"
         select "Pieni", :from => "plant_coverage"
         fill_in "plant_latin_name", with: "Plantus plantus"
@@ -64,9 +68,17 @@ describe 'Plant pages' do
     let(:admin) { FactoryGirl.create(:admin) }
 
     before do
+
+      Light.create!(desc: "Varjoisa")
+      Light.create!(desc: "Puolivarjoisa")
+      Light.create!(desc: "Aurinkoinen")
+
       sign_in admin
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, light_requirement: 1, note: "Totally fabulous plant")
-      @test_plant.save()
+      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1,note: "Totally fabulous plant")
+      @test_plant.update_attribute(:light_id, 2)
+      @test_plant.save
+
+
     end
 
     describe 'view without admin rights' do

@@ -5,6 +5,10 @@ namespace :db do
   task populate: :environment do
 
 
+    Light.create!(desc: "Varjoisa")
+    Light.create!(desc: "Puolivarjoisa")
+    Light.create!(desc: "Aurinkoinen")
+
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
@@ -17,7 +21,7 @@ namespace :db do
       weight = n+1
       note = "asd"
 
-      Plant.create!(name: name,
+      @plant = Plant.create!(name: name,
                     latin_name: latin_name,
                     coverage: coverage,
                     aestethic_appeal: appeal,
@@ -25,8 +29,9 @@ namespace :db do
                     maintenance: maintenance,
                     min_soil_thickness: thickness,
                     weight: weight,
-                    light_requirement: light,
                     note: note)
+       @plant.update_attribute(:light_id, light)
+
     end
 
     Base.create!(material: "Kivimurska",

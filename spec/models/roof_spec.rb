@@ -4,7 +4,14 @@ require 'spec_helper'
 
 describe Roof do
   before do
+
+
+    Light.create!(desc: "Varjoisa")
+    Light.create!(desc: "Puolivarjoisa")
+    Light.create!(desc: "Aurinkoinen")
+
     @roof = Roof.new(area: 50, declination: 10, load_capacity: 480)
+    @roof.update_attribute(:light_id, 2)
   end
 
   subject { @roof }
