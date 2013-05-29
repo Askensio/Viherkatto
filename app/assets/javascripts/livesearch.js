@@ -5,6 +5,7 @@ $(document).ready(function () {
     })();
 
 
+
     function paginate(entry_count, page, per_page) {
         var total = Math.ceil(entry_count / per_page);
         $('.pagination').empty()
@@ -49,44 +50,57 @@ $(document).ready(function () {
 
 
     function addPlantElementForSearch(entry) {
-
         var listElement = $('<li></li>');
         var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '  </a>');
+        plantLink.attr('id', entry.id)
         listElement.append(plantLink);
-        listElement.append('<i class=\"icon-plus pull-right\"></i>');
+
+        listElement.append(createIconButton(-1 * entry.id));
         $('.plant-list').append(listElement);
     }
 
+
+
+    function createIconButton(id) {
+        var icon = $('<i class=\"icon-plus pull-right clickable\"></i>').attr('id', id).click( listaClikkerListener )
+        return icon
+    }
 
     var $cells = $("li");
     var plantdata = [];
 
     $("#search").keyup(function() {
-        $('.plant-list').empty();
-        //  var val = $.trim(this.value).toUpperCase();
-        //  if (val === "")
-        //      $cells.parent().show();
-        //  else {
-        //      $cells.parent().hide();
-        //     $cells.filter(function() {
-        //          return -1 != $(this).text().toUpperCase().indexOf(val); }).parent().show();
-        //}
-        if (plantdata.length === 0) {
-            $.getJSON("/plants.json", function (data) {
+        var searchword = $("#search").val();
+            $.getJSON("/plants.json?name=" + searchword, function (data) {
+                plantdata = []
                 plantdata = data["plants"];
                 console.log(plantdata);
+                $('.plant-list').empty();
+                $.each(plantdata, function (i, item) {
+                    addPlantElementForSearch(item);
+                    console.log(searchword);
+                    console.log(item.name);
+                });
             });
-        }
-
-        $.each(plantdata, function (i, item) {
-            var searchword = $("#search").val();
-            if ( item.name.toLocaleLowerCase().indexOf(searchword) >= 0 ) {
-                addPlantElementForSearch(item);
-            }
-            console.log(searchword);
-            console.log(item.name);
-        });
     });
+
+    var addedPlants = []
+    var listaClikkerListener = function(event) {
+        var id = -1 * event.target.getAttribute('id')
+        var chosenOne = $('#' + id)
+        var parent = chosenOne.parent()
+
+        chosenOne.click(
+            function(e) {
+               // e.target.remove()
+            }
+        );
+        var listElement = $('<li class="pull-left"></li>');
+        listElement.append(chosenOne.clone());
+        $('.chosen-list').append(listElement).append('<br>');
+        console.log(parent)
+        //parent.remove()
+    }
 
 });
 

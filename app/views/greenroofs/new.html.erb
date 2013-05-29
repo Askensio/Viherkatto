@@ -1,4 +1,4 @@
-
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 <% provide(:title, 'Kasvit') %>
 
 <% flash.each do |key, value| %>
@@ -7,9 +7,15 @@
 <p class="content"></p>
 <div id="plant-search">
   <!--<form class="navbar-search"><label>Hae kasveja: <input id="search" type="text"></label></form>     -->
-  <%= text_field_tag 'search' %>
-
+  <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4"%>
+  <!--<%= select_tag 'colour', "<option>Sininen</option><option>Punainen</option><option>Keltainen</option><option>Vihreä</option>".html_safe, :class => "selectpicker bootstrap-select show-menu-arrow span4" %>
+  -->
   <ul class="plant-list">
+  </ul>
+</div>
+<div id="chosenOnes">
+  <ul class="chosen-list">
+    <p>Valitsemasi kasvit:</p>
   </ul>
 </div>
 
