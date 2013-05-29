@@ -97,13 +97,6 @@ class PlantsController < ApplicationController
       @jsonPlants -= @jsonPlantsDub
 
       format.json { render :json => {count: @plants.total_entries, plants: @jsonPlants} }
-=======
-      #if :per_page.present?
-      format.json  { render :json => {count: @plants.total_entries, plants: @jsonPlants } }
-      #else
-      #format.json { render :json => {count: @plants} }
-      #end
->>>>>>> viherkaton_lisays
     end
   end
 
