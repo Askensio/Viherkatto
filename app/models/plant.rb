@@ -1,6 +1,8 @@
 class Plant < ActiveRecord::Base
 
   has_one :light
+  has_many :planteds
+  has_many :greenroofs, through: :planteds
 
   attr_accessible :coverage, :latin_name, :aestethic_appeal, :colour, :maintenance, :min_soil_thickness, :name, :note, :weight, :light_id
   attr_readonly :id

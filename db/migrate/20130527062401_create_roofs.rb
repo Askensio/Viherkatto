@@ -6,8 +6,6 @@ class CreateRoofs < ActiveRecord::Migration
       t.integer :area
       t.references :light
 
-
-
       t.timestamps
     end
 

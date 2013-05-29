@@ -1,9 +1,13 @@
 class Base < ActiveRecord::Base
-  attr_accessible :absorbancy, :material, :thickness, :weight
+
+  belongs_to :greenroof
+
+  has_many :consists
+  has_many :layers, through: :consist
+
+  attr_accessible :absorbancy
 
   validates :absorbancy, allow_blank: false, numericality: true
-  validates :material, presence: true
-  validates :thickness, allow_blank: false, numericality: true
-  validates :weight, allow_blank: false, numericality: true
+
 
 end
