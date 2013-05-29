@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(:version => 20130529071441) do
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
 
+  create_table "lights", :force => true do |t|
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "locations", :force => true do |t|
     t.integer  "roof_id"
     t.integer  "environment_id"
@@ -58,16 +64,19 @@ ActiveRecord::Schema.define(:version => 20130529071441) do
     t.integer  "min_soil_thickness"
     t.integer  "weight"
     t.integer  "coverage"
-    t.integer  "light_requirement"
+    t.integer  "light_id"
     t.string   "note"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "plants", ["name"], :name => "index_plants_on_name", :unique => true
+
   create_table "roofs", :force => true do |t|
     t.integer  "declination"
     t.integer  "load_capacity"
     t.integer  "area"
+    t.integer  "light_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -85,5 +94,7 @@ ActiveRecord::Schema.define(:version => 20130529071441) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

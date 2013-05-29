@@ -110,6 +110,9 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(params[:plant])
+    if !@plant.light_id.nil?
+    @plant.update_attribute(:light_id, params[:light][:id])
+    end
     if @plant.save
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
@@ -120,7 +123,7 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
-    if @plant.update_attributes(params[:plant])
+    if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
       # Handle a successful update.
       redirect_to plant_url
     else
