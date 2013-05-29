@@ -11,7 +11,6 @@ class PlantsController < ApplicationController
   end
 
   def index
-    #@plants = Plant.paginate(page: params[:page])
     respond_to do |format|
       @plants = Plant.paginate(page: params[:page])
       format.html { render :html => @plants } # index.html.erb
@@ -25,14 +24,11 @@ class PlantsController < ApplicationController
       @jsonPlantsDub = [:Plant]
 
       if params[:name].present?
-        #@jsonPlantsDub = [:Plant]
-
         @jsonPlants.each do |p|
           if !p.name.downcase.include?(params[:name].downcase)
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:latin_name].present?
@@ -41,7 +37,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:colour].present?
@@ -50,7 +45,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:maintenance].present?
@@ -59,7 +53,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:coverage].present?
@@ -68,7 +61,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:min_soil_thickness].present?
@@ -77,7 +69,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:weight_is].present?
@@ -86,7 +77,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:weight_atleast].present?
@@ -95,7 +85,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       if params[:weight_max].present?
@@ -104,7 +93,6 @@ class PlantsController < ApplicationController
             @jsonPlantsDub << p
           end
         end
-        #@jsonPlants -= @jsonPlantsDub
       end
 
       @jsonPlants -= @jsonPlantsDub
