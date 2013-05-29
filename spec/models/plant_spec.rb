@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Plant do
 
   before do
+
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
@@ -145,5 +146,4 @@ describe Plant do
     before { @plant.coverage = -123 }
     it { should_not be_valid }
   end
-
 end
