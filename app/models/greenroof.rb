@@ -10,10 +10,21 @@ class Greenroof < ActiveRecord::Base
 
   has_many :layers, through: :bases
 
+  after_save :save_bases, :save_roof
+
   attr_accessible :address, :purpose, :note
 
   validates :address, presence: true, length: { maximum: 150 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}
   validates :note, length: { maximum: 1500 }
 
+  def save_bases
+    self.bases.each do |base|
+      base.save
+    end
+  end
+
+  def save_roof
+    roof.save
+  end
 end
