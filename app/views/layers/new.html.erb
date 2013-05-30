@@ -1,0 +1,14 @@
+<% provide(:title, 'Lisää kerros') %>
+
+<h1>Lisää kerros</h1>
+
+<div class="row">
+  <div class="span5 offset4">
+    <%= form_for(@layer) do |f| %>
+        <%= render 'shared/errors/error_layers' %>
+        <%= render 'shared/forms/layer_form_fields' %>
+        <%= f.submit "Lisää kerros", class: "btn btn-large btn-custom" %>
+    <% end %>
+    * = Pakollinen kenttä
+  </div>
+</div>

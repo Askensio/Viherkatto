@@ -16,9 +16,6 @@
         <%= f.label :colour %>
         <%= f.select :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5"%>
 
-        <%= f.label "aestethic appeal (0-2)" %>
-        <%= f.text_field :aestethic_appeal %>
-
         <%= f.label :light_id %>
         <%= collection_select(:light, :id, Light.all,
                               :id, :desc, {:selected => @plant.light_id} ,:class => "selectpicker show-menu-arrow span5" )%>

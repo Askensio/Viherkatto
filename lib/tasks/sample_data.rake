@@ -12,7 +12,6 @@ namespace :db do
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
-      appeal = 1
       colour = "Green"
       maintenance = 2
       coverage = 1
@@ -24,7 +23,6 @@ namespace :db do
       @plant = Plant.create!(name: name,
                     latin_name: latin_name,
                     coverage: coverage,
-                    aestethic_appeal: appeal,
                     colour: colour,
                     maintenance: maintenance,
                     min_soil_thickness: thickness,
@@ -34,21 +32,18 @@ namespace :db do
 
     end
 
-    Base.create!(material: "Kivimurska",
+    Layer.create!(name: "Kivimurska",
                  thickness: 60,
-                 weight: 100,
-                 absorbancy: 30)
+                 weight: 100)
 
     99.times do |n|
-      material = Faker::Lorem.words(1).join(" ")
+      name = Faker::Lorem.words(1).join(" ")
       thickness = n*10
       weight = thickness+10
-      absorbancy = weight+10
 
-      Base.create!(material: material,
+      Layer.create!(name: name,
                    thickness: thickness,
-                   weight: weight,
-                   absorbancy: absorbancy)
+                   weight: weight)
     end
 
 
