@@ -28,24 +28,5 @@ describe Light do
     it { should be_valid }
   end
 
-  describe 'when id is not present' do
-    before { @light.id = " " }
-    it { should_not be_valid }
-  end
-
-  describe 'when id is not a number' do
-    before { @light.id = "esa" }
-    it { should_not be_valid }
-  end
-
-  describe 'when id is negative' do
-    before { @light.id = -1 }
-    it { should_not be_valid }
-  end
-
-  describe 'when id is correct' do
-    before { @light.id = 1 }
-    it { should be_valid }
-  end
 
 end
