@@ -2,8 +2,10 @@ Viherkatto::Application.routes.draw do
 
   resources :users
   resources :plants
+  resources :layers, except: :destroy
+
   resources :bases, except: :destroy
-  resources :roofs, only: [:new, :create]
+  resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
 
@@ -12,7 +14,8 @@ Viherkatto::Application.routes.draw do
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
 
-  match '/add_base', to: 'bases#new'
+  match '/add_layer', to: 'layers#new'
+  match '/add_greenroof', to: 'greenroof#new'
 
   get 'pages/home'
   get 'pages/contacts'

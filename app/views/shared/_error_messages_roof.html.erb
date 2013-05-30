@@ -13,9 +13,6 @@
         <% @roof.errors.full_messages.each do |msg| %>
             <li>* <%= msg %></li>
         <% end %>
-        <% flash.each do |key, value| %>
-            <li>* <%= value %></li>
-        <% end %>
       </ul>
     </div>
 <% end %>

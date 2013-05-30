@@ -95,7 +95,6 @@ class PlantsController < ApplicationController
       end
 
       @jsonPlants -= @jsonPlantsDub
-
       format.json { render :json => {count: @plants.total_entries, plants: @jsonPlants} }
     end
   end
@@ -110,10 +109,10 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(params[:plant])
-    if !@plant.light_id.nil?
-    @plant.update_attribute(:light_id, params[:light][:id])
-    end
     if @plant.save
+      if @plant.light_id.nil?
+        @plant.update_attribute(:light_id, 1)
+      end
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
     else
