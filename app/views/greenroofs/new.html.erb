@@ -4,7 +4,11 @@
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
+
+<%= render 'shared/forms/roof_form_fields' %>
 <div class="row">
+
+
 
 <div class="baseAdder span4">
   <form class="form-horizontal">
@@ -119,3 +123,8 @@
 
 <%= javascript_include_tag "pagination/bootpag" %>
 <%= javascript_include_tag "livesearch" %>
+<%= javascript_include_tag "bootstrap-select" %>
+<%= javascript_include_tag "bootstrap-tooltip" %>
+<script>$('.selectpicker').selectpicker();</script>
+
+
