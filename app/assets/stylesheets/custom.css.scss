@@ -278,3 +278,13 @@ input {
 
   }
 }
+
+.baseAdder {
+  border-radius: 15px;
+  background-color: $grayMediumLight;
+  height:300px;
+  width:40%;
+  legend {
+    text-align: center;
+  }
+}

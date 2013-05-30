@@ -4,6 +4,100 @@
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
+<div class="row">
+
+<div class="baseAdder span4">
+  <form class="form-horizontal">
+    <fieldset>
+
+      <!-- Form Name -->
+      <legend>Lisää pohja</legend>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Materiaali *</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Paksuus (cm) *</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Vedenimukyky (l/m2) *</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Paino (kg/m2) *</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
+
+<div class="baseAdder span4">
+  <form class="form-horizontal">
+    <fieldset>
+
+      <!-- Form Name -->
+      <legend>Lisää katto</legend>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Text Input</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Text Input</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+      <!-- Select Basic -->
+      <div class="control-group">
+        <label class="control-label" for="selectbasic">Select Basic</label>
+        <div class="controls">
+          <select id="selectbasic" name="selectbasic" class="input-xlarge">
+            <option>Option one</option>
+            <option>Option two</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="textinput">Text Input</label>
+        <div class="controls">
+          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+
+</div>
+</div>
+
+
 <p class="content"></p>
 <div id="plant-search">
   <!--<form class="navbar-search"><label>Hae kasveja: <input id="search" type="text"></label></form>     -->
@@ -13,6 +107,9 @@
   <ul class="plant-list">
   </ul>
 </div>
+
+
+
 <div id="chosenOnes">
   <ul class="chosen-list">
 
