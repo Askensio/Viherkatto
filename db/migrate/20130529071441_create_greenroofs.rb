@@ -3,8 +3,8 @@ class CreateGreenroofs < ActiveRecord::Migration
     create_table :greenroofs do |t|
       t.string :address
       t.integer :purpose
-      t.string :note
-      t.integer :user_id
+      t.text :note
+      t.references :user
 
       t.timestamps
     end
