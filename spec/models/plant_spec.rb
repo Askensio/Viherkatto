@@ -34,6 +34,16 @@ describe Plant do
     it { should_not be_valid }
   end
 
+  describe "when light_id is updated with negative number" do
+    before { @plant.update_attribute(:light_id, -1) }
+    it { should_not be_valid }
+  end
+
+  describe "when light_id is null" do
+    before { @plant.light_id = nil }
+    it { should_not be_valid }
+  end
+
   describe "when name is not present" do
     before { @plant.name = " " }
     it { should_not be_valid }
