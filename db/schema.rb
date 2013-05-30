@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20130528144225) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "roofs", ["declination", "load_capacity", "area"], :name => "roof_index", :unique => true
+  add_index "roofs", ["declination", "load_capacity", "area"], :name => "roof_index"
 
   create_table "users", :force => true do |t|
     t.string   "name"
