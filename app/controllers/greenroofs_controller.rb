@@ -1,4 +1,10 @@
 class GreenroofsController < ApplicationController
+
+
+  def show
+    @greenroof = Greenroof.find(params[:id])
+  end
+
   def new
     @greenroof = Greenroof.new
     @base = Base.new
