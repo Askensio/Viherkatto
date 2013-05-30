@@ -12,6 +12,6 @@ class CreateRoofs < ActiveRecord::Migration
 
     add_index :roofs, [:declination, :load_capacity, :area],
               :name => 'roof_index'
-    add_index :roofs, :greenroof
+    add_index :roofs, :greenroof_id
   end
 end
