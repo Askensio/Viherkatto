@@ -250,3 +250,26 @@ input {
     }
   }
 }
+
+#plant-search {
+  overflow:auto;
+  height:600px;
+  width:400px;
+  li {
+    width:200px;
+    text-align:center;
+    margin:auto;
+  }
+}
+
+#chosenOnes {
+  width: 400px;
+  border-style:solid;
+  border-width:1px;
+  position: fixed;
+  right: 50px;
+  top: 60px;
+  li {
+    font-size: 0.9em;
+  }
+}

@@ -5,6 +5,7 @@ Viherkatto::Application.routes.draw do
   resources :bases, except: :destroy
   resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
+  resources :greenroofs
 
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
