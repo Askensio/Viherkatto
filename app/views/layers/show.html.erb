@@ -1,0 +1,27 @@
+<% provide(:title, 'Kerrosnäkymä') %>
+
+<div class="row">
+
+  <div class="span4 offset3">
+
+    <h1><%= @layer.name %></h1>
+
+    <table class="table">
+      <tr>
+        <td>Paksuus</td>
+        <td><%= @layer.thickness %> cm</td>
+      </tr>
+      <tr>
+        <td>Paino</td>
+        <td><%= @layer.weight %> kg/m2</td>
+      </tr>
+    </table>
+
+    <% if signed_in? && current_user.admin? %>
+        <%= link_to "Muokkaa", edit_layer_path, class: "btn btn-large btn-custom" %>
+    <% end %>
+    <%= link_to "Takaisin", layers_path, class: "btn btn-large btn-custom" %>
+
+  </div>
+
+</div>

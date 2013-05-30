@@ -1,0 +1,14 @@
+<% provide(:title, 'Kerroksen päivitys') %>
+
+<h1>Kerroksen päivitys</h1>
+
+<div class="row">
+  <div class="span5 offset4">
+    <%= form_for(@layer) do |f| %>
+        <%= render 'shared/errors/error_layers' %>
+        <%= render 'shared/forms/layer_form_fields' %>
+        <%= f.submit "Päivitä muutokset", class: "btn btn-large btn-custom" %>
+    <% end %>
+    * = Pakollinen kenttä
+  </div>
+</div>

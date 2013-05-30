@@ -34,10 +34,12 @@ en:
         Green: "Vihreä"
 
       base:
-        material: "Materiaali"
+        absorbancy: "Vedenimukyky"
+
+      layer:
+        name: "Nimi"
         thickness: "Paksuus"
         weight: "Paino"
-        absorbancy: "Vedenimukyky"
 
     errors:
       models:
@@ -99,14 +101,17 @@ en:
 
         base:
           attributes:
-            material:
+            absorbancy:
+                blank: "puuttuu."
+                not_a_number: ": arvon kuuluu olla numero."
+
+        layer:
+          attributes:
+            name:
                 blank: "puuttuu."
             thickness:
                 blank: "puuttuu."
                 not_a_number: ": arvon kuuluu olla numero."
             weight:
-                blank: "puuttuu."
-                not_a_number: ": arvon kuuluu olla numero."
-            absorbancy:
                 blank: "puuttuu."
                 not_a_number: ": arvon kuuluu olla numero."

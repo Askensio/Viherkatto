@@ -3,8 +3,6 @@ Viherkatto::Application.routes.draw do
   resources :users
   resources :plants
   resources :layers, except: :destroy
-
-  resources :bases, except: :destroy
   resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs

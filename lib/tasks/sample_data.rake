@@ -34,21 +34,18 @@ namespace :db do
 
     end
 
-    Base.create!(material: "Kivimurska",
+    Layer.create!(name: "Kivimurska",
                  thickness: 60,
-                 weight: 100,
-                 absorbancy: 30)
+                 weight: 100)
 
     99.times do |n|
-      material = Faker::Lorem.words(1).join(" ")
+      name = Faker::Lorem.words(1).join(" ")
       thickness = n*10
       weight = thickness+10
-      absorbancy = weight+10
 
-      Base.create!(material: material,
+      Layer.create!(name: name,
                    thickness: thickness,
-                   weight: weight,
-                   absorbancy: absorbancy)
+                   weight: weight)
     end
 
 
