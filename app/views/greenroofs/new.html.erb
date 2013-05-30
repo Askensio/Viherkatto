@@ -1,124 +1,72 @@
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
-<% provide(:title, 'Kasvit') %>
+<% provide(:title, 'Viherkaton lisäys') %>
 
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
-<%= render 'shared/forms/roof_form_fields' %>
 <div class="row">
+  <div class="baseAdder span4">
+    <h1>Lisää katto</h1>
 
+    <div id="adderForms">
+      <%= render 'shared/forms/roof_form_fields' %>
+    </div>
+  </div>
 
+  <div class="baseAdder span4">
+    <h1>Lisää pohja</h1>
+    <div id="adderForms">
+      <%= render 'shared/forms/layer_form_fields' %>
+      <%= render 'shared/forms/base_form_fields' %>
+    </div>
+  </div>
 
-<div class="baseAdder span4">
-  <form class="form-horizontal">
-    <fieldset>
+  <div class="plantAdder span4">
+    <p class="content"></p>
+    <div>
+      <h1>Lisää kasvit</h1>
+      <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4"%>
+    </div>
+    <div id="plant-search">
+      <ul class="plant-list">
+      </ul>
+    </div>
+  </div>
 
-      <!-- Form Name -->
-      <legend>Lisää pohja</legend>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Materiaali *</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Paksuus (cm) *</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Vedenimukyky (l/m2) *</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Paino (kg/m2) *</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-    </fieldset>
-  </form>
-</div>
-
-<div class="baseAdder span4">
-  <form class="form-horizontal">
-    <fieldset>
-
-      <!-- Form Name -->
-      <legend>Lisää katto</legend>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Text Input</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Text Input</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-      <!-- Select Basic -->
-      <div class="control-group">
-        <label class="control-label" for="selectbasic">Select Basic</label>
-        <div class="controls">
-          <select id="selectbasic" name="selectbasic" class="input-xlarge">
-            <option>Option one</option>
-            <option>Option two</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Text input-->
-      <div class="control-group">
-        <label class="control-label" for="textinput">Text Input</label>
-        <div class="controls">
-          <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-        </div>
-      </div>
-
-    </fieldset>
-  </form>
-
-</div>
+  <div class="baseAdderBonus span4">
+    <h1>Viherkaton tiedot</h1>
+    <p>Osoite</p>
+    <div id="adderForms">
+      <%= text_field_tag 'address', nil, :placeholder => 'Osoite', :class => 'centeredField span4' %>
+    </div>
+    <%= text_area 'note', nil, :placeholder => 'Vapaa kuvaus' %>
+  </div>
 </div>
 
 
-<p class="content"></p>
-<div id="plant-search">
-  <!--<form class="navbar-search"><label>Hae kasveja: <input id="search" type="text"></label></form>     -->
-  <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4"%>
-  <!--<%= select_tag 'colour', "<option>Sininen</option><option>Punainen</option><option>Keltainen</option><option>Vihreä</option>".html_safe, :class => "selectpicker bootstrap-select show-menu-arrow span4" %>
-  -->
-  <ul class="plant-list">
+<div id="chosenOnes" class="row span5">
+
+  <h2>Yhteenveto</h2>
+
+  <div class="span2">
+  <ul id="theplants" class="chosen-list unstyled ">
+    <h4>Valitsemasi kasvit</h4>
   </ul>
-</div>
+  </div>
 
-
-
-<div id="chosenOnes">
-  <ul class="chosen-list">
-
-    <h4 class="pull-left">Valitsemasi kasvit</h4>
+  <div class="span2">
+  <ul class="roof-list unstyled">
+    <h4>Katon tiedot</h4>
+      <li class="area">Pinta-ala: </li>
+      <li class="declination">Kaltevuus: </li>
+      <li class="capacity">Kantavuus: </li>
   </ul>
+  </div>
+
+  <div class="span2">
+    <h4>Pohjan tiedot</h4>
+  </div>
 </div>
 
 <%= javascript_include_tag "pagination/bootpag" %>

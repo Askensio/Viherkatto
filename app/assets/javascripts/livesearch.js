@@ -69,11 +69,45 @@ $(document).ready(function () {
     var $cells = $("li");
     var plantdata = [];
 
+    $("#roof_area").keyup(function() {
+        var input = $("#roof_area").val();
+        console.log("foo");
+        $('.area').empty();
+        $('.area').append('Pinta-ala: '+input+' (m2)');
+    })
+
+    $("#roof_declination").keyup(function() {
+        var input = $("#roof_declination").val();
+        $('.declination').empty();
+        $('.declination').append('Kaltevuus: ' + input);
+    })
+
+    $("#environment_id").change(function() {
+        var input = $("#environment_id").val();
+        console.log(input);
+    })
+
+    $("#roof_load_capacity").keyup(function() {
+        var input = $("#roof_load_capacity").val();
+        $('.capacity').empty();
+        $('.capacity').append('Kantavuus: ' + input + ' (kg/m2)');
+    })
+
+
     $("#search").keyup(function() {
         var searchword = $("#search").val();
             $.getJSON("/plants.json?name=" + searchword, function (data) {
                 plantdata = []
                 plantdata = data["plants"];
+
+//                if (plantdata.length === 0) {
+//                    var listElement = $('<li></li>');
+//                    var addPlantButton = $('<div class=\"btn-large\"><p>Lisää oma kasvi</p></div>');
+//                    listElement.append(addPlantButton);
+//                    $('.plant-list').append(listElement);
+//                    console.log("enpty!");
+//                }
+
                 console.log(plantdata);
                 $('.plant-list').empty();
                 $.each(plantdata, function (i, item) {
@@ -95,7 +129,7 @@ $(document).ready(function () {
                // e.target.remove()
             }
         );
-        var listElement = $('<li class="pull-left"></li>');
+        var listElement = $('<li></li>');
         listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
         $('.chosen-list').append(listElement).append('<br>');
         console.log(parent)
