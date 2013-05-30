@@ -8,6 +8,8 @@ class Greenroof < ActiveRecord::Base
   has_one :roof, :dependent => :destroy
   has_many :bases, :dependent => :destroy
 
+  has_many :layers, through: :bases
+
   attr_accessible :address, :purpose, :note
 
   validates :address, presence: true, length: { maximum: 150 }

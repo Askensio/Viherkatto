@@ -3,7 +3,7 @@
 <h1>Päivitä tietojasi täältä</h1>
 
 <div class="row">
-  <div class="span5 offset3">
+  <div class="span4 offset3">
     <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages' %>
 
@@ -23,10 +23,10 @@
         <%= f.label :password %>
         <%= f.password_field :password, :class =>  "span4" %>
 
-        <%= f.label :password_confirmation, "Vahvista salasana" %>
+        <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, :class =>  "span4" %>
 
-        <%= f.submit "Tallenna muutokset", class: "btn btn-custom" %>
+        <%= f.submit "Tallenna", class: "btn btn-custom" %>
     <% end %>
   </div>
 </div>

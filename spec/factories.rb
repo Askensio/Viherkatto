@@ -10,4 +10,14 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :roof do
+    area '70'
+    declination '10'
+    load_capacity '500'
+  end
+
+  factory :environment do
+    name 'Merenranta'
+  end
 end

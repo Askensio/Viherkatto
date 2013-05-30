@@ -24,7 +24,10 @@ describe 'Roof' do
     describe "with invalid information" do
       it "should not add a roof" do
         expect { click_button submit }.not_to change(Roof, :count)
+
       end
+      before { click_button submit }
+      it { should have_content('Katon lisäys') }
     end
 
     describe "with valid information" do
@@ -39,6 +42,29 @@ describe 'Roof' do
       it "should create a new roof" do
         expect { click_button submit }.to change(Roof, :count).by(1)
       end
+    end
+  end
+
+  describe 'edit' do
+    let(:submit) { "Muokkaa" }
+    let(:roof) { FactoryGirl.create(:roof) }
+    let(:environment) { FactoryGirl.create(:environment) }
+
+    before do
+      roof.environments << environment
+      visit edit_roof_path(roof)
+    end
+    describe 'with invalid inputs' do
+      before do
+        fill_in "roof_area",          with: "-5"
+        fill_in "roof_declination",   with: ""
+        select "Merenranta",          from: "environment_id"
+        select "Pelto",               from: "environment_id"
+        fill_in "roof_load_capacity", with: "500"
+
+        click_button submit
+      end
+      it { should have_content('virhe') }
     end
   end
 end
