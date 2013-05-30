@@ -17,5 +17,6 @@ class Plant < ActiveRecord::Base
   validates :note, length: { maximum: 1000 }
   validates :coverage, presence: true, :inclusion => {:in => (0...4)}, :numericality => {:only_integer => true}
   validates :latin_name, presence: true, length: { maximum: 100 }
+  validates :light_id, presence: true, :inclusion => {:in => (0...2)}
 
 end

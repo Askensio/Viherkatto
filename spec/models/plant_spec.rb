@@ -15,11 +15,24 @@ describe Plant do
   subject { @plant }
 
   it { should respond_to(:name) }
+  it { should respond_to(:latin_name) }
   it { should respond_to(:colour) }
+  it { should respond_to(:coverage) }
   it { should respond_to(:maintenance) }
   it { should respond_to(:min_soil_thickness) }
   it { should respond_to(:weight) }
+  it { should respond_to(:light_id) }
   it { should respond_to(:note) }
+
+  describe "when light_id is correctly updated" do
+    before { @plant.update_attribute(:light_id, 0) }
+    it { should be_valid }
+  end
+
+  describe "when light_id is updated with too large number" do
+    before { @plant.update_attribute(:light_id, 5) }
+    it { should_not be_valid }
+  end
 
   describe "when name is not present" do
     before { @plant.name = " " }
