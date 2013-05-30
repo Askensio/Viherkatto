@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(:version => 20130528144225) do
     t.string   "name"
     t.string   "latin_name"
     t.string   "colour"
-    t.integer  "aestethic_appeal"
     t.integer  "maintenance"
     t.integer  "min_soil_thickness"
     t.integer  "weight"

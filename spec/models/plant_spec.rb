@@ -8,14 +8,13 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, aestethic_appeal: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
   end
 
   subject { @plant }
 
   it { should respond_to(:name) }
-  it { should respond_to(:aestethic_appeal) }
   it { should respond_to(:colour) }
   it { should respond_to(:maintenance) }
   it { should respond_to(:min_soil_thickness) }
@@ -99,26 +98,6 @@ describe Plant do
 
   describe "When maintenance is not a number" do
     before { @plant.maintenance = "lovedatplant" }
-    it { should_not be_valid }
-  end
-
-  describe "When aestethic_appeal is not within limits" do
-    before { @plant.aestethic_appeal = 10 }
-    it { should_not be_valid }
-  end
-
-  describe "When aestethic_appeal is within limits" do
-    before { @plant.aestethic_appeal = 1 }
-    it { should be_valid }
-  end
-
-  describe "When aestethic_appeal is negative" do
-    before { @plant.aestethic_appeal = -10 }
-    it { should_not be_valid }
-  end
-
-  describe "When aestethic_appeal is not a number" do
-    before { @plant.aestethic_appeal = "lovedatplant" }
     it { should_not be_valid }
   end
 

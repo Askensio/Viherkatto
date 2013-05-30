@@ -12,7 +12,6 @@ namespace :db do
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
-      appeal = 1
       colour = "Green"
       maintenance = 2
       coverage = 1
@@ -24,7 +23,6 @@ namespace :db do
       @plant = Plant.create!(name: name,
                     latin_name: latin_name,
                     coverage: coverage,
-                    aestethic_appeal: appeal,
                     colour: colour,
                     maintenance: maintenance,
                     min_soil_thickness: thickness,
