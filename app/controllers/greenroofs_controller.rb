@@ -14,38 +14,41 @@ class GreenroofsController < ApplicationController
 
     @greenroof = Greenroof.new( params[:@greenroof] )
 
+    params[:bases].each do |base|
+      @base = Base.new( base )
 
-    Greenroof.transaction do
-      begin
-        # Creates a new roof and adds environments to it
-        @roof = Roof.new( params[:roof] )
-        params[:environment][:id].shift
-        if not !params[:environment][:id].empty?
-          params[:environment][:id].each do |env|
-            @env = Environment.find_by_id(env)
-            if @env != nil
-              @roof.environments << @env
-            end
-          end
-        end
-        # If there was no enviroments selected return to form and print error message
-        if params[:environment][:id].empty?
-          flash.now[:error] = "Et valinnut ympäristöä"
-          render 'new'
-          return
-        end
-        @roof.save!
-
-        @layer = Layer.create!( params[:layer] )
-
-
-      # '!' in the save and create functions rises an exception. In this case the form view is rendered and all
-      # successful transactions in the block (from the save and create functions) are rolled back.
-      rescue ActiveRecord::RecordInvalid
-        render 'new'
-        raise ActiveRecord::Rollback
+      @base.layers.each do |layer|
+        @layer = Layer.new(layer)
+        @base << @layer
       end
+      @greenroof << @base
+    end
 
+    @roof = Roof.new( params[:roof] )
+    params[:environment][:id].shift
+    if (!params[:environment][:id].empty?)
+      params[:environment][:id].each do |env|
+        @env = Environment.find_by_id(env)
+        if (@env != nil)
+          @roof.environments << @env
+        end
+      end
+    end
+
+    @greenroof.roof = @roof
+
+    params[:plants].each do |id|
+      @plant = Plant.find_by_id(id)
+      if not @plant.nil?
+        @greenroof.plants << @plant
+      end
+    end
+
+    if @greenroof.save
+      flash.now[:success] = "Viherkaton lisäys onnistui!"
+      redirect_to root_url
+    else
+      render 'new'
     end
   end
 end
