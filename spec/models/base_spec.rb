@@ -23,4 +23,9 @@ describe Base do
     it { should_not be_valid }
   end
 
+  describe "absorbancy is negative" do
+    before { @base.absorbancy=-1 }
+    it { should_not be_valid }
+  end
+
 end

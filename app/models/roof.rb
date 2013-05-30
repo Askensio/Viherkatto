@@ -10,5 +10,4 @@ class Roof < ActiveRecord::Base
   validates :area, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
   validates :declination, presence: true, :inclusion => {:in => (0...90)}, :numericality => {:only_integer => true}
   validates :load_capacity, presence: true, :inclusion => {:in => (0...10000000)}, :numericality => {:only_integer => true}
-
 end
