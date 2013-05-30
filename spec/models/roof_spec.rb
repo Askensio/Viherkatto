@@ -32,6 +32,11 @@ describe Roof do
     it { should_not be_valid }
   end
 
+  describe 'when area is not a number' do
+    before { @roof.area = "yolo swaggings" }
+    it { should_not be_valid }
+  end
+
   describe 'when area is present and valid' do
     before { @roof.area = 50 }
     it { should be_valid }
@@ -47,6 +52,11 @@ describe Roof do
     it { should_not be_valid }
   end
 
+  describe 'when declination is not a number' do
+    before { @roof.declination = "yolo swaggings" }
+    it { should_not be_valid }
+  end
+
   describe 'when declination is present and valid' do
     before { @roof.declination = 50 }
     it { should be_valid }
@@ -59,6 +69,11 @@ describe Roof do
 
   describe 'when load capacity is negative' do
     before { @roof.load_capacity = -500 }
+    it { should_not be_valid }
+  end
+
+  describe 'when load capacity is not a number' do
+    before { @roof.load_capacity = "yolo swaggings" }
     it { should_not be_valid }
   end
 
