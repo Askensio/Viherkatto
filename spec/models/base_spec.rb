@@ -36,13 +36,8 @@ describe Base do
     it { should_not be_valid }
   end
 
-  describe "absorbancy isn't numerical" do
-    before { @base.absorbancy="jee" }
-    it { should_not be_valid }
-  end
-
-  describe "thickness isn't numerical" do
-    before { @base.thickness="jee" }
+  describe "when weight is negative" do
+    before { @base.weight=-1 }
     it { should_not be_valid }
   end
 
@@ -51,4 +46,23 @@ describe Base do
     it { should_not be_valid }
   end
 
+  describe "absorbancy isn't numerical" do
+    before { @base.absorbancy="jee" }
+    it { should_not be_valid }
+  end
+
+  describe "absorbancy is negative" do
+    before { @base.absorbancy=-1 }
+    it { should_not be_valid }
+  end
+
+  describe "thickness isn't numerical" do
+    before { @base.thickness="jee" }
+    it { should_not be_valid }
+  end
+
+  describe "thickness is negative" do
+    before { @base.thickness=-1 }
+    it { should_not be_valid }
+  end
 end
