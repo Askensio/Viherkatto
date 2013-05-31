@@ -92,7 +92,7 @@ namespace :db do
     @greenroof = Greenroof.create!(address: "Adminkuja 16", purpose: 1, note: "Chillailua varten")
     @greenroof.user = User.find(1)
     @greenroof.roof = @roof
-    @kasvit = [Plants.find(1), Plants.find(2)]
+    @kasvit = [Plant.find(1), Plant.find(2)]
     @greenroof.plants = @kasvit
     @greenroof.save
 

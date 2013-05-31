@@ -13,8 +13,8 @@
     <div class= "span5">
       <%= image_tag 'viherkatot_logo.jpg', class:"img-polaroid", style: "float:left", margin: "0 5px 0 0"%>
     </div>
-    <% @plants %>
-    <% @greenroof.plants.each {|plant| @plants << " " << (link_to plant.name, plant_path) } %>
+    <% @plants = "" %>
+    <% @greenroof.plants.each {|plant| @plants.concat( " " + plant.name + " " +(link_to plant.name, plant_path) + "," ) } %>
 
     <%= form_for(@greenroof) do |f| %>
         <table class="table span5">
@@ -41,7 +41,7 @@
 
           <tr>
             <td><%= f.label :plants %></td>
-            <td><% f.text_area @plant s%>/td>
+            <td><%= f.label @plants %> </td>
           </tr>
         </table>
     <% end %>
