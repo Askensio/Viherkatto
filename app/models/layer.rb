@@ -1,7 +1,7 @@
 class Layer < ActiveRecord::Base
 
-  has_many :consists
-  has_many :bases, through: :consists
+  has_many :consists, :dependent => :destroy
+  has_many :bases, :through => :consists
 
   attr_accessible :name, :thickness, :weight
 

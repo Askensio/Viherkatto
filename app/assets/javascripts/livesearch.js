@@ -124,6 +124,9 @@ $(document).ready(function () {
         var chosenOne = $('#' + id)
         var parent = chosenOne.parent()
 
+        addedPlants.push(id)
+        setPlants(addedPlants)
+
         chosenOne.click(
             function(e) {
                // e.target.remove()
@@ -137,4 +140,3 @@ $(document).ready(function () {
     }
 
 });
-

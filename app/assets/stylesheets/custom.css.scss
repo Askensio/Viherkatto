@@ -285,9 +285,10 @@ input {
 .baseAdder {
   border-radius: 15px;
   background-color: $grayMediumLight;
-  height:350px;
+  //height:350px;
   width:35%;
   margin-bottom: 15px;
+  padding-bottom: 1.5em;
   legend {
     text-align: center;
   }
@@ -316,7 +317,13 @@ input {
   }
 }
 
-#adderForms {
+.add-base-button {
+  padding-left: 1.2em;
+}
+
+
+
+.adderForms {
   padding-left: 15px;
 }
 
