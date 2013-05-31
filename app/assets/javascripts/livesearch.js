@@ -93,6 +93,30 @@ $(document).ready(function () {
         $('.capacity').append('Kantavuus: ' + input + ' (kg/m2)');
     })
 
+    $("#base_absorbancy").keyup(function(){
+        var input = $("#base_absorbancy").val();
+        $('.absorbancy').empty();
+        $('.absorbancy').append('Vedenimukyky: ' + input + ' (l/m2)');
+    })
+
+    $("#layer_name").keyup(function() {
+        var input = $("#layer_name").val();
+        $('.name').empty();
+        $('.name').append('Materiaali: ' + input);
+    })
+    $("#layer_thickness").keyup(function() {
+        var input = $("#layer_thickness").val();
+        $('.thickness').empty();
+        $('.thickness').append('Paksuus: ' + input + ' (cm)');
+    })
+    $("#layer_weight").keyup(function() {
+        var input = $("#layer_weight").val();
+        $('.weight').empty();
+        $('.weight').append('Paino: ' + input + ' (kg/m2)');
+    })
+
+
+
 
     $("#search").keyup(function() {
         var searchword = $("#search").val();

@@ -22,7 +22,7 @@
 
       <div class="adderForms" id="base-form">
         <% @greenroof.bases.each_with_index do |base, i| %>
-            <div id="base<%= i+1 %>">
+            <div id="base<%= i+1 %>" class="baseAdder">
               <%= render 'shared/forms/base_form_fields_for_greenroof_addition.html.erb', :base => base, :index => i %>
               <button id="add-layer-button-<%= i+1 %>" class="btn-small btn-custom base-form-button">Lisää kerros
               </button>
@@ -56,10 +56,8 @@
 
       <p>Osoite</p>
 
-      <div class="adderForms">
-          <%= text_field_tag 'address', nil, :placeholder => 'Osoite', :class => 'centeredField span4', :required => true %>
-      </div>
-      <%= text_area 'note', nil, :placeholder => 'Vapaa kuvaus' %>
+          <%= text_field_tag 'address', nil, :placeholder => 'Osoite', :class => 'span4', :required => true %>
+      <%= text_area 'note', nil, :placeholder => 'Vapaa kuvaus', :class =>'span4' %>
     </div>
   </div>
 
@@ -84,7 +82,13 @@
     </div>
 
     <div class="span2">
-      <h4>Pohjan tiedot</h4>
+      <ul class="base-list unstyled">
+        <h4>Pohjan tiedot</h4>
+        <li class="absorbancy">Vedenimukyky:</li>
+        <li class="name">Materiaali:</li>
+        <li class="thickness">Paksuus:</li>
+        <li class="weight">Paino:</li>
+      </ul>
     </div>
   </div>
 </form>

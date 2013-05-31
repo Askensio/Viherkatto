@@ -297,11 +297,15 @@ input {
 .baseAdderBonus {
   border-radius: 15px;
   background-color: $grayMediumLight;
+  padding-left: 15px;
   height:auto;
   width:35%;
   margin-bottom: 15px;
   legend {
     text-align: center;
+  }
+  p {
+    margin-bottom: 0px;
   }
 }
 
@@ -321,15 +325,13 @@ input {
   padding-left: 1.2em;
 }
 
-
-
 .adderForms {
   padding-left: 15px;
 }
 
+
 #note_ {
   height: 200px;
-  width: 300px;
   padding-left: 15px;
 }
 

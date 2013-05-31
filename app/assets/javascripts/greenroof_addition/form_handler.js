@@ -29,7 +29,7 @@ function generateBaseForm() {
     // gets the number of direct div child elements of #base-form
     var baseCount = $('#base-form > div').size() + 1
     // adds the container for the form
-    var baseFormElement = $('<div></div>').attr('id', 'base' + baseCount)
+    var baseFormElement = $('<div></div>').attr('id', 'base' + baseCount).attr('class', 'baseAdder')
     // adds the header
     var h2Element = $('<h2>Pohja ' + baseCount + '</h2>').attr('class', 'span4')
     baseFormElement.append(h2Element)
