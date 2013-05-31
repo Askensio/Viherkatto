@@ -17,7 +17,7 @@ class GreenroofsController < ApplicationController
     params[:bases].each do |base|
       @base = Base.new( base )
 
-      @base.layers.each do |layer|
+      base[:layers].each do |layer|
         @layer = Layer.new(layer)
         @base << @layer
       end
