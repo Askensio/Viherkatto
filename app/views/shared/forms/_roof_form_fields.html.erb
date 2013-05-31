@@ -4,18 +4,26 @@
     <% end %>
     <%= render 'shared/error_messages_roof' %>
 
-    <%= f.label :area, h('Pinta-ala m2 *')%>
-    <%= f.text_field :area, :class =>  "span4"%>
+    <%= f.label :area, h('Pinta-ala m2 *') %>
+    <%= f.text_field :area, :class => "span4", :required => true %>
 
-    <%= f.label :declination, h('Kaltevuusaste *')%>
-    <%= f.text_field :declination, :class =>  "span4" %>
+    <%= f.label :declination, h('Kaltevuusaste *') %>
+    <%= f.text_field :declination, :class => "span4", :required => true %>
 
-    <%= f.label :environment %>
-    <%= collection_select :environment, :id, Environment.all, :id, :name,
-                          { :selected => @roof.environments.map{|env| env.id} },
-                          :class => "selectpicker show-menu-arrow show-tick span4" ,:multiple => true %>
+    <%= f.label :environment, h('Sijainti') %>
+    <div class="required">
+      <% if @roof.environments.empty? %>
+          <%= collection_select :environment, :id, Environment.all, :id, :name,
+                                {:selected => 1},
+                                :class => "selectpicker show-menu-arrow show-tick span4", :multiple => true, :required => true %>
+      <% else %>
+          <%= collection_select :environment, :id, Environment.all, :id, :name,
+                                {:selected => @roof.environments.map { |env| env.id }},
+                                :class => "selectpicker show-menu-arrow show-tick span4", :multiple => true, :required => true %>
+      <% end %>
+    </div>
 
-    <%= f.label :load_capacity, h('Kantavuus kg/m2 *')%>
-    <%= f.text_field :load_capacity , :class =>  "span4" %>
+    <%= f.label :load_capacity, h('Kantavuus kg/m2 *') %>
+    <%= f.text_field :load_capacity, :class => "span4", :required => true %>
 
 <% end %>

@@ -1,54 +1,84 @@
 # encoding: UTF-8
 
 class GreenroofsController < ApplicationController
+
+  before_filter :signed_user, only: [:new, :create]
+
   def new
     @greenroof = Greenroof.new
     @base = Base.new
-    @roof = Roof.new
-    @environments = Environment.all
     @layer = Layer.new
-    @base = Base.new
+
+    @base.layers << @layer
+
+    @roof = Roof.new
+    @greenroof.bases << @base
+    @greenroof.roof = @roof
+    @environments = Environment.all
   end
 
   def create
 
-    @greenroof = Greenroof.new( params[:@greenroof] )
+    @greenroof = Greenroof.new(params[:greenroof])
+    @greenroof.user = current_user
 
-    params[:bases].each do |base|
-      @base = Base.new( base )
 
-      base[:layers].each do |layer|
-        @layer = Layer.new(layer)
-        @base << @layer
-      end
-      @greenroof << @base
-    end
+    @roof = Roof.new(params[:roof])
 
-    @roof = Roof.new( params[:roof] )
-    params[:environment][:id].shift
-    if (!params[:environment][:id].empty?)
+    if not params[:environment].nil?
+      params[:environment][:id].shift
       params[:environment][:id].each do |env|
         @env = Environment.find_by_id(env)
         if (@env != nil)
           @roof.environments << @env
         end
       end
+    else
+      flash.now[:error] = "Et valinnut ympäristöä."
+      respond_to do |format|
+        #format.js { render :action => 'new' }
+      end
+      return
     end
 
     @greenroof.roof = @roof
 
-    params[:plants].each do |id|
-      @plant = Plant.find_by_id(id)
-      if not @plant.nil?
-        @greenroof.plants << @plant
+    @bases = params[:bases]
+    @bases.each do |key, value|
+      @base = Base.new(value[:base])
+      value[:layers].each do |key, value|
+        @layer = Layer.new(value)
+        @base.layers << @layer
+      end
+      @greenroof.bases << @base
+    end
+
+
+    if params[:plants].nil?
+      #flash.now[:error] = "Et lisännyt yhtään kasvia."
+      respond_to do |format|
+        #format.js { render :action => 'new' }
+      end
+      return
+    else
+      params[:plants].each do |id|
+        @plant = Plant.find_by_id(id)
+        if not @plant.nil?
+          @greenroof.plants << @plant
+        end
       end
     end
 
-    if @greenroof.save
-      flash.now[:success] = "Viherkaton lisäys onnistui!"
-      redirect_to root_url
+    if @greenroof.save!
+      flash[:success] = "Viherkaton lisäys onnistui!"
+      render :js => "window.location = '/'"
+
     else
-      render 'new'
+      if not params[:plants].nil? and not params[:environment][:id].empty?
+        respond_to do |format|
+          #format.js { render :action => 'new' }
+        end
+      end
     end
   end
 end

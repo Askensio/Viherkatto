@@ -240,7 +240,7 @@ input {
 
 .plant-list {
   list-style: none;
-  margin: 0;
+  width:400px;
   li {
     overflow: auto;
     padding: 10px 0;
@@ -253,23 +253,86 @@ input {
 
 #plant-search {
   overflow:auto;
-  height:600px;
-  width:400px;
+  height:350px;
+  width:auto;
+  text-align: center;
   li {
     width:200px;
-    text-align:center;
+    text-align:left;
     margin:auto;
   }
 }
 
 #chosenOnes {
-  width: 400px;
-  border-style:solid;
-  border-width:1px;
+  font-family:Arial, Helvetica, Times;
+  /*border-style:solid;
+  border-width:1px;*/
+  border-radius: 15px;
+  background-color: #DBEDD8;
   position: fixed;
   right: 50px;
   top: 60px;
   li {
     font-size: 0.9em;
+    font-weight:bold;
   }
+
+  #theplants {
+    line-height:0.3em;
+  }
+}
+
+.baseAdder {
+  border-radius: 15px;
+  background-color: $grayMediumLight;
+  //height:350px;
+  width:35%;
+  margin-bottom: 15px;
+  padding-bottom: 1.5em;
+  legend {
+    text-align: center;
+  }
+}
+
+.baseAdderBonus {
+  border-radius: 15px;
+  background-color: $grayMediumLight;
+  height:auto;
+  width:35%;
+  margin-bottom: 15px;
+  legend {
+    text-align: center;
+  }
+}
+
+
+.plantAdder {
+  width:35%;
+  margin-bottom:15px;
+  border-radius: 15px;
+  background-color: $grayMediumLight;
+  text-align: center;
+  legend {
+    text-align: center;
+  }
+}
+
+.add-base-button {
+  padding-left: 1.2em;
+}
+
+
+
+.adderForms {
+  padding-left: 15px;
+}
+
+#note_ {
+  height: 200px;
+  width: 300px;
+  padding-left: 15px;
+}
+
+.centeredField {
+  padding-left: 15px;
 }
