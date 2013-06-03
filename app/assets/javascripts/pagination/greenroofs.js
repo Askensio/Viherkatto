@@ -60,7 +60,7 @@ $(document).ready(function () {
         var listElement = $('<li></li>');
 
         $.getJSON('/users/' + entry.id, function (data) {
-            var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + data["name"] + '</a>');
+            var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + "Käyttäjän " + data["name"] + " viherkatto" + '</a>');
             listElement.append(greenroofLink);
             listElement.append(' | ');
             var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>').click(
