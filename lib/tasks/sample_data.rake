@@ -47,6 +47,8 @@ namespace :db do
     end
 
 
+
+
     admin = User.create!(name: "Example User",
                          email: "admin@foo.bar",
                          password: "foobar12",
@@ -86,6 +88,14 @@ namespace :db do
       @roof.environments << Environment.find(id)
       @roof.save
     end
+
+    @greenroof = Greenroof.create!(address: "Adminkuja 16", purpose: 1, note: "Chillailua varten")
+    @greenroof.user = User.find(1)
+    @greenroof.roof = @roof
+    @kasvit = [Plant.find(1), Plant.find(2)]
+    @greenroof.plants = @kasvit
+    @greenroof.save
+
 
   end
 end

@@ -2,7 +2,12 @@
 
 class GreenroofsController < ApplicationController
 
-  before_filter :signed_user, only: [:new, :create]
+ before_filter :signed_user, only: [:new, :create]
+
+def show
+    @greenroof = Greenroof.find(params[:id])
+  end
+
 
   def new
     @greenroof = Greenroof.new

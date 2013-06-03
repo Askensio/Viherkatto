@@ -1,0 +1,48 @@
+<% provide(:title, 'Käyttäjän '<< @greenroof.user.name << " viherkatto") %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+
+
+
+
+<div class="row-fluid marketing">
+  <div>
+    <h1>
+      <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
+    </h1>
+
+    <div class="span5">
+      <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid", style: "float:left", margin: "0 5px 0 0" %>
+    </div>
+    <%= form_for(@greenroof) do |f| %>
+        <table class="table span5">
+          <tr>
+            <td><%= f.label :user %></td>
+            <td><%= f.label @greenroof.user.name %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :address %></td>
+            <td><%= f.label :address %></td>
+          </tr>
+
+
+          <tr>
+            <td><%= f.label :purpose %></td>
+            <td><%= f.label :purpose %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label "Katon tiedot:" %></td>
+            <td><%= link_to "Katto", @greenroof.roof %></p></td>
+          </tr>
+
+          <tr>
+
+            <td><%= f.label :plants %></td>
+            <td><div class= "well"> <%= printPlants(@greenroof) %> </div> </td>
+          </tr>
+        </table>
+    <% end %>
+      </div>
+    </div>
+

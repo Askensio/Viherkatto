@@ -1,5 +1,7 @@
+# encoding: UTF-8
+
 module UsersHelper
   def positions
-    @positions = ["", "Yksityisurakoitsija", "Yritys", "Tutkija", "Muu"]
+    @positions = ["", "Yksityishenkilö", "Yritys", "Tutkija", "Muu"]
   end
 end
