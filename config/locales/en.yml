@@ -18,9 +18,7 @@ en:
         name: "Nimi"
         latin_name: "Latinankielinen nimi"
         colour: "Väri"
-        aestethic appeal (0-2): "Nättiys (0-2)"
-        aestethic_appeal: "Nättiys"
-        light_requirement: "Valon tarve"
+        light_id: "Valon tarve"
         maintenance: "Hoidon tarve"
         minimum soil thickness (cm): "Minimipaksuus pohjalle (cm)"
         min_soil_thickness: "Minimipaksuus pohjalle"
@@ -67,10 +65,6 @@ en:
             latin_name:
                 blank: "puuttuu."
                 too_long: "on liian pitkä."
-            aestethic_appeal:
-                blank: "puuttuu."
-                inclusion: "ei ole sallittujen arvojen rajoissa."
-                not_a_number: "ei ole numero."
             colour:
                 blank: "puuttuu"
                 too_long: "on liian pitkä."
@@ -92,7 +86,7 @@ en:
                 not_a_number: "ei ole numero."
             note:
                 too_long: "on liian pitkä"
-            light_requirement:
+            light_id:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
