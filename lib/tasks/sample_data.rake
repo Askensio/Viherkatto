@@ -75,7 +75,7 @@ namespace :db do
     Environment.create!(name: "Muu")
 
     id = 1
-    20.times do |n|
+    40.times do |n|
       id = id + 1
       if(id > 4)
         id = 1
@@ -86,21 +86,19 @@ namespace :db do
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
-      @roof.save
-    end
 
-    @plants = [Plant.find(1), Plant.find(2)]
-    @roof = Roof.new(declination: 89, load_capacity: 20000, area: 500)
-    @light = Light.find_by_id(1)
-    @roof.light = @light
-    @roof.save
-    @base = Base.new(absorbancy: 20)
-    @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
-    @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
-    @base.layers << @layer1
-    @base.layers << @layer2
 
-    98.times do |n|
+
+
+
+      @plants = [Plant.find(1), Plant.find(2)]
+      @base = Base.new(absorbancy: 20)
+      @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
+      @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
+      @base.layers << @layer1
+      @base.layers << @layer2
+
+
       address = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
