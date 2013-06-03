@@ -34,4 +34,34 @@ describe Greenroof do
 
   it { should be_valid }
 
+  describe "when address is not present" do
+    before { @groof.address = "" }
+    it { should_not be_valid }
+  end
+
+  describe "when purpose is not present" do
+    before { @groof.purpose = "" }
+    it { should_not be_valid }
+  end
+
+  describe "when purpose is not numerical" do
+    before { @groof.purpose = "käyttötarkoitus" }
+    it { should_not be_valid }
+  end
+
+  describe "when purpose isn't between valid values" do
+    before { @groof.purpose = 50 }
+    it { should_not be_valid }
+  end
+
+  describe "when purpose is negative" do
+    before { @groof.purpose = -1 }
+    it { should_not be_valid }
+  end
+
+  describe "note is too long" do
+    before { @groof.note = "a"*1600 }
+    it { should_not be_valid }
+  end
+
 end

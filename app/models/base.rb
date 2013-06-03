@@ -5,9 +5,10 @@ class Base < ActiveRecord::Base
   has_many :consists, :dependent => :destroy
   has_many :layers, :through  => :consists
 
-  attr_accessible :absorbancy
+  attr_accessible :absorbancy, :note
 
   validates :absorbancy, allow_blank: false, :numericality => { only_integer: true, :greater_than => 0 }
+  validates :note, length: { maximum: 1500 }
 
   before_save :save_layers
 

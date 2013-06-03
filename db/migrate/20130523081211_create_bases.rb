@@ -3,6 +3,7 @@ class CreateBases < ActiveRecord::Migration
     create_table :bases do |t|
       t.integer :absorbancy
       t.references :greenroof
+      t.text :note
 
       t.timestamps
     end
