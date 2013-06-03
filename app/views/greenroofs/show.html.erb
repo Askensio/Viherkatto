@@ -41,7 +41,15 @@
             <td><%= f.label :plants %></td>
             <td><div class= "well"> <%= printPlants(@greenroof) %> </div> </td>
           </tr>
+
+          <% @greenroof.bases.each_with_index do |base, i| %>
+          <%= render 'shared/forms/base_form_fields_for_greenroof_addition.html.erb', :base => base, :index => i %>
+
+              <% end %>
+
         </table>
+
+
     <% end %>
       </div>
     </div>
