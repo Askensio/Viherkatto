@@ -3,7 +3,7 @@ class Base < ActiveRecord::Base
   belongs_to :greenroof
 
   has_many :consists, :dependent => :destroy
-  has_many :layers, through: :consists
+  has_many :layers, :through  => :consists
 
   attr_accessible :absorbancy
 

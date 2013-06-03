@@ -1,7 +1,7 @@
 class Roof < ActiveRecord::Base
 
  belongs_to :light
- has_many :locations
+ has_many :locations, :dependent => :destroy
  has_many :environments, :through => :locations
  belongs_to :greenroof
 

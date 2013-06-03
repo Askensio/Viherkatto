@@ -1,0 +1,13 @@
+<%= fields_for(layer) do |f| %>
+    <div id="layer<%= index+1 %>">
+      <h2>Kerros <%= index+1 %></h2>
+      <%= f.label :name, "Kerroksen nimi *" %>
+      <%= f.text_field :name, :class => "span4", :required => true  %>
+
+      <%= f.label :thickness, "Paksuus (cm) *" %>
+      <%= f.text_field :thickness, :class => "span4", :required => true  %>
+
+      <%= f.label :weight, "Paino (kg/m2) *" %>
+      <%= f.text_field :weight, :class => "span4", :required => true  %>
+    </div>
+<% end %>
