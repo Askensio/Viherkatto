@@ -24,13 +24,13 @@ $(document).ready(function () {
         if (per_page === undefined)  per_page = 20;
         if (onDelete === undefined)  onDelete = false;
 
-        if(onDelete) reloadPaginateNeeded = onDelete;
+        if (onDelete) reloadPaginateNeeded = onDelete;
 
         $.getJSON("/plants.json?page=" + page + "&per_page=" + per_page, function (data) {
 
             var entry_count = data["count"];
             var plants = data["plants"];
-            if(plants.length === 0) {
+            if (plants.length === 0) {
                 reloadPaginateNeeded = true
                 page -= 1
             }
@@ -54,34 +54,34 @@ $(document).ready(function () {
         var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '</a>');
         listElement.append(plantLink);
         listElement.append(' | ');
-        var deleteElement = $('<a href=\"#\" id=\"/plants/' + entry.id + '\">' + 'poista' + '</a>').click(
-            function (e) {
-                var url = e.target.getAttribute('id')
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-                    },
-                    success: function (result) {
-                        var pagenr = 0;
-                        var pageItems = $('.bootpag').children();
-                        $.each(pageItems, function (i, item) {
-                            var cl =  $(item).attr("class");
-
-                            if(cl === "disabled") {
-                                pagenr = $(item).attr("data-lp");
-                            }
-                        });
-                        getPlants(pagenr, 20, true)
-                    }
-                });
-
-            });
+        var deleteElement = $('<a href=\"#\" id=\"/plants/' + entry.id + '\">' + 'poista' + '</a>').click(deletePlantRequest);
         listElement.append(deleteElement).append(' | ');
         var editElement = $('<a href=\"/plants/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
         listElement.append(editElement);
         $('.plant-list').append(listElement);
+    }
+
+    var deletePlantRequest = function() {
+        var url = e.target.getAttribute('id')
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+            },
+            success: function (result) {
+                var pagenr = 0;
+                var pageItems = $('.bootpag').children();
+                $.each(pageItems, function (i, item) {
+                    var cl = $(item).attr("class");
+
+                    if (cl === "disabled") {
+                        pagenr = $(item).attr("data-lp");
+                    }
+                });
+                getPlants(pagenr, 20, true)
+            }
+        });
     }
 
     function addPlantElementForSearch(entry) {
@@ -97,23 +97,23 @@ $(document).ready(function () {
     var $cells = $("li");
     var plantdata = [];
 
-    $("#search").keyup(function() {
+    $("#search").keyup(function () {
         $('.plant-list').empty();
-       if (plantdata.length === 0) {
-           $.getJSON("/plants.json", function (data) {
-               plantdata = data["plants"];
-               console.log(plantdata);
-           });
-       }
+        if (plantdata.length === 0) {
+            $.getJSON("/plants.json", function (data) {
+                plantdata = data["plants"];
+                console.log(plantdata);
+            });
+        }
 
-       $.each(plantdata, function (i, item) {
+        $.each(plantdata, function (i, item) {
             var searchword = $("#search").val();
-            if ( item.name.toLocaleLowerCase().indexOf(searchword) >= 0 ) {
+            if (item.name.toLocaleLowerCase().indexOf(searchword) >= 0) {
                 addPlantElementForSearch(item);
             }
             console.log(searchword);
             console.log(item.name);
-       });
+        });
     });
 
 });

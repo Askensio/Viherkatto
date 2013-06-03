@@ -38,7 +38,7 @@ namespace :db do
 
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
-      thickness = n*10
+      thickness = n*10+1
       weight = thickness+10
 
       Layer.create!(name: name,
@@ -89,7 +89,7 @@ namespace :db do
       @roof.save
     end
 
-    @greenroof = Greenroof.create!(address: "Adminkuja 16", purpose: 1, note: "Chillailua varten")
+    @greenroof = Greenroof.new(address: "Adminkuja 16", purpose: 1, note: "Chillailua varten")
     @greenroof.user = User.find(1)
     @greenroof.roof = @roof
     @kasvit = [Plant.find(1), Plant.find(2)]
