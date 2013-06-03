@@ -1,23 +1,11 @@
-<!--<<<<<<< HEAD-->
-<!--<% provide(:title, 'Viherkatot') %>-->
+<% provide(:title, 'Viherkatot') %>
 
-<!--<% flash.each do |key, value| %>-->
-    <!--<div class="alert alert-<%= key %>"><%= value %></div>-->
-<!--<% end %>-->
-<!--<p class="pagination"></p>-->
-<!--<p class="content"></p>-->
-<!--<ul class="greenroof-list">-->
-<!--</ul>-->
-<!--<%= javascript_include_tag "pagination/bootpag" %>-->
-<!--<%= javascript_include_tag "pagination/greenroofs" %>-->
-<!--=======-->
-
-<% provide(:title, 'Viherkattojen selaus') %>
-
-<%= will_paginate %>
-
-<ul class="greenroofs">
-  <%= render @greenroofs %>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<p class="pagination"></p>
+<p class="content"></p>
+<ul class="greenroof-list">
 </ul>
-
-<%= will_paginate %>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "pagination/greenroofs" %>

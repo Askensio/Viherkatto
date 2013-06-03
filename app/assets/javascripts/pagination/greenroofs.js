@@ -34,6 +34,7 @@ $(document).ready(function () {
         if(onDelete) reloadPaginateNeeded = onDelete;
 
         $.getJSON("/greenroofs.json?page=" + page + "&per_page=" + per_page, function (data) {
+//            $.getJSON("/greenroofs.json?page=1&per_page=20", function (data) {
 
             var entry_count = data["count"];
             var greenroofs = data["greenroofs"];
