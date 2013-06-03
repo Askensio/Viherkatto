@@ -8,7 +8,7 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
   end
 
@@ -59,9 +59,19 @@ describe Plant do
     it { should_not be_valid }
   end
 
-  describe "When thickness is a number" do
-    before { @plant.min_soil_thickness = 1 }
+  describe "When thickness is a valid number" do
+    before { @plant.min_soil_thickness = 8 }
     it { should be_valid }
+  end
+
+  describe "When thickness is too low" do
+    before { @plant.min_soil_thickness = 7 }
+    it { should_not be_valid }
+  end
+
+  describe "When thickness is too great" do
+    before { @plant.min_soil_thickness = 10001 }
+    it { should_not be_valid }
   end
 
   describe "When thickness is negative" do
@@ -126,11 +136,6 @@ describe Plant do
 
   describe "When height is negative" do
     before { @plant.height = -123 }
-    it { should_not be_valid }
-  end
-
-  describe "When height is too low" do
-    before { @plant.height = 7 }
     it { should_not be_valid }
   end
 
