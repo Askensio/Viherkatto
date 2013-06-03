@@ -14,21 +14,21 @@ namespace :db do
       latin_name = Faker::Lorem.words(4).join(" ")
       colour = "Green"
       maintenance = 2
-      coverage = 1
-      thickness = n+1
+      height = 10
+      thickness = n+8
       light = 2
       weight = n+1
       note = "asd"
 
       @plant = Plant.create!(name: name,
                     latin_name: latin_name,
-                    coverage: coverage,
+                    height: height,
                     colour: colour,
                     maintenance: maintenance,
                     min_soil_thickness: thickness,
                     weight: weight,
                     note: note)
-       @plant.update_attribute(:light_id, light)
+       @plant.update_attributes(:light_id => light)
 
     end
 
@@ -38,7 +38,7 @@ namespace :db do
 
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
-      thickness = n*10
+      thickness = n*10+1
       weight = thickness+10
 
       Layer.create!(name: name,
@@ -89,13 +89,28 @@ namespace :db do
       @roof.save
     end
 
-    @greenroof = Greenroof.create!(address: "Adminkuja 16", purpose: 1, note: "Chillailua varten")
-    @greenroof.user = User.find(1)
-    @greenroof.roof = @roof
-    @kasvit = [Plant.find(1), Plant.find(2)]
-    @greenroof.plants = @kasvit
-    @greenroof.save
+    @plants = [Plant.find(1), Plant.find(2)]
+    @roof = Roof.new(declination: 89, load_capacity: 20000, area: 500)
+    @light = Light.find_by_id(1)
+    @roof.light = @light
+    @base = Base.new(absorbancy: 20)
+    @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
+    @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
+    @base.layers << @layer1
+    @base.layers << @layer2
 
+    98.times do |n|
+      address = Faker::Lorem.words(3).join(" ")
+      purpose = 1
+      note = Faker::Lorem.words(5).join(" ")
+      @user = User.find(n+1)
+      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
+      @groof.user = @user
+      @groof.roof = @roof
+      @groof.plants = @plants
+      @groof.bases << @base
+      @groof.save
+    end
 
   end
 end
