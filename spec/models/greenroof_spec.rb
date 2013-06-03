@@ -15,12 +15,14 @@ describe Greenroof do
     @roof = Roof.new(declination: 89, load_capacity: 20000, area: 500)
     @light = Light.find_by_id(1)
     @roof.light = @light
-    @roof.greenroof = @groof
+    @groof.roof = @roof
 
     @plant1 = Plant.new(name: "nättikukka", latin_name: "Kukkaus kauneus", colour: "Blue", coverage: 1, maintenance: 1,  min_soil_thickness: 20, weight: 1, note: "Oikein tosi nätti!")
     @plant2 = Plant.new(name: "Example Plant nro 2", latin_name: "Plantus Examplus Secondus", coverage: 1, colour: "Green", maintenance: 2, min_soil_thickness: 20, weight: 1, note: "This one's also a totally fabulous plant!")
     @groof.plants << @plant1
     @groof.plants << @plant2
+
+    @groof.save
 
   end
 

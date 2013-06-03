@@ -1,6 +1,6 @@
 class Plant < ActiveRecord::Base
 
-  has_one :light
+  belongs_to :light
   has_many :planteds
   has_many :greenroofs, through: :planteds
 
