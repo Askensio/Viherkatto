@@ -31,14 +31,13 @@ $(document).ready(function () {
         if (per_page === undefined)  per_page = 20;
         if (onDelete === undefined)  onDelete = false;
 
-        if(onDelete) reloadPaginateNeeded = onDelete;
+        if (onDelete) reloadPaginateNeeded = onDelete;
 
         $.getJSON("/greenroofs.json?page=" + page + "&per_page=" + per_page, function (data) {
-//            $.getJSON("/greenroofs.json?page=1&per_page=20", function (data) {
 
             var entry_count = data["count"];
             var greenroofs = data["greenroofs"];
-            if(greenroofs.length === 0) {
+            if (greenroofs.length === 0) {
                 reloadPaginateNeeded = true
                 page -= 1
             }
@@ -47,9 +46,9 @@ $(document).ready(function () {
                 console.log("reloading pagination")
                 reloadPaginateNeeded = false;
             }
-            // Clears the plant list.
+            // Clears the greenroof list.
             $('.greenroof-list').empty();
-            // And lists the queried plants.
+            // And lists the queried greenroofs.
             $.each(greenroofs, function (i, item) {
                 addGreenroofElement(item);
             });
@@ -59,43 +58,46 @@ $(document).ready(function () {
     function addGreenroofElement(entry) {
 
         var listElement = $('<li></li>');
-        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.id + '</a>');
-        listElement.append(greenroofLink);
-        listElement.append(' | ');
-        var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>').click(
-            function (e) {
-                var url = e.target.getAttribute('id')
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-                    },
-                    success: function (result) {
-                        var pagenr = 0;
-                        var pageItems = $('.bootpag').children();
-                        $.each(pageItems, function (i, item) {
-                            var cl =  $(item).attr("class");
 
-                            if(cl === "disabled") {
-                                pagenr = $(item).attr("data-lp");
-                            }
-                        });
-                        getGreenroofs(pagenr, 5, true)
-                    }
+        $.getJSON('/users/' + entry.id, function (data) {
+            var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + data["name"] + '</a>');
+            listElement.append(greenroofLink);
+            listElement.append(' | ');
+            var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>').click(
+                function (e) {
+                    var url = e.target.getAttribute('id')
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+                        },
+                        success: function (result) {
+                            var pagenr = 0;
+                            var pageItems = $('.bootpag').children();
+                            $.each(pageItems, function (i, item) {
+                                var cl = $(item).attr("class");
+
+                                if (cl === "disabled") {
+                                    pagenr = $(item).attr("data-lp");
+                                }
+                            });
+                            getGreenroofs(pagenr, 5, true)
+                        }
+                    });
+
                 });
-
-            });
-        listElement.append(deleteElement).append(' | ');
-        var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
-        listElement.append(editElement);
-        $('.greenroof-list').append(listElement);
+            listElement.append(deleteElement).append(' | ');
+            var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
+            listElement.append(editElement);
+            $('.greenroof-list').append(listElement);
+        });
     }
 
     function addGreenroofElementForSearch(entry) {
 
         var listElement = $('<li></li>');
-        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.id + '  </a>');
+        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.user_id + '  </a>');
         listElement.append(greenroofLink);
         listElement.append('<i class=\"icon-plus pull-right\"></i>');
         $('.greenroof-list').append(listElement);
@@ -105,16 +107,8 @@ $(document).ready(function () {
     var $cells = $("li");
     var greenroofdata = [];
 
-    $("#search").keyup(function() {
+    $("#search").keyup(function () {
         $('.greenroof-list').empty();
-        //  var val = $.trim(this.value).toUpperCase();
-        //  if (val === "")
-        //      $cells.parent().show();
-        //  else {
-        //      $cells.parent().hide();
-        //     $cells.filter(function() {
-        //          return -1 != $(this).text().toUpperCase().indexOf(val); }).parent().show();
-        //}
         if (greenroofdata.length === 0) {
             $.getJSON("/greenroofs.json", function (data) {
                 greenroofdata = data["greenroofs"];
@@ -124,7 +118,7 @@ $(document).ready(function () {
 
         $.each(greenroofdata, function (i, item) {
             var searchword = $("#search").val();
-            if ( item.name.toLocaleLowerCase().indexOf(searchword) >= 0 ) {
+            if (item.name.toLocaleLowerCase().indexOf(searchword) >= 0) {
                 addGreenroofElementForSearch(item);
             }
             console.log(searchword);
