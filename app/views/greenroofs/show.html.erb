@@ -13,7 +13,7 @@
     <div class="span5">
       <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid", style: "float:left", margin: "0 5px 0 0" %>
     </div>
-    <%= form_for(@greenroof) do |f| %>
+    <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
             <td><%= f.label :user %></td>
@@ -33,7 +33,7 @@
 
           <tr>
             <td><%= f.label "Katon tiedot:" %></td>
-            <td><%= link_to "Katto", @greenroof.roof %></p></td>
+            <td><%= redirect_to "Katto", roof_path(@greenroof.roof.id) %></p></td>
           </tr>
 
           <tr>
@@ -48,6 +48,7 @@
               <% end %>
 
         </table>
+
 
 
     <% end %>
