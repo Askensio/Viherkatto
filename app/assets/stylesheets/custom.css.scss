@@ -277,6 +277,10 @@ input {
   #theplants {
     line-height:0.3em;
   }
+
+  #chevrons {
+    text-align: center;
+  }
 }
 
 .baseAdder {
@@ -319,6 +323,11 @@ input {
   .span4 {
     text-align: center;
   }
+
+  .span5 {
+    border-radius: 20px;
+    background-color: $grayMediumLight;
+  }
 }
 
 .add-base-button {
@@ -342,9 +351,10 @@ input {
 .large-input {
   padding-right: 100px;
   padding-left: 100px;
-  border-radius: 15px;
-  padding-bottom: 15px;
+  border-radius: 20px;
+  margin-bottom: 50px;
   text-align: center;
+  background-color: $grayMediumLight;
   label {
     font-family:Verdana, Geneva, sans-serif;
   }
