@@ -240,9 +240,7 @@ input {
 
 .plant-list {
   list-style: none;
-  width:400px;
   li {
-    overflow: auto;
     padding: 10px 0;
     border-top: 1px solid $grayMediumLight;
     &:last-child {
@@ -253,7 +251,6 @@ input {
 
 #plant-search {
   overflow:auto;
-  height:350px;
   width:auto;
   text-align: center;
   li {
@@ -311,12 +308,16 @@ input {
 
 
 .plantAdder {
-  width:35%;
+  padding-right: 100px;
+  padding-left: 100px;
   margin-bottom:15px;
   border-radius: 15px;
-  background-color: $grayMediumLight;
   text-align: center;
   legend {
+    text-align: center;
+  }
+
+  .span4 {
     text-align: center;
   }
 }
@@ -338,3 +339,21 @@ input {
 .centeredField {
   padding-left: 15px;
 }
+
+.large-input {
+  padding-right: 100px;
+  padding-left: 100px;
+  border-radius: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+  label {
+    font-family:Verdana, Geneva, sans-serif;
+  }
+  #large-input-right {
+    .span4 {
+      margin-bottom: 98px;
+    }
+  }
+}
+
+
