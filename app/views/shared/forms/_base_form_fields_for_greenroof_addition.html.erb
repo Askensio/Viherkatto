@@ -1,0 +1,7 @@
+<%= fields_for(base) do |f| %>
+
+    <h2>Pohja <%= index+1 %></h2>
+    <%= f.label :absorbancy, "Vedenimukyky (l/m2)" %>
+    <%= f.text_field :absorbancy, :class => "span4", :required => true %>
+
+<% end %>

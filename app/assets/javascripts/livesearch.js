@@ -26,7 +26,7 @@ $(document).ready(function () {
 
         if(onDelete) reloadPaginateNeeded = onDelete;
 
-        $.getJSON("/plants.json?page=" + page, function (data) {
+        $.getJSON("/plants.json", function (data) {
 
             var entry_count = data["count"];
             var plants = data["plants"];
@@ -69,11 +69,69 @@ $(document).ready(function () {
     var $cells = $("li");
     var plantdata = [];
 
+    $("#roof_area").keyup(function() {
+        var input = $("#roof_area").val();
+        console.log("foo");
+        $('.area').empty();
+        $('.area').append('Pinta-ala: '+input+' (m2)');
+    })
+
+    $("#roof_declination").keyup(function() {
+        var input = $("#roof_declination").val();
+        $('.declination').empty();
+        $('.declination').append('Kaltevuus: ' + input);
+    })
+
+    $("#environment_id").change(function() {
+        var input = $("#environment_id").val();
+        console.log(input);
+    })
+
+    $("#roof_load_capacity").keyup(function() {
+        var input = $("#roof_load_capacity").val();
+        $('.capacity').empty();
+        $('.capacity').append('Kantavuus: ' + input + ' (kg/m2)');
+    })
+
+    $("#base_absorbancy").keyup(function(){
+        var input = $("#base_absorbancy").val();
+        $('.absorbancy').empty();
+        $('.absorbancy').append('Vedenimukyky: ' + input + ' (l/m2)');
+    })
+
+    $("#layer_name").keyup(function() {
+        var input = $("#layer_name").val();
+        $('.name').empty();
+        $('.name').append('Materiaali: ' + input);
+    })
+    $("#layer_thickness").keyup(function() {
+        var input = $("#layer_thickness").val();
+        $('.thickness').empty();
+        $('.thickness').append('Paksuus: ' + input + ' (cm)');
+    })
+    $("#layer_weight").keyup(function() {
+        var input = $("#layer_weight").val();
+        $('.weight').empty();
+        $('.weight').append('Paino: ' + input + ' (kg/m2)');
+    })
+
+
+
+
     $("#search").keyup(function() {
         var searchword = $("#search").val();
             $.getJSON("/plants.json?name=" + searchword, function (data) {
                 plantdata = []
                 plantdata = data["plants"];
+
+//                if (plantdata.length === 0) {
+//                    var listElement = $('<li></li>');
+//                    var addPlantButton = $('<div class=\"btn-large\"><p>Lisää oma kasvi</p></div>');
+//                    listElement.append(addPlantButton);
+//                    $('.plant-list').append(listElement);
+//                    console.log("enpty!");
+//                }
+
                 console.log(plantdata);
                 $('.plant-list').empty();
                 $.each(plantdata, function (i, item) {
@@ -90,17 +148,19 @@ $(document).ready(function () {
         var chosenOne = $('#' + id)
         var parent = chosenOne.parent()
 
+        addedPlants.push(id)
+        setPlants(addedPlants)
+
         chosenOne.click(
             function(e) {
                // e.target.remove()
             }
         );
-        var listElement = $('<li class="pull-left"></li>');
-        listElement.append(chosenOne.clone());
+        var listElement = $('<li></li>');
+        listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
         $('.chosen-list').append(listElement).append('<br>');
         console.log(parent)
         //parent.remove()
     }
 
 });
-
