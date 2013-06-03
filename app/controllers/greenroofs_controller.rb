@@ -2,9 +2,9 @@
 
 class GreenroofsController < ApplicationController
 
- before_filter :signed_user, only: [:new, :create]
+  before_filter :signed_user, only: [:new, :create]
 
-def show
+  def show
     @greenroof = Greenroof.find(params[:id])
   end
 
@@ -83,6 +83,20 @@ def show
         respond_to do |format|
           #format.js { render :action => 'new' }
         end
+      end
+    end
+  end
+
+  def index
+    respond_to do |format|
+      @greenroofs = Greenroof.paginate(page: params[:page])
+      #@greenroofs = Greenroof.all
+
+      format.html { render :html => @greenroofs } # index.html.erb
+      if params[:page].present?
+        @jsonGreenroofs = Greenroof.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        @jsonGreenroofs = Greenroof.all
       end
     end
   end
