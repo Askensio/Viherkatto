@@ -14,7 +14,7 @@ namespace :db do
       latin_name = Faker::Lorem.words(4).join(" ")
       colour = "Green"
       maintenance = 2
-      coverage = 1
+      height = 10
       thickness = n+1
       light = 2
       weight = n+1
@@ -22,7 +22,7 @@ namespace :db do
 
       @plant = Plant.create!(name: name,
                     latin_name: latin_name,
-                    coverage: coverage,
+                    height: height,
                     colour: colour,
                     maintenance: maintenance,
                     min_soil_thickness: thickness,
@@ -39,7 +39,7 @@ namespace :db do
 
     99.times do |n|
       material = Faker::Lorem.words(1).join(" ")
-      thickness = n*10
+      thickness = n*10+1
       weight = thickness+10
       absorbancy = weight+10
 

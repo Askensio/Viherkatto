@@ -8,7 +8,7 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
   end
 
@@ -17,7 +17,7 @@ describe Plant do
   it { should respond_to(:name) }
   it { should respond_to(:latin_name) }
   it { should respond_to(:colour) }
-  it { should respond_to(:coverage) }
+  it { should respond_to(:height) }
   it { should respond_to(:maintenance) }
   it { should respond_to(:min_soil_thickness) }
   it { should respond_to(:weight) }
@@ -114,18 +114,28 @@ describe Plant do
     it { should be_valid }
   end
 
-  describe "When coverage is not a number" do
-    before { @plant.coverage = "lalala" }
+  describe "When height is not a number" do
+    before { @plant.height = "lalala" }
     it { should_not be_valid }
   end
 
-  describe "When coverage is a number" do
-    before { @plant.coverage = 1 }
+  describe "When height is a valid number" do
+    before { @plant.height = 8 }
     it { should be_valid }
   end
 
-  describe "When coverage is negative" do
-    before { @plant.coverage = -123 }
+  describe "When height is negative" do
+    before { @plant.height = -123 }
+    it { should_not be_valid }
+  end
+
+  describe "When height is too low" do
+    before { @plant.height = 7 }
+    it { should_not be_valid }
+  end
+
+  describe "When height is too great" do
+    before { @plant.height = 10001 }
     it { should_not be_valid }
   end
 end

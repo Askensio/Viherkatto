@@ -27,7 +27,7 @@ en:
         weight (kg/m2): "Paino (kg/m2)"
         weight: "Paino"
         notes: "Huomioita"
-        coverage: "Peittävyys"
+        height: "Korkeus"
         Blue: "Sininen"
         Red: "Punainen"
         Yellow: "Keltainen"
@@ -78,7 +78,7 @@ en:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
-            coverage:
+            height:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
