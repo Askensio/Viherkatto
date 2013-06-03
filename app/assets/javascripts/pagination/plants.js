@@ -73,7 +73,7 @@ $(document).ready(function () {
                                 pagenr = $(item).attr("data-lp");
                             }
                         });
-                        getPlants(pagenr, 5, true)
+                        getPlants(pagenr, 20, true)
                     }
                 });
 
@@ -99,14 +99,6 @@ $(document).ready(function () {
 
     $("#search").keyup(function() {
         $('.plant-list').empty();
-      //  var val = $.trim(this.value).toUpperCase();
-      //  if (val === "")
-      //      $cells.parent().show();
-      //  else {
-      //      $cells.parent().hide();
-       //     $cells.filter(function() {
-      //          return -1 != $(this).text().toUpperCase().indexOf(val); }).parent().show();
-        //}
        if (plantdata.length === 0) {
            $.getJSON("/plants.json", function (data) {
                plantdata = data["plants"];
