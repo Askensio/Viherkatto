@@ -41,9 +41,9 @@ describe 'Plant pages' do
         fill_in "plant_name", with: "Example Plant"
         select "Sininen", :from => "plant_colour"
         select "Helppo", :from => "plant_maintenance"
-        select "Pieni", :from => "plant_coverage"
+        fill_in "plant_height", with: 1
         fill_in "plant_latin_name", with: "Plantus plantus"
-        fill_in "plant_min_soil_thickness", with: 1
+        fill_in "plant_min_soil_thickness", with: 8
         fill_in "plant_weight", with: 1
         fill_in "plant_note", with: "huomio"
       end
@@ -73,7 +73,7 @@ describe 'Plant pages' do
       Light.create!(desc: "Aurinkoinen")
 
       sign_in admin
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", coverage: 1, colour: "Green", maintenance: 1, min_soil_thickness: 1, weight: 1,note: "Totally fabulous plant")
+      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
       @test_plant.update_attribute(:light_id, 2)
       @test_plant.save
 
