@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(:version => 20130529121814) do
     t.integer  "maintenance"
     t.integer  "min_soil_thickness"
     t.integer  "weight"
-    t.integer  "coverage"
+    t.integer  "height"
     t.integer  "light_id"
     t.string   "note"
     t.datetime "created_at",         :null => false

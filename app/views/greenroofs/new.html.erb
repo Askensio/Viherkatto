@@ -1,11 +1,75 @@
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 <% provide(:title, 'Viherkaton lisäys') %>
 
-
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
+<div class="row large-input">
+  <h1>Viherkaton tiedot</h1>
+  <div class="span5">
+    <%= render 'shared/forms/groof_form_fields' %>
+  </div>
+  <div class="span5" id="large-input-right">
+    <%= render 'shared/forms/roof_form_fields' %>
+  </div>
+</div>
+
+
+<div class="plantAdder row">
+  <div class="span5">
+    <h1>Lisää kasvit</h1>
+    <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4" %>
+    <div id="plant-search">
+      <ul class="plant-list">
+      </ul>
+    </div>
+  </div>
+  <div class="span5">
+    <div class="baseAdder">
+      <%= render 'shared/error_messages_roof' %>
+      <h1>Lisää pohja</h1>
+
+      <div class="adderForms" id="base-form">
+        <% @greenroof.bases.each_with_index do |base, i| %>
+            <div id="base<%= i+1 %>" class="baseAdder">
+              <%= render 'shared/forms/base_form_fields_for_greenroof_addition.html.erb', :base => base, :index => i %>
+
+              <div class="btn-group" id="add-layer-btn-grp">
+                <button class="btn  span2" id="add-layer-button" >Lisää kerros</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="add-layer-dropdown-list">
+                  <li>
+                    <a href="#">Kasvukerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Vedenpidätyskerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Salaojakerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Juurisuojakerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Muu</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+        <% end %>
+      </div>
+      <div class="add-base-button">
+        <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää pohja</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <form id="form">
   <div class="row">
     <div class="baseAdder span4">
@@ -75,40 +139,49 @@
 
       <p>Osoite</p>
 
-          <%= text_field_tag 'address', nil, :placeholder => 'Osoite', :class => 'span4', :required => true %>
+      <%= text_field_tag 'address', nil, :placeholder => 'Osoite', :class => 'span4', :required => true %>
       <%= text_area 'note', nil, :placeholder => 'Vapaa kuvaus', :class =>'span4' %>
     </div>
   </div>
 
-
+ -->
   <div id="chosenOnes" class="row span5">
-
-    <h2>Yhteenveto</h2>
-    <button class="btn btn-large btn-custom" id="save">Tallenna</button>
-    <div class="span2">
-      <ul id="theplants" class="chosen-list unstyled ">
-        <h4>Valitsemasi kasvit</h4>
-      </ul>
+    <div id="chevrons">
+      <i class="icon-chevron-down" id="clickDown"></i>
+      <i class="icon-chevron-up" id="clickUp"></i>
     </div>
 
-    <div class="span2">
-      <ul class="roof-list unstyled">
-        <h4>Katon tiedot</h4>
-        <li class="area" required>Pinta-ala:</li>
-        <li class="declination" required>Kaltevuus:</li>
-        <li class="capacity" required>Kantavuus:</li>
-      </ul>
+    <div id="chosenOnesSlide">
+
+
+      <h2>Yhteenveto</h2>
+      <button class="btn btn-large btn-custom" id="save">Tallenna</button>
+      <div class="span2">
+        <ul id="theplants" class="chosen-list unstyled ">
+          <h4>Valitsemasi kasvit</h4>
+        </ul>
+      </div>
+
+      <div class="span2">
+        <ul class="roof-list unstyled">
+          <h4>Katon tiedot</h4>
+          <li class="area" required>Pinta-ala:</li>
+          <li class="declination" required>Kaltevuus:</li>
+          <li class="capacity" required>Kantavuus:</li>
+        </ul>
+      </div>
+
+      <div class="span2">
+        <ul class="base-list unstyled">
+          <h4>Pohjan tiedot</h4>
+          <li class="absorbancy">Vedenimukyky:</li>
+          <li class="name">Materiaali:</li>
+          <li class="thickness">Paksuus:</li>
+          <li class="weight">Paino:</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="span2">
-      <ul class="base-list unstyled">
-        <h4>Pohjan tiedot</h4>
-        <li class="absorbancy">Vedenimukyky:</li>
-        <li class="name">Materiaali:</li>
-        <li class="thickness">Paksuus:</li>
-        <li class="weight">Paino:</li>
-      </ul>
-    </div>
   </div>
 </form>
 <%= javascript_include_tag "pagination/bootpag" %>

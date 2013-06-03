@@ -25,6 +25,6 @@ class Greenroof < ActiveRecord::Base
   end
 
   def save_roof
-    self.roof.save
+    roof.save
   end
 end

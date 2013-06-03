@@ -44,7 +44,7 @@ h1 {
 
 h2 {
   font-size: 1.7em;
-  letter-spacing: pb 0 x;
+  letter-spacing: 0px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -240,9 +240,7 @@ input {
 
 .plant-list {
   list-style: none;
-  width:400px;
   li {
-    overflow: auto;
     padding: 10px 0;
     border-top: 1px solid $grayMediumLight;
     &:last-child {
@@ -253,7 +251,6 @@ input {
 
 #plant-search {
   overflow:auto;
-  height:350px;
   width:auto;
   text-align: center;
   li {
@@ -280,15 +277,18 @@ input {
   #theplants {
     line-height:0.3em;
   }
+
+  #chevrons {
+    text-align: center;
+  }
 }
 
 .baseAdder {
   border-radius: 15px;
-  background-color: $grayMediumLight;
   //height:350px;
-  width:35%;
   margin-bottom: 15px;
   padding-bottom: 1.5em;
+  text-align: center;
   legend {
     text-align: center;
   }
@@ -311,13 +311,22 @@ input {
 
 
 .plantAdder {
-  width:35%;
+  padding-right: 100px;
+  padding-left: 100px;
   margin-bottom:15px;
   border-radius: 15px;
-  background-color: $grayMediumLight;
   text-align: center;
   legend {
     text-align: center;
+  }
+
+  .span4 {
+    text-align: center;
+  }
+
+  .span5 {
+    border-radius: 20px;
+    background-color: $grayMediumLight;
   }
 }
 
@@ -339,6 +348,24 @@ input {
   padding-left: 15px;
 }
 
+.large-input {
+  padding-right: 100px;
+  padding-left: 100px;
+  border-radius: 20px;
+  margin-bottom: 50px;
+  text-align: center;
+  background-color: $grayMediumLight;
+  label {
+    font-family:Verdana, Geneva, sans-serif;
+  }
+  #large-input-right {
+    .span4 {
+      margin-bottom: 98px;
+    }
+  }
+}
+
+
 .remove-layer-button {
   margin-bottom: 1em;
 }
@@ -354,4 +381,7 @@ input {
       border-bottom: 1px solid $grayMediumLight;
     }
   }
+}
+=======
+
 }

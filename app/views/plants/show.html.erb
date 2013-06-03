@@ -27,7 +27,7 @@
           </tr>
 
           <tr>
-            <td><%= f.label :light%></td>
+            <td><%= f.label :light %></td>
             <td><%= f.label Light.find(@plant.light_id).desc %></td>
           </tr>
 
@@ -37,13 +37,13 @@
           </tr>
 
           <tr>
-            <td><%= f.label :coverage %></td>
-            <td><%= f.label coverageLevel(@plant.coverage) %></td>
+            <td><%= f.label :min_soil_thickness %></td>
+            <td><%= f.label @plant.min_soil_thickness %></td>
           </tr>
 
           <tr>
-            <td><%= f.label :min_soil_thickness %></td>
-            <td><%= f.label @plant.min_soil_thickness %></td>
+            <td><%= f.label :height %></td>
+            <td><%= f.label @plant.height %></td>
           </tr>
 
           <tr>

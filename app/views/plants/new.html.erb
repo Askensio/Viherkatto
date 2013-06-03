@@ -23,11 +23,11 @@
         <%= f.label :maintenance %>
         <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
 
-        <%= f.label :coverage %>
-        <%= select :plant, :coverage, [['Pieni',1],['Keskisuuri',2], ['Suuri',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
-
         <%= f.label "minimum soil thickness (cm)" %>
         <%= f.text_field :min_soil_thickness %>
+
+        <%= f.label :height %>
+        <%= f.text_field :height %>
 
         <%= f.label "weight (kg/m2)" %>
         <%= f.text_field :weight %>
