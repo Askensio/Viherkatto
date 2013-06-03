@@ -55,7 +55,6 @@ function generateBaseForm() {
     baseFormElement.append(addLayerButton)
     // creates an initial form for the layers and adds it
     //var layerElement = generateLayerForm(1)
-    baseFormElement.append(layerElement)
     // baseFormElement.append(layerElement)
     // returns the created form element for a new base
     return baseFormElement
