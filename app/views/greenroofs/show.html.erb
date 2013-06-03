@@ -13,7 +13,7 @@
     <div class="span5">
       <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid", style: "float:left", margin: "0 5px 0 0" %>
     </div>
-    <%= form_for(@greenroof) do |f| %>
+    <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
             <td><%= f.label :user %></td>
@@ -37,12 +37,23 @@
           </tr>
 
           <tr>
-
             <td><%= f.label :plants %></td>
-            <td><div class= "well"> <%= printPlants(@greenroof) %> </div> </td>
+            <td>
+              <div class="well"> <%= printPlants(@greenroof) %> </div>
+            </td>
           </tr>
+
+          <tr>
+            <td><%= f.label :bases %></td>
+            <td>
+              <div class="well"> <%= printBases(@greenroof) %> </div>
+            </td>
+          </tr>
+
         </table>
+
+
     <% end %>
-      </div>
-    </div>
+  </div>
+</div>
 

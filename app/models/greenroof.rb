@@ -10,7 +10,7 @@ class Greenroof < ActiveRecord::Base
 
   has_many :layers, through: :bases
 
-  after_save :save_bases, :save_roof
+  before_save :save_bases, :save_roof
 
   attr_accessible :address, :purpose, :note
 
@@ -25,6 +25,6 @@ class Greenroof < ActiveRecord::Base
   end
 
   def save_roof
-    roof.save
+    self.roof.save
   end
 end

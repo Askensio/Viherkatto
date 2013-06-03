@@ -87,6 +87,10 @@ namespace :db do
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
 
+
+
+
+
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(absorbancy: 20)
       @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
@@ -94,10 +98,12 @@ namespace :db do
       @base.layers << @layer1
       @base.layers << @layer2
 
+
       address = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = User.find(n+1)
+
       @groof = Greenroof.new(address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof

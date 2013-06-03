@@ -7,6 +7,10 @@ class RoofsController < ApplicationController
     @environments = Environment.all
   end
 
+  def show
+    @roof = Roof.find(params[:id])
+  end
+
   def create
     @roof = Roof.new(params[:roof])
     params[:environment][:id].shift

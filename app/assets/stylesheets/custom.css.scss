@@ -352,10 +352,12 @@ input {
 .large-input {
   padding-right: 100px;
   padding-left: 100px;
+
   border-radius: 20px;
   margin-bottom: 50px;
   text-align: center;
   background-color: $grayMediumLight;
+
   label {
     font-family:Verdana, Geneva, sans-serif;
   }
