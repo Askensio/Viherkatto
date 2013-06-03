@@ -30,13 +30,23 @@ describe Layer do
     it { should_not be_valid }
   end
 
-  describe "thickness isn't numerical" do
-    before { @layer.thickness="jee" }
+  describe "when weight is negative" do
+    before { @layer.weight=-1 }
     it { should_not be_valid }
   end
 
   describe "weight isn't numerical" do
     before { @layer.weight="jee" }
+    it { should_not be_valid }
+  end
+
+  describe "thickness isn't numerical" do
+    before { @layer.thickness="jee" }
+    it { should_not be_valid }
+  end
+
+  describe "thickness is negative" do
+    before { @layer.thickness=-1 }
     it { should_not be_valid }
   end
 

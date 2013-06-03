@@ -281,11 +281,10 @@ input {
 
 .baseAdder {
   border-radius: 15px;
-  background-color: $grayMediumLight;
   //height:350px;
-  width:35%;
   margin-bottom: 15px;
   padding-bottom: 1.5em;
+  text-align: center;
   legend {
     text-align: center;
   }
@@ -357,3 +356,7 @@ input {
 }
 
 
+.remove-layer-button {
+  margin-bottom: 1em;
+
+}

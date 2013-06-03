@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20130529121814) do
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
     t.integer  "greenroof_id"
+    t.text     "note"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

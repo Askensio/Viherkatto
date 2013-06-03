@@ -17,7 +17,6 @@
 
 <div class="plantAdder row large-input">
   <div class="span5">
-
     <h1>Lisää kasvit</h1>
     <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4" %>
     <div id="plant-search">
@@ -25,9 +24,51 @@
       </ul>
     </div>
   </div>
+  <div class="span5">
+    <div class="baseAdder">
+      <%= render 'shared/error_messages_roof' %>
+      <h1>Lisää pohja</h1>
 
+      <div class="adderForms" id="base-form">
+        <% @greenroof.bases.each_with_index do |base, i| %>
+            <div id="base<%= i+1 %>" class="baseAdder">
+              <%= render 'shared/forms/base_form_fields_for_greenroof_addition.html.erb', :base => base, :index => i %>
+
+              <div class="btn-group" id="add-layer-btn-grp">
+                <button class="btn  span2" id="add-layer-button" >Lisää kerros</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="add-layer-dropdown-list">
+                  <li>
+                    <a href="#">Kasvukerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Vedenpidätyskerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Salaojakerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Juurisuojakerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Muu</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+        <% end %>
+      </div>
+      <div class="add-base-button">
+        <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää pohja</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!--
 <form id="form">
   <div class="row">
     <div class="baseAdder span4">
@@ -46,11 +87,30 @@
         <% @greenroof.bases.each_with_index do |base, i| %>
             <div id="base<%= i+1 %>" class="baseAdder">
               <%= render 'shared/forms/base_form_fields_for_greenroof_addition.html.erb', :base => base, :index => i %>
-              <button id="add-layer-button-<%= i+1 %>" class="btn-small btn-custom base-form-button">Lisää kerros
-              </button>
-              <% base.layers.each_with_index do |layer, j| %>
-                  <%= render 'shared/forms/layer_form_fields_for_greenroof_addition.html.erb', :layer => layer, :index => j %>
-              <% end %>
+
+              <div class="btn-group" id="add-layer-btn-grp">
+                <button class="btn  span2" id="add-layer-button" >Lisää kerros</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="add-layer-dropdown-list">
+                  <li>
+                    <a href="#">Kasvukerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Vedenpidätyskerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Salaojakerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Juurisuojakerros</a>
+                  </li>
+                  <li>
+                    <a href="#">Muu</a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
         <% end %>
@@ -83,10 +143,13 @@
     </div>
   </div>
 
-
+ -->
   <div id="chosenOnes" class="row span5">
-    <i class="icon-chevron-down" id="clickDown"></i>
-    <i class="icon-chevron-up" id="clickUp"></i>
+    <div id="chevrons">
+      <i class="icon-chevron-down" id="clickDown"></i>
+      <i class="icon-chevron-up" id="clickUp"></i>
+    </div>
+
     <div id="chosenOnesSlide">
 
 

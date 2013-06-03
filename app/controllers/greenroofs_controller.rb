@@ -15,22 +15,13 @@ class GreenroofsController < ApplicationController
     @greenroof.bases << @base
     @greenroof.roof = @roof
     @environments = Environment.all
-
-=begin
-    @layer2 = Layer.new
-    @base.layers << @layer2
-    @base2 = Base.new
-    @layer3 = Layer.new
-    @base2.layers << @layer3
-    @greenroof.bases << @base2
-=end
-
   end
 
   def create
 
     @greenroof = Greenroof.new(params[:greenroof])
     @greenroof.user = current_user
+
 
     @roof = Roof.new(params[:roof])
 

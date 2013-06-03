@@ -14,7 +14,7 @@ class Greenroof < ActiveRecord::Base
 
   attr_accessible :address, :purpose, :note
 
-  validates :address, presence: true, length: { maximum: 150 }
+  validates :address, presence: true, length: { maximum: 200 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}
   validates :note, length: { maximum: 1500 }
 

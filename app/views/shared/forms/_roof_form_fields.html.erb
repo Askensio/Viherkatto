@@ -14,7 +14,7 @@
     <div class="required">
       <% if @roof.environments.empty? %>
           <%= collection_select :environment, :id, Environment.all, :id, :name,
-                                {:selected => @roof.environments.map { |env| env.id }},
+                                {:selected => 1},
                                 :class => "selectpicker show-menu-arrow show-tick span4", :multiple => true, :required => true %>
       <% else %>
           <%= collection_select :environment, :id, Environment.all, :id, :name,
