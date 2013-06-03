@@ -1,0 +1,8 @@
+<%= fields_for (@greenroof) do |f| %>
+
+    <%= f.label :address, h('Osoite tai paikkakunta') %>
+    <%= f.text_field :address, :class => "span4" %>
+
+    <%= f.label :note, h('Vapaa kuvaus') %>
+    <%= f.text_area :note, :class => "span4" %>
+<% end %>

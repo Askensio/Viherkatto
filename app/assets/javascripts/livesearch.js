@@ -18,6 +18,23 @@ $(document).ready(function () {
             });
     }
 
+
+    $("#clickDown").click(function() {
+        $("#chosenOnesSlide").slideDown("slow", function() {
+            // if you want to have some callback behavior, define that here
+        });
+    });
+
+    $("#clickUp").click(function() {
+        $("#chosenOnesSlide").slideUp("slow", function() {
+            // if you want to have some callback behavior, define that here
+        });
+
+    });
+
+
+
+
     function getPlants(page, per_page, onDelete) {
         var reloadPaginateNeeded = false;
         if (page === undefined && per_page === undefined) reloadPaginateNeeded = true;

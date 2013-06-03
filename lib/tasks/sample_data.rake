@@ -28,7 +28,7 @@ namespace :db do
                     min_soil_thickness: thickness,
                     weight: weight,
                     note: note)
-       @plant.update_attributes(:light_id, light)
+       @plant.update_attributes(:light_id => light)
 
     end
 
@@ -99,12 +99,12 @@ namespace :db do
     @base.layers << @layer1
     @base.layers << @layer2
 
-    99.times do |n|
+    98.times do |n|
       address = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
-      @user = User.find(n)
-      @groof = Greenroof.create!(address: address, purpose: purpose, note: note)
+      @user = User.find(n+1)
+      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants

@@ -55,7 +55,7 @@ function generateBaseForm() {
     baseFormElement.append(addLayerButton)
     // creates an initial form for the layers and adds it
     //var layerElement = generateLayerForm(1)
-    baseFormElement.append(layerElement)
+    // baseFormElement.append(layerElement)
     // returns the created form element for a new base
     return baseFormElement
 }
@@ -108,7 +108,7 @@ function generateLayerForm(target) {
     // in case this is not the first layer of base a remove button is created, there will be no remove button
     // for the first layer since there has to be at least one layer per base.
     //if (layerCount > 1) {
-    var removeButton = $('<button>Poista kerros</button>').attr('class', "btn btn-mini btn-danger remove-layer-button").click(removeParent)
+    var removeButton = $('<br><button>Poista kerros</button>').attr('class', "btn btn-mini btn-danger remove-layer-button").click(removeParent)
     layerFormElement.append(removeButton)
     //}
 
