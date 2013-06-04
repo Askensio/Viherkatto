@@ -36,6 +36,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def show
+    @user = User.find_by_id(params[:id])
+    respond_to do |format|
+      format.html { render :html => @user }
+      format.json { render :json => {name: @user.name} }
+    end
+  end
+
   private
 
   def user_params
@@ -45,7 +53,7 @@ class UsersController < ApplicationController
 
   def signed_in_user
     redirect_to kirjaudu_url,
-    notice: "Kirjaudu sisään muokataksesi tietojasi" unless signed_in?
+                notice: "Kirjaudu sisään muokataksesi tietojasi" unless signed_in?
   end
 
   def correct_user

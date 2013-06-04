@@ -132,6 +132,24 @@ $(document).ready(function () {
         $('.weight').append('Paino: ' + input + ' (kg/m2)');
     })
 
+    $("#greenroof_address").keyup(function() {
+        var input = $("#greenroof_address").val();
+        $('.address').empty();
+        $('.address').append('Osoite: ' + input);
+    })
+
+    $("#greenroof_note").keyup(function() {
+        var input = $("#greenroof_note").val();
+        $('.note').empty();
+        $('.note').append('Vapaa kuvaus: ' + input);
+    })
+
+    $("#base_absorbancy").keyup(function() {
+        var input = $("#base_absorbancy").val();
+        $('.absorbancy').empty(),
+        $('.absorbancy').append('Vedenimukyky: ' + input + ' (l/m2)');
+    })
+
 
 
 
