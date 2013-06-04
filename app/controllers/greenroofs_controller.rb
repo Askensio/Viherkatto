@@ -4,6 +4,10 @@ class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
 
+  def index
+    @greenroofs = Greenroof.paginate(page: params[:page])
+  end
+
   def show
     @greenroof = Greenroof.find(params[:id])
   end
@@ -51,9 +55,11 @@ class GreenroofsController < ApplicationController
     @bases = params[:bases]
     @bases.each do |key, value|
       @base = Base.new(value[:base])
-      value[:layers].each do |key, value|
-        @layer = Layer.new(value)
-        @base.layers << @layer
+      if not value[:layers].nil?
+        value[:layers].each do |key, value|
+          @layer = Layer.new(value)
+          @base.layers << @layer
+        end
       end
       @greenroof.bases << @base
     end

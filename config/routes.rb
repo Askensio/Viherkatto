@@ -11,9 +11,10 @@ Viherkatto::Application.routes.draw do
   match '/kirjaudu', to: 'sessions#new'
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
+  match '/getcurrentuser', to: 'sessions#getCurrentUser'
 
   match '/add_layer', to: 'layers#new'
-  match '/add_greenroof', to: 'greenroof#new'
+  #match '/add_greenroof', to: 'greenroof#new'
 
   get 'pages/home'
   get 'pages/contacts'
