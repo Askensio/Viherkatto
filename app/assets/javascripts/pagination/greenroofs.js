@@ -11,7 +11,6 @@ $(document).ready(function () {
         getGreenroofs();
     })();
 
-
     function paginate(entry_count, page, per_page) {
         var total = Math.ceil(entry_count / per_page);
         $('.pagination').empty()
@@ -88,36 +87,36 @@ $(document).ready(function () {
         $('.greenroof-list').append(listElement);
     }
 
-    function addGreenroofElementForSearch(entry) {
-
-        var listElement = $('<li></li>');
-        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.user_id + '  </a>');
-        listElement.append(greenroofLink);
-        listElement.append('<i class=\"icon-plus pull-right\"></i>');
-        $('.greenroof-list').append(listElement);
-    }
-
-    var $cells = $("li");
-    var greenroofdata = [];
-
-    $("#search").keyup(function () {
-        $('.greenroof-list').empty();
-        if (greenroofdata.length === 0) {
-            $.getJSON("/greenroofs.json", function (data) {
-                greenroofdata = data["greenroofs"];
-                console.log(greenroofdata);
-            });
-        }
-
-        $.each(greenroofdata, function (i, item) {
-            var searchword = $("#search").val();
-            if (item.name.toLocaleLowerCase().indexOf(searchword) >= 0) {
-                addGreenroofElementForSearch(item);
-            }
-            console.log(searchword);
-            console.log(item.name);
-        });
-    });
+//    function addGreenroofElementForSearch(entry) {
+//
+//        var listElement = $('<li></li>');
+//        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.user_id + '  </a>');
+//        listElement.append(greenroofLink);
+//        listElement.append('<i class=\"icon-plus pull-right\"></i>');
+//        $('.greenroof-list').append(listElement);
+//    }
+//
+//    var $cells = $("li");
+//    var greenroofdata = [];
+//
+//    $("#search").keyup(function () {
+//        $('.greenroof-list').empty();
+//        if (greenroofdata.length === 0) {
+//            $.getJSON("/greenroofs.json", function (data) {
+//                greenroofdata = data["greenroofs"];
+//                console.log(greenroofdata);
+//            });
+//        }
+//
+//        $.each(greenroofdata, function (i, item) {
+//            var searchword = $("#search").val();
+//            if (item.name.toLocaleLowerCase().indexOf(searchword) >= 0) {
+//                addGreenroofElementForSearch(item);
+//            }
+//            console.log(searchword);
+//            console.log(item.name);
+//        });
+//    });
 
 });
 
