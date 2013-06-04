@@ -1,4 +1,3 @@
-
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -44,7 +43,7 @@ h1 {
 
 h2 {
   font-size: 1.7em;
-  letter-spacing: pb 0 x;
+  letter-spacing: 0px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -71,11 +70,13 @@ p {
     color: white;
     text-decoration: none;
   }
- }
+}
+
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
   color: #ffffff;
   background-color: #2e462e;
 }
+
 rekisteroidy
 
 /* footer */
@@ -250,18 +251,17 @@ input {
 }
 
 #plant-search {
-  overflow:auto;
-  width:auto;
+  overflow: auto;
+  width: auto;
   text-align: center;
   li {
-    width:200px;
-    text-align:left;
+    text-align:center;
     margin:auto;
   }
 }
 
 #chosenOnes {
-  font-family:Arial, Helvetica, Times;
+  font-family: Arial, Helvetica, Times;
   /*border-style:solid;
   border-width:1px;*/
   border-radius: 15px;
@@ -272,11 +272,11 @@ input {
   top: 50px;
   li {
     font-size: 0.9em;
-    font-weight:bold;
+    font-weight: bold;
   }
 
   #theplants {
-    line-height:0.3em;
+    line-height: 0.3em;
   }
 
   #chevrons {
@@ -299,8 +299,8 @@ input {
   border-radius: 15px;
   background-color: $grayMediumLight;
   padding-left: 15px;
-  height:auto;
-  width:35%;
+  height: auto;
+  width: 35%;
   margin-bottom: 15px;
   legend {
     text-align: center;
@@ -310,11 +310,10 @@ input {
   }
 }
 
-
 .plantAdder {
   padding-right: 100px;
   padding-left: 100px;
-  margin-bottom:15px;
+  margin-bottom: 15px;
   border-radius: 15px;
   text-align: center;
   legend {
@@ -339,7 +338,6 @@ input {
   padding-left: 15px;
 }
 
-
 #note_ {
   height: 200px;
   padding-left: 15px;
@@ -359,7 +357,7 @@ input {
   background-color: $grayMediumLight;
 
   label {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
   }
   #large-input-right {
     .span4 {
@@ -368,8 +366,20 @@ input {
   }
 }
 
-
 .remove-layer-button {
   margin-bottom: 1em;
+}
 
+/* greenroofs index */
+.greenroof-list {
+  list-style: none;
+  width: 400px;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayMediumLight;
+    &:last-child {
+      border-bottom: 1px solid $grayMediumLight;
+    }
+  }
 }

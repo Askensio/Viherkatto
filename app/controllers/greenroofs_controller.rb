@@ -92,4 +92,23 @@ class GreenroofsController < ApplicationController
       end
     end
   end
+
+  def index
+    respond_to do |format|
+      @greenroofs = Greenroof.paginate(page: params[:page])
+      #@greenroofs = Greenroof.all
+
+      format.html { render :html => @greenroofs } # index.html.erb
+      if params[:page].present?
+        @jsonGreenroofs = Greenroof.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        @jsonGreenroofs = Greenroof.all
+      end
+
+      @jsonUser = User.all
+
+      #format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs} }
+      format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs, user: @jsonUser.to_json(:only => [:name, :id]) } }
+    end
+  end
 end
