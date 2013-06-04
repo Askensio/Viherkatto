@@ -60,11 +60,7 @@ $(document).ready(function () {
     function findUserById(grUser, users) {
         var jsonArray = JSON.parse(users);
         var palautettava = "Username not found";
-//        for (var i = 0; i < users.length; i++) {
-//            console.log(users["id"] + " " + users["name"]);
-//        }
 
-//        console.log(grUser + " " + users)
         $.each(jsonArray, function (i, item) {
             console.log(grUser);
             console.log(item["id"]);
@@ -72,15 +68,8 @@ $(document).ready(function () {
                 console.log("if onnistui");
                 palautettava = item["name"];
                 return false;
-//                return item["name"];
             }
         });
-//        $.each(users, function (i, item) {
-//           if(item.id == grUser){
-//               console.log("löyty");
-//               return "esa";
-//           }
-//        });
         return palautettava;
     }
 
@@ -96,40 +85,7 @@ $(document).ready(function () {
         var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
         listElement.append(editElement);
 
-
-//        $.getJSON('/users/' + entry.user_id, function (data) {
-//            var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + "Käyttäjän " + data["name"] + " viherkatto" + '</a>');
-//            listElement.append(greenroofLink);
-//            listElement.append(' | ');
-//            var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>').click(
-//                function (e) {
-//                    var url = e.target.getAttribute('id')
-//                    $.ajax({
-//                        url: url,
-//                        type: 'DELETE',
-//                        beforeSend: function (xhr) {
-//                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-//                        },
-//                        success: function (result) {
-//                            var pagenr = 0;
-//                            var pageItems = $('.bootpag').children();
-//                            $.each(pageItems, function (i, item) {
-//                                var cl = $(item).attr("class");
-//
-//                                if (cl === "disabled") {
-//                                    pagenr = $(item).attr("data-lp");
-//                                }
-//                            });
-//                            getGreenroofs(pagenr, 5, true)
-//                        }
-//                    });
-//
-//                });
-//            listElement.append(deleteElement).append(' | ');
-//            var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
-//            listElement.append(editElement);
         $('.greenroof-list').append(listElement);
-//        });
     }
 
     function addGreenroofElementForSearch(entry) {
@@ -140,7 +96,6 @@ $(document).ready(function () {
         listElement.append('<i class=\"icon-plus pull-right\"></i>');
         $('.greenroof-list').append(listElement);
     }
-
 
     var $cells = $("li");
     var greenroofdata = [];
