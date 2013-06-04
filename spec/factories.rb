@@ -20,4 +20,15 @@ FactoryGirl.define do
   factory :environment do
     name 'Merenranta'
   end
+
+  factory :plant do
+    sequence(:name) { |n| "Example Plant #{n}" }
+    sequence(:latin_name) { |n| "Plantus Examplus #{n}" }
+    height 1
+    colour "Green"
+    maintenance 1
+    min_soil_thickness 20
+    weight 1
+    note "Totally fabulous plant"
+  end
 end
