@@ -8,7 +8,7 @@
     <%= f.text_field :area, :class => "span4", :required => true %>
 
     <%= f.label :declination, h('Kaltevuusaste') %>
-    <%= f.text_field :declination, :class => "span4", :required => true %>
+    <%= f.text_field :declination, :class => "span4", :required => true, :type => "number", :max => "90" %>
 
     <%= f.label :environment, h('Sijainti') %>
     <div class="required">

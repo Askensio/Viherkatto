@@ -255,9 +255,8 @@ input {
   width: auto;
   text-align: center;
   li {
-    width: 200px;
-    text-align: left;
-    margin: auto;
+    text-align:center;
+    margin:auto;
   }
 }
 
@@ -267,9 +266,10 @@ input {
   border-width:1px;*/
   border-radius: 15px;
   background-color: #DBEDD8;
+  padding-left: 10px;
   position: fixed;
-  right: 50px;
-  top: 60px;
+  right: 0.5%;
+  top: 50px;
   li {
     font-size: 0.9em;
     font-weight: bold;
