@@ -1,5 +1,9 @@
 <% provide(:title, 'Käyttäjän '<< @greenroof.user.name << " viherkatto") %>
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+<%= stylesheet_link_tag "photoslider", media: "all" %>
+
+
+
 
 
 
@@ -9,10 +13,14 @@
     <h1>
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
-
+    <%= javascript_include_tag "photoslider" %>
     <div class="span5">
-      <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid", style: "float:left", margin: "0 5px 0 0" %>
+      <div class="photoslider" id="default"></div>
+
+      <%= javascript_include_tag 'photoinit' %>
+
     </div>
+
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
@@ -56,4 +64,7 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_include_tag "photoslider" %>
+
 

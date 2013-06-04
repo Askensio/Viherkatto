@@ -24,6 +24,7 @@ $(document).ready(function () {
     }
 
     function getGreenroofs(page, per_page, onDelete) {
+        var currentuser = getCurrentUser();
         var reloadPaginateNeeded = false;
         if (page === undefined && per_page === undefined) reloadPaginateNeeded = true;
         if (page === undefined) page = 1;
@@ -51,9 +52,22 @@ $(document).ready(function () {
             $('.greenroof-list').empty();
             // And lists the queried greenroofs.
             $.each(greenroofs, function (i, item) {
-                addGreenroofElement(item, findUserById(item.user_id, users));
+                addGreenroofElement(item, findUserById(item.user_id, users), currentuser);
             });
         });
+    }
+
+    function getCurrentUser() {
+        var mydata = [];
+        $.ajax({
+            url: '/getcurrentuser',
+            async: false,
+            dataType: 'json',
+            success: function (json) {
+                mydata = json;
+            }
+        });
+        return mydata;
     }
 
     function findUserById(grUser, users) {
@@ -61,62 +75,30 @@ $(document).ready(function () {
         var palautettava = "Username not found";
 
         $.each(jsonArray, function (i, item) {
-            console.log(grUser);
-            console.log(item["id"]);
             if (item["id"] == grUser) {
-                console.log("if onnistui");
-                palautettava = item["name"];
+                palautettava = item;
                 return false;
             }
         });
         return palautettava;
     }
 
-    function addGreenroofElement(entry, user) {
-        console.log("lisätään katto numero " + entry.id)
+    function addGreenroofElement(entry, user, currentuser) {
 
         var listElement = $('<li></li>');
-        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + "Käyttäjän " + user + " viherkatto" + '</a>');
+        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + "Käyttäjän " + user["name"] + " viherkatto" + '</a>');
+
         listElement.append(greenroofLink);
-        listElement.append(' | ');
-        var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>')
-        listElement.append(deleteElement).append(' | ');
-        var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
-        listElement.append(editElement);
+
+        if (currentuser["name"] && currentuser["id"] == user["id"] || currentuser["admin"]) {
+            listElement.append(' | ');
+            var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>')
+            listElement.append(deleteElement).append(' | ');
+            var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
+            listElement.append(editElement);
+        }
 
         $('.greenroof-list').append(listElement);
     }
-
-//    function addGreenroofElementForSearch(entry) {
-//
-//        var listElement = $('<li></li>');
-//        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.user_id + '  </a>');
-//        listElement.append(greenroofLink);
-//        listElement.append('<i class=\"icon-plus pull-right\"></i>');
-//        $('.greenroof-list').append(listElement);
-//    }
-//
-//    var $cells = $("li");
-//    var greenroofdata = [];
-//
-//    $("#search").keyup(function () {
-//        $('.greenroof-list').empty();
-//        if (greenroofdata.length === 0) {
-//            $.getJSON("/greenroofs.json", function (data) {
-//                greenroofdata = data["greenroofs"];
-//                console.log(greenroofdata);
-//            });
-//        }
-//
-//        $.each(greenroofdata, function (i, item) {
-//            var searchword = $("#search").val();
-//            if (item.name.toLocaleLowerCase().indexOf(searchword) >= 0) {
-//                addGreenroofElementForSearch(item);
-//            }
-//            console.log(searchword);
-//            console.log(item.name);
-//        });
-//    });
-
 });
 

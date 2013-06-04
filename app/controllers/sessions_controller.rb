@@ -21,4 +21,14 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+
+  def getCurrentUser
+    @user = current_user
+    respond_to do |format|
+      format.json { render :json => { id: @user.id, name: @user.name, admin: @user.admin } }
+      #format.json { render :json => @user }
+    end
+  end
+
 end
+
