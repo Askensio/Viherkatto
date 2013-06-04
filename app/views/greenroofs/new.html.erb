@@ -22,7 +22,7 @@
       <h1>Lisää kasvit</h1>
       <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4" %>
       <div id="plant-search">
-        <ul class="plant-list">
+        <ul class="plant-list span4">
         </ul>
       </div>
     </div>
@@ -101,8 +101,8 @@
       <div class="span2">
         <ul class="roof-list unstyled">
           <h5>Kasvualusta</h5>
-          <li class="area" required>Materiaali: </li>
-          <li class="declination" required>Vedenimukyky: </li>
+          <li class="material" required>Materiaali: </li>
+          <li class="absorbancy" required>Vedenimukyky: </li>
         </ul>
       </div>
       <button class="btn btn-small btn-custom" id="save">Tallenna</button>
