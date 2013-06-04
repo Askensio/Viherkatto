@@ -58,7 +58,6 @@ $(document).ready(function () {
     }
 
     function getCurrentUser() {
-
         var mydata = [];
         $.ajax({
             url: '/getcurrentuser',
@@ -68,10 +67,7 @@ $(document).ready(function () {
                 mydata = json;
             }
         });
-        console.log(mydata);
         return mydata;
-//        alert(mydata);
-
     }
 
     function findUserById(grUser, users) {
@@ -79,11 +75,7 @@ $(document).ready(function () {
         var palautettava = "Username not found";
 
         $.each(jsonArray, function (i, item) {
-            console.log(grUser);
-            console.log(item["id"]);
             if (item["id"] == grUser) {
-                console.log("if onnistui");
-//                palautettava = item["name"];
                 palautettava = item;
                 return false;
             }
@@ -92,12 +84,6 @@ $(document).ready(function () {
     }
 
     function addGreenroofElement(entry, user, currentuser) {
-        console.log("lisätään katto numero " + entry.id)
-
-        //currentuseri
-
-        console.log("currenttina palautettu " + currentuser["admin"]);
-//        console.log(user + " " + user["id"] + " " + user["name"]);
 
         var listElement = $('<li></li>');
         var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + "Käyttäjän " + user["name"] + " viherkatto" + '</a>');
@@ -105,49 +91,14 @@ $(document).ready(function () {
         listElement.append(greenroofLink);
 
         if (currentuser["name"] && currentuser["id"] == user["id"] || currentuser["admin"]) {
-
             listElement.append(' | ');
             var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>')
             listElement.append(deleteElement).append(' | ');
             var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
             listElement.append(editElement);
-
         }
-
 
         $('.greenroof-list').append(listElement);
     }
-
-//    function addGreenroofElementForSearch(entry) {
-//
-//        var listElement = $('<li></li>');
-//        var greenroofLink = $('<a href=\"/greenroofs/' + entry.id + '\">' + entry.user_id + '  </a>');
-//        listElement.append(greenroofLink);
-//        listElement.append('<i class=\"icon-plus pull-right\"></i>');
-//        $('.greenroof-list').append(listElement);
-//    }
-//
-//    var $cells = $("li");
-//    var greenroofdata = [];
-//
-//    $("#search").keyup(function () {
-//        $('.greenroof-list').empty();
-//        if (greenroofdata.length === 0) {
-//            $.getJSON("/greenroofs.json", function (data) {
-//                greenroofdata = data["greenroofs"];
-//                console.log(greenroofdata);
-//            });
-//        }
-//
-//        $.each(greenroofdata, function (i, item) {
-//            var searchword = $("#search").val();
-//            if (item.name.toLocaleLowerCase().indexOf(searchword) >= 0) {
-//                addGreenroofElementForSearch(item);
-//            }
-//            console.log(searchword);
-//            console.log(item.name);
-//        });
-//    });
-
 });
 
