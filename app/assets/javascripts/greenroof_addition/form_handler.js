@@ -104,7 +104,7 @@ function generateLayerForm(target) {
     layerFormElement.append(weightLabel)
     layerFormElement.append(weightInput)
 
-    var removeButton = $('<button>Poista kerros</button>').attr('class', "btn btn-mini btn-danger remove-layer-button").click(removeParent)
+    var removeButton = $('<br><button>Poista kerros</button>').attr('class', "btn btn-mini btn-danger remove-layer-button").click(removeParent)
     layerFormElement.append(removeButton)
 
     return layerFormElement
