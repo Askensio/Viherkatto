@@ -1,5 +1,8 @@
 <% provide(:title, 'Käyttäjän '<< @greenroof.user.name << " viherkatto") %>
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+<%= stylesheet_link_tag "photoslider", media: "all" %>
+
+
 
 
 
@@ -10,76 +13,58 @@
     <h1>
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
+    <%= javascript_include_tag "photoslider" %>
+    <div class="span5">
+      <div class="photoslider" id="default"></div>
 
-    <div class="span5" id="left">
-      <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid", style: "float:left", margin: "0 5px 0 0" %>
-      <div class="carousel slide span13" id="myCarousel">
-        <div class="carousel-inner">
-     <ul class="thumbnails" >
-       <li class="span4">
-         <a class="thumbnail" href="/greenroof.jpg">
-           <%= image_tag 'greenroof.jpg', class: "img-polaroid", style: "float:left", margin: "5px 5px 5px 5px", height: "150px", width: "300px"  %>
-         </a>
-       </li>
-       <li class="span4">
-         <a class="thumbnail" href="/greenroof.jpg">
-           <%= image_tag 'greenroof1.jpg', class: "img-polaroid", style: "float:left", margin: "5px 5px 5px 5px", height: "150px", width: "300px"  %>
-         </a>
-       </li>
-       <li class="span4">
-         <a class="thumbnail" href="/greenroof.jpg">
-           <%= image_tag 'greenroof2.jpg', class: "img-polaroid", style: "float:left", margin: "5px 5px 5px 5px", height: "150px", width: "300px"  %>
-         </a>
-       </li>
-     </ul>
-          </div>
-        <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
-        <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
-        </div>
+      <%= javascript_include_tag 'photoinit' %>
 
     </div>
 
-      <%= fields_for(@greenroof) do |f| %>
-          <table class="table span5">
-            <tr>
-              <td><%= f.label :user %></td>
-              <td><%= f.label @greenroof.user.name %></td>
-            </tr>
+    <%= fields_for(@greenroof) do |f| %>
+        <table class="table span5">
+          <tr>
+            <td><%= f.label :user %></td>
+            <td><%= f.label @greenroof.user.name %></td>
+          </tr>
 
-            <tr>
-              <td><%= f.label :address %></td>
-              <td><%= f.label @greenroof.address %></td>
-            </tr>
-
-
-            <tr>
-              <td><%= f.label :purpose %></td>
-              <td><%= f.label @greenroof.purpose %></td>
-            </tr>
-
-            <tr>
-              <td><%= f.label "Katon tiedot:" %></td>
-              <td><%= link_to "Katto", @greenroof.roof %></p></td>
-            </tr>
-
-            <tr>
-              <td><%= f.label :plants %></td>
-              <td>
-                <div class="well"> <%= printPlants(@greenroof) %> </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td><%= f.label :bases %></td>
-              <td>
-                <div class="well"> <%= printBases(@greenroof) %> </div>
-              </td>
-            </tr>
-
-          </table>
+          <tr>
+            <td><%= f.label :address %></td>
+            <td><%= f.label @greenroof.address %></td>
+          </tr>
 
 
-      <% end %>
-      </div>
+          <tr>
+            <td><%= f.label :purpose %></td>
+            <td><%= f.label @greenroof.purpose %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label "Katon tiedot:" %></td>
+            <td><%= link_to "Katto", @greenroof.roof %></p></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :plants %></td>
+            <td>
+              <div class="well"> <%= printPlants(@greenroof) %> </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :bases %></td>
+            <td>
+              <div class="well"> <%= printBases(@greenroof) %> </div>
+            </td>
+          </tr>
+
+        </table>
+
+
+    <% end %>
+  </div>
 </div>
-<%= javascript_include_tag "bootstrap-carousel" %>
+
+<%= javascript_include_tag "photoslider" %>
+
+
