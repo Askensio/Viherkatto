@@ -98,7 +98,11 @@ class GreenroofsController < ApplicationController
       else
         @jsonGreenroofs = Greenroof.all
       end
-      format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs} }
+
+      @jsonUser = User.all
+
+      #format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs} }
+      format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs, user: @jsonUser.to_json(:only => [:name, :id]) } }
     end
   end
 end
