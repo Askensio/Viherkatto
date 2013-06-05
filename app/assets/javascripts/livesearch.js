@@ -5,7 +5,6 @@ $(document).ready(function () {
     })();
 
 
-
     function paginate(entry_count, page, per_page) {
         var total = Math.ceil(entry_count / per_page);
         $('.pagination').empty()
@@ -65,7 +64,6 @@ $(document).ready(function () {
         });
     }
 
-
     function addPlantElementForSearch(entry) {
         var listElement = $('<li></li>');
         var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '  </a>');
@@ -82,6 +80,13 @@ $(document).ready(function () {
         var icon = $('<i class=\"icon-plus pull-right clickable\"></i>').attr('id', id).click( listaClikkerListener )
         return icon
     }
+
+    function iconMinus() {
+        var icon = $('<i class=\"icon-minus\ clickable  "></i>');
+        return icon;
+    };
+
+
 
     var $cells = $("li");
     var plantdata = [];
@@ -150,9 +155,6 @@ $(document).ready(function () {
         $('.absorbancy').append('Vedenimukyky: ' + input + ' (l/m2)');
     })
 
-
-
-
     $("#search").keyup(function() {
         var searchword = $("#search").val();
             $.getJSON("/plants.json?name=" + searchword, function (data) {
@@ -178,6 +180,12 @@ $(document).ready(function () {
     });
 
     var addedPlants = []
+
+    /**
+     * This variable is used to provide the list of all chosen plants with clickable buttons that add and remove the plants from the lists.
+     *
+     * @param event
+     */
     var listaClikkerListener = function(event) {
         var id = -1 * event.target.getAttribute('id')
         var chosenOne = $('#' + id)
@@ -193,8 +201,18 @@ $(document).ready(function () {
         );
         var listElement = $('<li></li>');
         listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
-        $('.chosen-list').append(listElement).append('<br>');
+        listElement.append(iconMinus());
+        listElement.append('<br>');
+        listElement.click(function(e)
+        {
+            console.log(addedPlants.indexOf(id))
+            addedPlants.splice(addedPlants.indexOf(id), 1)
+            $(this).remove();
+            console.log(addedPlants)
+        });
+        $('.chosen-list').append(listElement);
         console.log(parent)
+        console.log(addedPlants)
         //parent.remove()
     }
 

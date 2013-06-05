@@ -4,9 +4,12 @@ $(document).ready(function () {
 });
 
 var plants = []
+var customPlants = []
 
 // initializes the button listeners for the form
 function init() {
+    $('#add-custom-plant').click(customPlant)
+
     $('#form').submit(function (event) {
         // cancels the form submission
         event.preventDefault();
@@ -22,6 +25,17 @@ function init() {
         e.preventDefault()
     })
 
+}
+
+var customPlant = function(event) {
+    event.preventDefault();
+    var input = $('#custom-plant-name').val()
+    if (input != "") {
+        customPlants.push(input)
+    }
+    $('#custom-plant-name').val("");
+    $('#theplants').append('<li>'+input+'</li>');
+    console.log(customPlants)
 }
 
 // listener function for the addition of a new base
