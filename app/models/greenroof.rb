@@ -16,7 +16,7 @@ class Greenroof < ActiveRecord::Base
 
   validates :address, presence: true, length: { maximum: 200 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}
-  validates :note, length: { maximum: 1500 }
+  validates :note, length: { maximum: 5000 }
 
   def save_bases
     self.bases.each do |base|

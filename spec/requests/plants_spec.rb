@@ -4,15 +4,19 @@ require 'spec_helper'
 
 describe 'Plant pages' do
 
-  Light.create!(desc: "Varjoisa")
-  Light.create!(desc: "Puolivarjoisa")
-  Light.create!(desc: "Aurinkoinen")
+  before do
+    Light.create!(desc: "Varjoisa")
+    Light.create!(desc: "Puolivarjoisa")
+    @light = Light.create!(desc: "Aurinkoinen")
+  end
+
+  let(:admin) { FactoryGirl.create(:admin) }
 
   subject { page }
 
   describe 'addition' do
 
-    let(:admin) { FactoryGirl.create(:admin) }
+
 
     before do
       sign_in admin
@@ -64,20 +68,11 @@ describe 'Plant pages' do
 
   describe 'Pages' do
 
-    let(:admin) { FactoryGirl.create(:admin) }
-
     before do
-
-      Light.create!(desc: "Varjoisa")
-      Light.create!(desc: "Puolivarjoisa")
-      Light.create!(desc: "Aurinkoinen")
-
       sign_in admin
       @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
-      @test_plant.update_attribute(:light_id, 2)
+      @test_plant.update_attribute(:light_id, @light.id)
       @test_plant.save
-
-
     end
 
     describe 'view without admin rights' do

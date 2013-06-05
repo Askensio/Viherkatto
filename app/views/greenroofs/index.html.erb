@@ -3,11 +3,15 @@
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
-<p class="pagination"></p>
-<p class="content"></p>
-<ul class="greenroof-list"  data-id="greenroof">
 
-</ul>
+<div >
+  <p class="pagination"></p>
+
+  <p class="content"></p>
+  <ul class="greenroof-list" data-id="greenroof">
+
+  </ul>
+</div>
 <%= javascript_include_tag "pagination/bootpag" %>
 <%= javascript_include_tag "pagination/greenroofs" %>
 <%= javascript_include_tag "pagination/paginator" %>
