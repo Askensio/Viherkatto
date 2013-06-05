@@ -38,6 +38,7 @@ var customPlant = function(event) {
     listElement.append(input)
     listElement.append(iconMinus());
     listElement.click(function(e) {
+        customPlants.splice(customPlants.indexOf(input), 1)
         $(this).remove();
     });
     $('#theplants').append(listElement)
