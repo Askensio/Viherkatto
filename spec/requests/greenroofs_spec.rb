@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 require 'spec_helper'
 
 describe 'Greenroof' do
@@ -42,9 +41,9 @@ describe 'Greenroof' do
       end
     end
 
-    describe 'with valid information' do
+    describe 'without plant information' do
       before do
-        fill_in "greenroof[address]",  with: "Some address"
+        fill_in "greenroof_address",  with: "Some address"
         fill_in "greenroof_note",     with: "This is a test greenroof"
         fill_in "roof_area",          with: "100"
         fill_in "roof_declination",   with: "10"
@@ -52,11 +51,12 @@ describe 'Greenroof' do
         select "Pelto",               from: "environment_id"
         fill_in "roof_load_capacity", with: "500"
         fill_in "base_absorbancy",    with: "400"
+
         puts page
       end
 
-      it "should create a new roof" do
-        expect { click_button submit }.to change(Roof, :count).by(1)
+      it "should not create a new roof" do
+        expect { click_button submit }.to change(Roof, :count).by(0)
       end
     end
   end

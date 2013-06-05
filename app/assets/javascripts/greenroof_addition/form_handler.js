@@ -34,7 +34,13 @@ var customPlant = function(event) {
         customPlants.push(input)
     }
     $('#custom-plant-name').val("");
-    $('#theplants').append('<li>'+input+'</li>');
+    var listElement = $('<li></li>')
+    listElement.append(input)
+    listElement.append(iconMinus());
+    listElement.click(function(e) {
+        $(this).remove();
+    });
+    $('#theplants').append(listElement)
     console.log(customPlants)
 }
 
@@ -129,12 +135,15 @@ var save = function (event) {
     var environments = createEnvironmentsObject()
     var bases = createBasesArray()
     var greenroof = createGreenroofObjcet()
+    var customplant = createCustomplantsObject()
 
     var data = new Object()
 
     data.roof = roof
     data.environment = environments
     data.bases = bases
+    data.customPlants = customplant
+    console.log(customplant)
     if (plants.length < 1) {
         alert("Et valinnut yhtään kasvia")
     }
@@ -142,6 +151,12 @@ var save = function (event) {
     data.greenroof = greenroof
 
     sendData(data)
+}
+
+function createCustomplantsObject() {
+   var customPlantArray = new Object()
+   customPlantArray.plants = customPlants
+   return customPlantArray
 }
 
 function createRoofObject() {
