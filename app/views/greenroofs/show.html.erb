@@ -2,12 +2,6 @@
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 <%= stylesheet_link_tag "photoslider", media: "all" %>
 
-
-
-
-
-
-
 <div class="row-fluid marketing">
   <div>
     <h1>
@@ -24,18 +18,18 @@
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
-            <td><%= f.label :user %></td>
+            <td><%= f.label :user, h("Käyttäjä: ") %></td>
             <td><%= f.label @greenroof.user.name %></td>
           </tr>
 
           <tr>
-            <td><%= f.label :address %></td>
+            <td><%= f.label :address, h("Sijainti: ") %></td>
             <td><%= f.label @greenroof.address %></td>
           </tr>
 
 
           <tr>
-            <td><%= f.label :purpose %></td>
+            <td><%= f.label :purpose, h("Käyttötarkoitus: ")%></td>
             <td><%= f.label @greenroof.purpose %></td>
           </tr>
 
@@ -45,16 +39,23 @@
           </tr>
 
           <tr>
-            <td><%= f.label :plants %></td>
+            <td><%= f.label :plants, h("Kasvit ") %></td>
             <td>
               <div class="well"> <%= printPlants(@greenroof) %> </div>
             </td>
           </tr>
 
           <tr>
-            <td><%= f.label :bases %></td>
+            <td><%= f.label :bases, h("Pohjat ") %></td>
             <td>
               <div class="well"> <%= printBases(@greenroof) %> </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :note, h("Huomioita") %></td>
+            <td>
+              <div class="well"> <%= @greenroof.note %> </div>
             </td>
           </tr>
 
