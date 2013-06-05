@@ -95,7 +95,7 @@ class PlantsController < ApplicationController
       end
 
       @jsonPlants -= @jsonPlantsDub
-      format.json { render :json => {count: @plants.total_entries, plants: @jsonPlants} }
+      format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @jsonPlants} }
     end
   end
 

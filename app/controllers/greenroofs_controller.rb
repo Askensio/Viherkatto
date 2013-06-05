@@ -95,20 +95,41 @@ class GreenroofsController < ApplicationController
 
   def index
     respond_to do |format|
-      @greenroofs = Greenroof.paginate(page: params[:page])
+      #@greenroofs = Greenroof.paginate(page: params[:page])
       #@greenroofs = Greenroof.all
 
-      format.html { render :html => @greenroofs } # index.html.erb
+
+      @count = 0
       if params[:page].present?
-        @jsonGreenroofs = Greenroof.paginate(page: params[:page], per_page: params[:per_page])
+        @greenroofs = Greenroof.paginate(page: params[:page], per_page: params[:per_page])
+        @count = @greenroofs.total_entries
       else
-        @jsonGreenroofs = Greenroof.all
+        @greenroofs = Greenroof.all
+        @count = @greenroofs.length
+      end
+
+      format.html { render :html => @greenroofs } # index.html.erb
+
+      @jsonGreenroofs = []
+
+
+
+      @greenroofs.each do |groof|
+        @user = User.find_by_id(groof.user_id)
+        hash = groof.attributes
+        hash[:user] = @user.name
+        if (signed_in?)
+          hash[:owner] = (@user.id == current_user.id)
+        else
+          hash[:owner] = false
+        end
+        @jsonGreenroofs << hash
       end
 
       @jsonUser = User.all
 
       #format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs} }
-      format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs, user: @jsonUser.to_json(:only => [:name, :id])} }
+      format.json { render :json => {admin: admin?, count: @count, greenroofs: @jsonGreenroofs} }
     end
   end
 
