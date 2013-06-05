@@ -30,5 +30,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  def important
+    redirect_to 'http://sieni.us/?id=40'
+  end
+
 end
 

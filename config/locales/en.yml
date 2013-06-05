@@ -14,6 +14,7 @@ en:
         password_confirmation: "Salasanan vahvistus"
         phone: "Puhelinnumero"
         profession: "Käyttäjärooli"
+
       plant:
         name: "Nimi"
         latin_name: "Latinankielinen nimi"
@@ -38,6 +39,14 @@ en:
         name: "Nimi"
         thickness: "Paksuus"
         weight: "Paino"
+
+      greenroof:
+         user: "Käyttäjä"
+         address: "Sijainti"
+         purpose: "Käyttötarkoitus"
+         plants: "Kasvit"
+         bases: "Pohjat"
+         note: "Huomioita"
 
     errors:
       models:
