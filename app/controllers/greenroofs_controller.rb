@@ -108,7 +108,21 @@ class GreenroofsController < ApplicationController
       @jsonUser = User.all
 
       #format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs} }
-      format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs, user: @jsonUser.to_json(:only => [:name, :id]) } }
+      format.json { render :json => {count: @greenroofs.total_entries, greenroofs: @jsonGreenroofs, user: @jsonUser.to_json(:only => [:name, :id])} }
+    end
+  end
+
+  def destroy
+    puts "jou mään tsikakooo"
+    @greenroof = Greenroof.find(params[:id])
+    respond_to do |format|
+
+      if @greenroof.user_id == current_user.id
+        @greenroof.destroy
+        format.js { render "success" }
+      else
+        format.js { render "fail" }
+      end
     end
   end
 end

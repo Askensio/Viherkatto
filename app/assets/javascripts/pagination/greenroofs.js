@@ -92,13 +92,36 @@ $(document).ready(function () {
 
         if (currentuser["name"] && currentuser["id"] == user["id"] || currentuser["admin"]) {
             listElement.append(' | ');
-            var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>')
+            var deleteElement = $('<a href=\"#\" id=\"/greenroofs/' + entry.id + '\">' + 'poista' + '</a>').click(deleteRequest);
             listElement.append(deleteElement).append(' | ');
             var editElement = $('<a href=\"/greenroofs/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
             listElement.append(editElement);
         }
 
         $('.greenroof-list').append(listElement);
+    }
+
+    var deleteRequest = function(e) {
+        var url = e.target.getAttribute('id')
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+            },
+            success: function (result) {
+                var pagenr = 0;
+                var pageItems = $('.bootpag').children();
+                $.each(pageItems, function (i, item) {
+                    var cl = $(item).attr("class");
+
+                    if (cl === "disabled") {
+                        pagenr = $(item).attr("data-lp");
+                    }
+                });
+                getGreenroofs(pagenr, 20, true)
+            }
+        });
     }
 });
 
