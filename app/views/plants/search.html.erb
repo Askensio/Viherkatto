@@ -1,0 +1,38 @@
+<% provide(:title, 'Kasvien haku') %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+
+<div class="row">
+  <div class="span5 offset3">
+    <div data-id="plant" id="search-form">
+      <label>Nimi:</label>
+      <input type="text" class="search-input" name="name" data-id="name">
+      <label>Latinankielinen nimi:</label>
+      <input type="text" class="search-input" name="latin_name" data-id="latin_name">
+
+      <select class="selectpicker search-input" multiple="true" data-id="colour">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
+      </select>
+
+      <!--<input type="submit" class="submit" value="Hae" name="hae">-->
+      <button name="hae">Hae</button>
+    </div>
+  </div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<p class="pagination"></p>
+<p class="content"></p>
+<ul class="plant-list list" data-id="plant">
+</ul>
+
+<%= javascript_include_tag "bootstrap-select" %>
+<script>$('.selectpicker').selectpicker();</script>
+
+<%= javascript_include_tag "search/search" %>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "pagination/paginator" %>
+<%= javascript_include_tag "search/plants-search" %>

@@ -142,4 +142,26 @@ class PlantsController < ApplicationController
     end
     #render :nothing => true
   end
+
+  def search
+    respond_to do |format|
+
+      format.html { render :html => {plants: @plants}}
+
+      @plants = Plant.all
+
+      @jsonPlantsDub = [:Plant]
+
+      if params[:name].present?
+        @plants.each do |p|
+          if !p.name.downcase.include?(params[:name].downcase)
+            @jsonPlantsDub << p
+          end
+        end
+      end
+      @plants -= @jsonPlantsDub
+      format.json { render :json => {plants: @plants} }
+    end
+
+  end
 end
