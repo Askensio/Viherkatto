@@ -64,11 +64,6 @@ describe Plant do
     it { should be_valid }
   end
 
-  describe "When thickness is too low" do
-    before { @plant.min_soil_thickness = 7 }
-    it { should_not be_valid }
-  end
-
   describe "When thickness is too great" do
     before { @plant.min_soil_thickness = 10001 }
     it { should_not be_valid }

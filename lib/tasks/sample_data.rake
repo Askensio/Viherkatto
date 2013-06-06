@@ -16,6 +16,7 @@ namespace :db do
       maintenance = 2
       height = 10
       thickness = n+8
+
       light = 2
       weight = n+1
       note = "asd"
