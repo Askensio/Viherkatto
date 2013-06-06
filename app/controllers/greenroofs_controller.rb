@@ -50,6 +50,15 @@ class GreenroofsController < ApplicationController
       return
     end
 
+    if not params[:customPlants].nil?
+      params[:customPlants].each do |cplant|
+        cplant[1].each do |toAddPlant|
+          @cplant = CustomPlant.new(name: toAddPlant)
+          @greenroof.custom_plants << @cplant
+        end
+      end
+    end
+
     @greenroof.roof = @roof
 
     @bases = params[:bases]

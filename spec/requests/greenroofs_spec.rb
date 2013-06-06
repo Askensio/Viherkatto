@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 require 'spec_helper'
 
 describe 'Greenroof' do
@@ -44,8 +43,9 @@ describe 'Greenroof' do
     end
 
     describe 'with valid information', js: true do
+
       before do
-        fill_in "greenroof[address]",  with: "Some address"
+        fill_in "greenroof_address",  with: "Some address"
         fill_in "greenroof_note",     with: "This is a test greenroof"
         fill_in "roof_area",          with: "100"
         fill_in "roof_declination",   with: "10"
@@ -64,6 +64,7 @@ describe 'Greenroof' do
 
           sleep 1.seconds
         end.to change(Greenroof, :count).by(1)
+
       end
     end
   end
