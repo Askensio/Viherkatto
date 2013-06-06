@@ -4,8 +4,33 @@ class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
 
-  def index
-    @greenroofs = Greenroof.paginate(page: params[:page])
+  def search
+    @greenroofs = Greenroof.scoped
+    @greenroofs = @greenroofs.where("address like ?", "%" + params[:address] + "%") if params[:address]
+    @greenroofs = @greenroofs.where("note like ?", "%" + params[:note] + "%") if params[:note]
+    #puts(@greenroofs.first[:address])
+    name = "%#{params[:name]}%"
+    colour = "%#{params[:colour]}%"
+    env = "%#{params[:envname]}%"
+    @greenroofs = @greenroofs.includes(:plants).where("plants.name like ?", name) if params[:name]
+    @greenroofs = @greenroofs.includes(:plants).where("plants.colour like ?", colour) if params[:colour]
+    @greenroofs = @greenroofs.includes(:plants).where("plants.maintenance = ?", params[:maintenance]) if params[:maintenance]
+    @greenroofs = @greenroofs.includes(:plants).where("plants.height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
+    @greenroofs = @greenroofs.includes(:plants).where("plants.height >= ?", params[:plantminheight]) if params[:plantminheight]
+    @greenroofs = @greenroofs.includes(:environments).where("environments.name like ?", env) if params[:envname]
+    @greenroofs = @greenroofs.includes(:roofs).where("roof.declination <= ?", params[:maxdeclination]) if params[:maxdeclination]
+    #Plant.where("name like ?", name).map{ |plant| plant.greenroofs }.flatten! if params[:name]
+
+
+=begin
+    conditions = {}
+    conditions[:address] = params[:address] unless params[:address].blank?
+    conditions[:purpose] = params[:purpose] unless params[:purpose].blank?
+    @greenroofs = Greenroof.search(conditions: conditions)
+    puts(@greenroofs)
+=end
+
+
   end
 
   def show

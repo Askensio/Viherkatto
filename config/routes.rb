@@ -7,12 +7,14 @@ Viherkatto::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
 
+
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
   match '/getcurrentuser', to: 'sessions#getCurrentUser'
   match '/sieni', to: 'sessions#important'
+  match '/search/greenroofs', to: 'greenroofs#search'
 
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'

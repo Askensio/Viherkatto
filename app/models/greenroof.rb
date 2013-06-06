@@ -27,4 +27,8 @@ class Greenroof < ActiveRecord::Base
   def save_roof
     self.roof.save
   end
+
+  def search(conditions)
+    Greenroof.where(conditions: conditions)
+  end
 end
