@@ -3,9 +3,12 @@ $(document).ready(function () {
 });
 
 var plants = []
+var customPlants = []
 
 // initializes the button listeners for the form
 function init() {
+    $('#add-custom-plant').click(customPlant)
+
     $('#form').submit(function (event) {
         // cancels the form submission
         event.preventDefault();
@@ -21,6 +24,24 @@ function init() {
         e.preventDefault()
     })
 
+}
+
+var customPlant = function(event) {
+    event.preventDefault();
+    var input = $('#custom-plant-name').val()
+    if (input != "") {
+        customPlants.push(input)
+    }
+    $('#custom-plant-name').val("");
+    var listElement = $('<li></li>')
+    listElement.append(input)
+    listElement.append(iconMinus());
+    listElement.click(function(e) {
+        customPlants.splice(customPlants.indexOf(input), 1)
+        $(this).remove();
+    });
+    $('#theplants').append(listElement)
+    console.log(customPlants)
 }
 
 // listener function for the addition of a new base
@@ -114,12 +135,15 @@ var save = function (event) {
     var environments = createEnvironmentsObject()
     var bases = createBasesArray()
     var greenroof = createGreenroofObjcet()
+    var customplant = createCustomplantsObject()
 
     var data = new Object()
 
     data.roof = roof
     data.environment = environments
     data.bases = bases
+    data.customPlants = customplant
+    console.log(customplant)
     if (plants.length < 1) {
         alert("Et valinnut yhtään kasvia")
     }
@@ -127,6 +151,12 @@ var save = function (event) {
     data.greenroof = greenroof
 
     sendData(data)
+}
+
+function createCustomplantsObject() {
+   var customPlantArray = new Object()
+   customPlantArray.plants = customPlants
+   return customPlantArray
 }
 
 function createRoofObject() {

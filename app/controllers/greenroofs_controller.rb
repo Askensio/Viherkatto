@@ -50,6 +50,15 @@ class GreenroofsController < ApplicationController
       return
     end
 
+    if not params[:customPlants].nil?
+      params[:customPlants].each do |cplant|
+        cplant[1].each do |toAddPlant|
+          @cplant = CustomPlant.new(name: toAddPlant)
+          @greenroof.custom_plants << @cplant
+        end
+      end
+    end
+
     @greenroof.roof = @roof
 
     @bases = params[:bases]
@@ -134,16 +143,18 @@ class GreenroofsController < ApplicationController
   end
 
   def destroy
-    puts "jou mään tsikakooo"
+
     @greenroof = Greenroof.find(params[:id])
     respond_to do |format|
-
-      if @greenroof.user_id == current_user.id
+      @response = ""
+      if (@greenroof.user_id == current_user.id ) or current_user.admin?
         @greenroof.destroy
-        format.js { render "success" }
+        @response = "success"
       else
-        format.js { render "fail" }
+        @response = "error"
       end
+
+      format.json { render :json => { response: @response }}
     end
   end
 end
