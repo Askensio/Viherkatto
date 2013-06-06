@@ -17,12 +17,11 @@ describe Greenroof do
     @roof.light = @light
     @groof.roof = @roof
 
-    @plant1 = Plant.new(name: "nättikukka", latin_name: "Kukkaus kauneus", colour: "Blue", coverage: 1, maintenance: 1,  min_soil_thickness: 20, weight: 1, note: "Oikein tosi nätti!")
-    @plant2 = Plant.new(name: "Example Plant nro 2", latin_name: "Plantus Examplus Secondus", coverage: 1, colour: "Green", maintenance: 2, min_soil_thickness: 20, weight: 1, note: "This one's also a totally fabulous plant!")
-    @groof.plants << @plant1
-    @groof.plants << @plant2
 
-    @groof.save
+    @plants = [ FactoryGirl.create(:plant),FactoryGirl.create(:plant)]
+    @groof.plants = @plants
+
+    @groof.save!
 
   end
 
@@ -60,7 +59,7 @@ describe Greenroof do
   end
 
   describe "note is too long" do
-    before { @groof.note = "a"*1600 }
+    before { @groof.note = "a"*5001 }
     it { should_not be_valid }
   end
 

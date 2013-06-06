@@ -66,6 +66,14 @@ describe 'Greenroof' do
 
   describe 'show' do
       before do
+
+        Environment.create!(name: "Merenranta")
+        Environment.create!(name: "Pelto")
+        Environment.create!(name: "Metsä")
+        Environment.create!(name: "Kaupunki")
+        Environment.create!(name: "Muu")
+
+
         area = 2
         declination = 4
         load_capacity = 10*4
@@ -99,7 +107,6 @@ describe 'Greenroof' do
         visit greenroof_path(@groof)
       end
 
-      subject {page}
 
       it {should have_selector('label', text: "Käyttäjä" )}
       it {should have_selector('label', text: "Sijainti" )}
@@ -109,9 +116,9 @@ describe 'Greenroof' do
       it {should have_selector('label', text: "Pohjat" )}
       it {should have_selector('label', text: "Huomioita" )}
 
-      describe 'click-plants-link' do
+      describe 'click-plants-link', js: true do
 
-        before page.find(:xpath, '//a[contains("plants")]').click
+        before {find(:xpath, '/html/body/div/div/div/table/tbody/tr[5]/td[2]/div/a[1]').click}
 
         it {should have_selector('label', text: "Latinankielinen nimi" )}
      end
