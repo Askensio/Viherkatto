@@ -13,7 +13,7 @@ class PlantsController < ApplicationController
   def index
     respond_to do |format|
       @plants = Plant.paginate(page: params[:page])
-      format.html { render :html => @plants}  # index.html.erb
+      format.html { render :html => @plants } # index.html.erb
       if params[:page].present?
         @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
       else
@@ -133,5 +133,27 @@ class PlantsController < ApplicationController
   def destroy
     Plant.find(params[:id]).destroy
     render :nothing => true
+  end
+
+  def search
+    respond_to do |format|
+
+      format.html { render :html => {plants: @plants}}
+
+      @plants = Plant.all
+
+      @jsonPlantsDub = [:Plant]
+
+      if params[:name].present?
+        @plants.each do |p|
+          if !p.name.downcase.include?(params[:name].downcase)
+            @jsonPlantsDub << p
+          end
+        end
+      end
+      @plants -= @jsonPlantsDub
+      format.json { render :json => {plants: @plants} }
+    end
+
   end
 end
