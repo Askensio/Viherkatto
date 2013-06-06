@@ -146,22 +146,11 @@ class PlantsController < ApplicationController
   def search
     respond_to do |format|
 
-      format.html { render :html => {plants: @plants}}
+      format.html { render :html => {plants: @plants} }
 
-      @plants = Plant.all
-
-      @jsonPlantsDub = [:Plant]
-
-      if params[:name].present?
-        @plants.each do |p|
-          if !p.name.downcase.include?(params[:name].downcase)
-            @jsonPlantsDub << p
-          end
-        end
-      end
-      @plants -= @jsonPlantsDub
-      format.json { render :json => {plants: @plants} }
+      @plants = Plant.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
+      @plants = @plants.paginate(page: params[:page], per_page: params[:per_page])  unless @plants.nil?
+      format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @plants} }
     end
-
   end
 end

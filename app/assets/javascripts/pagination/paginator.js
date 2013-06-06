@@ -1,107 +1,132 @@
-function Pagination(url, param) {
+function Pagination(url, page, per_page, param) {
 
     if (param === undefined)  param = "";
 
     this.object = getObject()
     this.parameters = param
-    this. url = url
+    this.url = url
+    this.entry_count = 0;
+    this.page = page
+    this.per_page = per_page;
+    this.total = 0
+
     function getObject() {
         return $('body').find('ul[data-id]').attr('data-id')
     }
-
-    this.deleteRequest = (function (paginator) {
-        return function (e) {
-
-            var url = e.target.getAttribute('id')
-
-            var callback = function (result) {
-                var pagenr = 0;
-                var pageItems = $('.bootpag').children();
-                $.each(pageItems, function (i, item) {
-                    var cl = $(item).attr("class");
-
-                    if (cl === "disabled") {
-                        pagenr = $(item).attr("data-lp");
-                    }
-                });
-                var alert = $('<div></div>').attr('class', 'alert alert-' + result.response)
-                if(result.response === 'success') {
-                    alert.append("Poisto onnistui.")
-                }
-                else {
-                    alert.append("Poisto epäonnistui.")
-                }
-                $('.pagination').before(alert)
-                console.log(alert)
-                paginator.getObjects(pagenr, 20, true)
-            }
-
-            $.ajax({
-                url: url,
-                type: 'DELETE',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-                },
-                success: callback
-            });
-        }
-    })(this)
 }
 
-Pagination.prototype.paginate = function (entry_count, page, per_page) {
+Pagination.prototype.deleteRequest = (function (paginator) {
 
-    var paginateBarListener = (function(paginator) {
-        return function (event, num) {
-            console.log(event)
-            paginator.getObjects(num, per_page)
+    return function (e) {
+
+        var url = e.target.getAttribute('id')
+
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+            },
+            success: function (response) {
+                callbackHandler(response)
+            }
+        });
+
+        function callbackHandler(result) {
+            //console.log(result)
+            var alert = $('<div></div>').attr('class', 'alert alert-' + result.response)
+            if (result.response === 'success') {
+                alert.append("Poisto onnistui.")
+            }
+            else {
+                alert.append("Poisto epäonnistui.")
+            }
+            $('.alert').remove()
+            //$('.pagination').before(alert)
+            //console.log(alert)
+            //paginator.paginate()
+            paginator.getObjects()
+        }
+    }
+})
+
+
+Pagination.prototype.paginate = function () {
+    var paginateBarListener = (function (paginator) {
+        return function (event, page) {
+            //console.log("jee")
+            paginator.page = page
+            paginator.getObjects()
         }
     })(this)
 
-    var total = Math.ceil(entry_count / per_page);
-    $('.pagination').empty()
     $('.pagination').bootpag({
-        total: total,
-        page: page,
-        maxVisible: 10
+        total: this.total,   // total pages
+        page: this.page,     // default page
+        maxVisible: 10  // visible pagination
     }).on('page', paginateBarListener);
-    $('.pagination').click(function() {
+    $('.pagination').click(function () {
         $('.alert').remove()
     })
 }
 
-Pagination.prototype.getObjects = function (page, per_page, onDelete) {
-    var reloadPaginateNeeded = false;
-    if (page === undefined && per_page === undefined) reloadPaginateNeeded = true;
-    if (page === undefined) page = 1;
-    if (per_page === undefined)  per_page = 20;
-    if (onDelete === undefined)  onDelete = false;
+Pagination.prototype.getObjects = function (render) {
 
-    if (onDelete) reloadPaginateNeeded = onDelete;
-    var callback = (function (paginator) {
-        return function (data) {
-//            console.log(data)
-            var entry_count = data["count"];
-            var objects = data[ paginator.object + "s" ];
-            console.log(objects)
-            if (objects.length === 0) {
-                reloadPaginateNeeded = true
-                page -= 1
-            }
-            if (reloadPaginateNeeded) {
-                paginator.paginate(entry_count, page, per_page)
-                //console.log("reloadin pagination")
-                reloadPaginateNeeded = false;
-            }
-            // Clears the list.
-            $('.' + paginator.object + '-list').empty();
-            // And lists the queried objects.
-            $.each(objects, function (i, item) {
-                paginator.addElement(item, data["admin"]);
-            });
-        };
-    }(this))
-   // console.log(this.parameters)
-    $.getJSON("/" + this.url + ".json?" + this.parameters + "page=" + page + "&per_page=" + per_page, callback);
+    if (render === undefined)  render = false;
+
+    var paginator = this
+
+    $.getJSON("/" + this.url + ".json?" + this.parameters + "page=" + this.page + "&per_page=" + this.per_page, function (data) {
+        callbackHandler(data)
+    });
+
+    function callbackHandler(data) {
+        console.log(data)
+        paginator.entry_count = data["count"];
+
+        console.log('total ' + paginator.total)
+        console.log('page ' + paginator.page)
+        console.log('entry_count ' + paginator.entry_count)
+        console.log('per_page ' + paginator.per_page)
+        console.log('laskutoimitus ' + Math.ceil(paginator.entry_count / paginator.per_page))
+
+        var currentPages = Math.ceil(paginator.entry_count / paginator.per_page)
+
+        if( currentPages < paginator.total ) {
+            console.log("sivun pitäisi kadota!!!")
+            paginator.total = currentPages
+            paginator.paginate()
+        }
+
+        paginator.total = currentPages
+
+        var objects = data[ paginator.object + "s" ];
+        //console.log(objects)
+        if (objects.length === 0) {
+
+            //console.log("no lenght :(")
+            //    paginator.page -= 1
+            //$('.pagination').empty()
+            paginator.paginate()
+            //paginator.getObjects()
+            //    paginator.getObjects()
+            //return
+        }
+        if (render) {
+            console.log("rendaah!")
+            $('.pagination').empty()
+            paginator.paginate()
+            //console.log("reloadin pagination")
+            render = false;
+        }
+
+        // Clears the list.
+        $('.' + paginator.object + '-list').empty();
+        // And lists the queried objects.
+        $.each(objects, function (i, item) {
+            paginator.addElement(item, data["admin"]);
+        });
+    }
 }
 
 Pagination.prototype.addElement = addElement

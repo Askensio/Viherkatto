@@ -1,13 +1,13 @@
 $(document).ready(function () {
 
     var searcher = new Search();
-    var paginator = new Pagination("search/plants")
+    var paginator = new Pagination("search/plants",1,20)
 
     var clickListener = function () {
+
         var params = searcher.buildQueryParameters()
-        console.log("NAPPI PAINETTU")
         paginator.parameters = params
-        paginator.getObjects()
+        paginator.getObjects(true)
     }
 
     $('[name="hae"]').click(clickListener);
