@@ -13,6 +13,7 @@ Viherkatto::Application.routes.draw do
   match '/uloskirjaus', to: 'sessions#destroy'
   match '/getcurrentuser', to: 'sessions#getCurrentUser'
   match '/sieni', to: 'sessions#important'
+  match '/search/plants', to: 'plants#search'
 
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'
