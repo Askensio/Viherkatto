@@ -3,11 +3,10 @@
     <div class="container">
       <%= link_to "etusivu", root_path, id: "logo" %>
       <nav>
-        <ul class="nav pull-left">
+        <ul class="nav">
           <% if signed_in? %>
               <li><%= link_to "Lisää uusi viherkatto", new_greenroof_path %></li>
           <% end %>
-          <li><%= link_to "Selaa viherkattoja", greenroofs_path %></li>
           <li><%= link_to "Selaa kasveja", plants_path %></li>
           <li><%= link_to "Yhteystiedot", '/contacts' %></li>
         </ul>
