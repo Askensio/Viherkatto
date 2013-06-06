@@ -8,6 +8,13 @@
       <input type="text" class="search-input" name="name" data-id="name">
       <label>Latinankielinen nimi:</label>
       <input type="text" class="search-input" name="latin_name" data-id="latin_name">
+
+      <select class="selectpicker search-input" multiple="true" data-id="colour">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
+      </select>
+
       <!--<input type="submit" class="submit" value="Hae" name="hae">-->
       <button name="hae">Hae</button>
     </div>
@@ -25,7 +32,7 @@
 <%= javascript_include_tag "bootstrap-select" %>
 <script>$('.selectpicker').selectpicker();</script>
 
-<%= javascript_include_tag "search" %>
+<%= javascript_include_tag "search/search" %>
 <%= javascript_include_tag "pagination/bootpag" %>
-<%= javascript_include_tag "pagination/plants" %>
 <%= javascript_include_tag "pagination/paginator" %>
+<%= javascript_include_tag "search/plants-search" %>

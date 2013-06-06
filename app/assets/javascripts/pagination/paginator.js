@@ -1,13 +1,10 @@
-$(document).ready(function () {
-    var paginator = new Pagination()
+function Pagination(url, param) {
 
-    paginator.getObjects()
-});
-
-function Pagination() {
+    if (param === undefined)  param = "";
 
     this.object = getObject()
-
+    this.parameters = param
+    this. url = url
     function getObject() {
         return $('body').find('ul[data-id]').attr('data-id')
     }
@@ -47,6 +44,7 @@ Pagination.prototype.paginate = function (entry_count, page, per_page) {
 
     var paginateBarListener = (function(paginator) {
         return function (event, num) {
+            console.log(event)
             paginator.getObjects(num, per_page)
         }
     })(this)
@@ -91,8 +89,8 @@ Pagination.prototype.getObjects = function (page, per_page, onDelete) {
             });
         };
     }(this))
-
-    $.getJSON("/" + this.object + "s.json?page=" + page + "&per_page=" + per_page, callback);
+   // console.log(this.parameters)
+    $.getJSON("/" + this.url + ".json?" + this.parameters + "page=" + page + "&per_page=" + per_page, callback);
 }
 
 Pagination.prototype.addElement = addElement

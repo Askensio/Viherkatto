@@ -1,3 +1,10 @@
+$(document).ready(function () {
+    var paginator = new Pagination("plants")
+
+    paginator.getObjects()
+});
+
+
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
     var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>');
