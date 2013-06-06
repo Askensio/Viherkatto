@@ -78,13 +78,13 @@
 }
 
 .photoslider_play {
-  background: url('/assets/play.png') no-repeat 0px 0px;
+  background: url('/assets/play.png') no-repeat 3px 3px;
 }
 
 .photoslider_stop {
-  background: url('/assets/pause.png') no-repeat 0px 0px;
+  background: url('/assets/pause.png') no-repeat 3px 3px;
 }
 
 .slideshow_disabled {
-  border-bottom: solid #919191 2px;
+  border: 1px dotted grey;
 }

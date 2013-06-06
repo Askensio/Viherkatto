@@ -4,10 +4,6 @@ class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
 
-  def index
-    @greenroofs = Greenroof.paginate(page: params[:page])
-  end
-
   def show
     @greenroof = Greenroof.find(params[:id])
   end

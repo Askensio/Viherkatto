@@ -81,10 +81,10 @@ Pagination.prototype.getObjects = function (page, per_page, onDelete) {
     if (onDelete) reloadPaginateNeeded = onDelete;
     var callback = (function (paginator) {
         return function (data) {
-            //console.log(data)
+            console.log(data)
             var entry_count = data["count"];
             var objects = data[ paginator.object + "s" ];
-            //console.log(objects)
+            console.log(objects)
             if (objects.length === 0) {
                 reloadPaginateNeeded = true
                 page -= 1
