@@ -27,7 +27,15 @@ function Pagination() {
                         pagenr = $(item).attr("data-lp");
                     }
                 });
-                //console.log(paginator)
+                var alert = $('<div></div>').attr('class', 'alert alert-' + result.response)
+                if(result.response === 'success') {
+                    alert.append("Poisto onnistui.")
+                }
+                else {
+                    alert.append("Poisto epäonnistui.")
+                }
+                $('.pagination').before(alert)
+                console.log(alert)
                 paginator.getObjects(pagenr, 20, true)
             }
 
@@ -58,6 +66,9 @@ Pagination.prototype.paginate = function (entry_count, page, per_page) {
         page: page,
         maxVisible: 10
     }).on('page', paginateBarListener);
+    $('.pagination').click(function() {
+        $('.alert').remove()
+    })
 }
 
 Pagination.prototype.getObjects = function (page, per_page, onDelete) {
@@ -70,7 +81,7 @@ Pagination.prototype.getObjects = function (page, per_page, onDelete) {
     if (onDelete) reloadPaginateNeeded = onDelete;
     var callback = (function (paginator) {
         return function (data) {
-            console.log(data)
+            //console.log(data)
             var entry_count = data["count"];
             var objects = data[ paginator.object + "s" ];
             //console.log(objects)
