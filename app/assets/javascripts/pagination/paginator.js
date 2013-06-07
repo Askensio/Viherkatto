@@ -81,14 +81,14 @@ Pagination.prototype.getObjects = function (render) {
     });
 
     function callbackHandler(data) {
-        console.log(data)
+        //console.log(data)
         paginator.entry_count = data["count"];
 
-        console.log('total ' + paginator.total)
-        console.log('page ' + paginator.page)
-        console.log('entry_count ' + paginator.entry_count)
-        console.log('per_page ' + paginator.per_page)
-        console.log('laskutoimitus ' + Math.ceil(paginator.entry_count / paginator.per_page))
+        //console.log('total ' + paginator.total)
+        //console.log('page ' + paginator.page)
+        //console.log('entry_count ' + paginator.entry_count)
+        //console.log('per_page ' + paginator.per_page)
+        //console.log('laskutoimitus ' + Math.ceil(paginator.entry_count / paginator.per_page))
 
         var currentPages = Math.ceil(paginator.entry_count / paginator.per_page)
 
