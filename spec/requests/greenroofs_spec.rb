@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 require 'spec_helper'
 
 describe 'Greenroof' do
@@ -44,8 +43,9 @@ describe 'Greenroof' do
     end
 
     describe 'with valid information', js: true do
+
       before do
-        fill_in "greenroof[address]",  with: "Some address"
+        fill_in "greenroof_address",  with: "Some address"
         fill_in "greenroof_note",     with: "This is a test greenroof"
         fill_in "roof_area",          with: "100"
         fill_in "roof_declination",   with: "10"
@@ -64,12 +64,12 @@ describe 'Greenroof' do
 
           sleep 1.seconds
         end.to change(Greenroof, :count).by(1)
+
       end
     end
   end
 
   # greenroofs#show
-=begin
   describe 'show' do
       before do
 
@@ -85,13 +85,13 @@ describe 'Greenroof' do
         load_capacity = 10*4
 
         @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
-        @roof.environments << Environment.find(1)
+        @roof.environments << Environment.first
 
 
 
-
-
-        @plants = [ FactoryGirl.create(:plant),FactoryGirl.create(:plant)]
+        @plant1 = FactoryGirl.create(:plant)
+        @plant1.update_attributes(:light_id => Light.first.id);
+        @plants = [ @plant1,FactoryGirl.create(:plant)]
         @base = Base.new(absorbancy: 20)
         @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
         @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
@@ -124,13 +124,24 @@ describe 'Greenroof' do
       it {should have_selector('label', text: "Pohjat" )}
       it {should have_selector('label', text: "Huomioita" )}
 
+
       describe 'click-plants-link', js: true do
-
-
-        #before page.find(:xpath, '//a[contains("plants")]').click
-
-        it {should have_selector('label', text: "Latinankielinen nimi" )}
+        before do
+        visit greenroof_path(@groof)
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[5]/td[2]/div/a[1]", :visible => true).click
+        sleep 1.seconds
+        end
+       it {should have_selector('label', text: "Latinankielinen nimi" )}
      end
+
+      describe 'click-materiaali-link', js: true do
+        before do
+          visit greenroof_path(@groof)
+          find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+          sleep 1.seconds
+        end
+        it {should have_selector('td', text: "Paino" )}
+      end
+
   end
-=end
 end

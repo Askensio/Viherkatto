@@ -3,7 +3,73 @@
 class UsersController < ApplicationController
 
   before_filter :signed_in_user, only: [:edit, :update]
-  before_filter :correct_user, only: [:edit, :update]
+  before_filter :authorized_user, only: [:edit, :update]
+
+  def index
+    @jsonUsers = []
+    respond_to do |format|
+      @users = User.paginate(page: params[:page])
+      format.html { render :html => @users } # index.html.erb
+      if params[:page].present?
+        @jsonUsers = User.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        @jsonUsers = User.all
+      end
+
+      @jsonUsersDub = [:User]
+
+      if params[:name].present?
+        @jsonUsers.each do |p|
+          if !p.name.downcase.include?(params[:name].downcase)
+            @jsonUsersDub << p
+          end
+        end
+      end
+
+      if params[:email].present?
+        @jsonUsers.each do |p|
+          if !p.email.downcase.include?(params[:email].downcase)
+            @jsonUsersDub << p
+          end
+        end
+      end
+
+      if params[:phone].present?
+        @jsonUsers.each do |p|
+          if !p.phone.downcase.include?(params[:phone].downcase)
+            @jsonUsersDub << p
+          end
+        end
+      end
+
+      if params[:profession].present?
+        @jsonUsers.each do |p|
+          if !p.profession.downcase.include?(params[:profession].downcase)
+            @jsonUsersDub << p
+          end
+        end
+      end
+
+
+=begin
+      if params[:admin].present?
+        @jsonUsers.each do |p|
+          if p.admin.to_i < params[:admin].to_i
+            @jsonUsersDub << p
+          end
+        end
+      end
+=end
+      puts @jsonUsers
+      puts "Jamo<3"
+      @jsonUsers -= @jsonUsersDub
+      puts @jsonUsers
+      puts "Jamox"
+      puts @jsonUsersDub
+      format.json { render :json => {admin: admin?, count: @users.total_entries, users: @jsonUsers} }
+    end
+  end
+
 
   def new
     @user = User.new
@@ -32,7 +98,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    signed_in_user
     @user = User.find(params[:id])
   end
 
@@ -56,8 +121,10 @@ class UsersController < ApplicationController
                 notice: "Kirjaudu sisään muokataksesi tietojasi" unless signed_in?
   end
 
-  def correct_user
+  def authorized_user
     @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)
+    redirect_to (root_path) unless @user.id == current_user.id || current_user.admin?
   end
+
 end
+

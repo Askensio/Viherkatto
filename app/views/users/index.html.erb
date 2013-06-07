@@ -1,0 +1,12 @@
+<% provide(:title, 'Käyttäjät') %>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<p class="pagination"></p>
+<p class="content"></p>
+<ul class="user-list list" data-id="user">
+</ul>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "pagination/genericIndex" %>
+<%= javascript_include_tag "pagination/paginator" %>

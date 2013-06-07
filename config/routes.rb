@@ -15,6 +15,8 @@ Viherkatto::Application.routes.draw do
   match '/getcurrentuser', to: 'sessions#getCurrentUser'
   match '/sieni', to: 'sessions#important'
   match '/search/greenroofs', to: 'greenroofs#search'
+  match '/search/plants', to: 'plants#search'
+
 
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'

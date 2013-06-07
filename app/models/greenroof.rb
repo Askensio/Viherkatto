@@ -7,12 +7,13 @@ class Greenroof < ActiveRecord::Base
 
   has_one :roof, :dependent => :destroy
   has_many :bases, :dependent => :destroy
+  has_many :custom_plants, :dependent => :destroy
 
   has_many :layers, through: :bases
 
   before_save :save_bases, :save_roof
 
-  attr_accessible :address, :purpose, :note
+  attr_accessible :address, :purpose, :note, :customPlants
 
   validates :address, presence: true, length: { maximum: 200 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}

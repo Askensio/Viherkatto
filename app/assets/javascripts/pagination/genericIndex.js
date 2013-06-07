@@ -1,14 +1,15 @@
 $(document).ready(function () {
-    var paginator = new Pagination("greenroofs" ,1, 20)
+    var paginator = new Pagination("plants")
 
-    paginator.getObjects(true)
+    paginator.getObjects()
 });
 
 
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
-    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\"> Käyttäjän ' + entry.user + ' viherkatto paikassa ' + entry.address + '</a>');
+    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>');
     listElement.append(link);
+//    console.log(admin)
     if (admin) {
         listElement.append(' | ');
         var deleteElement = $('<a href=\"#\" id="/' + this.object + 's/' + entry.id + '\">' + 'poista' + '</a>').click(this.deleteRequest);

@@ -1,0 +1,58 @@
+<% provide(:title, 'Kasvien haku') %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+
+<div class="row">
+  <div class="span5 offset3">
+    <div data-id="plant" id="search-form">
+      <label>Nimi:</label>
+      <input type="text" class="search-input" name="name" data-id="name">
+      <label>Latinankielinen nimi:</label>
+      <input type="text" class="search-input" name="latin_name" data-id="latin_name">
+
+      <label>Väri:</label>
+      <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour", :multiple => true %>
+
+      <label>Valontarve:</label>
+      <%= collection_select(:light, :id, Light.all, :id, :desc, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness', :multiple => true) %>
+
+      <label>Hoidon tarve:</label>
+      <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "maintenance", :multiple => true %>
+
+      <label>Minimipaksuus pohjalle</label>
+      <input type="text" class="search-input" name="min_thickness" data-id="min_thickness">
+
+      <label>Maksimipaksuus pohjalle</label>
+      <input type="text" class="search-input" name="max_thickness" data-id="max_thickness">
+
+      <label>Minimikorkeus</label>
+      <input type="text" class="search-input" name="min_height" data-id="min_height">
+
+      <label>Maksimikorkeus</label>
+      <input type="text" class="search-input" name="max_height" data-id="max_height">
+
+      <label>Minimipaino</label>
+      <input type="text" class="search-input" name="min_weight" data-id="min_weight">
+
+      <label>Maksimipaino</label>
+      <input type="text" class="search-input" name="max_weight" data-id="max_weight">
+
+      <button class="btn btn-custom span2" name="hae">Hae</button>
+    </div>
+  </div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<p class="pagination"></p>
+<p class="content"></p>
+<ul class="plant-list list" data-id="plant">
+</ul>
+
+<%= javascript_include_tag "bootstrap-select" %>
+<script>$('.selectpicker').selectpicker();</script>
+
+<%= javascript_include_tag "search/search" %>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "pagination/paginator" %>
+<%= javascript_include_tag "search/plants-search" %>
