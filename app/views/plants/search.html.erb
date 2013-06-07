@@ -10,13 +10,13 @@
       <input type="text" class="search-input" name="latin_name" data-id="latin_name">
 
       <label>Väri:</label>
-      <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour" %>
+      <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour", :multiple => true %>
 
       <label>Valontarve:</label>
       <%= collection_select(:light, :id, Light.all, :id, :desc, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness', :multiple => true) %>
 
       <label>Hoidon tarve:</label>
-      <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour" %>
+      <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "maintenance", :multiple => true %>
 
       <label>Minimipaksuus pohjalle</label>
       <input type="text" class="search-input" name="min_thickness" data-id="min_thickness">
