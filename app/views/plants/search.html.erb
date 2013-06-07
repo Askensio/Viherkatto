@@ -9,13 +9,33 @@
       <label>Latinankielinen nimi:</label>
       <input type="text" class="search-input" name="latin_name" data-id="latin_name">
 
-      <select class="selectpicker search-input" multiple="true" data-id="colour">
-        <option>Mustard</option>
-        <option>Ketchup</option>
-        <option>Relish</option>
-      </select>
+      <label>Väri:</label>
+      <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour" %>
 
-      <!--<input type="submit" class="submit" value="Hae" name="hae">-->
+      <label>Valontarve:</label>
+      <%= collection_select(:light, :id, Light.all, :id, :desc, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour") %>
+
+      <label>Hoidon tarve:</label>
+      <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour" %>
+
+      <label>Minimipaksuus pohjalle</label>
+      <input type="text" class="search-input" name="min_thickness" data-id="min_thickness">
+
+      <label>'Maksimipaksuus pohjalle'</label>
+      <input type="text" class="search-input" name="max_thickness" data-id="max_thickness">
+
+      <label>Minimikorkeus</label>
+      <input type="text" class="search-input" name="min_height" data-id="min_height">
+
+      <label>'Maksimikorkeus'</label>
+      <input type="text" class="search-input" name="max_height" data-id="max_height">
+
+      <label>Minimipaino</label>
+      <input type="text" class="search-input" name="min_weight" data-id="min_weight">
+
+      <label>Maksimipaino</label>
+      <input type="text" class="search-input" name="max_weight" data-id="max_weight">
+
       <button class="btn btn-custom span2" name="hae">Hae</button>
     </div>
   </div>
