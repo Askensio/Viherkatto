@@ -148,7 +148,13 @@ class PlantsController < ApplicationController
 
       format.html { render :html => {plants: @plants} }
 
-      @plants = Plant.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
+      @plants = Plant.scoped
+
+      @plants = @plants.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
+      @plants = @plants.where('latin_name like ?', '%' + params[:latin_name].downcase + '%') if params[:latin_name]
+      @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness])
+      @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness])
+
       @plants = @plants.paginate(page: params[:page], per_page: params[:per_page])  unless @plants.nil?
       format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @plants} }
     end
