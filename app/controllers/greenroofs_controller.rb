@@ -5,11 +5,10 @@ class GreenroofsController < ApplicationController
   before_filter :signed_user, only: [:new, :create]
 
   def search
-    unless params
+    if params.empty?
       @greenroofs = Greenroof.paginate(page: params[:page], per_page: params[:per_page])
     else
       @greenroofs = Greenroof.scoped
-      #puts(@greenroofs.first[:address])
       if params[:address]
         address = "%#{params[:address]}%"
         @greenroofs = @greenroofs.where("address like ?", address)
@@ -42,8 +41,10 @@ class GreenroofsController < ApplicationController
         layername = "%#{params[:layername]}%"
         @greenroofs = @greenroofs.includes(:layers).where("layers.name like ?", layername)
       end
+      puts(@greenroofs.each.inspect)
+      #puts(@greenroofs.first.plants)
       #@greenroofs = @greenroofs.includes(:layers).sum("layers.thickness => ?", params[:minthickness]) if params[:minthickness]
-      @greenroofs.paginate(page: params[:page], per_page: params[:per_page])
+      #@greenroofs.paginate(page: params[:page], per_page: params[:per_page])
       #Plant.where("name like ?", name).map{ |plant| plant.greenroofs }.flatten! if params[:name]
     end
   end
