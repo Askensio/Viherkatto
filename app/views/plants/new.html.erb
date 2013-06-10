@@ -20,6 +20,10 @@
         <%= collection_select(:light, :id, Light.all,
                               :id, :desc, {:selected => @plant.light_id} ,:class => "selectpicker show-menu-arrow span5" )%>
 
+        <%= f.label :growth_environment %>
+        <%= collection_select(:growth_environment, :environment, GrowthEnvironment.all,
+                              :environment, :environment, {}, :class => "selectpicker show-menu-arrow span5" )%>
+
         <%= f.label :maintenance %>
         <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
 

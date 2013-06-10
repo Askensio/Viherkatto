@@ -8,6 +8,8 @@ namespace :db do
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
+    GrowthEnvironment.create!(environment: "Heinikko")
+    GrowthEnvironment.create!(environment: "sammalikko")
 
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
@@ -22,20 +24,21 @@ namespace :db do
       note = "asd"
 
       @plant = Plant.create!(name: name,
-                    latin_name: latin_name,
-                    height: height,
-                    colour: colour,
-                    maintenance: maintenance,
-                    min_soil_thickness: thickness,
-                    weight: weight,
-                    note: note)
-       @plant.update_attributes(:light_id => light)
+                             latin_name: latin_name,
+                             height: height,
+                             colour: colour,
+                             maintenance: maintenance,
+                             min_soil_thickness: thickness,
+                             weight: weight,
+                             note: note)
+      @plant.update_attributes(:light_id => light)
+      @plant.growth_environments << GrowthEnvironment.find(1)
 
     end
 
     Layer.create!(name: "Kivimurska",
-                 thickness: 60,
-                 weight: 100)
+                  thickness: 60,
+                  weight: 100)
 
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
@@ -43,11 +46,9 @@ namespace :db do
       weight = thickness+10
 
       Layer.create!(name: name,
-                   thickness: thickness,
-                   weight: weight)
+                    thickness: thickness,
+                    weight: weight)
     end
-
-
 
 
     admin = User.create!(name: "Example User",
@@ -78,7 +79,7 @@ namespace :db do
     id = 1
     40.times do |n|
       id = id + 1
-      if(id > 4)
+      if (id > 4)
         id = 1
       end
       area = n
@@ -87,9 +88,6 @@ namespace :db do
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
-
-
-
 
 
       @plants = [Plant.find(1), Plant.find(2)]

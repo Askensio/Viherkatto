@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604103021) do
+ActiveRecord::Schema.define(:version => 20130610071758) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -58,6 +58,22 @@ ActiveRecord::Schema.define(:version => 20130604103021) do
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
+
+  create_table "growth_environments", :force => true do |t|
+    t.string   "environment"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "growths", :force => true do |t|
+    t.integer  "plant_id"
+    t.integer  "growth_environment_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "growths", ["growth_environment_id"], :name => "index_growths_on_growth_environment_id"
+  add_index "growths", ["plant_id"], :name => "index_growths_on_plant_id"
 
   create_table "layers", :force => true do |t|
     t.string   "name"
