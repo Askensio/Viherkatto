@@ -81,7 +81,7 @@ describe 'Greenroof' do
 
 
         area = 2
-        declination = 4
+        declination = 1
         load_capacity = 10*4
 
         @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
@@ -121,7 +121,7 @@ describe 'Greenroof' do
       it {should have_selector('label', text: "Käyttötarkoitus" )}
       it {should have_selector('label', text: "Katon tiedot" )}
       it {should have_selector('label', text: "Kasvit" )}
-      it {should have_selector('label', text: "Pohjat" )}
+      it {should have_selector('label', text: "Rakennekerrokset" )}
       it {should have_selector('label', text: "Huomioita" )}
 
 
