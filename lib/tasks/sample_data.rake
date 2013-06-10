@@ -5,9 +5,10 @@ namespace :db do
   task populate: :environment do
 
 
+    Light.create!(desc: "Aurinkoinen")
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
-    Light.create!(desc: "Aurinkoinen")
+
 
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
