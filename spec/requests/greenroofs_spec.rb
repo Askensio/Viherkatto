@@ -48,7 +48,7 @@ describe 'Greenroof' do
         fill_in "greenroof_address",  with: "Some address"
         fill_in "greenroof_note",     with: "This is a test greenroof"
         fill_in "roof_area",          with: "100"
-        fill_in "roof_declination",   with: "10"
+        select "Tasakatto",           from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
         #select "Pelto",               from: "environment_id"
