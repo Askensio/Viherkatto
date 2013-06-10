@@ -152,10 +152,30 @@ class PlantsController < ApplicationController
 
       @plants = @plants.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
       @plants = @plants.where('latin_name like ?', '%' + params[:latin_name].downcase + '%') if params[:latin_name]
-      @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness])
-      @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness])
+      @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness]) if params[:min_thickness]
+      @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness]) if params[:max_thickness]
 
-      @plants = @plants.paginate(page: params[:page], per_page: params[:per_page])  unless @plants.nil?
+      @plants = @plants.where('height <= ?', params[:max_height]) if params[:max_height]
+      @plants = @plants.where('height >= ?', params[:min_height]) if params[:min_height]
+      @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
+      @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
+
+
+
+
+      params[:colour].try(:each) do |colour|
+        @plants = @plants.where('colour like?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+      end
+
+      if (params[:lightness])
+        @lights = []
+        Light.where(:desc => params[:lightness]).each do |id|
+          @lights.push(id)
+        end
+        @plants = @plants.where(:light_id => @lights)
+      end
+
+      @plants = @plants.paginate(page: params[:page], per_page: params[:per_page]) unless @plants.nil?
       format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @plants} }
     end
   end

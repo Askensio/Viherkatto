@@ -6,6 +6,7 @@ $(document).ready(function () {
     var clickListener = function () {
 
         var params = searcher.buildQueryParameters()
+        console.log(params)
         paginator.parameters = params
         paginator.getObjects(true)
     }
