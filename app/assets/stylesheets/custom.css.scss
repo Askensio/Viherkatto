@@ -105,32 +105,6 @@ footer {
   }
 }
 
-/* Hero */
-
-.hero-unit {
-  padding: 60px;
-  margin-bottom: 30px;
-  background-color: #9CB770;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-
-.hero-unit h1 {
-  margin-bottom: 0;
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: inherit;
-}
-
-.hero-unit p {
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 27px;
-  color: inherit;
-}
-
 .carousel-caption h1,
 .carousel-caption .lead {
   margin: 0;
@@ -255,8 +229,8 @@ input {
   width: auto;
   text-align: center;
   li {
-    text-align:center;
-    margin:auto;
+    text-align: center;
+    margin: auto;
   }
 }
 
@@ -381,4 +355,43 @@ input {
       border-bottom: 1px solid $grayMediumLight;
     }
   }
+}
+
+#hero-div {
+  width: 90%;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+
+.greenroof-list-hero-unit {
+  padding: 1em;
+  position: relative;
+  h5 {
+    display: inline;
+  }
+  p {
+    font-size: small;
+  }
+  div {
+    padding-right: 1em;
+  }
+  a {
+    font-size: smaller;
+  }
+  .close-icon {
+    position: absolute;
+    top: -15px;
+    right: -15px
+  }
+  i {
+    position: absolute;
+    top: -5px;
+    right: -5px
+  }
+}
+
+.greenroof-list-hero-unit:hover {
+  -webkit-box-shadow:0px 0px 30px rgba(107, 142, 35, 1);
+  -moz-box-shadow: 0px 0px 30px rgba(107, 142, 35, 1);
+  box-shadow:0px 0px 30px rgba(107, 142, 35, 1);
 }
