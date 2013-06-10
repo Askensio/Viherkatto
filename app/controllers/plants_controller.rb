@@ -110,6 +110,15 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
     @plant.growth_environments << GrowthEnvironment.find_by_id(params[:growth_environments][:id])
+
+    puts "----------------"
+    puts params[:maintenances][:id]
+    puts "----------------"
+
+    if params[:maintenances][:id]
+      @plant.update_attributes(:maintenance => Maintenance.find_by_id(params[:light][:id]))
+    end
+
     if @plant.save
       if @plant.light_id.nil?
         @plant.update_attribute(:light_id, 1)
@@ -128,6 +137,10 @@ class PlantsController < ApplicationController
       @plant.growth_environments.clear
       @plant.growth_environments << GrowthEnvironment.find_by_id(params[:growth_environments][:id])
       @plant.save
+    end
+
+    if params[:maintenances][:id]
+      @plant.update_attribute(:maintenance, params[:light][:id])
     end
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])

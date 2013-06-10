@@ -1,5 +1,5 @@
 <% provide(:title, 'Kasvien lisäys') %>
-<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 <h1>Kasvien lisäys</h1>
 
 
@@ -10,22 +10,23 @@
         <%= f.label :name %>
         <%= f.text_field :name %>
 
-        <%= f.label :latin_name%>
+        <%= f.label :latin_name %>
         <%= f.text_field :latin_name %>
 
         <%= f.label :colour %>
-        <%= f.select :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5"%>
+        <%= f.select :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5" %>
 
         <%= f.label :light_id %>
         <%= collection_select(:light, :id, Light.all,
-                              :id, :desc, {:selected => @plant.light_id} ,:class => "selectpicker show-menu-arrow span5" )%>
+                              :id, :desc, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
 
         <%= f.label :growth_environment %>
         <%= collection_select(:growth_environments, :id, GrowthEnvironment.all,
-                              :id, :environment, {}, :class => "selectpicker show-menu-arrow span5" )%>
+                              :id, :environment, {}, :class => "selectpicker show-menu-arrow span5") %>
 
         <%= f.label :maintenance %>
-        <%= select :plant, :maintenance, [['Helppo',1],['Keskivaikea',2], ['Vaikea',3]], {}, :class => "selectpicker show-menu-arrow span5"%>
+        <%= collection_select(:maintenances, :id, Maintenance.all,
+                              :id, :name, {}, :class => "selectpicker show-menu-arrow span5") %>
 
         <%= f.label "minimum soil thickness (cm)" %>
         <%= f.text_field :min_soil_thickness %>
