@@ -109,10 +109,15 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(params[:plant])
+    @plant.growth_environments << GrowthEnvironment.find_by_id(params[:growth_environments][:id])
     if @plant.save
       if @plant.light_id.nil?
         @plant.update_attribute(:light_id, 1)
       end
+      puts "LKDJALKFSAJFÖLAÖJFSFSA"
+      puts params[:growth_environments][:id]
+
+
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
     else

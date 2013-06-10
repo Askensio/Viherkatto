@@ -32,6 +32,11 @@
           </tr>
 
           <tr>
+            <td><%= f.label :growth_environment %></td>
+            <td><%= f.label @plant.growth_environments.first.environment unless @plant.growth_environments.first.nil? %></td>
+          </tr>
+
+          <tr>
             <td><%= f.label :maintenance %></td>
             <td><%= f.label maintenanceLevel(@plant.maintenance) %></td>
           </tr>

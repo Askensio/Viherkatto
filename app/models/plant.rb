@@ -3,8 +3,8 @@ class Plant < ActiveRecord::Base
   belongs_to :light
   has_many :planteds
   has_many :greenroofs, through: :planteds
-  has_many :growths
-  has_many :growth_environments, through: :growths
+  has_many :growths, :dependent => :destroy
+  has_many :growth_environments, :through => :growths
 
   attr_accessible :height, :latin_name, :colour, :maintenance, :min_soil_thickness, :name, :note, :weight, :light_id
   attr_readonly :id

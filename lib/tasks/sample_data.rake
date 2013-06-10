@@ -9,7 +9,7 @@ namespace :db do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
     GrowthEnvironment.create!(environment: "Heinikko")
-    GrowthEnvironment.create!(environment: "sammalikko")
+    GrowthEnvironment.create!(environment: "Sammalikko")
 
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
