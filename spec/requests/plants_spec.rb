@@ -46,6 +46,7 @@ describe 'Plant pages' do
         fill_in "plant_name", with: "Example Plant"
         select "Sininen", :from => "plant_colour"
         select "Helppo", :from => "plant_maintenance"
+        select "Sammalikko", :from => "growth_environments_id"
         fill_in "plant_height", with: 1
         fill_in "plant_latin_name", with: "Plantus plantus"
         fill_in "plant_min_soil_thickness", with: 8
@@ -73,6 +74,7 @@ describe 'Plant pages' do
       sign_in admin
       @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
       @test_plant.update_attribute(:light_id, @light.id)
+      @test_plant.growth_environments << GrowthEnvironment.first
       @test_plant.save
     end
 
