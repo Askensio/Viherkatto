@@ -9,8 +9,8 @@ describe 'Plant pages' do
     Light.create!(desc: "Puolivarjoisa")
     @light = Light.create!(desc: "Aurinkoinen")
 
-    GrowthEnvironment.create!(name: "Heinikko")
-    GrowthEnvironment.create!(name: "Sammalikko")
+    GrowthEnvironment.create!(environment: "Heinikko")
+    GrowthEnvironment.create!(environment: "Sammalikko")
   end
 
   let(:admin) { FactoryGirl.create(:admin) }
