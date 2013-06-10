@@ -114,10 +114,6 @@ class PlantsController < ApplicationController
       if @plant.light_id.nil?
         @plant.update_attribute(:light_id, 1)
       end
-      puts "LKDJALKFSAJFÖLAÖJFSFSA"
-      puts params[:growth_environments][:id]
-
-
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
     else
@@ -127,6 +123,13 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
+
+    if params[:growth_environments][:id]
+      @plant.growth_environments.clear
+      @plant.growth_environments << GrowthEnvironment.find_by_id(params[:growth_environments][:id])
+      @plant.save
+    end
+
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
       # Handle a successful update.
       redirect_to plant_url
@@ -164,8 +167,6 @@ class PlantsController < ApplicationController
       @plants = @plants.where('height >= ?', params[:min_height]) if params[:min_height]
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
-
-
 
 
       params[:colour].try(:each) do |colour|
