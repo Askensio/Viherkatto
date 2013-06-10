@@ -10,7 +10,7 @@ describe Roof do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @roof = Roof.new(area: 50, declination: 10, load_capacity: 480)
+    @roof = Roof.new(area: 50, declination: 1, load_capacity: 480)
     @roof.update_attribute(:light_id, 2)
   end
 
@@ -52,13 +52,18 @@ describe Roof do
     it { should_not be_valid }
   end
 
+  describe 'when declination is too hight' do
+    before { @roof.declination = 3}
+    it { should_not be_valid }
+  end
+
   describe 'when declination is not a number' do
     before { @roof.declination = "yolo swaggings" }
     it { should_not be_valid }
   end
 
   describe 'when declination is present and valid' do
-    before { @roof.declination = 50 }
+    before { @roof.declination = 1 }
     it { should be_valid }
   end
 

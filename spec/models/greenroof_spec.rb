@@ -15,7 +15,7 @@ describe Greenroof do
     @base.layers << @layer2
     @groof.bases << @base
 
-    @roof = Roof.new(declination: 89, load_capacity: 20000, area: 500)
+    @roof = Roof.new(declination: 1, load_capacity: 20000, area: 500)
     @light = Light.find_by_id(1)
     @roof.light = @light
     @groof.roof = @roof
