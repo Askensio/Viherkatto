@@ -70,6 +70,9 @@ namespace :db do
                    password_confirmation: password)
     end
 
+    Environment.create!(name: "Esikaupunki")
+    Environment.create!(name: "Keskusta")
+    Environment.create!(name: "Maaseutu")
     Environment.create!(name: "Merenranta")
     Environment.create!(name: "Pelto")
     Environment.create!(name: "Metsä")
