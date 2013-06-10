@@ -59,10 +59,10 @@ function generateBaseForm() {
     // adds the container for the form
     var baseFormElement = $('<div></div>').attr('id', 'base' + baseCount).attr('class', 'baseAdder')
     // adds the header
-    var h2Element = $('<h2>Pohja ' + baseCount + '</h2>').attr('class', 'span4')
+    var h2Element = $('<h2>Kerros ' + baseCount + '</h2>').attr('class', 'span4')
     baseFormElement.append(h2Element)
     // adds a button for removing the base
-    var removeButton = $('<button>Poista pohja</button>').attr('class', "btn btn-mini btn-danger").click(removeParent)
+    var removeButton = $('<button>Poista kerros</button>').attr('class', "btn btn-mini btn-danger").click(removeParent)
     baseFormElement.append(removeButton)
     var labelElement = $('#base-form div label').first().clone()
     baseFormElement.append(labelElement)
