@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610122342) do
+ActiveRecord::Schema.define(:version => 20130610122108) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -99,16 +99,6 @@ ActiveRecord::Schema.define(:version => 20130610122342) do
   add_index "locations", ["environment_id"], :name => "index_locations_on_environment_id"
   add_index "locations", ["roof_id"], :name => "index_locations_on_roof_id"
 
-  create_table "maintains", :force => true do |t|
-    t.integer  "plant_id"
-    t.integer  "maintenance_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "maintains", ["maintenance_id"], :name => "index_maintains_on_maintenance_id"
-  add_index "maintains", ["plant_id"], :name => "index_maintains_on_plant_id"
-
   create_table "maintenances", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -129,11 +119,11 @@ ActiveRecord::Schema.define(:version => 20130610122342) do
     t.string   "name"
     t.string   "latin_name"
     t.string   "colour"
-    t.integer  "maintenance"
     t.integer  "min_soil_thickness"
     t.integer  "weight"
     t.integer  "height"
     t.integer  "light_id"
+    t.integer  "maintenance_id"
     t.string   "note"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false

@@ -7,7 +7,7 @@ class Plant < ActiveRecord::Base
   has_many :growths, :dependent => :destroy
   has_many :growth_environments, :through => :growths
 
-  attr_accessible :height, :latin_name, :colour, :min_soil_thickness, :name, :note, :weight, :light_id
+  attr_accessible :height, :latin_name, :colour, :min_soil_thickness, :name, :note, :weight, :light_id, :maintenance
   attr_readonly :id
 
   def translated_colour_category
