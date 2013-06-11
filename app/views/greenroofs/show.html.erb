@@ -8,21 +8,23 @@
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
 
-    <div class="flexslider span4">
-      <ul class="slides">
-        <li>
-          <img src="/assets/greenroof1.jpg"/>
-        </li>
-        <li>
-          <img src="/assets/greenroof2.jpg"/>
-        </li>
-        <li>
-          <img src="/assets/greenroof3.JPG"/>
-        </li>
-        <li>
-          <img src="/assets/2ndgreenroof.jpg"/>
-        </li>
-      </ul>
+    <div id="slider-holder">
+      <div class="flexslider span4">
+        <ul class="slides">
+          <li>
+            <img src="/assets/greenroof1.jpg"/>
+          </li>
+          <li>
+            <img src="/assets/greenroof2.jpg"/>
+          </li>
+          <li>
+            <img src="/assets/greenroof3.JPG"/>
+          </li>
+          <li>
+            <img src="/assets/2ndgreenroof.jpg"/>
+          </li>
+        </ul>
+      </div>
     </div>
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
@@ -80,7 +82,7 @@
 <script>
     $(window).load(function () {
         $('.flexslider').flexslider({
-            animation: "slide"
+            animation: "fade"
         });
     });
 </script>
