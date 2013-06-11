@@ -35,15 +35,18 @@ namespace :db do
     end
 
     Layer.create!(name: "Kivimurska",
+                  product_name: "Murske 2000",
                  thickness: 60,
                  weight: 100)
 
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
+      product_name = Faker::Lorem.words(1).join(" ")
       thickness = n*10+1
       weight = thickness+10
 
       Layer.create!(name: name,
+                    product_name: product_name,
                    thickness: thickness,
                    weight: weight)
     end
@@ -98,8 +101,8 @@ namespace :db do
 
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(absorbancy: 20)
-      @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
-      @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
+      @layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      @layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
       @base.layers << @layer1
       @base.layers << @layer2
 
