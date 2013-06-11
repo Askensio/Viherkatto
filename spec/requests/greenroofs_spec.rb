@@ -79,11 +79,6 @@ describe 'Greenroof' do
       Environment.create!(name: "Kaupunki")
       Environment.create!(name: "Muu")
 
-
-      area = 2
-      declination = 1
-      load_capacity = 10*4
-
       area = 2
       declination = 4
       load_capacity = 10*4
@@ -112,11 +107,12 @@ describe 'Greenroof' do
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
-      @groof.save
+      @groof.save!
       visit greenroof_path(@groof)
     end
 
     #subject {page}
+
 
     it { should have_selector('label', text: "Käyttäjä") }
     it { should have_selector('label', text: "Sijainti") }
