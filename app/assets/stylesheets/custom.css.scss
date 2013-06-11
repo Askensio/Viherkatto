@@ -236,26 +236,7 @@ input {
 
 /* plants index */
 
-.plant-list {
-  list-style: none;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid $grayMediumLight;
-    &:last-child {
-      border-bottom: 1px solid $grayMediumLight;
-    }
-  }
-}
 
-#plant-search {
-  overflow: auto;
-  width: auto;
-  text-align: center;
-  li {
-    text-align: center;
-    margin: auto;
-  }
-}
 
 #chosenOnes {
   font-family: Arial, Helvetica, Times;
@@ -266,7 +247,7 @@ input {
   padding-left: 10px;
   position: fixed;
   right: 0.5%;
-  top: 50px;
+  top: 100px;
   li {
     font-size: 0.9em;
     font-weight: bold;
@@ -282,11 +263,9 @@ input {
 }
 
 .baseAdder {
-  border-radius: 15px;
   //height:350px;
   margin-bottom: 15px;
   padding-bottom: 1.5em;
-  text-align: center;
   legend {
     text-align: center;
   }
@@ -295,7 +274,6 @@ input {
 .baseAdderBonus {
   border-radius: 15px;
   background-color: $grayMediumLight;
-  padding-left: 15px;
   height: auto;
   width: 35%;
   margin-bottom: 15px;
@@ -309,7 +287,6 @@ input {
 
 .plantAdder {
   padding-right: 100px;
-  padding-left: 100px;
   margin-bottom: 15px;
   border-radius: 15px;
   text-align: center;
@@ -327,13 +304,8 @@ input {
   }
 }
 
-.add-base-button {
-  padding-left: 1.2em;
-}
 
-.adderForms {
-  padding-left: 15px;
-}
+
 
 #note_ {
   height: 200px;
@@ -435,6 +407,33 @@ a {
           min-height: 20em;
         }
       }
+    }
+  }
+}
+
+/* CSS FOR GREEN ROOF ADDITION */
+.greenroof-addition {
+  h2 {
+    text-align: left;
+  }
+
+  // Some space between the forms, this should scale rather nicely.
+  input {
+    margin-bottom: 2%;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  // Bootstrap Jumbotorn overrides
+  .jumbotron {
+
+    // Main navbar is doubling its size when the screen is around 1024*768, padding required to show the h1 in this scenario.
+    padding-top: 50px;
+
+    h1 {
+      text-align: left;
     }
   }
 }

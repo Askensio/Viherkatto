@@ -133,10 +133,18 @@ $(document).ready(function () {
     })
 
     /**
-     * Roof declination value for the Synopsis-view.
+     * Roof declination value for the Synopsis-view. Crappy if-thing because I had no idea how to make it fetch the text from the field
+     * because the values are numbers.
      */
-    $("#roof_declination").keyup(function() {
+    $("#roof_declination").change(function() {
         var input = $("#roof_declination").val();
+        if (input === '0') {
+            input = "Tasakatto"
+        } else if (input === '1') {
+            input = "Loiva"
+        } else {
+            input = "Jyrkkä"
+        }
         $('.declination').empty();
         $('.declination').append('Kaltevuus: ' + input);
     })
@@ -145,7 +153,7 @@ $(document).ready(function () {
      * Environment id value for the Synopsis-view.
      */
     $("#environment_id").change(function() {
-        var input = $("#environment_id").val();
+        var input = $("#environment_id", this).text();
         console.log(input);
     })
 

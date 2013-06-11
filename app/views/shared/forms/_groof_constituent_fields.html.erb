@@ -1,0 +1,38 @@
+<div class="span5">
+  <div class="baseAdder">
+    <div class="adderForms" id="base-form">
+      <% @greenroof.bases.each_with_index do |base, i| %>
+          <div id="base<%= i+1 %>" class="baseAdder">
+            <%= render 'shared/forms/base_form_fields_for_greenroof_addition', :base => base, :index => i %>
+
+            <div class="btn-group" id="add-layer-btn-grp">
+              <button class="btn  span2" id="add-layer-button" >Lisää kerros</button>
+              <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" id="add-layer-dropdown-list">
+                <li>
+                  <a href="#">Kasvualusta</a>
+                </li>
+                <li>
+                  <a href="#">Vedenpidätyskerros</a>
+                </li>
+                <li>
+                  <a href="#">Salaojakerros</a>
+                </li>
+                <li>
+                  <a href="#">Juurisuojakerros</a>
+                </li>
+                <li>
+                  <a href="#">Muu</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <div class="add-base-button">
+      <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää kerros</button>
+    </div>
+  </div>
+</div>

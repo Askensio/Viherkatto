@@ -1,121 +1,41 @@
+<%= javascript_include_tag "bootstrap-select" %>
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
-<% provide(:title, 'Viherkaton lisäys') %>
-
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-<form id="form">
-  <div class="row large-input">
-    <h1>Viherkaton tiedot</h1>
-    <div class="span5">
-      <%= render 'shared/forms/groof_form_fields' %>
-    </div>
-    <div class="span5" id="large-input-right">
-      <%= render 'shared/error_messages_roof' %>
-      <%= render 'shared/forms/roof_form_fields' %>
-    </div>
-  </div>
 
 
-  <div class="plantAdder row">
-    <div class="span5">
-      <h1>Lisää perustamisvaiheen kasvit</h1>
-      <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4" %>
-      <div id="plant-search">
-        <ul class="plant-list span4">
-        </ul>
-            <input type="text" id="custom-plant-name" class="span4" placeholder="Kirjoita lisättävän kasvin nimi"/>
-            <button class="btn" id="add-custom-plant">Lisää oma kasvi</button>
+<!-- Masthead as provided by Twitter Bootstrap -->
+<div class="container greenroof-addition">
+  <header class="jumbotron subhead">
+    <h1>Lisää oma viherkatto</h1>
+  </header>
+
+  <section id="form">
+    <div class="row">
+      <div class="span7">
+        <p class="lead">Oletko kenties itse rakentanut tai rakennuttanut viherkaton ja haluat jakaa sen muiden kanssa? Jakamalla sen täällä lähetät teoksesi maailmalle kaikkien ihailtavaksi.</p>
+
+        <form class="form-horizontal">
+          <fieldset>
+            <legend>Viherkaton yleiset tiedot</legend>
+            <%= render 'shared/forms/groof_form_fields' %>
+            <br></br>
+            <legend>Katon tekniset tiedot</legend>
+            <%= render 'shared/forms/roof_form_fields' %>
+            <legend>Viherkaton rakennekerrokset</legend>
+            <%= render 'shared/forms/groof_constituent_fields' %>
+            <legend>Perustamisvaiheen kasvit</legend>
+            <%= render 'shared/forms/plant_livesearch' %>
+          </fieldset>
+        </form>
       </div>
     </div>
-    <div class="span5">
-      <div class="baseAdder">
-        <h1>Lisää viherkaton rakennekerros</h1>
+  </section>
+</div>
 
-        <div class="adderForms" id="base-form">
-          <% @greenroof.bases.each_with_index do |base, i| %>
-              <div id="base<%= i+1 %>" class="baseAdder">
-                <%= render 'shared/forms/base_form_fields_for_greenroof_addition', :base => base, :index => i %>
+<%= render 'shared/green_roof_addition/green_roof_compendium' %>
 
-                <div class="btn-group" id="add-layer-btn-grp">
-                  <button class="btn  span2" id="add-layer-button" >Lisää kerros</button>
-                  <button class="btn dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" id="add-layer-dropdown-list">
-                    <li>
-                      <a href="#">Kasvualusta</a>
-                    </li>
-                    <li>
-                      <a href="#">Vedenpidätyskerros</a>
-                    </li>
-                    <li>
-                      <a href="#">Salaojakerros</a>
-                    </li>
-                    <li>
-                      <a href="#">Juurisuojakerros</a>
-                    </li>
-                    <li>
-                      <a href="#">Muu</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-          <% end %>
-        </div>
-        <div class="add-base-button">
-          <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää kerros</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="chosenOnes" class="row span3">
-    <div id="chevrons">
-      <i class="icon-chevron-down" id="clickDown"></i>
-      <i class="icon-chevron-up" id="clickUp"></i>
-    </div>
-
-    <div id="chosenOnesSlide" class="row">
-      <h2>Yhteenveto</h2>
-      <div class="span2">
-        <h5>Yleiset</h5>
-        <ul class="unstyled">
-          <li class="address" required>Osoite: </li>
-          <li class="note" required>Vapaa kuvaus: </li>
-        </ul>
-      </div>
-      <div class="span2">
-        <h5>Katto</h5>
-        <ul class="unstyled">
-          <li class="area" required>Pinta-ala: </li>
-          <li class="declination" required>Kaltevuus: </li>
-          <li class="location" required>Sijainti: </li>
-          <li class="capacity" required>Kantavuus: </li>
-        </ul>
-      </div>
-      <div class="span2">
-        <ul id="theplants" class="chosen-list unstyled ">
-          <h5>Valitsemasi kasvit</h5>
-        </ul>
-      </div>
-      <div class="span2">
-        <ul class="roof-list unstyled">
-          <h5>Kasvualusta</h5>
-          <li class="material" required>Materiaali: </li>
-          <li class="absorbancy" required>Vedenimukyky: </li>
-        </ul>
-      </div>
-      <button class="btn btn-small btn-custom" id="save">Tallenna</button>
-    </div>
-  </div>
-</form>
 <%= javascript_include_tag "pagination/bootpag" %>
 <%= javascript_include_tag "greenroof_addition/livesearch" %>
 <%= javascript_include_tag "bootstrap-select" %>
 <%= javascript_include_tag "bootstrap-tooltip" %>
 <%= javascript_include_tag "greenroof_addition/form_handler" %>
 <script>$('.selectpicker').selectpicker();</script>
-
-
