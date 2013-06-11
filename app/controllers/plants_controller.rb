@@ -151,7 +151,8 @@ class PlantsController < ApplicationController
     end
 
     if params[:maintenances][:id]
-      @plant.update_attribute(:maintenance, params[:maintenances][:id])
+      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
+      @plant.save!
     end
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
@@ -162,7 +163,6 @@ class PlantsController < ApplicationController
   end
 
   def destroy
-
     respond_to do |format|
       if Plant.find(params[:id]).destroy
         @response = "success"
