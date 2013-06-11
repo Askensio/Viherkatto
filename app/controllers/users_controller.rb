@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   before_filter :signed_in_user, only: [:edit, :update]
   before_filter :authorized_user, only: [:edit, :update]
+  before_filter :admin_user, only: [:index, :destroy]
 
   def index
     @jsonUsers = []
@@ -109,6 +110,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      if User.find(params[:id]).destroy
+        @response = "success"
+      else
+        @response = "error"
+      end
+      format.json { render :json => {response: @response} }
+    end
+  end
   private
 
   def user_params
@@ -125,6 +136,5 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to (root_path) unless @user.id == current_user.id || current_user.admin?
   end
-
 end
 
