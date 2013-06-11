@@ -28,7 +28,7 @@ class LayersController < ApplicationController
   end
 
   def index
-    @layers = Layer.all(order: 'name, thickness, weight').paginate(page: params[:page])
+    @layers = Layer.all(order: 'name, product_name, thickness, weight').paginate(page: params[:page])
   end
 
   def edit
