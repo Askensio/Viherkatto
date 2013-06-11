@@ -102,7 +102,7 @@ describe 'Greenroof' do
       note = Faker::Lorem.words(5).join(" ")
       @user = FactoryGirl.create(:user)
 
-      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(address: address, purpose: purpose, note: note, year: 2012)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants

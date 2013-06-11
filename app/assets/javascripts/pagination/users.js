@@ -29,18 +29,18 @@ ModalController.prototype.setListeners = function (paginator) {
 }
 
 var addElement = function (entry, admin) {
-    var listElement = $('<li></li>');
-    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>');
-    listElement.append(link);
-    listElement.append(' | ');
+    var listElement = $('<li></li>').attr({
+        style: "width: 30%"
+    })
+    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>')
+    listElement.append(link)
     var deleteElement = $('<a href=\"#\" id="/' + this.object + 's/' + entry.id + '\">' + 'poista' + '</a>').click(function (event) {
-        event.stopPropagation();
+        event.stopPropagation()
         $('#confirm-modal').modal('show')
         ModalController.groofId = entry.id
 
     });
-    listElement.append(deleteElement).append(' | ');
-    var editElement = $('<a href=\"/' + this.object + 's/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
-    listElement.append(editElement);
-    $('.' + this.object + '-list').append(listElement);
+    deleteElement.attr('class', 'pull-right')
+    listElement.append(deleteElement)
+    $('.' + this.object + '-list').append(listElement)
 }
