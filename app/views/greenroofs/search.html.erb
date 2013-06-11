@@ -13,7 +13,7 @@
       <label>Kasvin väri</label>
       <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour", :multiple => true %>
       <label>Hoidon tarve</label>
-      <input type="text" name="maintenance" data-id="maintenance" class="search-input">
+      <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "maintenance", :multiple => true %>
       <label>Maksimikorkeus kasville</label>
       <input type="text" name="plantmaxheight" data-id="plantmaxheight" class="search-input">
       <label>Minimikorkeus kasville</label>
@@ -28,14 +28,14 @@
   </div>
 </div>
 
-<div >
-  <p class="pagination"></p>
 
-  <p class="content"></p>
-  <ul class="greenroof-list" data-id="greenroof">
-
+<p class="pagination"></p>
+<p class="content"></p>
+<section data-object="greenroof" data-id="list-section">
+  <ul class="greenroof-list list">
   </ul>
-</div>
+</section>
+
 
 <%= javascript_include_tag "bootstrap-select" %>
 <script>$('.selectpicker').selectpicker();</script>

@@ -4,8 +4,6 @@ $(document).ready(function () {
     paginator.getObjects(true)
     modalctrl = new ModalController()
     modalctrl.setListeners(paginator)
-
-
 });
 
 function ModalController() {

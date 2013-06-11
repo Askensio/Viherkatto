@@ -3,6 +3,21 @@
 <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
+
+<div id="confirm-modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Huom!</h3>
+  </div>
+  <div class="modal-body">
+    <p>Oletko varma, että haluat poistaa valitun käyttäjän? Poistamisen jälkeen kaikki käyttäjätiedot katoavat.</p>
+  </div>
+  <div class="modal-footer">
+    <a id="modal-cancel" href="#" class="btn">En</a>
+    <a id="modal-accept" href="#" class="btn btn-primary">Kyllä</a>
+  </div>
+</div>
+
 <p class="pagination"></p>
 <p class="content"></p>
 <section data-object="user" data-id="list-section">
@@ -10,5 +25,5 @@
   </ul>
 </section>
 <%= javascript_include_tag "pagination/bootpag" %>
-<%= javascript_include_tag "pagination/genericIndex" %>
+<%= javascript_include_tag "pagination/users" %>
 <%= javascript_include_tag "pagination/paginator" %>
