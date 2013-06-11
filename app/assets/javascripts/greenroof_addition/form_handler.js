@@ -240,6 +240,7 @@ function createGreenroofObjcet() {
 
     var greenroof = new Object()
     greenroof.address = $('#greenroof_address').val()
+    greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
     greenroof.purpose = 1
     return greenroof

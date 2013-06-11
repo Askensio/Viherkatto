@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(:version => 20130604103021) do
 
   create_table "greenroofs", :force => true do |t|
     t.string   "address"
+    t.string   "constructor"
+    t.integer  "year"
     t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"

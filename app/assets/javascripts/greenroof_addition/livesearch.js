@@ -13,7 +13,7 @@ $(document).ready(function () {
     })();
 
     /**
-     * Enables pagination for the Add Plant -functionality. Pagination however disabled for now. See genericIndex.js for more information.
+     * Enables pagination for the Add Plant -functionality. Pagination however disabled for now. See users.js for more information.
      * @param entry_count
      * @param page
      * @param per_page
@@ -153,7 +153,7 @@ $(document).ready(function () {
      * Environment id value for the Synopsis-view.
      */
     $("#environment_id").change(function() {
-        var input = $("#environment_id", this).text();
+        var input = $("#environment_id").text();
         console.log(input);
     })
 

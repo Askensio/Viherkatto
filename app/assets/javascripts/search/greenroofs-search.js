@@ -1,13 +1,23 @@
 $(document).ready(function () {
-    var paginator = new Pagination("plants")
 
-    paginator.getObjects()
+    var searcher = new Search();
+    var paginator = new Pagination("search/greenroofs",1,20)
+
+    var clickListener = function () {
+
+        var params = searcher.buildQueryParameters()
+        console.log(params)
+        paginator.parameters = params
+        paginator.getObjects(true)
+    }
+
+    $('[name="hae"]').click(clickListener);
 });
-
 
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
-    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>');
+    console.log(entry)
+    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + 'Käyttäjän ' + entry.user + ' viherkatto paikassa ' + entry.address + '</a>');
     listElement.append(link);
 //    console.log(admin)
     if (admin) {

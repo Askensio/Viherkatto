@@ -2,6 +2,8 @@ class CreateGreenroofs < ActiveRecord::Migration
   def change
     create_table :greenroofs do |t|
       t.string :address
+      t.string :constructor
+      t.integer :year
       t.integer :purpose
       t.text :note
       t.references :user
