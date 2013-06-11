@@ -8,8 +8,9 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
+    @plant.maintenance = Maintenance.find_by_id(1)
   end
 
   subject { @plant }
@@ -87,26 +88,6 @@ describe Plant do
   describe "When weight is a number" do
     before { @plant.weight = 1 }
     it { should be_valid }
-  end
-
-  describe "When maintenance is not within limits" do
-    before { @plant.maintenance = 10 }
-    it { should_not be_valid }
-  end
-
-  describe "When maintenance is within limits" do
-    before { @plant.maintenance = 1 }
-    it { should be_valid }
-  end
-
-  describe "When maintenance is negative" do
-    before { @plant.maintenance = -10 }
-    it { should_not be_valid }
-  end
-
-  describe "When maintenance is not a number" do
-    before { @plant.maintenance = "lovedatplant" }
-    it { should_not be_valid }
   end
 
   describe "When note is too long" do
