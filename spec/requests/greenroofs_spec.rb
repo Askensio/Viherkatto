@@ -80,7 +80,7 @@ describe 'Greenroof' do
       Environment.create!(name: "Muu")
 
       area = 2
-      declination = 4
+      declination = 1
       load_capacity = 10*4
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)

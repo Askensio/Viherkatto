@@ -89,15 +89,11 @@ namespace :db do
         id = 1
       end
       area = n
-      declination = n
+      declination = n%3
       load_capacity = 10*n
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
-
-
-
-
 
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(absorbancy: 20)
