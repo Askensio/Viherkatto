@@ -1,20 +1,29 @@
 <% provide(:title, 'Käyttäjän '<< @greenroof.user.name << " viherkatto") %>
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
-<%= stylesheet_link_tag "photoslider", media: "all" %>
+<%= stylesheet_link_tag "flexslider", media: "all" %>
 
 <div class="row-fluid marketing">
   <div>
     <h1>
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
-    <%= javascript_include_tag "photoslider" %>
-    <div class="span5">
-      <div class="photoslider" id="default"></div>
 
-      <%= javascript_include_tag 'photoinit' %>
-
+    <div class="flexslider span4">
+      <ul class="slides">
+        <li>
+          <img src="/assets/greenroof1.jpg"/>
+        </li>
+        <li>
+          <img src="/assets/greenroof2.jpg"/>
+        </li>
+        <li>
+          <img src="/assets/greenroof3.JPG"/>
+        </li>
+        <li>
+          <img src="/assets/2ndgreenroof.jpg"/>
+        </li>
+      </ul>
     </div>
-
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
@@ -29,7 +38,7 @@
 
 
           <tr>
-            <td><%= f.label :purpose, h("Käyttötarkoitus: ")%></td>
+            <td><%= f.label :purpose, h("Käyttötarkoitus: ") %></td>
             <td><%= f.label @greenroof.purpose %></td>
           </tr>
 
@@ -66,6 +75,14 @@
   </div>
 </div>
 
-<%= javascript_include_tag "photoslider" %>
+<%= javascript_include_tag "flexslider" %>
+
+<script>
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide"
+        });
+    });
+</script>
 
 
