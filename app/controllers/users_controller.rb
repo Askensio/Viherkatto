@@ -13,10 +13,10 @@ class UsersController < ApplicationController
       format.html { render :html => @users } # index.html.erb
 
       @users = User.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
-      @users = @users.('email like ?', '%' + params[:email].downcase + '%') if params[:email]
-      @users = @users.('phone like ?', '%' + params[:phone].downcase + '%') if params[:phone]
-      @users = @users.('profession like ?', '%' + params[:profession].downcase + '%') if params[:profession]
-      @users = User.paginate(page: params[:page], per_page: params[:per_page]) if params[:page] and params[:per_page]
+      @users = @users.where('email like ?', '%' + params[:email].downcase + '%') if params[:email]
+      @users = @users.where('phone like ?', '%' + params[:phone].downcase + '%') if params[:phone]
+      @users = @users.where('profession like ?', '%' + params[:profession].downcase + '%') if params[:profession]
+      @users = @users.paginate(page: params[:page], per_page: params[:per_page]) if params[:page] and params[:per_page]
 
       @users = @users.select('id, name, admin, email').order('email ASC').all
       format.json { render :json => {admin: admin?, count: @users.total_entries, users: @users} }

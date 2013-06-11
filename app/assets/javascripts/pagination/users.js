@@ -4,6 +4,27 @@ $(document).ready(function () {
     paginator.getObjects(true)
     modalctrl = new ModalController()
     modalctrl.setListeners(paginator)
+
+    var clickListener = function (event) {
+        paginate()
+    }
+
+    $('#find-button').click(clickListener);
+
+    var keyListener = function (event) {
+        var code = (event.keyCode ? event.keyCode : event.which);
+        if (code == 13) { //Enter keycode
+            paginate()
+        }
+    }
+
+    $('#email-field').keyup(keyListener)
+
+    function paginate() {
+        var params = 'email=' + $('#email-field').val() + '&'
+        paginator.parameters = params
+        paginator.getObjects(true)
+    }
 });
 
 function ModalController() {
