@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604103021) do
+ActiveRecord::Schema.define(:version => 20130611105054) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(:version => 20130604103021) do
 
   add_index "consists", ["base_id"], :name => "index_consists_on_base_id"
   add_index "consists", ["layer_id"], :name => "index_consists_on_layer_id"
+
+  create_table "contacts", :force => true do |t|
+    t.string   "otsikko"
+    t.string   "osoite"
+    t.string   "email"
+    t.string   "puhelin"
+    t.string   "note"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "custom_plants", :force => true do |t|
     t.string   "name"
