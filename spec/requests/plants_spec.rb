@@ -74,19 +74,18 @@ describe 'Plant pages' do
 
     before do
       sign_in admin
-      Maintenance.create!(name: "Helppo")
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
-      @test_plant.update_attribute(:light_id, @light.id)
-      @test_plant.growth_environments << GrowthEnvironment.find_by_id(1)
-      @test_plant.maintenance = Maintenance.find_by_id(1)
-      @test_plant.save
+      @plant1 = FactoryGirl.create(:plant)
+      @plant1.maintenance = Maintenance.create!(name: "Helppo")
+      @plant1.update_attributes(:light_id => Light.first.id);
+      @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
+      @plant1.save
     end
 
     describe 'view without admin rights' do
 
       before do
         visit '/uloskirjaus'
-        visit plant_path(@test_plant.id)
+        visit plant_path(@plant1.id)
       end
 
       it { should have_selector('h1', text: 'Example Plant') }
@@ -99,7 +98,7 @@ describe 'Plant pages' do
     describe 'view with admin rights' do
       before do
         sign_in admin
-        visit plant_path(@test_plant.id)
+        visit plant_path(@plant1.id)
       end
 
       it { should have_selector('a', text: "Muokkaa") }
@@ -107,7 +106,7 @@ describe 'Plant pages' do
 
     describe "Edit-page" do
 
-      before { visit edit_plant_path(@test_plant) }
+      before { visit edit_plant_path(@plant1) }
 
       it { should have_selector('h1', text: 'Kasvin päivitys') }
       it { should have_selector('h1', text: 'Kasvin päivitys') }

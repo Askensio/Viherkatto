@@ -90,7 +90,8 @@ describe 'Greenroof' do
 
 
       @plant1 = FactoryGirl.create(:plant)
-      @plant1.maintenance = Maintenance.find_by_id(1)
+      @plant1.maintenance = Maintenance.create!(name: "Helppo")
+      @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
       @plant1.update_attributes(:light_id => Light.first.id);
       @plants = [@plant1, FactoryGirl.create(:plant)]
       @base = Base.new(absorbancy: 20)
