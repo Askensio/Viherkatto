@@ -36,12 +36,6 @@
             <td><%= f.label printEnvironments(@plant.growth_environments) %></td>
           </tr>
 
-          <% puts "------------------" %>
-          <% puts @plant.maintenance %>
-          <% puts @plant.maintenance.nil? %>
-          <% puts Maintenance.find_by_id(@plant.maintenance) %>
-          <% puts "------------------" %>
-
           <tr>
             <td><%= f.label :maintenance %></td>
             <td><%= f.label @plant.maintenance.name %></td>

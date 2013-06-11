@@ -120,17 +120,9 @@ class PlantsController < ApplicationController
       end
     end
 
-    puts "------create----"
-    puts params[:maintenances][:id]
-    puts Maintenance.find_by_id(params[:maintenances][:id]).name
-    puts "----------------"
-
     if params[:maintenances][:id]
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
-      puts @plant.maintenance
-      puts @plant.maintenance.name
       @plant.save!
-      puts @plant.save
     end
 
     if @plant.save
@@ -163,7 +155,6 @@ class PlantsController < ApplicationController
     end
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
-      # Handle a successful update.
       redirect_to plant_url
     else
       render 'edit'
