@@ -9,65 +9,17 @@ class UsersController < ApplicationController
   def index
     @jsonUsers = []
     respond_to do |format|
-      @users = User.paginate(page: params[:page])
+      @users = User.scoped
       format.html { render :html => @users } # index.html.erb
-      if params[:page].present?
-        @jsonUsers = User.paginate(page: params[:page], per_page: params[:per_page])
-      else
-        @jsonUsers = User.all
-      end
 
-      @jsonUsersDub = [:User]
+      @users = User.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
+      @users = @users.('email like ?', '%' + params[:email].downcase + '%') if params[:email]
+      @users = @users.('phone like ?', '%' + params[:phone].downcase + '%') if params[:phone]
+      @users = @users.('profession like ?', '%' + params[:profession].downcase + '%') if params[:profession]
+      @users = User.paginate(page: params[:page], per_page: params[:per_page]) if params[:page] and params[:per_page]
 
-      if params[:name].present?
-        @jsonUsers.each do |p|
-          if !p.name.downcase.include?(params[:name].downcase)
-            @jsonUsersDub << p
-          end
-        end
-      end
-
-      if params[:email].present?
-        @jsonUsers.each do |p|
-          if !p.email.downcase.include?(params[:email].downcase)
-            @jsonUsersDub << p
-          end
-        end
-      end
-
-      if params[:phone].present?
-        @jsonUsers.each do |p|
-          if !p.phone.downcase.include?(params[:phone].downcase)
-            @jsonUsersDub << p
-          end
-        end
-      end
-
-      if params[:profession].present?
-        @jsonUsers.each do |p|
-          if !p.profession.downcase.include?(params[:profession].downcase)
-            @jsonUsersDub << p
-          end
-        end
-      end
-
-
-=begin
-      if params[:admin].present?
-        @jsonUsers.each do |p|
-          if p.admin.to_i < params[:admin].to_i
-            @jsonUsersDub << p
-          end
-        end
-      end
-=end
-      puts @jsonUsers
-      puts "Jamo<3"
-      @jsonUsers -= @jsonUsersDub
-      puts @jsonUsers
-      puts "Jamox"
-      puts @jsonUsersDub
-      format.json { render :json => {admin: admin?, count: @users.total_entries, users: @jsonUsers} }
+      @users = @users.select('id, name, admin, email').order('email ASC').all
+      format.json { render :json => {admin: admin?, count: @users.total_entries, users: @users} }
     end
   end
 
@@ -120,6 +72,20 @@ class UsersController < ApplicationController
       format.json { render :json => {response: @response} }
     end
   end
+
+  def admin
+    puts "lololol"
+    puts params[:id]
+    respond_to do |format|
+      @user = User.find(params[:id])
+      if @user and @user.id != current_user.id
+        @user.update_attribute(:admin, !@user.admin?)
+        @user.save
+      end
+      format.json { render :json => @user.admin? }
+    end
+  end
+
   private
 
   def user_params

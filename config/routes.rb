@@ -26,6 +26,12 @@ Viherkatto::Application.routes.draw do
   match '/contacts', to: 'pages#contacts'
   root :to => 'pages#home'
 
+  resources :users do
+    member do
+      post 'admin'
+    end
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
