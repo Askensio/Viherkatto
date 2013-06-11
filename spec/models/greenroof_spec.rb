@@ -71,6 +71,7 @@ describe Greenroof do
     it { should_not be_valid }
   end
 
+=begin
   describe "year is too big" do
     before { @groof.year = 2101 }
     it { should_not be_valid }
@@ -80,5 +81,6 @@ describe Greenroof do
     before { @groof.year = 1899 }
     it { should_not be_valid }
   end
+=end
 
 end
