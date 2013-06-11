@@ -1,30 +1,33 @@
 <% provide(:title, "Viherkattojen haku") %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 
-<div class="search" data-id="greenroof-search">
-  <form id="search-form" data-id="greenroof-search">
-    <label for="address">Osoite</label>
-    <input type="text" id="address" data-id="address" class="search-input">
-    <label for="groofnote">Viherkaton kuvaus</label>
-    <input type="text" id="groofnote" data-id="groofnote" class="search-input">
-    <label for="plantname">Kasvin nimi</label>
-    <input type="text" id="plantname" data-id="plantname" class="search-input">
-    <label for="colour">Kasvin väri</label>
-    <input type="text" id="colour" data-id="colour" class="search-input">
-    <label for="maintenance">Hoidon tarve</label>
-    <input type="text" id="maintenance" data-id="maintenance" class="search-input">
-    <label for="plantmaxheight">Maksimikorkeus kasville</label>
-    <input type="text" id="plantmaxheight" data-id="plantmaxheight" class="search-input">
-    <label for="plantminheight">Minimikorkeus kasville</label>
-    <input type="text" id="plantminheight" data-id="plantminheight" class="search-input">
-    <label for="envname">Ympäristö</label>
-    <input type="text" id="envname" data-id="envname" class="search-input">
-    <label for="layername">Kerros</label>
-    <input type="text" id="layername" data-id="layername" class="search-input">
+<div class="row">
+  <div class="span5 offset3">
+    <div data-id="greenroof" id="search-form">
+      <label>Osoite</label>
+      <input type="text" name="address" data-id="address" class="search-input">
+      <label>Viherkaton kuvaus</label>
+      <input type="text" name="groofnote" data-id="groofnote" class="search-input">
+      <label>Kasvin nimi</label>
+      <input type="text" name="plantname" data-id="plantname" class="search-input">
+      <label>Kasvin väri</label>
+      <input type="text" name="colour" data-id="colour" class="search-input">
+      <label>Hoidon tarve</label>
+      <input type="text" name="maintenance" data-id="maintenance" class="search-input">
+      <label>Maksimikorkeus kasville</label>
+      <input type="text" name="plantmaxheight" data-id="plantmaxheight" class="search-input">
+      <label>Minimikorkeus kasville</label>
+      <input type="text" name="plantminheight" data-id="plantminheight" class="search-input">
+      <label>Ympäristö</label>
+      <input type="text" name="envname" data-id="envname" class="search-input">
+      <label>Kerros</label>
+      <input type="text" name="layername" data-id="layername" class="search-input">
 
-    <input type="submit" value="Hae">
-  </form>
+      <button class="btn btn-custom span2" name="hae">Hae</button>
+    </div>
+  </div>
 </div>
-<!--
+
 <div >
   <p class="pagination"></p>
 
@@ -33,5 +36,11 @@
 
   </ul>
 </div>
--->
+
+<%= javascript_include_tag "search/search" %>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "search/greenroofs-search" %>
+<%= javascript_include_tag "pagination/paginator" %>
+
+
 

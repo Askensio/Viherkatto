@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var searcher = new Search();
-    var paginator = new Pagination("search/plants",1,20)
+    var paginator = new Pagination("search/greenroofs",1,20)
 
     var clickListener = function () {
 
@@ -16,7 +16,8 @@ $(document).ready(function () {
 
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
-    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>');
+    console.log(entry)
+    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + 'Käyttäjän ' + entry.user + ' viherkatto paikassa ' + entry.address + '</a>');
     listElement.append(link);
 //    console.log(admin)
     if (admin) {
