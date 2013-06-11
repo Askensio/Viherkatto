@@ -47,6 +47,11 @@ var addElement = function (entry, admin) {
     var address = $('<p></p>').append(entry.address)
     infoElement.append(addressHeading).append(address)
 
+    mainElement.click(function (event) {
+        window.location.href = "/greenroofs/" + entry.id;
+    })
+    mainElement.attr('style', 'cursor: pointer;')
+
     if (admin) {
         var deleteElement = $('<a href=\"#\"\"></a>')
         deleteElement.attr('class', 'pull-right')
@@ -57,24 +62,19 @@ var addElement = function (entry, admin) {
             id: entry.id
         })
 
-        removeElement.click(function () {
+        removeElement.click(function (event) {
+            event.stopPropagation();
             $('#confirm-modal').modal('show')
             ModalController.groofId = entry.id
 
         })
 
+        removeElement.attr('style', 'cursor: pointer;')
+
         deleteElement.append(removeElement)
         mainElement.append(deleteElement)
-        thumbnailElement.click(function () {
-            window.location.href = "/greenroofs/" + entry.id;
-        })
-        thumbnailElement.attr('style', 'cursor: pointer;')
-    } else {
-        mainElement.click(function () {
-            window.location.href = "/greenroofs/" + entry.id;
-        })
-        mainElement.attr('style', 'cursor: pointer;')
     }
+
     mainElement.append(infoElement)
 
     $('#hero-div').append(mainElement);
