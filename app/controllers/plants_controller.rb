@@ -122,7 +122,6 @@ class PlantsController < ApplicationController
 
     if params[:maintenances][:id]
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
-      @plant.save!
     end
 
     if @plant.save

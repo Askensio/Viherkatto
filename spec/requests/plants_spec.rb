@@ -11,6 +11,8 @@ describe 'Plant pages' do
 
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
+    Maintenance.create!(name: "Vaikea")
+    Maintenance.create!(name: "Helppo")
   end
 
   let(:admin) { FactoryGirl.create(:admin) }
@@ -21,7 +23,7 @@ describe 'Plant pages' do
 
     before do
       sign_in admin
-      visit add_plant_path
+      visit new_plant_path
     end
 
     it { should have_selector('title', text: 'Kasvien lisäys') }
@@ -45,7 +47,7 @@ describe 'Plant pages' do
       before do
         fill_in "plant_name", with: "Example Plant"
         select "Sininen", :from => "plant_colour"
-        select "Helppo", :from => "plant_maintenance"
+        select "Helppo", :from => "maintenances_id"
         select "Sammalikko", :from => "growth_environments_id"
         fill_in "plant_height", with: 1
         fill_in "plant_latin_name", with: "Plantus plantus"
@@ -72,9 +74,11 @@ describe 'Plant pages' do
 
     before do
       sign_in admin
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
+      Maintenance.create!(name: "Helppo")
+      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
       @test_plant.update_attribute(:light_id, @light.id)
-      @test_plant.growth_environments << GrowthEnvironment.first
+      @test_plant.growth_environments << GrowthEnvironment.find_by_id(1)
+      @test_plant.maintenance = Maintenance.find_by_id(1)
       @test_plant.save
     end
 
