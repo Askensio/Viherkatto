@@ -122,10 +122,15 @@ class PlantsController < ApplicationController
 
     puts "------create----"
     puts params[:maintenances][:id]
+    puts Maintenance.find_by_id(params[:maintenances][:id]).name
     puts "----------------"
 
     if params[:maintenances][:id]
-      @plant.update_attributes(:maintenance => Maintenance.find_by_id(params[:light][:id]))
+      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
+      puts @plant.maintenance
+      puts @plant.maintenance.name
+      @plant.save!
+      puts @plant.save
     end
 
     if @plant.save

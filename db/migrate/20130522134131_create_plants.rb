@@ -9,6 +9,7 @@ class CreatePlants < ActiveRecord::Migration
       t.integer :weight
       t.integer :height
       t.references :light
+      t.references :maintenance
       t.string :note
 
       t.timestamps
