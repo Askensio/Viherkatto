@@ -59,10 +59,10 @@ function generateBaseForm() {
     // adds the container for the form
     var baseFormElement = $('<div></div>').attr('id', 'base' + baseCount).attr('class', 'baseAdder')
     // adds the header
-    var h2Element = $('<h2>Pohja ' + baseCount + '</h2>').attr('class', 'span4')
+    var h2Element = $('<h2>Kerros ' + baseCount + '</h2>').attr('class', 'span4')
     baseFormElement.append(h2Element)
     // adds a button for removing the base
-    var removeButton = $('<button>Poista pohja</button>').attr('class', "btn btn-mini btn-danger").click(removeParent)
+    var removeButton = $('<button>Poista kerros</button>').attr('class', "btn btn-mini btn-danger").click(removeParent)
     baseFormElement.append(removeButton)
     var labelElement = $('#base-form div label').first().clone()
     baseFormElement.append(labelElement)
@@ -114,11 +114,15 @@ function generateLayerForm(target) {
         layerFormElement.append(nameInput)
 
     }
+    var productLabel =  $('<label for="layer_product_name">Tuotteen nimi</label>')
+    var productInput = $('<input class="span4" id="layer_product_name" name="layer[product_name]" size="30" type="text">')
     var thicknessLabel = $('<label for="layer_thickness">Paksuus (cm) *</label>')
     var thicknessInput = $('<input class="span4" id="layer_thickness" name="layer[thickness]" required="required" size="30" type="text">')
     var weightLabel = $('<label for="layer_weight">Paino (kg/m2) *</label>')
     var weightInput = $('<input class="span4" id="layer_weight" name="layer[weight]" required="required" size="30" type="text">')
 
+    layerFormElement.append(productLabel)
+    layerFormElement.append(productInput)
     layerFormElement.append(thicknessLabel)
     layerFormElement.append(thicknessInput)
     layerFormElement.append(weightLabel)
@@ -220,6 +224,8 @@ function createLayerObjectArray(baseElement) {
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
         layer.name = name
+        var product_name = $(this).children('[name="layer[product_name]"]').val()
+        layer.product_name = product_name
         var thickness = $(this).children('[name="layer[thickness]"]').val()
         layer.thickness = thickness
         var weight = $(this).children('[name="layer[weight]"]').val()

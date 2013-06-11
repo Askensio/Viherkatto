@@ -19,7 +19,7 @@
 
   <div class="plantAdder row">
     <div class="span5">
-      <h1>Lisää kasvit</h1>
+      <h1>Lisää perustamisvaiheen kasvit</h1>
       <%= text_field_tag 'search', nil, :placeholder => 'Hae kasvia nimellä', :class => "span4" %>
       <div id="plant-search">
         <ul class="plant-list span4">
@@ -30,7 +30,7 @@
     </div>
     <div class="span5">
       <div class="baseAdder">
-        <h1>Lisää pohja</h1>
+        <h1>Lisää viherkaton rakennekerros</h1>
 
         <div class="adderForms" id="base-form">
           <% @greenroof.bases.each_with_index do |base, i| %>
@@ -44,7 +44,7 @@
                   </button>
                   <ul class="dropdown-menu" id="add-layer-dropdown-list">
                     <li>
-                      <a href="#">Kasvukerros</a>
+                      <a href="#">Kasvualusta</a>
                     </li>
                     <li>
                       <a href="#">Vedenpidätyskerros</a>
@@ -65,7 +65,7 @@
           <% end %>
         </div>
         <div class="add-base-button">
-          <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää pohja</button>
+          <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää kerros</button>
         </div>
       </div>
     </div>

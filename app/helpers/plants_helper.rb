@@ -9,7 +9,7 @@ module PlantsHelper
   end
 
   def lightness(index)
-    @lightness = %w( Varjoinen Puolivarjo Aurinkoinen )
+    @lightness = %w( Aurinkoinen Varjoinen Puolivarjo )
 
     @light = @lightness[index]
   end

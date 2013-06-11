@@ -13,7 +13,7 @@ FactoryGirl.define do
 
   factory :roof do
     area '70'
-    declination '10'
+    declination '1'
     load_capacity '500'
   end
 

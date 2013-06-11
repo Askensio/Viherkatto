@@ -48,7 +48,7 @@ describe 'Greenroof' do
         fill_in "greenroof_address",  with: "Some address"
         fill_in "greenroof_note",     with: "This is a test greenroof"
         fill_in "roof_area",          with: "100"
-        fill_in "roof_declination",   with: "10"
+        select "Tasakatto",           from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
         #select "Pelto",               from: "environment_id"
@@ -81,7 +81,7 @@ describe 'Greenroof' do
 
 
         area = 2
-        declination = 4
+        declination = 1
         load_capacity = 10*4
 
         @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
@@ -121,7 +121,7 @@ describe 'Greenroof' do
       it {should have_selector('label', text: "Käyttötarkoitus" )}
       it {should have_selector('label', text: "Katon tiedot" )}
       it {should have_selector('label', text: "Kasvit" )}
-      it {should have_selector('label', text: "Pohjat" )}
+      it {should have_selector('label', text: "Rakennekerrokset" )}
       it {should have_selector('label', text: "Huomioita" )}
 
 

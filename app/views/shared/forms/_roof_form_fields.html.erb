@@ -8,7 +8,7 @@
     <%= f.text_field :area, :class => "span4", :required => true %>
 
     <%= f.label :declination, h('Kaltevuusaste') %>
-    <%= f.text_field :declination, :class => "span4", :required => true, :type => "number", :max => "90" %>
+    <%= f.select :declination, [['Tasakatto', '0'],['Loiva', '1'],['Jyrkkä','2']], {}, { :class => "selectpicker show-menu-arrow show-tick span4" } %>
 
     <%= f.label :environment, h('Sijainti') %>
     <div class="required">
