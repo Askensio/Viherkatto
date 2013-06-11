@@ -108,11 +108,12 @@ namespace :db do
 
 
       address = Faker::Lorem.words(3).join(" ")
+      constructor = "Laurin viherpiperrys kommandiittiyhtiö"
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(address: address, constructor: constructor, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
