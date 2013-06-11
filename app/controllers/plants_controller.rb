@@ -109,9 +109,22 @@ class PlantsController < ApplicationController
 
   def create
     @plant = Plant.new(params[:plant])
-    @plant.growth_environments << GrowthEnvironment.find_by_id(params[:growth_environments][:id])
 
-    puts "----------------"
+    params[:growth_environments][:id].shift
+    puts "--------kasvu-------------"
+    puts params[:growth_environments][:id]
+    puts "--------kasvu-------------"
+
+    if (!params[:growth_environments][:id].empty?)
+      params[:growth_environments][:id].each do |env|
+        @env = GrowthEnvironment.find_by_id(env)
+        if (@env != nil)
+          @plant.growth_environments << @env
+        end
+      end
+    end
+
+    puts "------create----"
     puts params[:maintenances][:id]
     puts "----------------"
 

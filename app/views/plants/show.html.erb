@@ -33,7 +33,7 @@
 
           <tr>
             <td><%= f.label :growth_environment %></td>
-            <td><%= f.label @plant.growth_environments.first.environment unless @plant.growth_environments.first.nil? %></td>
+            <td><%= f.label printEnvironments(@plant.growth_environments) %></td>
           </tr>
 
           <tr>

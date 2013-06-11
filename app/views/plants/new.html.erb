@@ -22,7 +22,7 @@
 
         <%= f.label :growth_environment %>
         <%= collection_select(:growth_environments, :id, GrowthEnvironment.all,
-                              :id, :environment, {}, :class => "selectpicker show-menu-arrow span5") %>
+                              :id, :environment, {}, :class => "selectpicker show-menu-arrow span5", :multiple => true) %>
 
         <%= f.label :maintenance %>
         <%= collection_select(:maintenances, :id, Maintenance.all,
