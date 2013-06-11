@@ -5,9 +5,7 @@ $(document).ready(function () {
     modalctrl = new ModalController()
     modalctrl.setListeners(paginator)
 
-    $('.container').attr({
-        style: "width: 75%"
-    })
+
 });
 
 function ModalController() {

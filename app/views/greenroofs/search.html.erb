@@ -11,7 +11,7 @@
       <label>Kasvin nimi</label>
       <input type="text" name="plantname" data-id="plantname" class="search-input">
       <label>Kasvin väri</label>
-      <input type="text" name="colour" data-id="colour" class="search-input">
+      <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour", :multiple => true %>
       <label>Hoidon tarve</label>
       <input type="text" name="maintenance" data-id="maintenance" class="search-input">
       <label>Maksimikorkeus kasville</label>
@@ -36,6 +36,9 @@
 
   </ul>
 </div>
+
+<%= javascript_include_tag "bootstrap-select" %>
+<script>$('.selectpicker').selectpicker();</script>
 
 <%= javascript_include_tag "search/search" %>
 <%= javascript_include_tag "pagination/bootpag" %>

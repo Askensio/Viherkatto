@@ -20,6 +20,10 @@ section {
 textarea {
   resize: vertical;
 }
+#navbar-container {
+  width: 90%;
+  max-width: 1170px;
+}
 
 .center {
   text-align: center;
@@ -140,7 +144,7 @@ footer {
 
 /* Navbar links: increase padding for taller navbar */
 .navbar .nav > li > a {
-  padding: 10px 50px;
+  padding: 10px 1.5em;
   background-color: #789f46;
 }
 

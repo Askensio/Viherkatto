@@ -1,6 +1,6 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
-    <div class="container">
+    <div class="container" id="navbar-container">
       <%= link_to "Viherkatot", root_path, id: "logo" %>
       <nav>
         <ul class="nav">
@@ -8,6 +8,7 @@
               <li><%= link_to "Lisää uusi viherkatto", new_greenroof_path %></li>
           <% end %>
           <li><%= link_to "Selaa kasveja", plants_path %></li>
+          <li><%= link_to "Selaa viherkattoja", greenroofs_path %></li>
           <li><%= link_to "Yhteystiedot", '/contacts' %></li>
         </ul>
         <ul class="nav pull-right">
