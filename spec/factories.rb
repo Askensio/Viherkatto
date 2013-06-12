@@ -31,4 +31,13 @@ FactoryGirl.define do
     weight 1
     note "Totally fabulous plant"
   end
+
+  factory :greenroof do
+    address "Emminkatu 1"
+    constructor "Laurin viherpiperrys kommandiittiyhtiö"
+    purpose 1
+    note "Viherkattotiimi on hienoin"
+    user { User.find(1) }
+    year 1984
+  end
 end
