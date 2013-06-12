@@ -146,4 +146,17 @@ describe 'Greenroof' do
       it { should have_selector('h5', text: "Sijainti") }
     end
   end
+
+  # greenroofs#search
+  describe 'search' do
+    before do
+
+      visit '/search/greenroofs'
+    end
+
+    describe "find by address" do
+      fill_in
+    end
+
+  end
 end
