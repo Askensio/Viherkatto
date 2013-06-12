@@ -110,6 +110,7 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
 
+
     params[:colour][:id].shift
 
     if not params[:colour][:id].empty?
@@ -123,9 +124,23 @@ class PlantsController < ApplicationController
 
     @plant.light = Light.find_by_id(params[:light][:id])
 
+
+    if params[:maintenances][:id]
+      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
+    end
+
     if @plant.save
       if @plant.light_id.nil?
         @plant.update_attribute(:light_id, 1)
+      end
+      params[:growth_environments][:id].shift
+      if (!params[:growth_environments][:id].empty?)
+        params[:growth_environments][:id].each do |env|
+          @env = GrowthEnvironment.find_by_id(env)
+          if (@env != nil)
+            @plant.growth_environments << @env
+          end
+        end
       end
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
@@ -136,8 +151,26 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
+
+    params[:growth_environments][:id].shift
+    if (!params[:growth_environments][:id].empty?)
+      @plant.growth_environments.clear
+      params[:growth_environments][:id].each do |env|
+        @env = GrowthEnvironment.find_by_id(env)
+        if (@env != nil)
+          @plant.growth_environments << @env
+        end
+      end
+    else
+      @plant.growth_environments.clear
+    end
+
+    if params[:maintenances][:id]
+      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
+      @plant.save!
+    end
+
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
-      # Handle a successful update.
       redirect_to plant_url
     else
       render 'edit'
@@ -145,7 +178,6 @@ class PlantsController < ApplicationController
   end
 
   def destroy
-
     respond_to do |format|
       if Plant.find(params[:id]).destroy
         @response = "success"
@@ -173,8 +205,6 @@ class PlantsController < ApplicationController
       @plants = @plants.where('height >= ?', params[:min_height]) if params[:min_height]
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
-
-
 
 
       params[:colour].try(:each) do |colour|

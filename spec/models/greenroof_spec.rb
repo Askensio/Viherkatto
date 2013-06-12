@@ -18,12 +18,17 @@ describe Greenroof do
 
     @roof = Roof.new(declination: 1, load_capacity: 20000, area: 500)
     @light = Light.find_by_id(1)
+    @maintenance = Maintenance.find_by_id(1)
     @roof.light = @light
     @groof.roof = @roof
 
+    @plant1 = FactoryGirl.create(:plant)
+    @plant2 = FactoryGirl.create(:plant)
 
-    @plant1 = FactoryGirl.create(:plant)#Plant.new(name: "nättikukka", latin_name: "Kukkaus kauneus", colour: "Blue", maintenance: 1,  min_soil_thickness: 20, weight: 1, note: "Oikein tosi nätti!", height: 5)
-    @plant2 = FactoryGirl.create(:plant)#Plant.new(name: "Example Plant nro 2", latin_name: "Plantus Examplus Secondus", colour: "Green", maintenance: 2, min_soil_thickness: 20, weight: 1, note: "This one's also a totally fabulous plant!", height: 5)
+    @plant1.maintenance = @maintenance
+    @plant2.maintenance = @maintenance
+    @plant1.save!
+    @plant2.save!
     @groof.plants << @plant1
     @groof.plants << @plant2
 

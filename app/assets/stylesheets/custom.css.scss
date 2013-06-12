@@ -448,6 +448,16 @@ a {
   }
 }
 
+
+#contact-table {
+  table-layout: fixed;
+}
+
+#contact-table td {
+  word-wrap: break-word;
+}
+
+
 // User control label
 .user-controls {
     display: inline;

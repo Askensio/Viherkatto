@@ -8,6 +8,11 @@ describe 'Plant pages' do
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     @light = Light.create!(desc: "Aurinkoinen")
+
+    GrowthEnvironment.create!(environment: "Heinikko")
+    GrowthEnvironment.create!(environment: "Sammalikko")
+    Maintenance.create!(name: "Vaikea")
+    Maintenance.create!(name: "Helppo")
   end
 
   let(:admin) { FactoryGirl.create(:admin) }
@@ -16,11 +21,9 @@ describe 'Plant pages' do
 
   describe 'addition' do
 
-
-
     before do
       sign_in admin
-      visit add_plant_path
+      visit new_plant_path
     end
 
     it { should have_selector('title', text: 'Kasvien lisäys') }
@@ -43,8 +46,10 @@ describe 'Plant pages' do
     describe "with valid information" do
       before do
         fill_in "plant_name", with: "Example Plant"
-        select "Helppo", :from => "plant_maintenance"
-        fill_in "plant_height", with: 1
+        select "Helppo", :from => "maintenances_id"
+        select "Sammalikko", :from => "growth_environments_id"
+        fill_in "plant_min_height", with: 1
+        fill_in "plant_max_height", with: 10
         fill_in "plant_latin_name", with: "Plantus plantus"
         fill_in "plant_min_soil_thickness", with: 8
         fill_in "plant_weight", with: 1
@@ -69,16 +74,18 @@ describe 'Plant pages' do
 
     before do
       sign_in admin
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
-      @test_plant.update_attribute(:light_id, @light.id)
-      @test_plant.save
+      @plant1 = FactoryGirl.create(:plant)
+      @plant1.maintenance = Maintenance.create!(name: "Helppo")
+      @plant1.update_attributes(:light_id => Light.first.id);
+      @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
+      @plant1.save
     end
 
     describe 'view without admin rights' do
 
       before do
         visit '/uloskirjaus'
-        visit plant_path(@test_plant.id)
+        visit plant_path(@plant1.id)
       end
 
       it { should have_selector('h1', text: 'Example Plant') }
@@ -91,7 +98,7 @@ describe 'Plant pages' do
     describe 'view with admin rights' do
       before do
         sign_in admin
-        visit plant_path(@test_plant.id)
+        visit plant_path(@plant1.id)
       end
 
       it { should have_selector('a', text: "Muokkaa") }
@@ -99,7 +106,7 @@ describe 'Plant pages' do
 
     describe "Edit-page" do
 
-      before { visit edit_plant_path(@test_plant) }
+      before { visit edit_plant_path(@plant1) }
 
       it { should have_selector('h1', text: 'Kasvin päivitys') }
       it { should have_selector('h1', text: 'Kasvin päivitys') }

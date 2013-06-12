@@ -14,16 +14,22 @@ namespace :db do
     Colour.create!(value: "Sininen")
     Colour.create!(value: "Vihreä")
 
+    GrowthEnvironment.create!(environment: "Heinikko")
+    GrowthEnvironment.create!(environment: "Sammalikko")
+    Maintenance.create!(name: "Luonnonmukainen")
+    Maintenance.create!(name: "Hieman hoitoa vaativa")
+    Maintenance.create!(name: "Paljon hoitoa vaativa")
 
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
-      maintenance = 2
-      height = 10
+      min_height = 10
+      max_height = 20
       thickness = n+8
       light = 2
       weight = n+1
       note = "asd"
+      maintenance = 1
 
       @plant = Plant.new(name: name,
                          latin_name: latin_name,
@@ -39,7 +45,8 @@ namespace :db do
       @plant.colours << colour
       @plant.save!
       @plant.update_attributes(:light_id => light)
-
+      @plant.update_attributes(:maintenance => Maintenance.find_by_id(maintenance))
+      @plant.growth_environments << GrowthEnvironment.find(1)
     end
 
     Layer.create!(name: "Kivimurska",
@@ -122,6 +129,9 @@ namespace :db do
       @groof.bases << @base
       @groof.save
     end
+
+    @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
+    @contact.save
 
   end
 end
