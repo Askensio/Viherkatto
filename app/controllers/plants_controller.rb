@@ -11,73 +11,27 @@ class PlantsController < ApplicationController
   end
 
   def index
-
-
     respond_to do |format|
-      @plants = Plant.scoped
+      @plants = Plant.paginate(page: params[:page])
       format.html { render :html => @plants } # index.html.erb
+      if params[:page].present?
+        @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        @jsonPlants = Plant.all
+      end
 
-      @plants = Plant.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
-      @plants = @plants.where('latin_name like ?', '%' + params[:latin_name].downcase + '%') if params[:latin_name]
-      @plants = @plants.where('colour like ?', '%' + params[:colour].downcase + '%') if params[:colour]
+      @jsonPlantsDub = [:Plant]
 
-      @plants = @plants.paginate(page: params[:page], per_page: params[:per_page]) if params[:page] and params[:per_page]
+      if params[:name].present?
+        @jsonPlants.each do |p|
+          if !p.name.downcase.include?(params[:name].downcase)
+            @jsonPlantsDub << p
+          end
+        end
+      end
 
-      @plants = @plants.select('*').all
-      format.json { render :json => {plants: @plants} }
-
-      #if params[:maintenance].present?
-      #  @jsonPlants.each do |p|
-      #    if p.maintenance.to_i != params[:maintenance].to_i
-      #      @jsonPlantsDub << p
-      #    end
-      #  end
-      #end
-      #
-      #if params[:coverage].present?
-      #  @jsonPlants.each do |p|
-      #    if p.coverage.to_i != params[:coverage].to_i
-      #      @jsonPlantsDub << p
-      #    end
-      #  end
-      #end
-      #
-      #if params[:min_soil_thickness].present?
-      #  @jsonPlants.each do |p|
-      #    if p.min_soil_thickness.to_i < params[:min_soil_thickness].to_i
-      #      @jsonPlantsDub << p
-      #    end
-      #  end
-      #end
-      #
-      #if params[:weight_is].present?
-      #  @jsonPlants.each do |p|
-      #    if p.weight.to_i != params[:weight_is].to_i
-      #      @jsonPlantsDub << p
-      #    end
-      #  end
-      #end
-      #
-      #if params[:weight_atleast].present?
-      #  @jsonPlants.each do |p|
-      #    if p.weight.to_i < params[:weight_atleast].to_i
-      #      @jsonPlantsDub << p
-      #    end
-      #  end
-      #end
-      #
-      #if params[:weight_max].present?
-      #  @jsonPlants.each do |p|
-      #    if p.weight.to_i > params[:weight_max].to_i
-      #      @jsonPlantsDub << p
-      #    end
-      #  end
-      #end
-      #
-      #@jsonPlants -= @jsonPlantsDub
-      #format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @jsonPlants} }
-
-
+      @jsonPlants -= @jsonPlantsDub
+      format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @jsonPlants} }
     end
   end
 
