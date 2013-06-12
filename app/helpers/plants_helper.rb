@@ -17,7 +17,7 @@ module PlantsHelper
   def maintenanceLevel(index)
     @maintenance = %w( Helppo Keskivaikea Vaikea )
 
-    @level = @maintenance[index]
+    @level = @maintenance[index-1]
   end
 
   def colours

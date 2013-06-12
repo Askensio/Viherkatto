@@ -20,12 +20,24 @@
             <td><%= f.label :latin_name %></td>
             <td><%= f.label @plant.latin_name %></td>
           </tr>
-
-          <tr>
-            <td><%= f.label :colour %></td>
-            <td><%= f.label @plant.colour %></td>
-          </tr>
-
+          <% if @plant.colours.size > 0 %>
+              <tr>
+                <td><%= f.label :colour %></td>
+                <td>
+                  <%=
+                      colours = ""
+                      @plant.colours.each_with_index do |col, index|
+                        if index == @plant.colours.size - 1
+                          colours += col.value
+                        else
+                          colours += col.value + ", "
+                        end
+                      end
+                      f.label colours
+                  %>
+                </td>
+              </tr>
+          <% end %>
           <tr>
             <td><%= f.label :light %></td>
             <td><%= f.label Light.find(@plant.light_id).desc %></td>
@@ -50,12 +62,12 @@
             <td><%= f.label :weight %></td>
             <td><%= f.label @plant.weight %></td>
           </tr>
-
-          <tr>
-            <td><%= f.label :note %></td>
-            <td><%= f.label @plant.note %></td>
-          </tr>
-
+          <% if @plant.note != "" %>
+              <tr>
+                <td><%= f.label :note %></td>
+                <td><%= f.label @plant.note %></td>
+              </tr>
+          <% end %>
         </table>
     <% end %>
 

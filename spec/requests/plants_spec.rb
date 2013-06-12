@@ -43,7 +43,6 @@ describe 'Plant pages' do
     describe "with valid information" do
       before do
         fill_in "plant_name", with: "Example Plant"
-        select "Sininen", :from => "plant_colour"
         select "Helppo", :from => "plant_maintenance"
         fill_in "plant_height", with: 1
         fill_in "plant_latin_name", with: "Plantus plantus"
@@ -70,7 +69,7 @@ describe 'Plant pages' do
 
     before do
       sign_in admin
-      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
+      @test_plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, maintenance: 1, min_soil_thickness: 8, weight: 1,note: "Totally fabulous plant")
       @test_plant.update_attribute(:light_id, @light.id)
       @test_plant.save
     end

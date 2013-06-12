@@ -8,7 +8,7 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", maintenance: 1, min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, maintenance: 1, min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
   end
 
@@ -16,7 +16,6 @@ describe Plant do
 
   it { should respond_to(:name) }
   it { should respond_to(:latin_name) }
-  it { should respond_to(:colour) }
   it { should respond_to(:height) }
   it { should respond_to(:maintenance) }
   it { should respond_to(:min_soil_thickness) }

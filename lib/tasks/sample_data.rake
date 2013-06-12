@@ -9,35 +9,43 @@ namespace :db do
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
 
+    Colour.create!(value: "Keltainen")
+    Colour.create!(value: "Punainen")
+    Colour.create!(value: "Sininen")
+    Colour.create!(value: "Vihreä")
+
 
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
-      colour = "Green"
       maintenance = 2
       height = 10
       thickness = n+8
-
       light = 2
       weight = n+1
       note = "asd"
 
-      @plant = Plant.create!(name: name,
-                    latin_name: latin_name,
-                    height: height,
-                    colour: colour,
-                    maintenance: maintenance,
-                    min_soil_thickness: thickness,
-                    weight: weight,
-                    note: note)
-       @plant.update_attributes(:light_id => light)
+      @plant = Plant.new(name: name,
+                         latin_name: latin_name,
+                         height: height,
+                         maintenance: maintenance,
+                         min_soil_thickness: thickness,
+                         weight: weight,
+                         note: note)
+
+      colour =  Colour.find_by_id n%3 + 1
+      @plant.colours << colour
+      colour =  Colour.find_by_id (n-1)%3 + 1
+      @plant.colours << colour
+      @plant.save!
+      @plant.update_attributes(:light_id => light)
 
     end
 
     Layer.create!(name: "Kivimurska",
                   product_name: "Murske 2000",
-                 thickness: 60,
-                 weight: 100)
+                  thickness: 60,
+                  weight: 100)
 
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
@@ -47,11 +55,9 @@ namespace :db do
 
       Layer.create!(name: name,
                     product_name: product_name,
-                   thickness: thickness,
-                   weight: weight)
+                    thickness: thickness,
+                    weight: weight)
     end
-
-
 
 
     admin = User.create!(name: "Example User",
@@ -85,7 +91,7 @@ namespace :db do
     id = 1
     40.times do |n|
       id = id + 1
-      if(id > 4)
+      if (id > 4)
         id = 1
       end
       area = n
