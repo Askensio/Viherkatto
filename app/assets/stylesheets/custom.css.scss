@@ -20,6 +20,10 @@ section {
 textarea {
   resize: vertical;
 }
+#navbar-container {
+  width: 90%;
+  max-width: 1170px;
+}
 
 .center {
   text-align: center;
@@ -140,7 +144,7 @@ footer {
 
 /* Navbar links: increase padding for taller navbar */
 .navbar .nav > li > a {
-  padding: 10px 50px;
+  padding: 10px 1.5em;
   background-color: #789f46;
 }
 
@@ -236,7 +240,7 @@ input {
 
 /* plants index */
 
-.plant-list {
+.list {
   list-style: none;
   li {
     padding: 10px 0;
@@ -255,6 +259,11 @@ input {
     text-align: center;
     margin: auto;
   }
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0 0 25px;
 }
 
 #chosenOnes {
@@ -437,4 +446,14 @@ a {
       }
     }
   }
+}
+
+// User control label
+.user-controls {
+    display: inline;
+    color: rgb(230, 230, 230);
+}
+
+.admin-user {
+  color: rgb(90, 180, 240);
 }

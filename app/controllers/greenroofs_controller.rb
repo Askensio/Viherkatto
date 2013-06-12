@@ -4,6 +4,74 @@ class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
 
+  def search
+
+    respond_to do |format|
+
+      format.html { render :html => {greenroofs: @greenroofs} }
+
+      @greenroofs = Greenroof.scoped
+      if params[:address]
+        address = "%#{params[:address]}%"
+        @greenroofs = @greenroofs.where("address like ?", address)
+      end
+      if params[:groofnote]
+        groofnote = "%#{params[:groofnote]}%"
+        @greenroofs = @greenroofs.where("greenroofs.note like ?", groofnote)
+      end
+      if params[:plantname]
+        plantname = "%#{params[:plantname]}%"
+        @greenroofs = @greenroofs.joins(:plants).where("plants.name like ?", plantname)
+      end
+      if params[:maintenance]
+        maintenance = params[:maintenance].to_i
+        @greenroofs = @greenroofs.joins(:plants).where("plants.maintenance = ?", maintenance)
+      end
+      @greenroofs = @greenroofs.joins(:plants).where("plants.height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.height >= ?", params[:plantminheight]) if params[:plantminheight]
+      if params[:envname]
+        envname = "%#{params[:envname]}%"
+        @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)
+      end
+      @greenroofs = @greenroofs.joins(:roof).where("roofs.declination <= ?", params[:maxdeclination]) if params[:maxdeclination]
+      @greenroofs = @greenroofs.joins(:roof).where("roofs.load_capacity >= ?", params[:minload_capacity]) if params[:minload_capacity]
+      @greenroofs = @greenroofs.joins(:roof).where("roofs.area >= ?", params[:minroofarea]) if params[:minroofarea]
+      @greenroofs = @greenroofs.joins(:roof).where("roofs.area <= ?", params[:maxroofarea]) if params[:maxroofarea]
+      if params[:layername]
+        layername = "%#{params[:layername]}%"
+        @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
+      end
+
+      @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
+      @count = @greenroofs.total_entries
+=begin
+      if params[:colour]
+        colour = "%#{params[:colour]}%"
+        @greenroofs = @greenroofs.joins(:plants).where("plants.colour like ?", colour)
+      end
+=end
+      #@greenroofs = @greenroofs.joins(:bases).where("bases.absorbancy >= ?", params[:minabsorbancy]) if params[:minabsorbancy]
+      #@greenroofs = @greenroofs.joins(:layers).sum("layers.thickness => ?", params[:minthickness]) if params[:minthickness]
+
+      #Plant.where("name like ?", name).map{ |plant| plant.greenroofs }.flatten! if params[:name]
+
+
+      @jsonGreenroofs = []
+
+      @greenroofarray = @greenroofs.to_a
+      @greenroofarray.each do |groof|
+        @user = User.find_by_id(groof.user_id)
+        jsonGreenroof = groof.attributes
+        jsonGreenroof[:user] = @user.name
+        @jsonGreenroofs << jsonGreenroof
+      end
+
+      format.json { render :json => {admin: admin?, count: @count, greenroofs: @jsonGreenroofs} }
+
+    end
+
+  end
+
   def show
     @greenroof = Greenroof.find(params[:id])
   end
