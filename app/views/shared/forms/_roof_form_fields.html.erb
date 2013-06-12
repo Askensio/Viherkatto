@@ -17,7 +17,7 @@
     <div class="required">
       <% if @roof.environments.empty? %>
           <%= collection_select :environment, :id, Environment.all, :id, :name,
-                                {:selected => 1},  :class => "selectpicker show-menu-arrow show-tick span3", :multiple => true, :required => true %>
+                                {}, :title => "Valitse miljöö",  :class => "selectpicker show-menu-arrow show-tick span3 chosen-env", :multiple => true, :required => true %>
       <% else %>
           <%= collection_select :environment, :id, Environment.all, :id, :name,
                                 {:selected => @roof.environments.map { |env| env.id }},  :class => "selectpicker show-menu-arrow show-tick span3", :multiple => true, :required => true %>

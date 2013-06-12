@@ -88,12 +88,13 @@ $(document).ready(function () {
      * @param entry
      */
     function addPlantElementForSearch(entry) {
-        var listElement = $('<li></li>');
+        var listElement = $('<li class="plant-add-list"></li>');
+        listElement.append(createIconButton(-1 * entry.id))
         var plantLink = $('<a href=\"/plants/' + entry.id + '\">' + entry.name + '  </a>');
         plantLink.attr('id', entry.id)
         listElement.append(plantLink);
 
-        listElement.append(createIconButton(-1 * entry.id));
+        ;
         $('.plant-list').append(listElement);
     }
 
@@ -104,7 +105,7 @@ $(document).ready(function () {
      * @returns {*|jQuery}
      */
     function createIconButton(id) {
-        var icon = $('<i class=\"icon-plus pull-right clickable\"></i>').attr('id', id).click( listaClikkerListener )
+        var icon = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Lisää</i>').attr('id', id).click( listaClikkerListener )
         return icon
     }
 
@@ -132,6 +133,20 @@ $(document).ready(function () {
         $('.area').append('Pinta-ala: '+input+' (m2)');
     })
 
+    $("#greenroof_year").keyup(function() {
+        var input = $("#greenroof_year").val();
+        console.log("foo");
+        $('.construction_year').empty();
+        $('.construction_year').append('Valmistumisvuosi: '+input);
+    })
+
+    $("#greenroof_constructor").keyup(function() {
+        var input = $("#greenroof_constructor").val();
+        console.log("foo");
+        $('.constructor').empty();
+        $('.constructor').append('Rakennuttaja: '+input);
+    })
+
     /**
      * Roof declination value for the Synopsis-view. Crappy if-thing because I had no idea how to make it fetch the text from the field
      * because the values are numbers.
@@ -153,8 +168,13 @@ $(document).ready(function () {
      * Environment id value for the Synopsis-view.
      */
     $("#environment_id").change(function() {
-        var input = $("#environment_id").text();
-        console.log(input);
+        var input = $("#environment_id option:selected").text();
+        input = input.match(/[A-Z][a-z-ä]+/g);
+        if (input === null) {
+            input = 'Ei sijaintia'
+        }
+        $('.location').empty();
+        $('.location').append('Sijainti: ' + input)
     })
 
     /**

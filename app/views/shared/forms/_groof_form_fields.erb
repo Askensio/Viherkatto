@@ -1,10 +1,13 @@
 <%= fields_for (@greenroof) do |f| %>
 
+    <%= f.label :year, h('Viherkaton valmistumisvuosi') %>
+    <%= f.number_field :year %>
+
     <%= f.label :address, h('Osoite tai paikkakunta') %>
     <%= f.text_field :address %>
 
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
-    <%= f.text_field :constructor, :class => "span4" %>
+    <%= f.text_field :constructor%>
 
     <%= f.label :note, h('Vapaa kuvaus') %>
     <%= f.text_area :note %>
