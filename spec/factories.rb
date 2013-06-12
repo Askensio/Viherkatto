@@ -1,3 +1,4 @@
+# encoding: UTF-8
 FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "Person #{n}" }
@@ -12,6 +13,9 @@ FactoryGirl.define do
   end
 
   factory :roof do
+    before(:create) do |roof|
+      environment = FactoryGirl.create(:environment)
+    end
     area '70'
     declination '1'
     load_capacity '500'
@@ -32,11 +36,34 @@ FactoryGirl.define do
   end
 
   factory :greenroof do
+    before(:create) do |greenroof|
+      plants = [FactoryGirl.create(:plant), FactoryGirl.create(:plant)]
+      #user = FactoryGirl.create(:user)
+      bases = [FactoryGirl.build(:base), FactoryGirl.build(:base)]
+      #roof = FactoryGirl.build(:roof)
+    end
+    roof { |a| a.association(:roof) }
+    user { |a| a.association(:user) }
     address "Emminkatu 1"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
     purpose 1
     note "Viherkattotiimi on hienoin"
-    user { User.find(1) }
     year 1984
   end
+
+  factory :layer do
+    sequence(:name) { |n| "Kiisseli #{n}" }
+    product_name "Repan kiisseli"
+    thickness 10
+    weight 100
+  end
+
+  factory :base do
+    before(:create) do |base|
+      layers = [FactoryGirl.create(:layer), FactoryGirl.create(:layer)]
+    end
+    absorbancy 100
+    note "Tämä on superlaadukas pohj-- kasvualusta."
+  end
 end
+

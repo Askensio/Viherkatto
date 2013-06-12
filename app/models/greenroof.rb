@@ -23,12 +23,12 @@ class Greenroof < ActiveRecord::Base
 
   def save_bases
     self.bases.each do |base|
-      base.save
+      base.save!
     end
   end
 
   def save_roof
-    self.roof.save
+    roof.save!
   end
 
   def search(conditions)

@@ -186,16 +186,24 @@ describe 'Greenroof' do
   end
 
   # greenroofs#search
+
   describe 'search' do
     before do
-
+      @groof = FactoryGirl.create(:greenroof)
       visit '/search/greenroofs'
     end
 
+    subject { page }
+
     describe "find by address" do
-      fill_in
+      before do
+        fill_in 'address', with: "Emminkatu"
+        click_on('search-button')
+      end
+      it { should have_link("Emminkatu") }
     end
 
   end
+
 end
 
