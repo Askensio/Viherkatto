@@ -110,16 +110,6 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
 
-    params[:growth_environments][:id].shift
-    if (!params[:growth_environments][:id].empty?)
-      params[:growth_environments][:id].each do |env|
-        @env = GrowthEnvironment.find_by_id(env)
-        if (@env != nil)
-          @plant.growth_environments << @env
-        end
-      end
-    end
-
     if params[:maintenances][:id]
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
     end
@@ -127,6 +117,15 @@ class PlantsController < ApplicationController
     if @plant.save
       if @plant.light_id.nil?
         @plant.update_attribute(:light_id, 1)
+      end
+      params[:growth_environments][:id].shift
+      if (!params[:growth_environments][:id].empty?)
+        params[:growth_environments][:id].each do |env|
+          @env = GrowthEnvironment.find_by_id(env)
+          if (@env != nil)
+            @plant.growth_environments << @env
+          end
+        end
       end
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
@@ -147,6 +146,8 @@ class PlantsController < ApplicationController
           @plant.growth_environments << @env
         end
       end
+    else
+      @plant.growth_environments.clear
     end
 
     if params[:maintenances][:id]

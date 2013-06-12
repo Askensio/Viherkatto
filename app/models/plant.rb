@@ -7,7 +7,7 @@ class Plant < ActiveRecord::Base
   has_many :growths, :dependent => :destroy
   has_many :growth_environments, :through => :growths
 
-  attr_accessible :height, :latin_name, :colour, :min_soil_thickness, :name, :note, :weight, :light_id, :maintenance
+  attr_accessible :min_height, :max_height, :latin_name, :colour, :min_soil_thickness, :name, :note, :weight, :light_id, :maintenance
   attr_readonly :id
 
   def translated_colour_category
@@ -19,6 +19,8 @@ class Plant < ActiveRecord::Base
   validates :min_soil_thickness, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
   validates :weight, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
   validates :note, length: {maximum: 1000}
-  validates :height, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
+  validates :min_height, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
+  validates :max_height, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
+  validates_numericality_of :max_height, :greater_than => Proc.new { |r| r.min_height }, :allow_blank => true
   validates :latin_name, presence: true, length: {maximum: 100}
 end

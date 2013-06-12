@@ -19,7 +19,8 @@ namespace :db do
       latin_name = Faker::Lorem.words(4).join(" ")
       colour = "Green"
       #maintenance = 2
-      height = 10
+      min_height = 10
+      max_height = 20
       thickness = n+8
 
       light = 2
@@ -29,7 +30,8 @@ namespace :db do
 
       @plant = Plant.create!(name: name,
                              latin_name: latin_name,
-                             height: height,
+                             min_height: min_height,
+                             max_height: max_height,
                              colour: colour,
                              #maintenance: maintenance,
                              min_soil_thickness: thickness,

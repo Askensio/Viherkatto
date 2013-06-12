@@ -33,7 +33,13 @@
 
           <tr>
             <td><%= f.label :growth_environment %></td>
-            <td><%= f.label printEnvironments(@plant.growth_environments) %></td>
+            <td>
+              <% if (@plant.growth_environments.empty?) %>
+                  <%= f.label "Tyhjä" %>
+              <% else %>
+                  <%= f.label printEnvironments(@plant.growth_environments) %>
+              <% end %>
+            </td>
           </tr>
 
           <tr>
@@ -47,8 +53,13 @@
           </tr>
 
           <tr>
-            <td><%= f.label :height %></td>
-            <td><%= f.label @plant.height %></td>
+            <td><%= f.label :min_height %></td>
+            <td><%= f.label @plant.min_height %></td>
+          </tr>
+
+          <tr>
+            <td><%= f.label :max_height %></td>
+            <td><%= f.label @plant.max_height %></td>
           </tr>
 
           <tr>

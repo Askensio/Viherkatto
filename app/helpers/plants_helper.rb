@@ -20,6 +20,14 @@ module PlantsHelper
     @level = @maintenance[index]
   end
 
+  def listSelectedEnvironments (environments)
+    envs = []
+    environments.each do |env|
+      envs << env.id
+    end
+    return envs
+  end
+
   def printEnvironments (environments)
     envs = ""
     counter = 1
