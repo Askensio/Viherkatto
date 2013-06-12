@@ -21,6 +21,6 @@ class Plant < ActiveRecord::Base
   validates :note, length: {maximum: 1000}
   validates :min_height, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
   validates :max_height, presence: true, :inclusion => {:in => (0...10000)}, :numericality => {:only_integer => true}
-  validates_numericality_of :max_height, :greater_than => Proc.new { |r| r.min_height }, :allow_blank => true
+  validates_numericality_of :max_height, :greater_than_or_equal_to => Proc.new { |r| r.min_height }, :allow_blank => true
   validates :latin_name, presence: true, length: {maximum: 100}
 end
