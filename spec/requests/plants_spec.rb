@@ -49,7 +49,8 @@ describe 'Plant pages' do
         select "Sininen", :from => "plant_colour"
         select "Helppo", :from => "maintenances_id"
         select "Sammalikko", :from => "growth_environments_id"
-        fill_in "plant_height", with: 1
+        fill_in "plant_min_height", with: 1
+        fill_in "plant_max_height", with: 10
         fill_in "plant_latin_name", with: "Plantus plantus"
         fill_in "plant_min_soil_thickness", with: 8
         fill_in "plant_weight", with: 1

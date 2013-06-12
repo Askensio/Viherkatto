@@ -22,8 +22,8 @@ describe Greenroof do
     @roof.light = @light
     @groof.roof = @roof
 
-    @plant1 = Plant.new(name: "nättikukka", latin_name: "Kukkaus kauneus", colour: "Blue", min_soil_thickness: 20, weight: 1, note: "Oikein tosi nätti!", height: 5)
-    @plant2 = Plant.new(name: "Example Plant nro 2", latin_name: "Plantus Examplus Secondus", colour: "Green", min_soil_thickness: 20, weight: 1, note: "This one's also a totally fabulous plant!", height: 5)
+    @plant1 = Plant.new(name: "nättikukka", latin_name: "Kukkaus kauneus", colour: "Blue", min_soil_thickness: 20, weight: 1, note: "Oikein tosi nätti!", min_height: 5, max_height: 10)
+    @plant2 = Plant.new(name: "Example Plant nro 2", latin_name: "Plantus Examplus Secondus", colour: "Green", min_soil_thickness: 20, weight: 1, note: "This one's also a totally fabulous plant!", min_height: 5, max_height: 10)
     @plant1.maintenance = @maintenance
     @plant2.maintenance = @maintenance
 
