@@ -1,20 +1,31 @@
 <% provide(:title, 'Käyttäjän '<< @greenroof.user.name << " viherkatto") %>
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
-<%= stylesheet_link_tag "photoslider", media: "all" %>
+<%= stylesheet_link_tag "flexslider", media: "all" %>
 
 <div class="row-fluid marketing">
   <div>
     <h1>
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
-    <%= javascript_include_tag "photoslider" %>
-    <div class="span5">
-      <div class="photoslider" id="default"></div>
 
-      <%= javascript_include_tag 'photoinit' %>
-
+    <div id="slider-holder">
+      <div class="flexslider span4">
+        <ul class="slides">
+          <li>
+            <img src="/assets/greenroof1.jpg"/>
+          </li>
+          <li>
+            <img src="/assets/greenroof2.jpg"/>
+          </li>
+          <li>
+            <img src="/assets/greenroof3.JPG"/>
+          </li>
+          <li>
+            <img src="/assets/2ndgreenroof.jpg"/>
+          </li>
+        </ul>
+      </div>
     </div>
-
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
@@ -27,9 +38,15 @@
             <td><%= f.label @greenroof.address %></td>
           </tr>
 
+          <% if !@greenroof.constructor.nil? %>
+          <tr>
+            <td><%= f.label :constructor, h("Rakentaja: ") %></td>
+            <td><%= f.label @greenroof.constructor %></td>
+          </tr>
+              <% end %>
 
           <tr>
-            <td><%= f.label :purpose, h("Käyttötarkoitus: ")%></td>
+            <td><%= f.label :purpose, h("Käyttötarkoitus: ") %></td>
             <td><%= f.label @greenroof.purpose %></td>
           </tr>
 
@@ -46,7 +63,7 @@
           </tr>
 
           <tr>
-            <td><%= f.label :bases, h("Pohjat ") %></td>
+            <td><%= f.label :bases, h("Rakennekerrokset ")%></td>
             <td>
               <div class="well"> <%= printBases(@greenroof) %> </div>
             </td>
@@ -66,6 +83,14 @@
   </div>
 </div>
 
-<%= javascript_include_tag "photoslider" %>
+<%= javascript_include_tag "flexslider" %>
+
+<script>
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "fade"
+        });
+    });
+</script>
 
 

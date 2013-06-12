@@ -13,11 +13,13 @@ class Greenroof < ActiveRecord::Base
 
   before_save :save_bases, :save_roof
 
-  attr_accessible :address, :purpose, :note, :customPlants
+  attr_accessible :address, :constructor, :purpose, :note, :customPlants, :year
 
   validates :address, presence: true, length: { maximum: 200 }
+  validates :constructor, length: { maximum: 200 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}
   validates :note, length: { maximum: 5000 }
+  #validates :year, numericality: true, inclusion: {in: (1900...2100)}
 
   def save_bases
     self.bases.each do |base|
@@ -27,5 +29,9 @@ class Greenroof < ActiveRecord::Base
 
   def save_roof
     self.roof.save
+  end
+
+  def search(conditions)
+    Greenroof.where(conditions: conditions)
   end
 end

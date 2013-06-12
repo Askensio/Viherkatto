@@ -5,9 +5,9 @@ namespace :db do
   task populate: :environment do
 
 
+    Light.create!(desc: "Aurinkoinen")
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
-    Light.create!(desc: "Aurinkoinen")
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
     Maintenance.create!(name: "Luonnonmukainen")
@@ -41,15 +41,18 @@ namespace :db do
     end
 
     Layer.create!(name: "Kivimurska",
+                  product_name: "Murske 2000",
                   thickness: 60,
                   weight: 100)
 
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
+      product_name = Faker::Lorem.words(1).join(" ")
       thickness = n*10+1
       weight = thickness+10
 
       Layer.create!(name: name,
+                    product_name: product_name,
                     thickness: thickness,
                     weight: weight)
     end
@@ -74,6 +77,9 @@ namespace :db do
                    password_confirmation: password)
     end
 
+    Environment.create!(name: "Esikaupunki")
+    Environment.create!(name: "Keskusta")
+    Environment.create!(name: "Maaseutu")
     Environment.create!(name: "Merenranta")
     Environment.create!(name: "Pelto")
     Environment.create!(name: "Metsä")
@@ -87,27 +93,27 @@ namespace :db do
         id = 1
       end
       area = n
-      declination = n
+      declination = n%3
       load_capacity = 10*n
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
 
-
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(absorbancy: 20)
-      @layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
-      @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
+      @layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      @layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
       @base.layers << @layer1
       @base.layers << @layer2
 
 
       address = Faker::Lorem.words(3).join(" ")
+      constructor = "Laurin viherpiperrys kommandiittiyhtiö"
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(address: address, constructor: constructor, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants

@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(:version => 20130610122108) do
 
   create_table "greenroofs", :force => true do |t|
     t.string   "address"
+    t.string   "constructor"
+    t.integer  "year"
     t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
@@ -77,10 +79,11 @@ ActiveRecord::Schema.define(:version => 20130610122108) do
 
   create_table "layers", :force => true do |t|
     t.string   "name"
+    t.string   "product_name"
     t.integer  "thickness"
     t.integer  "weight"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "lights", :force => true do |t|

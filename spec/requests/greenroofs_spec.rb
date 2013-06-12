@@ -49,7 +49,7 @@ describe 'Greenroof' do
         fill_in "greenroof_address", with: "Some address"
         fill_in "greenroof_note", with: "This is a test greenroof"
         fill_in "roof_area", with: "100"
-        fill_in "roof_declination", with: "10"
+        select "Tasakatto", from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
         #select "Pelto",               from: "environment_id"
@@ -80,17 +80,15 @@ describe 'Greenroof' do
       Environment.create!(name: "Kaupunki")
       Environment.create!(name: "Muu")
 
-
       area = 2
-      declination = 4
+      declination = 1
       load_capacity = 10*4
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.first
 
-
       @plant1 = FactoryGirl.create(:plant)
-      @plant1.maintenance = Maintenance.create!(name: "Helppo")
+      @plant1.maintenance = Maintenance.create!(name: "Vaikea")
       @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
       @plant1.update_attributes(:light_id => Light.first.id);
       @plants = [@plant1, FactoryGirl.create(:plant)]
@@ -99,7 +97,6 @@ describe 'Greenroof' do
       @layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
       @base.layers << @layer1
       @base.layers << @layer2
-
 
       address = Faker::Lorem.words(3).join(" ")
       purpose = 1
@@ -117,15 +114,51 @@ describe 'Greenroof' do
 
     #subject {page}
 
+    #Environment.create!(name: "Merenranta")
+    #Environment.create!(name: "Pelto")
+    #Environment.create!(name: "Metsä")
+    #Environment.create!(name: "Kaupunki")
+    #Environment.create!(name: "Muu")
+    #
+    #area = 2
+    #declination = 1
+    #load_capacity = 10*4
+    #
+    #@roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
+    #@roof.environments << Environment.first
+    #
+    ##@plant1 = FactoryGirl.create(:plant)
+    ##@plant1.update_attributes(:light_id => Light.create!(desc: "Aurinkoinen"));
+    #@plants = [@plant1, FactoryGirl.create(:plant)]
+    #@base = Base.new(absorbancy: 20)
+    #@layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
+    #@layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
+    #@base.layers << @layer1
+    #@base.layers << @layer2
+    #
+    #address = Faker::Lorem.words(3).join(" ")
+    #purpose = 1
+    #note = Faker::Lorem.words(5).join(" ")
+    #@user = FactoryGirl.create(:user)
+    #
+    #@groof = Greenroof.new(address: address, purpose: purpose, note: note, year: 2012)
+    #@groof.user = @user
+    #@groof.roof = @roof
+    #@groof.plants = @plants
+    #@groof.bases << @base
+    #@groof.save!
+    #visit greenroof_path(@groof)
+    #end
+
+    subject { page }
 
     it { should have_selector('label', text: "Käyttäjä") }
     it { should have_selector('label', text: "Sijainti") }
     it { should have_selector('label', text: "Käyttötarkoitus") }
     it { should have_selector('label', text: "Katon tiedot") }
     it { should have_selector('label', text: "Kasvit") }
-    it { should have_selector('label', text: "Pohjat") }
+    it { should have_selector('label', text: "Rakennekerrokset") }
     it { should have_selector('label', text: "Huomioita") }
-
 
     describe 'click-plants-link', js: true do
       before do
@@ -144,6 +177,11 @@ describe 'Greenroof' do
       end
       it { should have_selector('td', text: "Paino") }
     end
-
+    describe 'index', js: true do
+      before { visit greenroofs_path }
+      it { should have_selector('title', text: "Viherkatot") }
+      it { should have_selector('h5', text: "Omistaja") }
+      it { should have_selector('h5', text: "Sijainti") }
+    end
   end
 end

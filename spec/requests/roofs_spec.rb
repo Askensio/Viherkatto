@@ -33,7 +33,7 @@ describe 'Roof' do
     describe "with valid information" do
       before do
         fill_in "roof_area",          with: "20"
-        fill_in "roof_declination",   with: "10"
+        select "Tasakatto",           from: "roof_declination"
         select "Merenranta",          from: "environment_id"
         select "Pelto",               from: "environment_id"
         fill_in "roof_load_capacity", with: "500"
@@ -57,7 +57,7 @@ describe 'Roof' do
     describe 'with invalid inputs' do
       before do
         fill_in "roof_area",          with: "-5"
-        fill_in "roof_declination",   with: ""
+        select "Tasakatto",           from: "roof_declination"
         select "Merenranta",          from: "environment_id"
         select "Pelto",               from: "environment_id"
         fill_in "roof_load_capacity", with: "500"

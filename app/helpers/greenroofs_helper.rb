@@ -25,7 +25,7 @@ module GreenroofsHelper
     output = '';
     output.html_safe
     index = 1;
-    greenroof.bases.each_with_index { |base| bases.push("Pohja " << index.to_s << ": " << printLayers(base) << "\n")
+    greenroof.bases.each_with_index { |base| bases.push("Kerros " << index.to_s << ": " << printLayers(base) << "\n")
     index.next
     }
     hash = Hash[bases.map.with_index.to_a]
