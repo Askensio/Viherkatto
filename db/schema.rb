@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611105054) do
+
+ActiveRecord::Schema.define(:version => 20130610122108) do
+
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20130611105054) do
   create_table "greenroofs", :force => true do |t|
     t.string   "address"
     t.string   "constructor"
+    t.integer  "year"
     t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
@@ -69,6 +72,22 @@ ActiveRecord::Schema.define(:version => 20130611105054) do
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
+
+  create_table "growth_environments", :force => true do |t|
+    t.string   "environment"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "growths", :force => true do |t|
+    t.integer  "plant_id"
+    t.integer  "growth_environment_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "growths", ["growth_environment_id"], :name => "index_growths_on_growth_environment_id"
+  add_index "growths", ["plant_id"], :name => "index_growths_on_plant_id"
 
   create_table "layers", :force => true do |t|
     t.string   "name"
@@ -95,6 +114,12 @@ ActiveRecord::Schema.define(:version => 20130611105054) do
   add_index "locations", ["environment_id"], :name => "index_locations_on_environment_id"
   add_index "locations", ["roof_id"], :name => "index_locations_on_roof_id"
 
+  create_table "maintenances", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "planteds", :force => true do |t|
     t.integer  "greenroof_id"
     t.integer  "plant_id"
@@ -109,11 +134,12 @@ ActiveRecord::Schema.define(:version => 20130611105054) do
     t.string   "name"
     t.string   "latin_name"
     t.string   "colour"
-    t.integer  "maintenance"
     t.integer  "min_soil_thickness"
     t.integer  "weight"
-    t.integer  "height"
+    t.integer  "max_height"
+    t.integer  "min_height"
     t.integer  "light_id"
+    t.integer  "maintenance_id"
     t.string   "note"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false

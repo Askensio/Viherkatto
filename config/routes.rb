@@ -10,13 +10,16 @@ Viherkatto::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
 
+
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
   match '/add_plant', to: 'plants#new'
   match '/uloskirjaus', to: 'sessions#destroy'
   match '/getcurrentuser', to: 'sessions#getCurrentUser'
   match '/sieni', to: 'sessions#important'
+  match '/search/greenroofs', to: 'greenroofs#search'
   match '/search/plants', to: 'plants#search'
+
 
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'
@@ -28,6 +31,12 @@ Viherkatto::Application.routes.draw do
   match '/contacts/edit', to: 'contact#edit'
   get 'pages/home'
   root :to => 'pages#home'
+
+  resources :users do
+    member do
+      post 'admin'
+    end
+  end
 
 
   # The priority is based upon order of creation:

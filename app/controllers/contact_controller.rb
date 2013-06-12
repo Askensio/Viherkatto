@@ -3,7 +3,6 @@
 class ContactController < ApplicationController
 
   def edit
-
     if (!signed_in? || !current_user.admin?)
       redirect_to root_path
     else

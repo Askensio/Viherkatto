@@ -32,8 +32,19 @@
           </tr>
 
           <tr>
+            <td><%= f.label :growth_environment %></td>
+            <td>
+              <% if (@plant.growth_environments.empty?) %>
+                  <%= f.label "Tyhjä" %>
+              <% else %>
+                  <%= f.label printEnvironments(@plant.growth_environments) %>
+              <% end %>
+            </td>
+          </tr>
+
+          <tr>
             <td><%= f.label :maintenance %></td>
-            <td><%= f.label maintenanceLevel(@plant.maintenance) %></td>
+            <td><%= f.label @plant.maintenance.name %></td>
           </tr>
 
           <tr>
@@ -41,10 +52,25 @@
             <td><%= f.label @plant.min_soil_thickness %></td>
           </tr>
 
-          <tr>
-            <td><%= f.label :height %></td>
-            <td><%= f.label @plant.height %></td>
-          </tr>
+          <% if !@plant.min_height.nil? && !@plant.max_height.nil? %>
+
+              <% @printable = " " %>
+              <% if @plant.min_height != 0 || @plant.max_height != 0 %>
+                  <tr>
+                    <td><%= f.label "height" %></td>
+                    <td>
+                      <% if @plant.min_height == @plant.max_height %>
+
+                          <% @printable = @plant.min_height.to_s %>
+                      <% else %>
+
+                          <% @printable += @plant.min_height.to_s + ' - ' + @plant.max_height.to_s %>
+                      <% end %>
+              <% end %>
+              <%= f.label @printable %>
+              </td>
+              </tr>
+          <% end %>
 
           <tr>
             <td><%= f.label :weight %></td>
@@ -57,15 +83,16 @@
           </tr>
 
         </table>
+
+
+        <% if signed_in? && current_user.admin? %>
+            <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
+        <% end %>
+
+        </div>
+        </div>
+
+        <%= javascript_include_tag "bootstrap-select" %>
+
+        <script>$('.selectpicker').selectpicker();</script>
     <% end %>
-
-    <% if signed_in? && current_user.admin? %>
-        <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
-    <% end %>
-
-  </div>
-</div>
-
-<%= javascript_include_tag "bootstrap-select" %>
-
-<script>$('.selectpicker').selectpicker();</script>

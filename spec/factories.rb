@@ -24,9 +24,9 @@ FactoryGirl.define do
   factory :plant do
     sequence(:name) { |n| "Example Plant #{n}" }
     sequence(:latin_name) { |n| "Plantus Examplus #{n}" }
-    height 1
+    min_height 1
+    max_height 10
     colour "Green"
-    maintenance 1
     min_soil_thickness 20
     weight 1
     note "Totally fabulous plant"
