@@ -4,6 +4,27 @@ $(document).ready(function () {
     paginator.getObjects(true)
     modalctrl = new ModalController()
     modalctrl.setListeners(paginator)
+
+    var clickListener = function (event) {
+        paginate()
+    }
+
+    $('#find-button').click(clickListener);
+
+    var keyListener = function (event) {
+        var code = (event.keyCode ? event.keyCode : event.which);
+        if (code == 13) { //Enter keycode
+            paginate()
+        }
+    }
+
+    $('#email-field').keyup(keyListener)
+
+    function paginate() {
+        var params = 'email=' + $('#email-field').val() + '&'
+        paginator.parameters = params
+        paginator.getObjects(true)
+    }
 });
 
 function ModalController() {
@@ -28,19 +49,76 @@ ModalController.prototype.setListeners = function (paginator) {
     }
 }
 
+function AdminController(id, elem) {
+
+    this.id = id
+    this.element = elem
+
+    this.toggleAdminStatus
+}
+AdminController.prototype.toggleAdminStatus = function () {
+    var element = this.element
+
+    $.ajax({
+        url: '/users/' + this.id + '/admin',
+        type: 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        success: function (response) {
+            responseHandler(response)
+        }
+    });
+
+    function responseHandler(admin) {
+        if (admin) {
+            console.log("käyttäjä on admin")
+            element.attr('class', 'admin-user user-controls')
+        } else {
+            console.log("käyttäjä ei ole admin")
+            element.attr('class', 'user-controls')
+        }
+        console.log(element)
+    }
+
+    console.log("Changin admin status of id: " + this.id)
+}
+
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>').attr({
-        style: "width: 30%"
+        style: "width: 40%"
     })
-    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>')
-    listElement.append(link)
+    var userLink = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.email + '</a>')
+    listElement.append(userLink)
+
+    var controlElement = $('<div></div>')
+
+    var adminToggle = $('<label>admin</label>').attr('class', 'user-controls')
+    if (entry.admin) {
+        adminToggle.attr('class', 'admin-user user-controls')
+    }
+
+    adminToggle.click(function (event) {
+        adminToggler = new AdminController(entry.id, $(event.target))
+        adminToggler.toggleAdminStatus()
+    })
+
+    controlElement.append(adminToggle)
+
+    controlElement.append(' | ')
+
     var deleteElement = $('<a href=\"#\" id="/' + this.object + 's/' + entry.id + '\">' + 'poista' + '</a>').click(function (event) {
         event.stopPropagation()
         $('#confirm-modal').modal('show')
         ModalController.groofId = entry.id
 
     });
-    deleteElement.attr('class', 'pull-right')
-    listElement.append(deleteElement)
+    controlElement.append(deleteElement)
+
+    controlElement.attr('class', 'pull-right')
+
+
+    listElement.append(controlElement)
+
     $('.' + this.object + '-list').append(listElement)
 }

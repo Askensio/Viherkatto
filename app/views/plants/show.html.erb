@@ -32,8 +32,13 @@
           </tr>
 
           <tr>
+            <td><%= f.label :growth_environment %></td>
+            <td><%= f.label printEnvironments(@plant.growth_environments) %></td>
+          </tr>
+
+          <tr>
             <td><%= f.label :maintenance %></td>
-            <td><%= f.label maintenanceLevel(@plant.maintenance) %></td>
+            <td><%= f.label @plant.maintenance.name %></td>
           </tr>
 
           <tr>

@@ -12,6 +12,7 @@ describe 'Greenroof' do
     @light = Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
+    Maintenance.create!(name: "Helppo")
   end
 
   let(:user) { FactoryGirl.create(:user) }
@@ -86,8 +87,9 @@ describe 'Greenroof' do
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.first
 
-
       @plant1 = FactoryGirl.create(:plant)
+      @plant1.maintenance = Maintenance.create!(name: "Vaikea")
+      @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
       @plant1.update_attributes(:light_id => Light.first.id);
       @plants = [@plant1, FactoryGirl.create(:plant)]
       @base = Base.new(absorbancy: 20)
@@ -96,23 +98,59 @@ describe 'Greenroof' do
       @base.layers << @layer1
       @base.layers << @layer2
 
-
       address = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = FactoryGirl.create(:user)
 
-      @groof = Greenroof.new(address: address, purpose: purpose, note: note, year: 2012)
+      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
-      @groof.save!
+      @groof.save
       visit greenroof_path(@groof)
     end
 
     #subject {page}
 
+    #Environment.create!(name: "Merenranta")
+    #Environment.create!(name: "Pelto")
+    #Environment.create!(name: "Metsä")
+    #Environment.create!(name: "Kaupunki")
+    #Environment.create!(name: "Muu")
+    #
+    #area = 2
+    #declination = 1
+    #load_capacity = 10*4
+    #
+    #@roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
+    #@roof.environments << Environment.first
+    #
+    ##@plant1 = FactoryGirl.create(:plant)
+    ##@plant1.update_attributes(:light_id => Light.create!(desc: "Aurinkoinen"));
+    #@plants = [@plant1, FactoryGirl.create(:plant)]
+    #@base = Base.new(absorbancy: 20)
+    #@layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
+    #@layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
+    #@base.layers << @layer1
+    #@base.layers << @layer2
+    #
+    #address = Faker::Lorem.words(3).join(" ")
+    #purpose = 1
+    #note = Faker::Lorem.words(5).join(" ")
+    #@user = FactoryGirl.create(:user)
+    #
+    #@groof = Greenroof.new(address: address, purpose: purpose, note: note, year: 2012)
+    #@groof.user = @user
+    #@groof.roof = @roof
+    #@groof.plants = @plants
+    #@groof.bases << @base
+    #@groof.save!
+    #visit greenroof_path(@groof)
+    #end
+
+    subject { page }
 
     it { should have_selector('label', text: "Käyttäjä") }
     it { should have_selector('label', text: "Sijainti") }
@@ -160,3 +198,4 @@ describe 'Greenroof' do
 
   end
 end
+
