@@ -1,11 +1,8 @@
 Viherkatto::Application.routes.draw do
 
-  get "contact/edit"
 
-  get "contact/show"
 
-  get "contact/create"
-
+  resources :contact
   resources :users
   resources :plants
   resources :layers, except: :destroy
@@ -24,9 +21,11 @@ Viherkatto::Application.routes.draw do
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'
 
+
   get 'pages/home'
   get 'pages/contacts'
   match '/contacts', to: 'contact#show'
+  match '/contacts/edit', to: 'contact#edit'
   root :to => 'pages#home'
 
 
