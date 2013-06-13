@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Greenroof < ActiveRecord::Base
 
   belongs_to :user
@@ -34,4 +36,5 @@ class Greenroof < ActiveRecord::Base
   def search(conditions)
     Greenroof.where(conditions: conditions)
   end
+
 end
