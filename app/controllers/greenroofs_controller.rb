@@ -1,5 +1,6 @@
 # encoding: UTF-8
 
+
 class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
@@ -232,11 +233,9 @@ class GreenroofsController < ApplicationController
 
       file =  File.read(params["file-0"].tempfile) if params["file-0"]
       f = File.new("/home/jarno/tmp" ,"w+")
-      #f.write(file)
-      #f.close
-      @groof.attachment = file
+      @groof.photo = params["file-0"].tempfile
       puts "LDSALDASLKJDSALK"
-      @groof.save!
+      @groof.save
       format.json { render :json => { response: "jee, kuva uploadattu!" } }
     end
   end

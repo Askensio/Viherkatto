@@ -15,7 +15,12 @@ class Greenroof < ActiveRecord::Base
 
   attr_accessible :address, :constructor, :purpose, :note, :customPlants, :year, :photo
 
+
   has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  attr_accessor :photo_file_name
+  attr_accessor :photo_content_type
+  attr_accessor :photo_file_size
+  attr_accessor :photo_updated_at
 
   validates :address, presence: true, length: { maximum: 200 }
   validates :constructor, length: { maximum: 200 }
