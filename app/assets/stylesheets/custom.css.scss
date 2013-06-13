@@ -20,6 +20,7 @@ section {
 textarea {
   resize: vertical;
 }
+
 #navbar-container {
   width: 90%;
   max-width: 1170px;
@@ -251,7 +252,6 @@ input {
   }
 }
 
-
 ul, ol {
   padding: 0;
   margin: 0 0 25px;
@@ -321,9 +321,6 @@ ul, ol {
     background-color: $grayMediumLight;
   }
 }
-
-
-
 
 #note_ {
   height: 200px;
@@ -429,7 +426,6 @@ a {
   }
 }
 
-
 #contact-table {
   table-layout: fixed;
 }
@@ -438,11 +434,10 @@ a {
   word-wrap: break-word;
 }
 
-
 // User control label
 .user-controls {
-    display: inline;
-    color: rgb(230, 230, 230);
+  display: inline;
+  color: rgb(230, 230, 230);
 }
 
 .admin-user {
@@ -451,6 +446,7 @@ a {
 
 .loading-icon {
   display: none;
+}
 
 /* CSS FOR GREEN ROOF ADDITION */
 .greenroof-addition {
@@ -485,5 +481,4 @@ a {
   .plant-add-list {
     margin-bottom: 0.7em;
   }
-
 }
