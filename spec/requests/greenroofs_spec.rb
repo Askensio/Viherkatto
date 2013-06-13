@@ -104,12 +104,12 @@ describe 'Greenroof' do
       note = Faker::Lorem.words(5).join(" ")
       @user = FactoryGirl.create(:user)
 
-      @groof = Greenroof.new(address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(year: 2010, address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
-      @groof.save
+      @groof.save!
 =end
       @groof = FactoryGirl.create(:whole_greenroof)
       visit greenroof_path(@groof)
@@ -182,6 +182,8 @@ describe 'Greenroof' do
     end
     describe 'index', js: true do
       before { visit greenroofs_path }
+
+      #it { should have_selector('title', text: "Viherkatot") }
       it { should have_selector('h5', text: "Omistaja") }
       it { should have_selector('h5', text: "Sijainti") }
     end
