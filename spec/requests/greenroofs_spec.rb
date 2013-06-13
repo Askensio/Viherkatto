@@ -195,10 +195,42 @@ describe 'Greenroof' do
 
     subject { page }
 
-    describe "find by address" do
+    describe "find by address", js: true do
       before do
         fill_in 'address', with: "Emminkatu"
-        click_on('search-button')
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Emminkatu") }
+    end
+
+    describe "find by greenroof note", js:true do
+      before do
+        fill_in 'groofnote', with: "kattotiimi"
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Emminkatu") }
+    end
+
+    describe "find by plantname", js:true do
+      before do
+        fill_in 'plantname', with: "xam"
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Emminkatu") }
+    end
+
+    describe "find by plantmaxheight", js:true do
+      before do
+        fill_in 'plantmaxheight', with: 1
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Emminkatu") }
+    end
+
+    describe "find by plantminheight", js:true do
+      before do
+        fill_in 'plantminheight', with: 1
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
       it { should have_link("Emminkatu") }
     end
