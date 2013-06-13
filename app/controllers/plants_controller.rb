@@ -137,14 +137,25 @@ class PlantsController < ApplicationController
       @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness]) if params[:min_thickness]
       @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness]) if params[:max_thickness]
 
-      @plants = @plants.where('height <= ?', params[:max_height]) if params[:max_height]
-      @plants = @plants.where('height >= ?', params[:min_height]) if params[:min_height]
+      @plants = @plants.where('max_height <= ?', params[:max_height]) if params[:max_height]
+      @plants = @plants.where('min_height >= ?', params[:min_height]) if params[:min_height]
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-
       params[:colour].try(:each) do |colour|
         @plants = @plants.where('colour like?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+      end
+
+      params[:growth_environments].try(:each) do |env|
+        @plants = @plants.where('growth_environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%') if env
+      end
+
+      if (params[:maintenance])
+        @maints = []
+        Maintenance.where(:name => params[:maintenance]).each do |id|
+          @maints.push(id)
+        end
+        @plants = @plants.where(:maintenance_id => @maints)
       end
 
       if (params[:lightness])
