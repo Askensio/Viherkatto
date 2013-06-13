@@ -58,7 +58,7 @@
           <tr>
             <td><%= f.label :plants, h("Kasvit ") %></td>
             <td>
-              <div class="well"> <%= printPlants(@greenroof) %> </div>
+              <div class="well"> <%= printPlants(@greenroof) + printCustomPlants(@greenroof) %> </div>
             </td>
           </tr>
 
