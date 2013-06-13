@@ -41,10 +41,10 @@ namespace :db do
       @plant.colours << colour
       colour =  Colour.first
       @plant.colours << colour
-      @plant.save!
       @plant.light = Light.first
       @plant.maintenance = Maintenance.first
       @plant.growth_environments << GrowthEnvironment.first
+      @plant.save!
     end
 
     Layer.create!(name: "Kivimurska",

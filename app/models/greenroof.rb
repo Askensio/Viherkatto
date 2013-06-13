@@ -19,7 +19,7 @@ class Greenroof < ActiveRecord::Base
   validates :constructor, length: { maximum: 200 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}
   validates :note, length: { maximum: 5000 }
-  #validates :year, numericality: true, inclusion: {in: (1900...2100)}
+  validates :year, numericality: true, inclusion: {in: (1900...2100)}
 
   def save_bases
     self.bases.each do |base|
