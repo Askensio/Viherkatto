@@ -3,6 +3,7 @@
 <%= stylesheet_link_tag "bootstrap-fileupload", media: "all" %>
 
 
+
 <!-- Masthead as provided by Twitter Bootstrap -->
 <div class="container greenroof-addition">
   <header class="jumbotron subhead">
@@ -12,11 +13,21 @@
   <section id="form">
     <div class="row">
       <div class="span7">
-        <p class="lead">Oletko kenties itse rakentanut tai rakennuttanut viherkaton ja haluat jakaa sen muiden kanssa? Jakamalla sen täällä lähetät teoksesi maailmalle kaikkien ihailtavaksi.</p>
+        <p class="lead">Oletko kenties itse rakentanut tai rakennuttanut viherkaton ja haluat jakaa sen muiden kanssa?
+          Jakamalla sen täällä lähetät teoksesi maailmalle kaikkien ihailtavaksi.</p>
+
         <form class="form-horizontal">
           <fieldset>
             <legend>Viherkaton yleiset tiedot</legend>
             <%= render 'shared/forms/groof_form_fields' %>
+            <br><br>
+            <label>Kuva viherkatostasi:</label>
+
+            <div class="fileupload fileupload-new" data-provides="fileupload" name="image-upload">
+              <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" id="image-upload"/></span>
+              <span class="fileupload-preview"></span>
+              <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+            </div>
             <br></br>
             <legend>Katon tekniset tiedot</legend>
             <div id="large-input-right">

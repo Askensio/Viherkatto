@@ -3,6 +3,7 @@
 class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
+  before_filter :owner, only: [:upload]
 
   def search
 
@@ -155,7 +156,10 @@ class GreenroofsController < ApplicationController
 
     if @greenroof.save!
       flash[:success] = "Viherkaton lisäys onnistui!"
-      render :js => "window.location = '/'"
+      respond_to do |format|
+        format.json { render :json => {id: @greenroof.id} }
+      end
+      #render :js => "window.location = '/'"
 
     else
       if not params[:plants].nil? and not params[:environment][:id].empty?
@@ -211,14 +215,37 @@ class GreenroofsController < ApplicationController
     @greenroof = Greenroof.find(params[:id])
     respond_to do |format|
       @response = ""
-      if (@greenroof.user_id == current_user.id ) or current_user.admin?
+      if (@greenroof.user_id == current_user.id) or current_user.admin?
         @greenroof.destroy
         @response = "success"
       else
         @response = "error"
       end
 
-      format.json { render :json => { response: @response }}
+      format.json { render :json => {response: @response} }
+    end
+  end
+
+  def upload
+    respond_to do |format|
+      @groof = Greenroof.find_by_id( params[:id] )
+
+      file =  File.read(params["file-0"].tempfile) if params["file-0"]
+      f = File.new("/home/jarno/tmp" ,"w+")
+      #f.write(file)
+      #f.close
+      @groof.attachment = file
+      puts "LDSALDASLKJDSALK"
+      @groof.save!
+      format.json { render :json => { response: "jee, kuva uploadattu!" } }
+    end
+  end
+
+  private
+
+  def owner
+    unless Greenroof.find_by_id( params[:id] ).user_id == current_user.id
+      redirect_to root_url
     end
   end
 end
