@@ -27,9 +27,7 @@ describe 'Greenroof' do
       visit new_greenroof_path
     end
 
-
     let(:submit) { "save" }
-
 
     it { should have_selector('title', content: 'Viherkaton lisäys') }
     it { should have_selector('h1', content: 'Viherkaton tiedot') }

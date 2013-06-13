@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610122108) do
+ActiveRecord::Schema.define(:version => 20130612061709) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20130610122108) do
 
   add_index "bases", ["greenroof_id"], :name => "index_bases_on_greenroof_id"
 
+  create_table "colours", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "colours", ["value"], :name => "index_colours_on_value"
+
   create_table "consists", :force => true do |t|
     t.integer  "base_id"
     t.integer  "layer_id"
@@ -32,6 +40,16 @@ ActiveRecord::Schema.define(:version => 20130610122108) do
 
   add_index "consists", ["base_id"], :name => "index_consists_on_base_id"
   add_index "consists", ["layer_id"], :name => "index_consists_on_layer_id"
+
+  create_table "contacts", :force => true do |t|
+    t.string   "otsikko"
+    t.string   "osoite"
+    t.string   "email"
+    t.string   "puhelin"
+    t.string   "note"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "custom_plants", :force => true do |t|
     t.string   "name"
@@ -47,6 +65,16 @@ ActiveRecord::Schema.define(:version => 20130610122108) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "flower_colours", :force => true do |t|
+    t.integer  "colour_id"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "flower_colours", ["colour_id"], :name => "index_flower_colours_on_colour_id"
+  add_index "flower_colours", ["plant_id"], :name => "index_flower_colours_on_plant_id"
 
   create_table "greenroofs", :force => true do |t|
     t.string   "address"
@@ -121,10 +149,10 @@ ActiveRecord::Schema.define(:version => 20130610122108) do
   create_table "plants", :force => true do |t|
     t.string   "name"
     t.string   "latin_name"
-    t.string   "colour"
     t.integer  "min_soil_thickness"
     t.integer  "weight"
-    t.integer  "height"
+    t.integer  "max_height"
+    t.integer  "min_height"
     t.integer  "light_id"
     t.integer  "maintenance_id"
     t.string   "note"

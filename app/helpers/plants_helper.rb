@@ -17,7 +17,15 @@ module PlantsHelper
   def maintenanceLevel(index)
     @maintenance = %w( Helppo Keskivaikea Vaikea )
 
-    @level = @maintenance[index]
+    @level = @maintenance[index-1]
+  end
+
+  def listSelectedEnvironments (environments)
+    envs = []
+    environments.each do |env|
+      envs << env.id
+    end
+    return envs
   end
 
   def printEnvironments (environments)

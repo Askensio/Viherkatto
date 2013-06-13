@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe Plant do
@@ -8,7 +9,7 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", height: 1, colour: "Green", min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", min_height: 5, max_height: 10,  min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
     @plant.maintenance = Maintenance.find_by_id(1)
   end
@@ -17,9 +18,8 @@ describe Plant do
 
   it { should respond_to(:name) }
   it { should respond_to(:latin_name) }
-  it { should respond_to(:colour) }
-  it { should respond_to(:height) }
-  it { should respond_to(:maintenance) }
+  it { should respond_to(:min_height) }
+  it { should respond_to(:max_height) }
   it { should respond_to(:min_soil_thickness) }
   it { should respond_to(:weight) }
   it { should respond_to(:light_id) }
@@ -100,23 +100,51 @@ describe Plant do
     it { should be_valid }
   end
 
-  describe "When height is not a number" do
-    before { @plant.height = "lalala" }
+  describe "When min height is not a number" do
+    before { @plant.min_height = "lalala" }
     it { should_not be_valid }
   end
 
-  describe "When height is a valid number" do
-    before { @plant.height = 8 }
+  describe "When min height is a valid number" do
+    before { @plant.min_height = 8 }
     it { should be_valid }
   end
 
-  describe "When height is negative" do
-    before { @plant.height = -123 }
+  describe "When min_height is negative" do
+    before { @plant.min_height = -123 }
     it { should_not be_valid }
   end
 
-  describe "When height is too great" do
-    before { @plant.height = 10001 }
+  describe "When min_height is too great" do
+    before { @plant.min_height = 10001 }
+    it { should_not be_valid }
+  end
+
+  describe "When max height is not a number" do
+    before { @plant.max_height = "lalala" }
+    it { should_not be_valid }
+  end
+
+  describe "When max height is a valid number" do
+    before { @plant.max_height = 8 }
+    it { should be_valid }
+  end
+
+  describe "When max height is negative" do
+    before { @plant.max_height = -123 }
+    it { should_not be_valid }
+  end
+
+  describe "When max height is too great" do
+    before { @plant.max_height = 10001 }
+    it { should_not be_valid }
+  end
+
+  describe "When max height is greater than min" do
+    before do
+      @plant.min_height = 200
+      @plant.max_height = 100
+    end
     it { should_not be_valid }
   end
 end

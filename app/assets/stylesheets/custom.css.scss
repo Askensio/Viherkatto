@@ -448,6 +448,16 @@ a {
   }
 }
 
+
+#contact-table {
+  table-layout: fixed;
+}
+
+#contact-table td {
+  word-wrap: break-word;
+}
+
+
 // User control label
 .user-controls {
     display: inline;
@@ -456,4 +466,8 @@ a {
 
 .admin-user {
   color: rgb(90, 180, 240);
+}
+
+.loading-icon {
+  display: none;
 }
