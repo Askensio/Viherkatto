@@ -14,10 +14,11 @@ function init() {
         event.preventDefault();
     });
     var layerDropdownList = $("a[class='layer-option']")
-    console.log($("a[class='layer-option']"))
+    //console.log($("a[class='layer-option']"))
 
     layerDropdownList.each(function(index, value) {
-        $(this).click(addLayer)
+        $(this).parent().click(addLayer)
+        //console.log($(this).parent())
     })
     //$('#add-base-button').click(addBase)
     $('#save').click(save)
@@ -51,7 +52,6 @@ var addBase = function addBase(event) {
     var formElement = $('#base-form')
     formElement.append(generateBaseForm())
 }
-
 function generateBaseForm() {
 
     // gets the number of direct div child elements of #base-form
@@ -70,10 +70,11 @@ function generateBaseForm() {
     baseFormElement.append(absorbancyInputElement)
 
     var addLayerButton = $('#add-layer-btn-grp').clone()
+    console.log(addLayerButton)
     var linkList = addLayerButton.children('ul')
     linkList.each(function(index, value) {
-        $(this).click(addLayer)
-        console.log($(this))
+        $(this).parent().click(addLayer)
+        console.log($(this).parent())
     })
     baseFormElement.append(addLayerButton)
     return baseFormElement
@@ -87,26 +88,29 @@ var removeParent = function (event) {
 // listener for the addition of a new layer form
 var addLayer = function addLayer(event) {
 
+    console.log($(event.target).parents('li:eq(0)').text())
+
     event.preventDefault()
 
+    var textElementForLayer = $(event.target).parents('li:eq(0)')
+    //console.log(spandexElement.text())
     var parentDiv = $(this).parents('div:eq(0)')
-    var layerElement = generateLayerForm(event.target)
+    var layerElement = generateLayerForm(textElementForLayer    .text())
     parentDiv.before(layerElement)
 }
 
-function generateLayerForm(target) {
-    console.log(target.text)
+function generateLayerForm(layerName) {
     // creates a new container for the layer form
     var layerFormElement = $('<div></div>').attr('class', 'layer' )
 
-    if(target.text === 'Muu') {
+    if(layerName === 'Muu') {
         var nameLabel = $('<label for="layer_name">Kerroksen nimi *</label>')
         var nameInput = $('<input class="span4" id="layer_name" name="layer[name]" required="required" size="30" type="text">')
         layerFormElement.append(nameLabel)
         layerFormElement.append(nameInput)
     } else {
-        var name= $('<h4>' + target.text + '</h4>')
-        var nameInput = $('<input class="span4" id="layer_name" name="layer[name]" size="30" type="hidden" value="'+ target.text +'">')
+        var name= $('<h4>' + layerName + '</h4>')
+        var nameInput = $('<input class="span4" id="layer_name" name="layer[name]" size="30" type="hidden" value="'+ layerName +'">')
         layerFormElement.append(name)
         layerFormElement.append(nameInput)
 
