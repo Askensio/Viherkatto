@@ -27,8 +27,8 @@ class GreenroofsController < ApplicationController
         maintenance = params[:maintenance].to_i
         @greenroofs = @greenroofs.joins(:plants).where("plants.maintenance = ?", maintenance)
       end
-      @greenroofs = @greenroofs.joins(:plants).where("plants.height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
-      @greenroofs = @greenroofs.joins(:plants).where("plants.height >= ?", params[:plantminheight]) if params[:plantminheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.max_height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]) if params[:plantminheight]
       if params[:envname]
         envname = "%#{params[:envname]}%"
         @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)

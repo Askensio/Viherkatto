@@ -187,7 +187,7 @@ describe 'Greenroof' do
 
   describe 'search' do
     before do
-      @groof = FactoryGirl.create(:greenroof)
+      @groof = FactoryGirl.create(:whole_greenroof)
       visit '/search/greenroofs'
     end
 
@@ -219,7 +219,7 @@ describe 'Greenroof' do
 
     describe "find by plantmaxheight", js:true do
       before do
-        fill_in 'plantmaxheight', with: 1
+        fill_in 'plantmaxheight', with: 10
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
       it { should have_link("Emminkatu") }

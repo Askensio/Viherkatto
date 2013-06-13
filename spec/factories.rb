@@ -13,12 +13,10 @@ FactoryGirl.define do
   end
 
   factory :roof do
-    before(:create) do |roof|
-      environment = FactoryGirl.create(:environment)
-    end
     area '70'
     declination '1'
     load_capacity '500'
+    environments { Array.new(2) { FactoryGirl.build(:environment) } }
   end
 
   factory :environment do
@@ -36,12 +34,6 @@ FactoryGirl.define do
   end
 
   factory :greenroof do
-    before(:create) do |greenroof|
-      plants = [FactoryGirl.create(:plant), FactoryGirl.create(:plant)]
-      #user = FactoryGirl.create(:user)
-      bases = [FactoryGirl.build(:base), FactoryGirl.build(:base)]
-      #roof = FactoryGirl.build(:roof)
-    end
     roof { |a| a.association(:roof) }
     user { |a| a.association(:user) }
     address "Emminkatu 1"
@@ -49,6 +41,13 @@ FactoryGirl.define do
     purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
+    plants { Array.new(3) { FactoryGirl.build(:plant) } }
+
+    factory :whole_greenroof do
+      after(:create) do |greenroof|
+        FactoryGirl.create(:base, greenroof: greenroof)
+      end
+    end
   end
 
   factory :layer do
@@ -59,11 +58,9 @@ FactoryGirl.define do
   end
 
   factory :base do
-    before(:create) do |base|
-      layers = [FactoryGirl.create(:layer), FactoryGirl.create(:layer)]
-    end
     absorbancy 100
     note "Tämä on superlaadukas pohj-- kasvualusta."
+    layers { Array.new(3) { FactoryGirl.create(:layer) }}
   end
 end
 
