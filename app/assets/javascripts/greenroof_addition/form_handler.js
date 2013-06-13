@@ -141,9 +141,11 @@ var save = function (event) {
     var bases = createBasesArray()
     var greenroof = createGreenroofObjcet()
     var customplant = createCustomplantsObject()
+    var purposes = createPurposeObject()
 
     var data = new Object()
 
+    data.purpose = purposes
     data.roof = roof
     data.environment = environments
     data.bases = bases
@@ -178,6 +180,20 @@ function createRoofObject() {
 
     //console.log(JSON.stringify(roof))
     return roof
+}
+
+function createPurposeObject() {
+    var purposes = new Object()
+    var id = []
+
+    $("#purpose_id option:selected").each(function (index) {
+       id.push($(this).attr('value'))
+    });
+    if (id.length < 1) {
+        alert("Valitse jokin käyttötarkoitus")
+    }
+    purposes.id = id
+    return purposes
 }
 
 function createEnvironmentsObject() {
@@ -243,6 +259,7 @@ function createLayerObjectArray(baseElement) {
 function createGreenroofObjcet() {
 
     var greenroof = new Object()
+    greenroof.purpose = $
     greenroof.address = $('#greenroof_address').val()
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
@@ -250,6 +267,7 @@ function createGreenroofObjcet() {
     greenroof.year = $('#greenroof_year').val()
     return greenroof
 }
+
 
 function sendData(data) {
 

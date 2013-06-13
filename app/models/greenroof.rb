@@ -6,6 +6,7 @@ class Greenroof < ActiveRecord::Base
 
   has_many :planteds
   has_many :plants, through: :planteds
+  has_many :purposes
 
   has_one :roof, :dependent => :destroy
   has_many :bases, :dependent => :destroy

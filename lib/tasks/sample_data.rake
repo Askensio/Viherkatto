@@ -14,6 +14,10 @@ namespace :db do
     Colour.create!(value: "Sininen")
     Colour.create!(value: "Vihreä")
 
+    Purpose.create!(value: "Käyttökatto")
+    Purpose.create!(value: "Maisemakatto")
+    Purpose.create!(value: "Hyötykatto")
+
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
     Maintenance.create!(name: "Luonnonmukainen")

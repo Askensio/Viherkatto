@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20130613103128) do
   add_index "plants", ["name"], :name => "index_plants_on_name", :unique => true
 
   create_table "purposes", :force => true do |t|
+    t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
