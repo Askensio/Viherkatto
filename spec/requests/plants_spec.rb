@@ -46,7 +46,6 @@ describe 'Plant pages' do
     describe "with valid information" do
       before do
         fill_in "plant_name", with: "Example Plant"
-        select "Sininen", :from => "plant_colour"
         select "Helppo", :from => "maintenances_id"
         select "Sammalikko", :from => "growth_environments_id"
         fill_in "plant_min_height", with: 1

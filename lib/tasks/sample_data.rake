@@ -8,6 +8,12 @@ namespace :db do
     Light.create!(desc: "Aurinkoinen")
     Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
+
+    Colour.create!(value: "Keltainen")
+    Colour.create!(value: "Punainen")
+    Colour.create!(value: "Sininen")
+    Colour.create!(value: "Vihreä")
+
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
     Maintenance.create!(name: "Luonnonmukainen")
@@ -17,29 +23,28 @@ namespace :db do
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
-      colour = "Green"
-      #maintenance = 2
       min_height = 10
       max_height = 20
       thickness = n+8
-
-      light = 2
       weight = n+1
       note = "asd"
-      maintenance = 1
 
-      @plant = Plant.create!(name: name,
-                             latin_name: latin_name,
-                             min_height: min_height,
-                             max_height: max_height,
-                             colour: colour,
-                             #maintenance: maintenance,
-                             min_soil_thickness: thickness,
-                             weight: weight,
-                             note: note)
-      @plant.update_attributes(:light_id => light)
-      @plant.update_attributes(:maintenance => Maintenance.find_by_id(maintenance))
-      @plant.growth_environments << GrowthEnvironment.find(1)
+      @plant = Plant.new(name: name,
+                         latin_name: latin_name,
+                         min_height: min_height,
+                         max_height: max_height,
+                         min_soil_thickness: thickness,
+                         weight: weight,
+                         note: note)
+
+      colour =  Colour.last
+      @plant.colours << colour
+      colour =  Colour.first
+      @plant.colours << colour
+      @plant.light = Light.first
+      @plant.maintenance = Maintenance.first
+      @plant.growth_environments << GrowthEnvironment.first
+      @plant.save!
     end
 
     Layer.create!(name: "Kivimurska",

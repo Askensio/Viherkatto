@@ -110,6 +110,21 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
 
+
+    params[:colour][:id].shift
+
+    if not params[:colour][:id].empty?
+      params[:colour][:id].each do |col|
+        @col = Colour.find_by_id col
+        if not @col.equal? nil
+          @plant.colours << @col
+        end
+      end
+    end
+
+    @plant.light = Light.find_by_id(params[:light][:id])
+
+
     if params[:maintenances][:id]
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
     end

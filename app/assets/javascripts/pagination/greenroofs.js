@@ -4,6 +4,12 @@ $(document).ready(function () {
     paginator.getObjects(true)
     modalctrl = new ModalController()
     modalctrl.setListeners(paginator)
+
+    console.log($("[data-id='list-section']").parent())
+    $("[data-id='list-section']").parent().attr({
+        style: "width: 90%",
+        class: "pull-right"
+    })
 });
 
 function ModalController() {

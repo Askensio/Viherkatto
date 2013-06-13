@@ -20,6 +20,7 @@ section {
 textarea {
   resize: vertical;
 }
+
 #navbar-container {
   width: 90%;
   max-width: 1170px;
@@ -251,16 +252,6 @@ input {
   }
 }
 
-#plant-search {
-  overflow: auto;
-  width: auto;
-  text-align: center;
-  li {
-    text-align: center;
-    margin: auto;
-  }
-}
-
 ul, ol {
   padding: 0;
   margin: 0 0 25px;
@@ -275,7 +266,7 @@ ul, ol {
   padding-left: 10px;
   position: fixed;
   right: 0.5%;
-  top: 50px;
+  top: 100px;
   li {
     font-size: 0.9em;
     font-weight: bold;
@@ -291,11 +282,8 @@ ul, ol {
 }
 
 .baseAdder {
-  border-radius: 15px;
   //height:350px;
-  margin-bottom: 15px;
   padding-bottom: 1.5em;
-  text-align: center;
   legend {
     text-align: center;
   }
@@ -304,7 +292,6 @@ ul, ol {
 .baseAdderBonus {
   border-radius: 15px;
   background-color: $grayMediumLight;
-  padding-left: 15px;
   height: auto;
   width: 35%;
   margin-bottom: 15px;
@@ -318,7 +305,6 @@ ul, ol {
 
 .plantAdder {
   padding-right: 100px;
-  padding-left: 100px;
   margin-bottom: 15px;
   border-radius: 15px;
   text-align: center;
@@ -334,14 +320,6 @@ ul, ol {
     border-radius: 20px;
     background-color: $grayMediumLight;
   }
-}
-
-.add-base-button {
-  padding-left: 1.2em;
-}
-
-.adderForms {
-  padding-left: 15px;
 }
 
 #note_ {
@@ -448,7 +426,6 @@ a {
   }
 }
 
-
 #contact-table {
   table-layout: fixed;
 }
@@ -456,17 +433,57 @@ a {
 #contact-table td {
   word-wrap: break-word;
 }
+
 #Muokkaabutton {
   margin-left: 75%;
 }
 
+
 // User control label
 .user-controls {
-    display: inline;
-    color: rgb(230, 230, 230);
+  display: inline;
+  color: rgb(230, 230, 230);
 }
 
 .admin-user {
   color: rgb(90, 180, 240);
 }
 
+.loading-icon {
+  display: none;
+}
+
+/* CSS FOR GREEN ROOF ADDITION */
+.greenroof-addition {
+  h2 {
+    text-align: left;
+  }
+
+  // Some space between the forms, this should scale rather nicely.
+  input {
+    margin-bottom: 2%;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  // Bootstrap Jumbotorn overrides
+  .jumbotron {
+
+    // Main navbar is doubling its size when the screen is around 1024*768, padding required to show the h1 in this scenario.
+    padding-top: 50px;
+
+    h1 {
+      text-align: left;
+    }
+  }
+
+  .add-plant-for-greenroof {
+    margin-right: 1em;
+  }
+
+  .plant-add-list {
+    margin-bottom: 0.7em;
+  }
+}
