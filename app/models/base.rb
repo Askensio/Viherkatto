@@ -7,7 +7,7 @@ class Base < ActiveRecord::Base
 
   attr_accessible :absorbancy, :note
 
-  validates :absorbancy, allow_blank: false, :numericality => { only_integer: true, :greater_than => 0 }
+  validates :absorbancy, allow_blank: true, :numericality => { only_integer: true, :greater_than => 0 }
   validates :note, length: { maximum: 1500 }
 
   before_save :save_layers
