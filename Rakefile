@@ -7,9 +7,3 @@
 require File.expand_path('../config/application', __FILE__)
 
 Viherkatto::Application.load_tasks
-
-task :default => [:spec]
-desc 'run Rspec specs'
-task :spec do
-  sh 'rspec spec'
-end
