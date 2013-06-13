@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Contact do
 
   @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
-  @contact.save
+  @contact.save!
 
   let(:admin) { FactoryGirl.create(:admin) }
 
