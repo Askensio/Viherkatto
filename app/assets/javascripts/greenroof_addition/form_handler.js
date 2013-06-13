@@ -13,12 +13,13 @@ function init() {
         // cancels the form submission
         event.preventDefault();
     });
-    var layerDropdownList = $('#add-layer-dropdown-list').children()
+    var layerDropdownList = $("a[class='layer-option']")
+    console.log($("a[class='layer-option']"))
+
     layerDropdownList.each(function(index, value) {
         $(this).click(addLayer)
-        console.log($(this))
     })
-    $('#add-base-button').click(addBase)
+    //$('#add-base-button').click(addBase)
     $('#save').click(save)
     $('#add-layer-button').click(function(e) {
         e.preventDefault()
@@ -41,7 +42,6 @@ var customPlant = function(event) {
         $(this).remove();
     });
     $('#theplants').append(listElement)
-    console.log(customPlants)
 }
 
 // listener function for the addition of a new base
@@ -89,12 +89,9 @@ var addLayer = function addLayer(event) {
 
     event.preventDefault()
 
-    var parentBase = $(this).parents('div:eq(1)')
-    //var layerCount = baseFormElement.children('div').size()
+    var parentDiv = $(this).parents('div:eq(0)')
     var layerElement = generateLayerForm(event.target)
-    console.log(layerElement)
-    console.log(parentBase.children('.btn-group'))
-    layerElement.insertBefore(parentBase.children('.btn-group'))
+    parentDiv.before(layerElement)
 }
 
 function generateLayerForm(target) {
@@ -147,7 +144,6 @@ var save = function (event) {
     data.environment = environments
     data.bases = bases
     data.customPlants = customplant
-    console.log(customplant)
     if (plants.length < 1) {
         alert("Et valinnut yhtään kasvia")
     }
@@ -156,6 +152,8 @@ var save = function (event) {
 
     sendData(data)
 }
+
+
 
 function createCustomplantsObject() {
    var customPlantArray = new Object()
@@ -182,8 +180,10 @@ function createEnvironmentsObject() {
 
     var environments = new Object()
     var id = []
-    $('.selected').each(function (index) {
-        id.push($(this).attr('rel'))
+
+    $("#environment_id option:selected").each(function (index) {
+        id.push($(this).attr('value'))
+        console.log($(this).attr('value'))
     });
     if (id.length < 1) {
         alert("Valitse sijainti")
@@ -243,6 +243,7 @@ function createGreenroofObjcet() {
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
     greenroof.purpose = 1
+    greenroof.year = $('#greenroof_year').val()
     return greenroof
 }
 

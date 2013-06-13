@@ -1,0 +1,25 @@
+<div>
+  <div class="baseAdder">
+    <div class="adderForms" id="base-form">
+      <% @greenroof.bases.each_with_index do |base, i| %>
+          <div id="base<%= i+1 %>" class="baseAdder">
+            <%= render 'shared/forms/base_form_fields_for_greenroof_addition', :base => base, :index => i %>
+
+            <select class="selectpicker add-layer-btn-grp span4">
+              <option class="layer-option">Kasvualusta</option>
+              <option class="layer-option">Vedenpidätyskerros</option>
+              <option class="layer-option">Salaojakerros</option>
+              <option class="layer-option">Juurisuojakerros</option>
+              <option class="layer-option">Muu</option>
+            </select>
+
+          </div>
+      <% end %>
+    </div>
+    <!--
+    <div class="add-base-button">
+      <button id="add-base-button" class="btn-small btn-custom base-form-button">Lisää kerros</button>
+    </div>
+    -->
+  </div>
+</div>
