@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Contact do
 
   @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
-  @contact.save
+  @contact.save!
 
   let(:admin) { FactoryGirl.create(:admin) }
 
@@ -24,7 +24,7 @@ describe Contact do
     it { should_not have_button("Muokkaa") }
   end
 
-=begin
+begin
   describe "View with admin" do
     before do
       sign_in admin
@@ -33,6 +33,6 @@ describe Contact do
 
     it { should have_button("Muokkaa") }
   end
-=end
+end
 
 end
