@@ -1,3 +1,9 @@
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => [:spec]
+
 # encoding: UTF-8
 
 #!/usr/bin/env rake
