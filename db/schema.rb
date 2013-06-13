@@ -172,9 +172,12 @@ ActiveRecord::Schema.define(:version => 20130613103128) do
 
   create_table "purposes", :force => true do |t|
     t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "greenroof_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
+
+  add_index "purposes", ["greenroof_id"], :name => "index_purposes_on_greenroof_id"
 
   create_table "roofs", :force => true do |t|
     t.integer  "declination"

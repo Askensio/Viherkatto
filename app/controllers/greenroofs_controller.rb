@@ -98,6 +98,17 @@ class GreenroofsController < ApplicationController
 
     @roof = Roof.new(params[:roof])
 
+    if not params[:purpose].nil?
+      params[:purpose].each do |purp|
+        purp[1].each do |toAddPurp|
+          @purp = Purpose.find(toAddPurp)
+          if (@purp != nil)
+            @greenroof.purposes << @purp
+          end
+        end
+      end
+    end
+
     if not params[:environment].nil?
       params[:environment][:id].shift
       params[:environment][:id].each do |env|
