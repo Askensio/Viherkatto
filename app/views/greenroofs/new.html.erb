@@ -3,6 +3,7 @@
 <%= stylesheet_link_tag "bootstrap-fileupload", media: "all" %>
 
 
+
 <!-- Masthead as provided by Twitter Bootstrap -->
 <div class="container greenroof-addition">
   <header class="jumbotron subhead">
@@ -18,10 +19,11 @@
             <legend>Viherkaton yleiset tiedot</legend>
             <%= render 'shared/forms/groof_form_fields' %>
             <%= form_for @greenroof, :url => new_greenroof_path, :html => { :multipart => true } do |form| %>
-                <%= form.file_field :photo %>
             <% end %>
-            <div class="fileupload fileupload-new" data-provides="fileupload">
-              <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+            <br><br>
+            <label>Kuva:</label>
+            <div class="fileupload fileupload-new" data-provides="fileupload" name="image-upload">
+              <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" id="image-upload"/></span>
               <span class="fileupload-preview"></span>
               <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
             </div>

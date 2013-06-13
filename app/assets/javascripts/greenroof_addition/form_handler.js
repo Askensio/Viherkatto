@@ -14,7 +14,7 @@ function init() {
         event.preventDefault();
     });
     var layerDropdownList = $("a[class='layer-option']")
-    console.log($("a[class='layer-option']"))
+    //console.log($("a[class='layer-option']"))
 
     layerDropdownList.each(function(index, value) {
         $(this).click(addLayer)
@@ -132,6 +132,7 @@ function generateLayerForm(target) {
 }
 
 var save = function (event) {
+
     var roof = createRoofObject()
     var environments = createEnvironmentsObject()
     var bases = createBasesArray()
@@ -183,7 +184,7 @@ function createEnvironmentsObject() {
 
     $("#environment_id option:selected").each(function (index) {
         id.push($(this).attr('value'))
-        console.log($(this).attr('value'))
+        //console.log($(this).attr('value'))
     });
     if (id.length < 1) {
         alert("Valitse sijainti")
@@ -220,7 +221,7 @@ function createLayerObjectArray(baseElement) {
     var layerArray = []
     var layers = baseElement.children('div')
     layers.each(function (index) {
-        console.log($(this).children($('h4')))
+        //console.log($(this).children($('h4')))
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
         layer.name = name
@@ -257,6 +258,32 @@ function sendData(data) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
         },
         success: function (response) {
+            console.log('Greenroof id: ' + response.id + ' saved')
+
+            var imageData = new FormData()
+
+            jQuery.each($('#image-upload')[0].files, function(i, file) {
+                imageData.append('file-'+i, file);
+            });
+
+            sendImage(imageData, response.id)
+        }
+    });
+}
+
+function sendImage(imageData, id) {
+    $.ajax({
+        url: '/greenroofs/' +id + '/upload',
+        type: 'POST',
+        data: imageData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        success: function (response) {
+            console.log(response)
         }
     });
 }

@@ -13,7 +13,9 @@ class Greenroof < ActiveRecord::Base
 
   before_save :save_bases, :save_roof
 
-  attr_accessible :address, :constructor, :purpose, :note, :customPlants, :year
+  attr_accessible :address, :constructor, :purpose, :note, :customPlants, :year, :photo
+
+  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
   validates :address, presence: true, length: { maximum: 200 }
   validates :constructor, length: { maximum: 200 }
