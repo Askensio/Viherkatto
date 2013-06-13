@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   before_filter :admin_user, only: [:index, :destroy]
 
   def index
+
     @jsonUsers = []
     respond_to do |format|
       @users = User.scoped
@@ -74,7 +75,6 @@ class UsersController < ApplicationController
   end
 
   def admin
-    puts "lololol"
     puts params[:id]
     respond_to do |format|
       @user = User.find(params[:id])

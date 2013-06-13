@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe Plant do
@@ -8,7 +9,7 @@ describe Plant do
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 
-    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", min_height: 5, max_height: 10, colour: "Green", min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
+    @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", min_height: 5, max_height: 10,  min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);
     @plant.maintenance = Maintenance.find_by_id(1)
   end
@@ -17,10 +18,8 @@ describe Plant do
 
   it { should respond_to(:name) }
   it { should respond_to(:latin_name) }
-  it { should respond_to(:colour) }
   it { should respond_to(:min_height) }
   it { should respond_to(:max_height) }
-  it { should respond_to(:maintenance) }
   it { should respond_to(:min_soil_thickness) }
   it { should respond_to(:weight) }
   it { should respond_to(:light_id) }

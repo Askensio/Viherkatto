@@ -186,11 +186,11 @@ class GreenroofsController < ApplicationController
       @jsonGreenroofs = []
 
 
-
+      # TÄMÄ FUNKTIO TURHA KUN VIHERKATOLLA ON OMISTAJA KENTTÄ
       @greenroofs.each do |groof|
         @user = User.find_by_id(groof.user_id)
         hash = groof.attributes
-        hash[:user] = @user.name
+        hash[:user] = @user.name unless @user.nil?
         if (signed_in?)
           hash[:owner] = (@user.id == current_user.id)
         else

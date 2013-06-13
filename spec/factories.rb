@@ -26,7 +26,6 @@ FactoryGirl.define do
     sequence(:latin_name) { |n| "Plantus Examplus #{n}" }
     min_height 1
     max_height 10
-    colour "Green"
     min_soil_thickness 20
     weight 1
     note "Totally fabulous plant"

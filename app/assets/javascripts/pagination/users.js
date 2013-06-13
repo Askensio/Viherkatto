@@ -72,16 +72,12 @@ AdminController.prototype.toggleAdminStatus = function () {
 
     function responseHandler(admin) {
         if (admin) {
-            console.log("käyttäjä on admin")
             element.attr('class', 'admin-user user-controls')
         } else {
-            console.log("käyttäjä ei ole admin")
             element.attr('class', 'user-controls')
         }
         console.log(element)
     }
-
-    console.log("Changin admin status of id: " + this.id)
 }
 
 var addElement = function (entry, admin) {
