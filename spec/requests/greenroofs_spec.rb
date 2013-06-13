@@ -9,10 +9,13 @@ describe 'Greenroof' do
     Environment.create!(name: "Kaupunki")
     Environment.create!(name: "Muu")
 
+=begin
     @light = Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
+=end
     Maintenance.create!(name: "Helppo")
+
   end
 
   let(:user) { FactoryGirl.create(:user) }
@@ -22,7 +25,8 @@ describe 'Greenroof' do
 
   describe 'addition' do
     before do
-      plant.update_attribute(:light_id, 1)
+      FactoryGirl.create(:light)
+      plant.update_attribute(:light_id, Light.first.id)
       sign_in user
       visit new_greenroof_path
     end
