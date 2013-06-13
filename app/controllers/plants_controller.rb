@@ -30,70 +30,6 @@ class PlantsController < ApplicationController
         end
       end
 
-      if params[:latin_name].present?
-        @jsonPlants.each do |p|
-          if !p.latin_name.downcase.include?(params[:latin_name].downcase)
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:colour].present?
-        @jsonPlants.each do |p|
-          if !p.colour.downcase.include?(params[:colour].downcase)
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:maintenance].present?
-        @jsonPlants.each do |p|
-          if p.maintenance.to_i != params[:maintenance].to_i
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:coverage].present?
-        @jsonPlants.each do |p|
-          if p.coverage.to_i != params[:coverage].to_i
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:min_soil_thickness].present?
-        @jsonPlants.each do |p|
-          if p.min_soil_thickness.to_i < params[:min_soil_thickness].to_i
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:weight_is].present?
-        @jsonPlants.each do |p|
-          if p.weight.to_i != params[:weight_is].to_i
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:weight_atleast].present?
-        @jsonPlants.each do |p|
-          if p.weight.to_i < params[:weight_atleast].to_i
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
-      if params[:weight_max].present?
-        @jsonPlants.each do |p|
-          if p.weight.to_i > params[:weight_max].to_i
-            @jsonPlantsDub << p
-          end
-        end
-      end
-
       @jsonPlants -= @jsonPlantsDub
       format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @jsonPlants} }
     end
@@ -201,14 +137,25 @@ class PlantsController < ApplicationController
       @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness]) if params[:min_thickness]
       @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness]) if params[:max_thickness]
 
-      @plants = @plants.where('height <= ?', params[:max_height]) if params[:max_height]
-      @plants = @plants.where('height >= ?', params[:min_height]) if params[:min_height]
+      @plants = @plants.where('max_height <= ?', params[:max_height]) if params[:max_height]
+      @plants = @plants.where('min_height >= ?', params[:min_height]) if params[:min_height]
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-
       params[:colour].try(:each) do |colour|
         @plants = @plants.where('colour like?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+      end
+
+      params[:growth_environments].try(:each) do |env|
+        @plants = @plants.where('growth_environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%') if env
+      end
+
+      if (params[:maintenance])
+        @maints = []
+        Maintenance.where(:name => params[:maintenance]).each do |id|
+          @maints.push(id)
+        end
+        @plants = @plants.where(:maintenance_id => @maints)
       end
 
       if (params[:lightness])
