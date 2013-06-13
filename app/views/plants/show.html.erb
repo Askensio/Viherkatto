@@ -43,16 +43,18 @@
             <td><%= f.label Light.find(@plant.light_id).desc %></td>
           </tr>
 
-          <tr>
-            <td><%= f.label :growth_environment %></td>
-            <td>
-              <% if (@plant.growth_environments.empty?) %>
-                  <%= f.label "Tyhjä" %>
-              <% else %>
-                  <%= f.label printEnvironments(@plant.growth_environments) %>
-              <% end %>
-            </td>
-          </tr>
+          <% if !@plant.growth_environments.empty? && !@plant.growth_environments.nil? %>
+              <tr>
+                <td><%= f.label :growth_environment %></td>
+                <td>
+                  <%= if (@plant.growth_environments.empty?)
+                        f.label "Tyhjä"
+                      else
+                        f.label printEnvironments(@plant.growth_environments)
+                      end %>
+                </td>
+              </tr>
+          <% end %>
 
           <tr>
             <td><%= f.label :maintenance %></td>
@@ -71,17 +73,17 @@
                   <tr>
                     <td><%= f.label "height" %></td>
                     <td>
-                      <% if @plant.min_height == @plant.max_height %>
+                      <%= if @plant.min_height == @plant.max_height
 
-                          <% @printable = @plant.min_height.to_s %>
-                      <% else %>
+                            @printable = @plant.min_height.to_s
+                          else
 
-                          <% @printable += @plant.min_height.to_s + ' - ' + @plant.max_height.to_s %>
-                      <% end %>
+                            @printable += @plant.min_height.to_s + ' - ' + @plant.max_height.to_s
+                          end
+                          f.label @printable %>
+                    </td>
+                  </tr>
               <% end %>
-              <%= f.label @printable %>
-              </td>
-              </tr>
           <% end %>
 
           <tr>
