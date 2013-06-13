@@ -122,6 +122,12 @@ function generateLayerForm(layerName) {
     var weightLabel = $('<label for="layer_weight">Paino (kg/m2) *</label>')
     var weightInput = $('<input class="span4" id="layer_weight" name="layer[weight]" required="required" size="30" type="text">')
 
+    if(layerName == 'Suodatinkangas' || layerName == 'Asennussuoja') {
+        thicknessInput.attr('value', '0').attr('disabled', 'true')
+        weightInput.attr('value', '0').attr('disabled', 'true')
+
+    }
+
     layerFormElement.append(productLabel)
     layerFormElement.append(productInput)
     layerFormElement.append(thicknessLabel)
