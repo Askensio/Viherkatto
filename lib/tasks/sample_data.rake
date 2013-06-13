@@ -26,27 +26,25 @@ namespace :db do
       min_height = 10
       max_height = 20
       thickness = n+8
-      light = 2
       weight = n+1
       note = "asd"
-      maintenance = 1
 
       @plant = Plant.new(name: name,
                          latin_name: latin_name,
-                         height: height,
-                         maintenance: maintenance,
+                         min_height: min_height,
+                         max_height: max_height,
                          min_soil_thickness: thickness,
                          weight: weight,
                          note: note)
 
-      colour =  Colour.find_by_id n%3 + 1
+      colour =  Colour.last
       @plant.colours << colour
-      colour =  Colour.find_by_id (n-1)%3 + 1
+      colour =  Colour.first
       @plant.colours << colour
       @plant.save!
-      @plant.update_attributes(:light_id => light)
-      @plant.update_attributes(:maintenance => Maintenance.find_by_id(maintenance))
-      @plant.growth_environments << GrowthEnvironment.find(1)
+      @plant.light = Light.first
+      @plant.maintenance = Maintenance.first
+      @plant.growth_environments << GrowthEnvironment.first
     end
 
     Layer.create!(name: "Kivimurska",
