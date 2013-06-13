@@ -23,6 +23,10 @@ FactoryGirl.define do
     name 'Merenranta'
   end
 
+  factory :light do
+    desc "Aurinkoinen"
+  end
+
   factory :plant do
     sequence(:name) { |n| "Example Plant #{n}" }
     sequence(:latin_name) { |n| "Plantus Examplus #{n}" }
@@ -34,15 +38,15 @@ FactoryGirl.define do
   end
 
   factory :greenroof do
-    roof { |a| a.association(:roof) }
+    roof { |a| a.association(:roof, light: @light) }
     user { |a| a.association(:user) }
     address "Emminkatu 1"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
     purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
-    plants { Array.new(3) { FactoryGirl.build(:plant) } }
-
+    @light = FactoryGirl.create(:light)
+    plants { Array.new(3) { FactoryGirl.create(:plant, light: @light) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|
         FactoryGirl.create(:base, greenroof: greenroof)

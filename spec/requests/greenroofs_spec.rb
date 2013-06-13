@@ -112,6 +112,15 @@ describe 'Greenroof' do
       @groof.save!
 =end
       @groof = FactoryGirl.create(:whole_greenroof)
+=begin
+      @light = FactoryGirl.create(:light)
+      @groof.roof.light = @light
+      @groof.roof.save!
+      @groof.plants.each do |plant|
+        plant.light = @light
+        plant.save!
+      end
+=end
       visit greenroof_path(@groof)
     end
 
@@ -166,8 +175,9 @@ describe 'Greenroof' do
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[5]/td[2]/div/a[1]", :visible => true).click
-        sleep 1.seconds
+        sleep 10.seconds
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+        sleep 10.seconds
       end
       it { should have_selector('label', text: "Latinankielinen nimi") }
     end
@@ -175,7 +185,7 @@ describe 'Greenroof' do
     describe 'click-materiaali-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
         sleep 1.seconds
       end
       it { should have_selector('td', text: "Paino") }
