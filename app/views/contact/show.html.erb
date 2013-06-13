@@ -8,42 +8,47 @@
 
   <div class="row-fluid marketing">
 
-      <div class="span6 pull-left">
-        <%= fields_for(@contact) do |f| %>
-            <h3><%= @contact.otsikko %></h3>
-            <table class="table" id="contact-table">
-              <tr>
-                <td><%= f.label :osoite, h("Osoite: ") %></td>
-                <td><%= f.label @contact.osoite %></td>
-              </tr>
-              <tr>
-                <td><%= f.label :email, h("Sähköposti: ") %></td>
-                <td><label><%= @contact.email %></label></td>
-              </tr>
-              <tr>
-                <td><%= f.label :puhelin, h("Puhelinnumero: ") %></td>
-                <td><%= f.label @contact.puhelin %></td>
-              </tr>
-              <tr>
-                <td><%= f.label :note, h("Lisätiedot: ") %></td>
+    <div class="span6 pull-left">
+      <%= fields_for(@contact) do |f| %>
+          <h3><%= @contact.otsikko %></h3>
+          <table class="table" id="contact-table">
+            <tr>
+              <td><%= f.label :osoite, h("Osoite: ") %></td>
+              <td><%= f.label @contact.osoite %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :email, h("Sähköposti: ") %></td>
+              <td><label><%= @contact.email %></label></td>
+            </tr>
+            <tr>
+              <td><%= f.label :puhelin, h("Puhelinnumero: ") %></td>
+              <td><%= f.label @contact.puhelin %></td>
+            </tr>
+            <tr>
+              <table class="table">
+                <td class="span2"><%= f.label :note, h("Lisätiedot: ") %></td>
+
                 <td>
                   <div class="well"><%= @contact.note %> </div>
                 </td>
-              </tr>
-              <tr>
                 <% if signed_in? && current_user.admin? %>
+                    <tr>
 
-                    <td/><td><%= link_to "Muokkaa", edit_contact_path, class: "btn btn-large btn-custom" %></td>
+
+                      <td/><td><%= link_to "Muokkaa", edit_contact_path(@contact), class: "btn btn-large btn-custom", id:"Muokkaabutton" %></td>
+
+                    </tr>
                 <% end %>
-              </tr>
+              </table>
+            </tr>
 
-            </table>
-        <% end %>
-      </div>
+          </table>
+      <% end %>
+    </div>
 
-      <div class="span6 pull-right">
-        <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid" %>
-      </div>
+    <div class="span6 pull-right">
+      <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid" %>
+    </div>
     </td>
   </div>
 

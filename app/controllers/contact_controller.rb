@@ -6,16 +6,16 @@ class ContactController < ApplicationController
     if (!signed_in? || !current_user.admin?)
       redirect_to root_path
     else
-      @contact = Contact.find(1)
+      @contact = Contact.first
     end
   end
 
   def show
-    @contact = Contact.find(1)
+    @contact = Contact.first
   end
 
   def update
-    @contact = Contact.find(1)
+    @contact = Contact.first
     if @contact.update_attributes(params[:contact])
       flash[:success] = "Tiedot päivitetty!"
 

@@ -24,11 +24,7 @@ Viherkatto::Application.routes.draw do
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'
 
-
-  match '/contact', to: 'contact#show'
   match '/contacts', to: 'contact#show'
-  match '/contact/edit', to: 'contact#edit'
-  match '/contacts/edit', to: 'contact#edit'
   get 'pages/home'
   root :to => 'pages#home'
 
