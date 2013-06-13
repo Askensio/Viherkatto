@@ -120,12 +120,12 @@ namespace :db do
       note = Faker::Lorem.words(5).join(" ")
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(address: address, constructor: constructor, purpose: purpose, note: note)
+      @groof = Greenroof.new(year: 2010, address: address, constructor: constructor, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
-      @groof.save
+      @groof.save!
     end
 
     @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
