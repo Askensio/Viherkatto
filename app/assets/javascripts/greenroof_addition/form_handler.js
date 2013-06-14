@@ -145,7 +145,7 @@ var save = function (event) {
     var roof = createRoofObject()
     var environments = createEnvironmentsObject()
     var bases = createBasesArray()
-    var greenroof = createGreenroofObjcet()
+    var greenroof = createGreenroofObject()
     var customplant = createCustomplantsObject()
 
     var data = new Object()
@@ -246,10 +246,11 @@ function createLayerObjectArray(baseElement) {
     return layerArray
 }
 
-function createGreenroofObjcet() {
+function createGreenroofObject() {
 
     var greenroof = new Object()
     greenroof.address = $('#greenroof_address').val()
+    greenroof.locality = $('#greenroof_locality').val()
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
     greenroof.purpose = 1

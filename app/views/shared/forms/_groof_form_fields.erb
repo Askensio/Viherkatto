@@ -3,7 +3,10 @@
     <%= f.label :year, h('Viherkaton valmistumisvuosi') %>
     <%= f.number_field :year %>
 
-    <%= f.label :address, h('Osoite tai paikkakunta') %>
+    <%= f.label :locality, h('Paikkakunta') %>
+    <%= f.text_field :locality %>
+
+    <%= f.label :address, h('Osoite') %>
     <%= f.text_field :address %>
 
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
