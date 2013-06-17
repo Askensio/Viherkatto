@@ -24,6 +24,5 @@ doc/
 db/.nfs*
 log/.nfs*
 /public/greenroofs
-/public/assets
 
 coverage
