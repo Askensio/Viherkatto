@@ -16,7 +16,7 @@ describe Base do
 
   describe "when absorbancy is not present" do
     before { @base.absorbancy="" }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe "absorbancy isn't numerical" do

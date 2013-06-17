@@ -11,9 +11,11 @@ class Greenroof < ActiveRecord::Base
 
   has_many :layers, through: :bases
 
-  before_save :save_bases, :save_roof
+  has_many :images, :dependent => :destroy
 
-  attr_accessible :address, :constructor, :purpose, :note, :customPlants, :year
+  before_save :save_bases, :save_roof, :save_images
+
+  attr_accessible :address, :constructor, :purpose, :note, :year
 
   validates :address, presence: true, length: { maximum: 200 }
   validates :constructor, length: { maximum: 200 }
@@ -29,6 +31,12 @@ class Greenroof < ActiveRecord::Base
 
   def save_roof
     self.roof.save!
+  end
+
+  def save_images
+    self.images.each do |img|
+      img.save!
+    end
   end
 
   def search(conditions)

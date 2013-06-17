@@ -34,6 +34,12 @@ Viherkatto::Application.routes.draw do
     end
   end
 
+  resources :greenroofs do
+    member do
+      post 'upload'
+    end
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
