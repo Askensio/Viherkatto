@@ -14,7 +14,7 @@ class Plant < ActiveRecord::Base
   has_many :links
   accepts_nested_attributes_for :links
 
-  attr_accessible :min_height, :max_height, :latin_name, :min_soil_thickness, :name, :note, :weight, :light_id
+  attr_accessible :min_height, :max_height, :latin_name, :min_soil_thickness, :name, :note, :weight, :light_id, :links_attributes
 
   attr_readonly :id
 

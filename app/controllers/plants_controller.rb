@@ -40,7 +40,8 @@ class PlantsController < ApplicationController
 
     3.times do
 
-      @plant.links << Link.new
+      #@plant.links << Link.new
+      @plant.links.build
       #@plant.links.build do |l|
       #  l << Link.new
       #end
@@ -55,7 +56,6 @@ class PlantsController < ApplicationController
     @plant = Plant.new(params[:plant])
 
     params[:colour][:id].shift
-
     if not params[:colour][:id].empty?
       params[:colour][:id].each do |col|
         @col = Colour.find_by_id col
@@ -67,6 +67,16 @@ class PlantsController < ApplicationController
 
     @plant.light = Light.find_by_id(params[:light][:id])
 
+    #if params[:links][:id]
+    #puts "----------------------"
+    #puts params[:links_attributes].nil?
+    #puts params[:links].nil?
+    #puts params[:links_attributes]
+    #puts params[:links]
+    #puts "kaikki"
+    #puts params[:plant][:links_attributes]
+    #puts "----------------------"
+    #end
 
     if params[:maintenances][:id]
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
