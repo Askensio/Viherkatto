@@ -72,9 +72,18 @@ var addElement = function (entry, admin) {
         })
 
         removeElement.attr('style', 'cursor: pointer;')
+        var editElement = $('<a href=/greenroofs/'+entry.id+ '/edit/></a>')
+        editElement.attr('class', 'pull-right')
+        var editButton  = $('<img />').attr({
+            class: 'edit-icon',
+            src: '/assets/edit-icon.png',
+            id: entry.id
+        })
 
         deleteElement.append(removeElement)
         mainElement.append(deleteElement)
+        editElement.append(editButton)
+        mainElement.append(editElement)
     }
 
     mainElement.append(infoElement)

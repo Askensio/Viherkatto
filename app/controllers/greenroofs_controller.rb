@@ -221,4 +221,10 @@ class GreenroofsController < ApplicationController
       format.json { render :json => { response: @response }}
     end
   end
+
+  def edit
+    @greenroof = Greenroof.find(params[:id])
+    @roof = @greenroof.roof
+    redirect_to root_path unless (signed_in? && (current_user.email == @greenroof.user.email || admin?))
+  end
 end
