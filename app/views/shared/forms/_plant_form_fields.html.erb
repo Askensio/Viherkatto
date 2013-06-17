@@ -58,17 +58,10 @@
 
     <%= f.fields_for :links do |l| %>
         <div class="row">
-          <div class="span2"><%= l.text_field :name, name: "link_name_1" %></div>
-          <div class="span3"><%= l.text_field :link, name: "link_link_1" %></div>
+          <div class="span2"><%= l.text_field :name %></div>
+          <div class="span3"><%= l.text_field :link %></div>
         </div>
-        <div class="row">
-          <div class="span2"><%= l.text_field :name, name: "link_name_2" %></div>
-          <div class="span3"><%= l.text_field :link, name: "link_link_2" %></div>
-        </div>
-        <div class="row">
-          <div class="span2"><%= l.text_field :name, name: "link_name_3" %></div>
-          <div class="span3"><%= l.text_field :link, name: "link_link_3" %></div>
-        </div>
+
     <% end %>
 
     <%= f.label :note %>
