@@ -161,7 +161,6 @@ class GreenroofsController < ApplicationController
       respond_to do |format|
         format.json { render :json => {id: @greenroof.id} }
       end
-      #render :js => "window.location = '/'"
 
     else
       if not params[:plants].nil? and not params[:environment][:id].empty?
@@ -196,6 +195,7 @@ class GreenroofsController < ApplicationController
       @greenroofs.each do |groof|
         @user = User.find_by_id(groof.user_id)
         hash = groof.attributes
+        hash[:thumb] = groof.images.first.thumb unless groof.images.first.nil?
         hash[:user] = @user.name unless @user.nil?
         if (signed_in?)
           hash[:owner] = (@user.id == current_user.id)
@@ -229,9 +229,9 @@ class GreenroofsController < ApplicationController
   end
 
   def upload
-    respond_to do |format|
-      @groof = Greenroof.find_by_id(params[:id])
+    @groof = Greenroof.find_by_id(params[:id])
 
+    unless params["file-0"].nil?
       # The path to the directory for the photos of the created greenroof.
       directory = "/public/greenroofs/photos/" + params[:id]
 
@@ -242,10 +242,10 @@ class GreenroofsController < ApplicationController
       photoFilename = params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
 
       # The full path for the photo.
-      photoPath = Dir.pwd +   directory + "/" + photoFilename
+      photoPath = Dir.pwd + directory + "/" + photoFilename
 
       file = File.read(params["file-0"].tempfile) if params["file-0"]
-      f = File.new(photoPath ,"w+")
+      f = File.new(photoPath, "w+")
       f.write file
       f.close
 
@@ -253,19 +253,20 @@ class GreenroofsController < ApplicationController
       thumbFilename = params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
 
       thumb = Magick::Image.read(photoPath).first
-      thumb.crop_resized!(120,  120, Magick::NorthGravity)
+      thumb.crop_resized!(120, 120, Magick::NorthGravity)
       thumbPath = Dir.pwd + directory + "/" + thumbFilename
       thumb.write(thumbPath)
 
-     # photo = "/photos/" + params[:id]
+      # photo = "/photos/" + params[:id]
 
       img = Image.new(photo: photoFilename, thumb: thumbFilename)
       @groof.images << img
-
-      @groof.save!
-
-      format.json { render :json => {response: "jee, kuva uploadattu!"} }
     end
+    if @groof.save!
+      flash[:success] = "Viherkaton lisäys onnistui!"
+      render :js => "window.location = '/'"
+    end
+
   end
 
   private
