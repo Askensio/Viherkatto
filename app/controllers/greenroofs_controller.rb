@@ -1,5 +1,6 @@
 # encoding: UTF-8
 
+require 'RMagick'
 
 class GreenroofsController < ApplicationController
 
@@ -240,9 +241,11 @@ class GreenroofsController < ApplicationController
       f.write file
       f.close
 
-      #@groof.photo = params["file-0"].tempfile
-      puts filename
-      #@groof.save
+      thumb = Magick::Image.read(filename).first
+      thumb.crop_resized!(75, 75, Magick::NorthGravity)
+      thumbFilename = directory + "/" + params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+      thumb.write(thumbFilename)
+
       format.json { render :json => {response: "jee, kuva uploadattu!"} }
     end
   end
