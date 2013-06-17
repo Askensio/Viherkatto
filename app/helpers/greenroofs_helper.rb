@@ -39,7 +39,15 @@ module GreenroofsHelper
       end
     }
     output.html_safe
-    end
+  end
+
+  def printAddress(greenroof)
+  if (greenroof.address.blank?)
+    return ""
+  else
+    return greenroof.address + ", "
+  end
+  end
 
 
 

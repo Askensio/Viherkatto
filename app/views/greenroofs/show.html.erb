@@ -35,7 +35,7 @@
 
           <tr>
             <td><%= f.label :address, h("Sijainti: ") %></td>
-            <td><%= f.label @greenroof.address %></td>
+            <td><%= f.label printAddress(@greenroof) << (@greenroof.locality).titleize.to_s %></td>
           </tr>
 
           <% if !@greenroof.constructor.nil? %>

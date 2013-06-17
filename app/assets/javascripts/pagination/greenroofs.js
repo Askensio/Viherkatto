@@ -46,7 +46,7 @@ var addElement = function (entry, admin) {
     var owner = $('<p></p>').append(entry.user)
     infoElement.append(ownerHeading).append(owner)
     var addressHeading = $('<h5>Sijainti:</h5>')
-    var address = $('<p></p>').append(entry.address)
+    var address = $('<p></p>').append(entry.locality)
     infoElement.append(addressHeading).append(address)
 
     mainElement.click(function (event) {

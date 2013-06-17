@@ -46,7 +46,6 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
 
-
     params[:colour][:id].shift
 
     if not params[:colour][:id].empty?
