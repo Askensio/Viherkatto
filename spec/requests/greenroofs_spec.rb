@@ -184,6 +184,7 @@ describe 'Greenroof' do
     it { should have_selector('label', text: "Rakennekerrokset") }
     it { should have_selector('label', text: "Huomioita") }
 
+=begin
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
@@ -193,6 +194,7 @@ describe 'Greenroof' do
       end
       it { should have_selector('label', text: "Latinankielinen nimi")  }
     end
+=end
 
     describe 'click-materiaali-link', js: true do
       before do

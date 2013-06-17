@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(:version => 20130613072945) do
     t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
+    t.string   "status"
+    t.text     "usage_experience"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.string   "thumbnail_file_name"

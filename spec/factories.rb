@@ -46,6 +46,8 @@ FactoryGirl.define do
     purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
+    usage_experience "Jee"
+    status "yksityisyrittäjä"
     plants { Array.new(3) { FactoryGirl.create(:plant) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|
