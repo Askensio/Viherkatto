@@ -231,20 +231,38 @@ class GreenroofsController < ApplicationController
   def upload
     respond_to do |format|
       @groof = Greenroof.find_by_id(params[:id])
-      directory = Dir.pwd + "/public/greenroofs/photos/" + params[:id]
 
-      FileUtils.mkdir_p directory if not File.directory? directory
+      # The path to the directory for the photos of the created greenroof.
+      directory = "/public/greenroofs/photos/" + params[:id]
 
-      filename =  directory + "/" + params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+      # If the directory does not exists a new one will be created.
+      FileUtils.mkdir_p Dir.pwd + directory if not File.directory? Dir.pwd + directory
+
+      # The filename for the new photo.
+      photoFilename = params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+
+      # The full path for the photo.
+      photoPath = Dir.pwd +   directory + "/" + photoFilename
+
       file = File.read(params["file-0"].tempfile) if params["file-0"]
-      f = File.new( filename ,"w+")
+      f = File.new(photoPath ,"w+")
       f.write file
       f.close
 
-      thumb = Magick::Image.read(filename).first
-      thumb.crop_resized!(75, 75, Magick::NorthGravity)
-      thumbFilename = directory + "/" + params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
-      thumb.write(thumbFilename)
+      # Filename for the thumbnail
+      thumbFilename = params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+
+      thumb = Magick::Image.read(photoPath).first
+      thumb.crop_resized!(120,  120, Magick::NorthGravity)
+      thumbPath = Dir.pwd + directory + "/" + thumbFilename
+      thumb.write(thumbPath)
+
+     # photo = "/photos/" + params[:id]
+
+      img = Image.new(photo: photoFilename, thumb: thumbFilename)
+      @groof.images << img
+
+      @groof.save!
 
       format.json { render :json => {response: "jee, kuva uploadattu!"} }
     end
