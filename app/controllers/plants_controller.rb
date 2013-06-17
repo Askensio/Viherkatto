@@ -67,18 +67,18 @@ class PlantsController < ApplicationController
 
     @plant.light = Light.find_by_id(params[:light][:id])
 
-    #if params[:links][:id]
-    puts "----------------------"
-    #puts params[:links_attributes].nil?
-    #puts params[:links].nil?
-    #puts params[:links_attributes]
-    #puts params[:links]
-    #puts "kaikki"
-    puts params[:plant][:links_attributes]["0"][:name]
-    @asd = params[:plant][:links_attributes]["0"]
-    puts @asd[:name]
-    puts "----------------------"
-    #end
+    ##if params[:links][:id]
+    #puts "----------------------"
+    ##puts params[:links_attributes].nil?
+    ##puts params[:links].nil?
+    ##puts params[:links_attributes]
+    ##puts params[:links]
+    ##puts "kaikki"
+    #puts params[:plant][:links_attributes]["0"][:name]
+    #@asd = params[:plant][:links_attributes]["0"]
+    #puts @asd[:name]
+    #puts "----------------------"
+    ##end
 
     if params[:plant][:links_attributes]
       for i in 0..2

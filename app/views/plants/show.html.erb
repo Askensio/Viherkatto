@@ -99,7 +99,13 @@
 
           <tr>
             <td><%= f.label :links %></td>
-            <td><%= link_to @plant.links.first.name, @plant.links.first.link %></td>
+            <td>
+              <% for i in 0..2 %>
+                  <%= link_to @plant.links[i].name, @plant.links[i].link %>
+                  <br>
+              <% end %>
+
+            </td>
 
           </tr>
 
