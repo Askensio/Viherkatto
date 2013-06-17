@@ -116,6 +116,14 @@ describe 'Greenroof' do
       @groof.save!
 =end
       @groof = FactoryGirl.create(:whole_greenroof)
+      @light = FactoryGirl.create(:light)
+      puts(@light.value)
+      @groof.roof.light = @light
+      @groof.roof.save!
+      @groof.plants.each do |plant|
+        plant.light = @light
+        plant.save!
+      end
 =begin
       @light = FactoryGirl.create(:light)
       @groof.roof.light = @light
@@ -179,11 +187,11 @@ describe 'Greenroof' do
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
-        sleep 10.seconds
+        sleep 20.seconds
         find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
         sleep 10.seconds
       end
-      it { should have_selector('label', text: "Latinankielinen nimi") }
+      it { should have_selector('label', text: "Latinankielinen nimi")  }
     end
 
     describe 'click-materiaali-link', js: true do

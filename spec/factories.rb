@@ -12,21 +12,21 @@ FactoryGirl.define do
     end
   end
 
+  factory :light do
+    value "Aurinkoinen"
+  end
+
   factory :roof do
     area '70'
     declination '1'
     load_capacity '500'
     environments { Array.new(2) { FactoryGirl.build(:environment) } }
-    light
   end
 
   factory :environment do
     name 'Merenranta'
   end
 
-  factory :light do
-    desc "Aurinkoinen"
-  end
 
   factory :plant do
     sequence(:name) { |n| "Example Plant #{n}" }
@@ -36,18 +36,16 @@ FactoryGirl.define do
     min_soil_thickness 20
     weight 1
     note "Totally fabulous plant"
-    light
   end
 
   factory :greenroof do
-    roof { |a| a.association(:roof, light: @light) }
+    roof { |a| a.association(:roof) }
     user { |a| a.association(:user) }
     address "Emminkatu 1"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
     purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
-    #@light = FactoryGirl.create(:light)
     plants { Array.new(3) { FactoryGirl.create(:plant) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|

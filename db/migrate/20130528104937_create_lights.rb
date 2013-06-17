@@ -1,7 +1,7 @@
 class CreateLights < ActiveRecord::Migration
   def change
     create_table :lights do |t|
-      t.string :desc
+      t.string :value
 
       t.timestamps
     end

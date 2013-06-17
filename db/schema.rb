@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20130613072945) do
   end
 
   create_table "lights", :force => true do |t|
-    t.string   "desc"
+    t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

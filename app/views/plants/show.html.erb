@@ -40,7 +40,7 @@
           <% end %>
           <tr>
             <td><%= f.label :light %></td>
-            <td><%= f.label Light.find(@plant.light_id).desc %></td>
+            <td><%= f.label Light.find(@plant.light_id).value %></td>
           </tr>
 
           <% if !@plant.growth_environments.empty? && !@plant.growth_environments.nil? %>
