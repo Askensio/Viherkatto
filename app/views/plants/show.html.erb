@@ -101,14 +101,17 @@
             <td><%= f.label :links %></td>
             <td>
               <% for i in 0..2 %>
-                  <%= link_to @plant.links[i].name, @plant.links[i].link %>
-                  <br>
+                  <% if !@plant.links[i].link.empty? %>
+                      <%= if @plant.links[i].name.empty?
+                            link_to @plant.links[i].link, @plant.links[i].link
+                          else
+                            link_to @plant.links[i].name, @plant.links[i].link
+                          end %>
+                      <br>
+                  <% end %>
               <% end %>
-
             </td>
-
           </tr>
-
         </table>
 
         <% if signed_in? && current_user.admin? %>
