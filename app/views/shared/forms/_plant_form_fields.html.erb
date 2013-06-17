@@ -50,10 +50,19 @@
     <%= f.label "weight (kg/m2)" %>
     <%= f.text_field :weight %>
 
-    <%= f.label :note %>
-    <%= f.text_field :note %>
+    <div class="row">
+      <div class="span2"><%= f.label "nimi" %></div>
+      <div class="span3"><%= f.label "osoite" %></div>
+    </div>
+    <div class="row">
+      <div class="span2"><%= f.text_field :note%></div>
+      <div class="span3"><%= f.text_field :note%></div>
+    </div>
 
-    <%= f.label "linkit" %>
+    <%= f.label :note %>
+    <%= f.text_area :note, style: 'height: 100px'%>
+
+
 
     <%=
         if current_page?(new_plant_path)
