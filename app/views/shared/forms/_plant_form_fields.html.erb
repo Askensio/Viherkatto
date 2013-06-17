@@ -53,6 +53,8 @@
     <%= f.label :note %>
     <%= f.text_field :note %>
 
+    <%= f.label "linkit" %>
+
     <%=
         if current_page?(new_plant_path)
           f.submit "Lisää uusi kasvi", class: "btn btn-large btn-custom"

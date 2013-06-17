@@ -11,6 +11,8 @@ class Plant < ActiveRecord::Base
   has_many :growths, :dependent => :destroy
   has_many :growth_environments, :through => :growths
 
+  has_many :links
+
   attr_accessible :min_height, :max_height, :latin_name, :min_soil_thickness, :name, :note, :weight, :light_id
 
   attr_readonly :id

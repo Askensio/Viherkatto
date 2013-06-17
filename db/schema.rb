@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613072945) do
+ActiveRecord::Schema.define(:version => 20130617075941) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -128,6 +128,16 @@ ActiveRecord::Schema.define(:version => 20130613072945) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "links", ["plant_id"], :name => "index_links_on_plant_id"
 
   create_table "locations", :force => true do |t|
     t.integer  "roof_id"
