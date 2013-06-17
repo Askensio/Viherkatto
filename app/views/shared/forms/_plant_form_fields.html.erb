@@ -50,19 +50,29 @@
     <%= f.label "weight (kg/m2)" %>
     <%= f.text_field :weight %>
 
+
     <div class="row">
-      <div class="span2"><%= f.label "nimi" %></div>
-      <div class="span3"><%= f.label "osoite" %></div>
+      <div class="span2"><%= f.label "Linkin nimi" %></div>
+      <div class="span3"><%= f.label "Linkin osoite" %></div>
     </div>
-    <div class="row">
-      <div class="span2"><%= f.text_field :note%></div>
-      <div class="span3"><%= f.text_field :note%></div>
-    </div>
+
+    <%= f.fields_for :links do |l| %>
+        <div class="row">
+          <div class="span2"><%= l.text_field :name, name: "link_name_1" %></div>
+          <div class="span3"><%= l.text_field :link, name: "link_link_1" %></div>
+        </div>
+        <div class="row">
+          <div class="span2"><%= l.text_field :name, name: "link_name_2" %></div>
+          <div class="span3"><%= l.text_field :link, name: "link_link_2" %></div>
+        </div>
+        <div class="row">
+          <div class="span2"><%= l.text_field :name, name: "link_name_3" %></div>
+          <div class="span3"><%= l.text_field :link, name: "link_link_3" %></div>
+        </div>
+    <% end %>
 
     <%= f.label :note %>
-    <%= f.text_area :note, style: 'height: 100px'%>
-
-
+    <%= f.text_area :note, style: 'height: 100px' %>
 
     <%=
         if current_page?(new_plant_path)

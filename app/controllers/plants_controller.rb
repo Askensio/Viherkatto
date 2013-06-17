@@ -37,6 +37,14 @@ class PlantsController < ApplicationController
 
   def new
     @plant = Plant.new
+
+    #3.times do
+
+    #@plant.links << Link.new
+    #@plant.links.build do |l|
+    #  l << Link.new
+    #end
+    #end
   end
 
   def edit
