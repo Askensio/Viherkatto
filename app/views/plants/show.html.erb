@@ -96,8 +96,14 @@
                 <td><%= f.label @plant.note %></td>
               </tr>
           <% end %>
-        </table>
 
+          <tr>
+            <td><%= f.label :links %></td>
+            <td><%= link_to @plant.links.first.name, @plant.links.first.link %></td>
+
+          </tr>
+
+        </table>
 
         <% if signed_in? && current_user.admin? %>
             <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
