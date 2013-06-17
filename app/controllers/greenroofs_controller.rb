@@ -229,21 +229,28 @@ class GreenroofsController < ApplicationController
 
   def upload
     respond_to do |format|
-      @groof = Greenroof.find_by_id( params[:id] )
+      @groof = Greenroof.find_by_id(params[:id])
+      directory = Dir.pwd + "/public/greenroofs/photos/" + params[:id]
 
-      file =  File.read(params["file-0"].tempfile) if params["file-0"]
-      f = File.new("/home/jarno/tmp" ,"w+")
-      @groof.photo = params["file-0"].tempfile
-      puts "LDSALDASLKJDSALK"
-      @groof.save
-      format.json { render :json => { response: "jee, kuva uploadattu!" } }
+      FileUtils.mkdir_p directory if not File.directory? directory
+
+      filename =  directory + "/" + params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+      file = File.read(params["file-0"].tempfile) if params["file-0"]
+      f = File.new( filename ,"w+")
+      f.write file
+      f.close
+
+      #@groof.photo = params["file-0"].tempfile
+      puts filename
+      #@groof.save
+      format.json { render :json => {response: "jee, kuva uploadattu!"} }
     end
   end
 
   private
 
   def owner
-    unless Greenroof.find_by_id( params[:id] ).user_id == current_user.id
+    unless Greenroof.find_by_id(params[:id]).user_id == current_user.id
       redirect_to root_url
     end
   end
