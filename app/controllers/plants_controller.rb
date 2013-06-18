@@ -37,14 +37,8 @@ class PlantsController < ApplicationController
 
   def new
     @plant = Plant.new
-
     3.times do
-
-      #@plant.links << Link.new
       @plant.links.build
-      #@plant.links.build do |l|
-      #  l << Link.new
-      #end
     end
   end
 
@@ -126,9 +120,17 @@ class PlantsController < ApplicationController
       @plant.growth_environments.clear
     end
 
+    puts "---------------"
+    puts @plant.links[0]
+    puts "---------------"
+
     if params[:plant][:links_attributes]
       for i in 0..2
         @curLink = @plant.links[i]
+
+        if (@curLink.nil?)
+          @curLink = Link.new
+        end
 
         if !params[:plant][:links_attributes][i.to_s][:name].empty?
           @curLink.name = params[:plant][:links_attributes][i.to_s][:name]
