@@ -4,7 +4,9 @@ require 'spec_helper'
 
 describe Contact do
 
+  before do
   Contact.create!(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
+  end
 
   let(:admin) { FactoryGirl.create(:admin) }
 
