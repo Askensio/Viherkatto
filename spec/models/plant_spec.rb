@@ -5,9 +5,9 @@ describe Plant do
 
   before do
 
-    Light.create!(desc: "Varjoisa")
-    Light.create!(desc: "Puolivarjoisa")
-    Light.create!(desc: "Aurinkoinen")
+    Light.create!(value: "Varjoisa")
+    Light.create!(value: "Puolivarjoisa")
+    Light.create!(value: "Aurinkoinen")
 
     @plant = Plant.new(name: "Example Plant", latin_name: "Plantus Examplus", min_height: 5, max_height: 10,  min_soil_thickness: 8, weight: 1, note: "Totally fabulous plant")
     @plant.update_attribute(:light_id, 1);

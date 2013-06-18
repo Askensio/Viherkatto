@@ -84,8 +84,10 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "status"
+    t.text     "usage_experience"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
@@ -124,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
   end
 
   create_table "lights", :force => true do |t|
-    t.string   "desc"
+    t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
