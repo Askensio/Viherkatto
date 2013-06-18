@@ -50,6 +50,12 @@ class PlantsController < ApplicationController
 
   def edit
     @plant = Plant.find(params[:id])
+
+    if @plant.links.empty?
+      3.times do
+        @plant.links.build
+      end
+    end
   end
 
   def create
@@ -66,19 +72,6 @@ class PlantsController < ApplicationController
     end
 
     @plant.light = Light.find_by_id(params[:light][:id])
-
-    ##if params[:links][:id]
-    #puts "----------------------"
-    ##puts params[:links_attributes].nil?
-    ##puts params[:links].nil?
-    ##puts params[:links_attributes]
-    ##puts params[:links]
-    ##puts "kaikki"
-    #puts params[:plant][:links_attributes]["0"][:name]
-    #@asd = params[:plant][:links_attributes]["0"]
-    #puts @asd[:name]
-    #puts "----------------------"
-    ##end
 
     if params[:plant][:links_attributes]
       for i in 0..2
@@ -131,6 +124,19 @@ class PlantsController < ApplicationController
       end
     else
       @plant.growth_environments.clear
+    end
+
+    if params[:plant][:links_attributes]
+      for i in 0..2
+        @curLink = @plant.links[i]
+
+        if !params[:plant][:links_attributes][i.to_s][:name].empty?
+          @curLink.name = params[:plant][:links_attributes][i.to_s][:name]
+        end
+        if !params[:plant][:links_attributes][i.to_s][:link].empty?
+          @curLink.link = params[:plant][:links_attributes][i.to_s][:link]
+        end
+      end
     end
 
     if params[:maintenances][:id]
