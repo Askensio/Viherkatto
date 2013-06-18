@@ -105,11 +105,12 @@ describe 'Greenroof' do
       @base.layers << @layer2
 
       address = Faker::Lorem.words(3).join(" ")
+      locality = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = FactoryGirl.create(:user)
 
-      @groof = Greenroof.new(year: 2010, address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(year: 2010, locality: locality, address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants

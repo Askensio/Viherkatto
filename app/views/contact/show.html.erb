@@ -9,7 +9,7 @@
   <div class="row-fluid marketing">
 
     <div class="span6 pull-left">
-      <%= fields_for(@contact) do |f| %>
+      <%= fields_for :contact do |f| %>
           <h3><%= @contact.otsikko %></h3>
           <table class="table" id="contact-table">
             <tr>

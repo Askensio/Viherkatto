@@ -14,10 +14,10 @@ describe Base do
 
   it { should be_valid }
 
-  #describe "when absorbancy is not present" do
-  #  before { @base.absorbancy="" }
-  #  it { should_not be_valid }
-  #end
+  describe "when absorbancy is not present" do
+    before { @base.absorbancy="" }
+    it { should be_valid }
+  end
 
   describe "absorbancy isn't numerical" do
     before { @base.absorbancy="jee" }
