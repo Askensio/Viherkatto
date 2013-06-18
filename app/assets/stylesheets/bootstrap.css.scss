@@ -911,10 +911,16 @@ abbr.initialism {
   text-transform: uppercase;
 }
 
+#aboutList li {
+  margin-left: 10%;
+  padding: 0.5%;
+}
+
 blockquote {
   padding: 0 0 0 15px;
   margin: 0 0 20px;
   border-left: 5px solid #eeeeee;
+  text-indent: 10%;
 }
 
 blockquote p {
@@ -6164,4 +6170,8 @@ a.badge:focus {
 
 .affix {
   position: fixed;
+}
+
+#headqmark i {
+  margin-right: -70px;
 }
