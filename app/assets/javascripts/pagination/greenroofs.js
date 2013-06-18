@@ -35,9 +35,13 @@ ModalController.prototype.setListeners = function (paginator) {
 }
 
 var addElement = function (entry, admin) {
+    console.log(entry)
     var mainElement = $('<div></div>').attr('class', 'hero-unit greenroof-list-hero-unit span4');
     var thumbnailElement = $('<div></div>').attr('class', 'thumbnail pull-left')
-    var thumbnail = $('<img />').attr('src', '/assets/ei_kuvaa_placeholder.gif')
+    var thumbnail = $('<img />').attr('src', '/assets/no_image_small.jpg')
+    if( entry.thumb ) {
+        thumbnail.attr('src', '/greenroofs/photos/' + entry.id + '/' + entry.thumb)
+    }
     thumbnailElement.append(thumbnail)
     mainElement.append(thumbnailElement)
 
@@ -46,7 +50,7 @@ var addElement = function (entry, admin) {
     var owner = $('<p></p>').append(entry.user)
     infoElement.append(ownerHeading).append(owner)
     var addressHeading = $('<h5>Sijainti:</h5>')
-    var address = $('<p></p>').append(entry.address)
+    var address = $('<p></p>').append(entry.locality)
     infoElement.append(addressHeading).append(address)
 
     mainElement.click(function (event) {

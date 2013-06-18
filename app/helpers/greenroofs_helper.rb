@@ -20,6 +20,37 @@ module GreenroofsHelper
     output.html_safe
   end
 
+  def printCustomPlants (greenroof)
+    plants = []
+    output = '';
+    greenroof.custom_plants.each { |plant| plants.push((plant.name)) }
+    hash = Hash[plants.map.with_index.to_a]
+    if greenroof.plants.count != 0
+    output << ', '
+    end
+    plants.each_with_index { |plant|
+      if hash[plant] < plants.size - 1
+        output << plant
+        output << ', '
+
+      else
+        output << plant
+
+      end
+    }
+    output.html_safe
+  end
+
+  def printAddress(greenroof)
+  if (greenroof.address.blank?)
+    return ""
+  else
+    return greenroof.address + ", "
+  end
+  end
+
+
+
   def printBases (greenroof)
     bases = []
     output = '';
@@ -66,4 +97,4 @@ module GreenroofsHelper
     }
     output.html_safe
   end
-end
+ end

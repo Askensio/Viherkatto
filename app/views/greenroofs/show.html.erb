@@ -7,22 +7,20 @@
     <h1>
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
-
     <div id="slider-holder">
       <div class="flexslider span4">
         <ul class="slides">
-          <li>
-            <img src="/assets/greenroof1.jpg"/>
-          </li>
-          <li>
-            <img src="/assets/greenroof2.jpg"/>
-          </li>
-          <li>
-            <img src="/assets/greenroof3.JPG"/>
-          </li>
-          <li>
-            <img src="/assets/2ndgreenroof.jpg"/>
-          </li>
+          <% if @greenroof.images.length > 0 %>
+              <% @greenroof.images.each do |img| %>
+                  <li>
+                    <img src="/greenroofs/photos/<%= @greenroof.id %>/<%= img.photo %>"/>
+                  </li>
+              <% end %>
+          <% else %>
+              <li>
+                <%= image_tag "no_image.jpg" %>
+              </li>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -35,15 +33,15 @@
 
           <tr>
             <td><%= f.label :address, h("Sijainti: ") %></td>
-            <td><%= f.label @greenroof.address %></td>
+            <td><%= f.label printAddress(@greenroof) << (@greenroof.locality).titleize.to_s %></td>
           </tr>
 
           <% if !@greenroof.constructor.nil? %>
-          <tr>
-            <td><%= f.label :constructor, h("Rakentaja: ") %></td>
-            <td><%= f.label @greenroof.constructor %></td>
-          </tr>
-              <% end %>
+              <tr>
+                <td><%= f.label :constructor, h("Rakentaja: ") %></td>
+                <td><%= f.label @greenroof.constructor %></td>
+              </tr>
+          <% end %>
 
           <tr>
             <td><%= f.label :purpose, h("Käyttötarkoitus: ") %></td>
@@ -58,12 +56,12 @@
           <tr>
             <td><%= f.label :plants, h("Kasvit ") %></td>
             <td>
-              <div class="well"> <%= printPlants(@greenroof) %> </div>
+              <div class="well"> <%= printPlants(@greenroof) + printCustomPlants(@greenroof) %> </div>
             </td>
           </tr>
 
           <tr>
-            <td><%= f.label :bases, h("Rakennekerrokset ")%></td>
+            <td><%= f.label :bases, h("Rakennekerrokset ") %></td>
             <td>
               <div class="well"> <%= printBases(@greenroof) %> </div>
             </td>

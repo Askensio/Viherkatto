@@ -1,0 +1,63 @@
+<%= form_for(@plant) do |f| %>
+    <%= render 'shared/error_plants' %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :latin_name %>
+    <%= f.text_field :latin_name %>
+
+    <%= f.label :colour %>
+    <%= collection_select(:colour, :id, Colour.all,
+                          :id, :value, {:selected => @plant.colours.map { |col| col.id }}, :class => "selectpicker show-menu-arrow show-tick span5",
+                          :title => "Valitse kukan väri", :multiple => true) %>
+
+    <%= f.label :light_id %>
+    <%= collection_select(:light, :id, Light.all,
+                          :id, :value, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
+
+    <%= f.label :growth_environment %>
+    <%= if @plant.growth_environments.empty?
+
+          collection_select(:growth_environments, :id, GrowthEnvironment.all,
+                            :id, :environment, {}, :class => "selectpicker show-menu-arrow span5", :multiple => true)
+
+        else
+          collection_select(:growth_environments, :id, GrowthEnvironment.all,
+                            :id, :environment, {:selected => listSelectedEnvironments(@plant.growth_environments)}, :class => "selectpicker show-menu-arrow span5", :multiple => true)
+        end %>
+
+    <%= f.label :maintenance %>
+    <%= if @plant.maintenance.nil?
+
+          collection_select(:maintenances, :id, Maintenance.all,
+                            :id, :name, {}, :class => "selectpicker show-menu-arrow span5")
+        else
+
+          collection_select(:maintenances, :id, Maintenance.all,
+                            :id, :name, {:selected => @plant.maintenance.id}, :class => "selectpicker show-menu-arrow span5")
+        end %>
+
+
+    <%= f.label "minimum soil thickness (cm)" %>
+    <%= f.text_field :min_soil_thickness %>
+
+    <%= f.label :min_height %>
+    <%= f.text_field :min_height %>
+
+    <%= f.label :max_height %>
+    <%= f.text_field :max_height %>
+
+    <%= f.label "weight (kg/m2)" %>
+    <%= f.text_field :weight %>
+
+    <%= f.label :note %>
+    <%= f.text_field :note %>
+
+    <%=
+        if current_page?(new_plant_path)
+          f.submit "Lisää uusi kasvi", class: "btn btn-large btn-custom"
+        else
+          f.submit "Päivitä", class: "btn btn-large btn-custom"
+        end
+    %>
+<% end %>

@@ -122,6 +122,12 @@ function generateLayerForm(layerName) {
     var weightLabel = $('<label for="layer_weight">Paino (kg/m2) *</label>')
     var weightInput = $('<input class="span4" id="layer_weight" name="layer[weight]" required="required" size="30" type="text">')
 
+    if(layerName == 'Suodatinkangas' || layerName == 'Asennussuoja') {
+        thicknessInput.attr('value', '0').attr('disabled', 'true')
+        weightInput.attr('value', '0').attr('disabled', 'true')
+
+    }
+
     layerFormElement.append(productLabel)
     layerFormElement.append(productInput)
     layerFormElement.append(thicknessLabel)
@@ -136,10 +142,11 @@ function generateLayerForm(layerName) {
 }
 
 var save = function (event) {
+
     var roof = createRoofObject()
     var environments = createEnvironmentsObject()
     var bases = createBasesArray()
-    var greenroof = createGreenroofObjcet()
+    var greenroof = createGreenroofObject()
     var customplant = createCustomplantsObject()
     var purposes = createPurposeObject()
 
@@ -203,7 +210,7 @@ function createEnvironmentsObject() {
 
     $("#environment_id option:selected").each(function (index) {
         id.push($(this).attr('value'))
-        console.log($(this).attr('value'))
+        //console.log($(this).attr('value'))
     });
     if (id.length < 1) {
         alert("Valitse sijainti")
@@ -240,7 +247,7 @@ function createLayerObjectArray(baseElement) {
     var layerArray = []
     var layers = baseElement.children('div')
     layers.each(function (index) {
-        console.log($(this).children($('h4')))
+        //console.log($(this).children($('h4')))
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
         layer.name = name
@@ -256,11 +263,12 @@ function createLayerObjectArray(baseElement) {
     return layerArray
 }
 
-function createGreenroofObjcet() {
+function createGreenroofObject() {
 
     var greenroof = new Object()
     greenroof.purpose = $
     greenroof.address = $('#greenroof_address').val()
+    greenroof.locality = $('#greenroof_locality').val()
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
     greenroof.purpose = 1
@@ -279,6 +287,32 @@ function sendData(data) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
         },
         success: function (response) {
+            console.log('Greenroof id: ' + response.id + ' saved')
+
+            var imageData = new FormData()
+
+            jQuery.each($('#image-upload')[0].files, function(i, file) {
+                imageData.append('file-'+i, file);
+            });
+
+            sendImage(imageData, response.id)
+        }
+    });
+}
+
+function sendImage(imageData, id) {
+    $.ajax({
+        url: '/greenroofs/' +id + '/upload',
+        type: 'POST',
+        data: imageData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        success: function (response) {
+            console.log(response)
         }
     });
 }

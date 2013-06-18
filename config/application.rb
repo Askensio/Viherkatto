@@ -17,6 +17,9 @@ end
 
 module Viherkatto
   class Application < Rails::Application
+
+    config.paperclip_defaults = {:storage => :fog, :fog_credentials => {:provider => "Local", :local_root => "#{Rails.root}/public"}, :fog_directory => "", :fog_host => "localhost"}
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -35,12 +38,16 @@ module Viherkatto
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    config.assets.precompile = true
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
+
+	config.assets.precompile = true
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
@@ -61,6 +68,9 @@ module Viherkatto
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    config.assets.initialize_on_precompile = false
+
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

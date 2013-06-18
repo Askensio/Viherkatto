@@ -9,12 +9,18 @@ describe 'Greenroof' do
     Environment.create!(name: "Kaupunki")
     Environment.create!(name: "Muu")
 
+<<<<<<< HEAD
     Purpose.create!(value: "Maisemakatto")
 
+=======
+=begin
+>>>>>>> develop
     @light = Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
+=end
     Maintenance.create!(name: "Helppo")
+
   end
 
   let(:user) { FactoryGirl.create(:user) }
@@ -24,7 +30,8 @@ describe 'Greenroof' do
 
   describe 'addition' do
     before do
-      plant.update_attribute(:light_id, 1)
+      FactoryGirl.create(:light)
+      plant.update_attribute(:light_id, Light.first.id)
       sign_in user
       visit new_greenroof_path
     end
@@ -48,6 +55,7 @@ describe 'Greenroof' do
 
       before do
         fill_in "greenroof_address", with: "Some address"
+        fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
         fill_in "roof_area", with: "100"
@@ -77,6 +85,7 @@ describe 'Greenroof' do
   describe 'show' do
     before do
 
+=begin
       Environment.create!(name: "Merenranta")
       Environment.create!(name: "Pelto")
       Environment.create!(name: "Metsä")
@@ -102,16 +111,36 @@ describe 'Greenroof' do
       @base.layers << @layer2
 
       address = Faker::Lorem.words(3).join(" ")
+      locality = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = FactoryGirl.create(:user)
 
-      @groof = Greenroof.new(year: 2010, address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(year: 2010, locality: locality, address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
       @groof.save!
+=end
+      @groof = FactoryGirl.create(:whole_greenroof)
+      @light = FactoryGirl.create(:light)
+      puts(@light.value)
+      @groof.roof.light = @light
+      @groof.roof.save!
+      @groof.plants.each do |plant|
+        plant.light = @light
+        plant.save!
+      end
+=begin
+      @light = FactoryGirl.create(:light)
+      @groof.roof.light = @light
+      @groof.roof.save!
+      @groof.plants.each do |plant|
+        plant.light = @light
+        plant.save!
+      end
+=end
       visit greenroof_path(@groof)
     end
 
@@ -163,34 +192,85 @@ describe 'Greenroof' do
     it { should have_selector('label', text: "Rakennekerrokset") }
     it { should have_selector('label', text: "Huomioita") }
 
+=begin
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[5]/td[2]/div/a[1]", :visible => true).click
-        sleep 1.seconds
+        sleep 20.seconds
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+        sleep 10.seconds
       end
-      it { should have_selector('label', text: "Latinankielinen nimi") }
+      it { should have_selector('label', text: "Latinankielinen nimi")  }
     end
+=end
 
     describe 'click-materiaali-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
         sleep 1.seconds
       end
       it { should have_selector('td', text: "Paino") }
     end
     describe 'index', js: true do
       before { visit greenroofs_path }
+
       #it { should have_selector('title', text: "Viherkatot") }
       it { should have_selector('h5', text: "Omistaja") }
       it { should have_selector('h5', text: "Sijainti") }
     end
   end
-end
 
-def select_by_value(id, value)
-  option_xpath = "//*[@id='#{id}']/option[@value='#{value}']"
-  option = find(:xpath, option_xpath).text
-  select(option, :from => id)
+  # greenroofs#search
+
+  describe 'search' do
+    before do
+      @groof = FactoryGirl.create(:whole_greenroof)
+      visit '/search/greenroofs'
+    end
+
+    subject { page }
+
+    describe "find by address", js: true do
+      before do
+        fill_in 'address', with: "Emminkatu"
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Helsinki") }
+    end
+
+    describe "find by greenroof note", js:true do
+      before do
+        fill_in 'groofnote', with: "kattotiimi"
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Helsinki") }
+    end
+
+    describe "find by plantname", js:true do
+      before do
+        fill_in 'plantname', with: "xam"
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Helsinki") }
+    end
+
+    describe "find by plantmaxheight", js:true do
+      before do
+        fill_in 'plantmaxheight', with: 10
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Helsinki") }
+    end
+
+    describe "find by plantminheight", js:true do
+      before do
+        fill_in 'plantminheight', with: 1
+        find(:xpath, '//*[@id="search-button"]', visible: true).click
+      end
+      it { should have_link("Helsinki") }
+    end
+
+  end
+
 end

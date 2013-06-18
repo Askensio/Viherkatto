@@ -46,7 +46,6 @@ class PlantsController < ApplicationController
   def create
     @plant = Plant.new(params[:plant])
 
-
     params[:colour][:id].shift
 
     if not params[:colour][:id].empty?
@@ -67,7 +66,7 @@ class PlantsController < ApplicationController
 
     if @plant.save
       if @plant.light_id.nil?
-        @plant.update_attribute(:light_id, 1)
+        @plant.update_attribute(:light_id, Light.first.id)
       end
       params[:growth_environments][:id].shift
       if (!params[:growth_environments][:id].empty?)
