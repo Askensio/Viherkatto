@@ -120,10 +120,6 @@ class PlantsController < ApplicationController
       @plant.growth_environments.clear
     end
 
-    puts "---------------"
-    puts @plant.links[0]
-    puts "---------------"
-
     if params[:plant][:links_attributes]
       for i in 0..2
         @curLink = @plant.links[i]
