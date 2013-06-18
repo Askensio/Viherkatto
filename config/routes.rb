@@ -2,6 +2,14 @@ Viherkatto::Application.routes.draw do
 
 
 
+  get "base/new"
+
+  get "base/index"
+
+  get "base/show"
+
+  get "base/edit"
+
   resources :contact
   resources :users
   resources :plants
