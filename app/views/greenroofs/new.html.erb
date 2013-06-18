@@ -16,7 +16,9 @@
         <form class="form-horizontal">
           <fieldset>
             <legend>Viherkaton yleiset tiedot</legend>
-            <%= render 'shared/forms/groof_form_fields' %>
+            <div id="purpose-select">
+              <%= render 'shared/forms/groof_form_fields' %>
+            </div>
             <%= form_for @greenroof, :url => new_greenroof_path, :html => { :multipart => true } do |form| %>
                 <%= form.file_field :photo %>
             <% end %>

@@ -13,7 +13,7 @@
     <div class="required">
       <% if @greenroof.purposes.empty? %>
           <%= collection_select :purpose, :id, Purpose.all, :id, :value,
-                                {}, :title => "Valitse käyttötarkoitus",  :class => "selectpicker show-menu-arrow show-tick span3 chosen-env", :multiple => true, :required => true %>
+                                {}, :title => "Valitse käyttötarkoitus", :class => "selectpicker show-menu-arrow show-tick span3 chosen-env", :multiple => true, :required => true %>
       <% else %>
           <%= collection_select :purpose, :id, Purpose.all, :id, :value,
                                 {:selected => @greenroof.purposes.map { |purp| purp.id }},  :class => "selectpicker show-menu-arrow show-tick span3", :multiple => true, :required => true %>
