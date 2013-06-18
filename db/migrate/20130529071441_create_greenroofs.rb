@@ -8,6 +8,8 @@ class CreateGreenroofs < ActiveRecord::Migration
       t.integer :purpose
       t.text :note
       t.references :user
+      t.string :status
+      t.text :usage_experience
 
       t.timestamps
     end

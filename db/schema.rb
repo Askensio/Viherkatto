@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613072945) do
+ActiveRecord::Schema.define(:version => 20130617100626) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -84,16 +84,10 @@ ActiveRecord::Schema.define(:version => 20130613072945) do
     t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
-    t.string   "thumbnail_file_name"
-    t.string   "thumbnail_content_type"
-    t.integer  "thumbnail_file_size"
-    t.datetime "thumbnail_updated_at"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.string   "status"
+    t.text     "usage_experience"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
@@ -114,6 +108,14 @@ ActiveRecord::Schema.define(:version => 20130613072945) do
   add_index "growths", ["growth_environment_id"], :name => "index_growths_on_growth_environment_id"
   add_index "growths", ["plant_id"], :name => "index_growths_on_plant_id"
 
+  create_table "images", :force => true do |t|
+    t.string   "photo"
+    t.string   "thumb"
+    t.integer  "greenroof_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "layers", :force => true do |t|
     t.string   "name"
     t.string   "product_name"
@@ -124,7 +126,7 @@ ActiveRecord::Schema.define(:version => 20130613072945) do
   end
 
   create_table "lights", :force => true do |t|
-    t.string   "desc"
+    t.string   "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

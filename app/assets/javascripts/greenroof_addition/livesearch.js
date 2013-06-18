@@ -71,7 +71,7 @@ $(document).ready(function () {
             }
             if (reloadPaginateNeeded) {
                 paginate(entry_count, page, per_page)
-                console.log("reloadin pagination")
+                //console.log("reloadin pagination")
                 reloadPaginateNeeded = false;
             }
             // Clears the plant list.
@@ -135,7 +135,7 @@ $(document).ready(function () {
 
     $("#greenroof_year").keyup(function() {
         var input = $("#greenroof_year").val();
-        console.log("foo");
+        //console.log("foo");
         $('.construction_year').empty();
         $('.construction_year').append('Valmistumisvuosi: '+input);
     })
