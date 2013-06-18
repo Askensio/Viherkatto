@@ -105,6 +105,7 @@ namespace :db do
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
+      @roof.light = Light.first
 
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(absorbancy: 20)
@@ -120,7 +121,7 @@ namespace :db do
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       usage_experience = "Jee"
-      status = "yksityisyrittäjä"
+      status = 1
       @user = User.find(n+1)
 
       @groof = Greenroof.new(year: 2010, locality: locality, address: address, constructor: constructor, purpose: purpose, note: note, usage_experience: usage_experience, status: status)

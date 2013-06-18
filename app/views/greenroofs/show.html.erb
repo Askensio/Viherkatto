@@ -50,7 +50,20 @@
 
           <tr>
             <td><%= f.label "Katon tiedot:" %></td>
-            <td><%= link_to "Katto", @greenroof.roof %></p></td>
+            <td>
+              Pinta-ala: <%= @greenroof.roof.area %>
+              <br>
+              Kaltevuus: <%= @greenroof.roof.declination %>
+              <br>
+              Kantavuus: <%= @greenroof.roof.load_capacity %>
+              <br>
+              Valoisuus: <%= @greenroof.roof.light.value %>
+              <br>
+              Ympäristö: <% @greenroof.roof.environments.each do |env| %>
+                  <%= env.name %>
+                  <br>
+              <% end %>
+            </td>
           </tr>
 
           <tr>

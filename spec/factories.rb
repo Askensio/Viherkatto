@@ -17,9 +17,9 @@ FactoryGirl.define do
   end
 
   factory :roof do
-    area '70'
-    declination '1'
-    load_capacity '500'
+    area 70
+    declination 1
+    load_capacity 500
     environments { Array.new(2) { FactoryGirl.build(:environment) } }
   end
 
@@ -48,7 +48,7 @@ FactoryGirl.define do
     note "Viherkattotiimi on hienoin"
     year 1984
     usage_experience "Jee"
-    status "yksityisyrittäjä"
+    status 1
     plants { Array.new(3) { FactoryGirl.create(:plant) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|

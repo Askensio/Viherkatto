@@ -21,6 +21,7 @@ class Greenroof < ActiveRecord::Base
   validates :address, length: {maximum: 200}
   validates :constructor, length: { maximum: 200 }
   validates :purpose, allow_blank: false, numericality: true, inclusion: {in: (0...2)}
+  validates :status, allow_blank: false, numericality: true, inclusion: {in: (0...3)}
   validates :note, length: { maximum: 5000 }
   validates :year, numericality: true, inclusion: {in: (1900...2100)}
   validates :usage_experience, length: {maximum: 5000}
