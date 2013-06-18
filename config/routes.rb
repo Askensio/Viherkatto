@@ -7,7 +7,7 @@ Viherkatto::Application.routes.draw do
   resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
-  #resources :bases
+  resources :bases
 
 
   match '/rekisteroidy',  to: 'users#new'

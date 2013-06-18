@@ -28,15 +28,19 @@ function attachClickListeners() {
         })
 
         var base = new Object()
+        base.name = $('#base_name').val()
         base.absorbancy = $('#base_absorbancy').val()
         base.note = $('#base_note').val()
-        base.layers = layer_array
+
+        var data = new Object()
+        data.base = base
+        data.layers = layer_array
 
         // Sends the base data
         $.ajax({
             url: '/bases',
             type: 'POST',
-            data: base,
+            data: data,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
             },
