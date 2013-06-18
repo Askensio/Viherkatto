@@ -13,7 +13,7 @@
 
     <%= f.label :light_id %>
     <%= collection_select(:light, :id, Light.all,
-                          :id, :desc, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
+                          :id, :value, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
 
     <%= f.label :growth_environment %>
     <%= if @plant.growth_environments.empty?

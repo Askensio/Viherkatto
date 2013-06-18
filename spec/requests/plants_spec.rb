@@ -5,9 +5,9 @@ require 'spec_helper'
 describe 'Plant pages' do
 
   before do
-    Light.create!(desc: "Varjoisa")
-    Light.create!(desc: "Puolivarjoisa")
-    @light = Light.create!(desc: "Aurinkoinen")
+    Light.create!(value: "Varjoisa")
+    Light.create!(value: "Puolivarjoisa")
+    @light = Light.create!(value: "Aurinkoinen")
 
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
