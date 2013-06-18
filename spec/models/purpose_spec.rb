@@ -19,4 +19,12 @@ describe Purpose do
     it { should_not be_valid }
   end
 
+  # It's just too long, nothing else is validated
+  describe "with absurd value" do
+    before { @purpose.value = "Öärghblörgh:D:D:D:MÄOLENPEKKAHIMASENKAKSOISOLENTO(812518258asd(SD(AS(/!" }
+    it { should_not be_valid }
+  end
+
+
+
 end

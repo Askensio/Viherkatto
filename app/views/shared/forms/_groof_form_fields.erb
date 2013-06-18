@@ -10,7 +10,7 @@
     <%= f.text_field :constructor%>
 
     <%= f.label :purpose, h('Viherkaton käyttötarkoitus') %>
-    <div class="required">
+    <div class="required" id="purpose-choose">
       <% if @greenroof.purposes.empty? %>
           <%= collection_select :purpose, :id, Purpose.all, :id, :value,
                                 {}, :title => "Valitse käyttötarkoitus", :class => "selectpicker show-menu-arrow show-tick span3 chosen-env", :multiple => true, :required => true %>

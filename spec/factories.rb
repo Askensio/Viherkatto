@@ -11,6 +11,10 @@ FactoryGirl.define do
     end
   end
 
+  factory :purpose do
+    value "Maisemakatto"
+  end
+
   factory :roof do
     area '70'
     declination '1'

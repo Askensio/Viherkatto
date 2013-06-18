@@ -54,8 +54,8 @@ describe 'Greenroof' do
         select "Tasakatto", from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
-        find_field('purpose_id').find('option[1]')
-        #page.select '1', :from => "purpose_id", :visible => false
+        find(:xpath, "//button[@data-id='purpose_id']", :visible => true).click
+        find(:xpath, "//*[@id=\"purpose-choose\"]/div/ul/li[1]/a").click
         fill_in "roof_load_capacity", with: "500"
         fill_in "base_absorbancy", with: "400"
         find("#" + (-1 * plant.id).to_s).click
