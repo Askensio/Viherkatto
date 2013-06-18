@@ -41,13 +41,14 @@
                 <% end %>
               </table>
             </tr>
+            <%= link_to "Lisätietoa sivusta", contact_path('about') %>
 
           </table>
       <% end %>
     </div>
 
     <div class="span6 pull-right">
-      <%= image_tag 'viherkatot_logo.jpg', class: "img-polaroid" %>
+      <%= link_to (image_tag 'viherkatot_logo.jpg', class: "img-polaroid"), 'http://www.luomus.fi/kasvitiede/tutkimus/viherkatot/' %>
     </div>
     </td>
   </div>
