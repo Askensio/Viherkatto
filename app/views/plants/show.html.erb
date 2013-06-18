@@ -101,7 +101,7 @@
             <td><%= f.label :links %></td>
             <td>
               <% for i in 0..2 %>
-                  <% if !@plant.links[i].link.empty? %>
+                  <% if !@plant.links[i].nil? && !@plant.links[i].link.empty? %>
                       <%= if @plant.links[i].name.empty?
                             link_to @plant.links[i].link, @plant.links[i].link
                           else
