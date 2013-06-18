@@ -9,17 +9,13 @@ describe 'Greenroof' do
     Environment.create!(name: "Kaupunki")
     Environment.create!(name: "Muu")
 
-<<<<<<< HEAD
     Purpose.create!(value: "Maisemakatto")
 
-=======
 =begin
->>>>>>> develop
     @light = Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 =end
-    Maintenance.create!(name: "Helppo")
 
   end
 

@@ -189,6 +189,10 @@
         null,
         null
       ],
+      "/Users/jjoonia/Documents/Viherkatto/app/helpers/purpose_helper.rb": [
+        1,
+        null
+      ],
       "/Users/jjoonia/Documents/Viherkatto/app/helpers/roofs_helper.rb": [
         null,
         null,
@@ -326,6 +330,8 @@
         0,
         null,
         null,
+        null,
+        null,
         null
       ],
       "/Users/jjoonia/Documents/Viherkatto/app/models/custom_plant.rb": [
@@ -442,6 +448,17 @@
         null,
         null,
         1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
         null,
         1,
         1,
@@ -621,10 +638,13 @@
         null
       ],
       "/Users/jjoonia/Documents/Viherkatto/app/models/greenroof.rb": [
-        1,
+        null,
         null,
         1,
         null,
+        1,
+        null,
+        1,
         1,
         1,
         null,
@@ -666,6 +686,7 @@
         null,
         1,
         0,
+        null,
         null,
         null
       ],
@@ -943,6 +964,21 @@
         1,
         271,
         1,
+        null
+      ],
+      "/Users/jjoonia/Documents/Viherkatto/app/controllers/purpose_controller.rb": [
+        1,
+        null
+      ],
+      "/Users/jjoonia/Documents/Viherkatto/app/models/purpose.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
         null
       ],
       "/Users/jjoonia/Documents/Viherkatto/app/controllers/roofs_controller.rb": [
@@ -1328,6 +1364,6 @@
         null
       ]
     },
-    "timestamp": 1371548414
+    "timestamp": 1371552986
   }
 }
