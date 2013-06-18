@@ -114,9 +114,12 @@
           </tr>
         </table>
 
-        <% if signed_in? && current_user.admin? %>
-            <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
-        <% end %>
+        <div class="row">
+          <% if signed_in? && current_user.admin? %>
+              <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
+          <% end %>
+          <%= link_to "Takaisin selaukseen", plants_path, class: "btn btn-large btn-custom" %>
+        </div>
 
         </div>
         </div>

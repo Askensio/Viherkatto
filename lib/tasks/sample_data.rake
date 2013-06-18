@@ -40,6 +40,9 @@ namespace :db do
       colour =  Colour.last
       @plant.colours << colour
       colour =  Colour.first
+      @plant.links << Link.new(name: "eka", link: "http://eka.com")
+      @plant.links << Link.new(name: "toka", link: "http://toka.com")
+      @plant.links << Link.new(name: "kolmas", link: "http://kolmas.com")
       @plant.colours << colour
       @plant.light = Light.first
       @plant.maintenance = Maintenance.first
