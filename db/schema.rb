@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
 
   create_table "greenroofs", :force => true do |t|
     t.string   "address"
+    t.string   "locality"
     t.string   "constructor"
     t.integer  "year"
     t.integer  "purpose"

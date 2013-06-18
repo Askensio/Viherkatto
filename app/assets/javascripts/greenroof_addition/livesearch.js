@@ -231,6 +231,11 @@ $(document).ready(function () {
         $('.address').append('Osoite: ' + input);
     })
 
+    $("#greenroof_locality").keyup(function() {
+        var input = $("#greenroof_locality").val();
+        $('.locality').empty();
+        $('.locality').append('Paikkakunta: ' + input);
+    })
     /**
      * Greenroof note value for the Synopsis-view.
      */
