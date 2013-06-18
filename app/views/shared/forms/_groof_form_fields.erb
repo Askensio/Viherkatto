@@ -9,10 +9,16 @@
     <%= f.label :address, h('Osoite') %>
     <%= f.text_field :address %>
 
+    <%= f.label :status, h('Lisään viherkaton roolissa:') %>
+    <%= f.select :status, [['Yksityishenkilö', '0'],['Yritys', '1'],['Tutkija','2'],['Muu/En halua kertoa', '3']], {}, :class => "selectpicker show-menu-arrow show-tick span3" %>
+
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
     <%= f.text_field :constructor%>
 
-    <%= f.label :note, h('Vapaa kuvaus') %>
+    <%= f.label :note, h('Vapaa kuvaus viherkatosta ja rakentamisesta') %>
     <%= f.text_area :note %>
+
+    <%= f.label :usage_experience, h('Käyttökokemuksia ja huomioita') %>
+    <%= f.text_area :usage_experience %>
 
 <% end %>
