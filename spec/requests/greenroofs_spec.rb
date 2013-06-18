@@ -50,6 +50,7 @@ describe 'Greenroof' do
 
       before do
         fill_in "greenroof_address", with: "Some address"
+        fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
         fill_in "roof_area", with: "100"
@@ -228,7 +229,7 @@ describe 'Greenroof' do
         fill_in 'address', with: "Emminkatu"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Emminkatu") }
+      it { should have_link("Helsinki") }
     end
 
     describe "find by greenroof note", js:true do
@@ -236,7 +237,7 @@ describe 'Greenroof' do
         fill_in 'groofnote', with: "kattotiimi"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Emminkatu") }
+      it { should have_link("Helsinki") }
     end
 
     describe "find by plantname", js:true do
@@ -244,7 +245,7 @@ describe 'Greenroof' do
         fill_in 'plantname', with: "xam"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Emminkatu") }
+      it { should have_link("Helsinki") }
     end
 
     describe "find by plantmaxheight", js:true do
@@ -252,7 +253,7 @@ describe 'Greenroof' do
         fill_in 'plantmaxheight', with: 10
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Emminkatu") }
+      it { should have_link("Helsinki") }
     end
 
     describe "find by plantminheight", js:true do
@@ -260,7 +261,7 @@ describe 'Greenroof' do
         fill_in 'plantminheight', with: 1
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Emminkatu") }
+      it { should have_link("Helsinki") }
     end
 
   end

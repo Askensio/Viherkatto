@@ -42,6 +42,7 @@ FactoryGirl.define do
     roof { |a| a.association(:roof) }
     user { |a| a.association(:user) }
     address "Emminkatu 1"
+    locality "Helsinki"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
     purpose 1
     note "Viherkattotiimi on hienoin"
