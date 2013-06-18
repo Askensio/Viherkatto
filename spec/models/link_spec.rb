@@ -13,11 +13,6 @@ describe Link do
 
   it { should be_valid }
 
-  #describe 'when name is not present' do
-  #  before { @link.name = " " }
-  #  it { should_not be_valid }
-  #end
-
   describe 'when name is too long' do
     before { @link.name = "a"*101 }
     it { should_not be_valid }
@@ -27,11 +22,6 @@ describe Link do
     before { @link.name = "Cobun kotikokkisivut" }
     it { should be_valid }
   end
-
-  #describe 'when link is not present' do
-  #  before { @link.link = " " }
-  #  it { should_not be_valid }
-  #end
 
   describe 'when link is too long' do
     before { @link.link = "a"*101 }
