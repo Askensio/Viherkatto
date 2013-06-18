@@ -132,11 +132,11 @@ describe 'Greenroof' do
     ##@plant1 = FactoryGirl.create(:plant)
     ##@plant1.update_attributes(:light_id => Light.create!(desc: "Aurinkoinen"));
     #@plants = [@plant1, FactoryGirl.create(:plant)]
-    #@base = Base.new(absorbancy: 20)
+    #@bases = Base.new(absorbancy: 20)
     #@layer1 = Layer.new(name: "Materiaali1", thickness: 30, weight: 20)
     #@layer2 = Layer.new(name: "Materiaali2", thickness: 80, weight: 10)
-    #@base.layers << @layer1
-    #@base.layers << @layer2
+    #@bases.layers << @layer1
+    #@bases.layers << @layer2
     #
     #address = Faker::Lorem.words(3).join(" ")
     #purpose = 1
@@ -147,7 +147,7 @@ describe 'Greenroof' do
     #@groof.user = @user
     #@groof.roof = @roof
     #@groof.plants = @plants
-    #@groof.bases << @base
+    #@groof.bases << @bases
     #@groof.save!
     #visit greenroof_path(@groof)
     #end

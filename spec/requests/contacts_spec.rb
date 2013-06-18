@@ -4,8 +4,7 @@ require 'spec_helper'
 
 describe Contact do
 
-  @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
-  @contact.save!
+  before { Contact.create!(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city") }
 
   let(:admin) { FactoryGirl.create(:admin) }
 
@@ -33,6 +32,4 @@ describe Contact do
 
     it { should have_selector('a',text: "Muokkaa") }
   end
-
-
 end

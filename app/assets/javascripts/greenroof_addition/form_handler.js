@@ -222,7 +222,7 @@ function createBasesArray() {
         baseAndLayers.layers = layers
         bases.push(baseAndLayers)
     });
-    //console.log(JSON.stringify(bases))
+    console.log(JSON.stringify(bases))
     return bases
 }
 

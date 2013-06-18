@@ -11,6 +11,7 @@ describe Base do
 
   it { should respond_to(:absorbancy) }
   it { should respond_to(:note) }
+  it { should respond_to(:name) }
 
   it { should be_valid }
 
@@ -34,4 +35,13 @@ describe Base do
     it { should_not be_valid }
   end
 
+  describe "name is too long" do
+    before { @base.name = "a"*101 }
+    it { should_not be_valid }
+  end
+
+  describe "name is valid" do
+    before { @base.name = "okay" }
+    it { should be_valid }
+  end
 end

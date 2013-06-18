@@ -1,15 +1,5 @@
 Viherkatto::Application.routes.draw do
 
-
-
-  get "base/new"
-
-  get "base/index"
-
-  get "base/show"
-
-  get "base/edit"
-
   resources :contact
   resources :users
   resources :plants
@@ -17,6 +7,7 @@ Viherkatto::Application.routes.draw do
   resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
+  #resources :bases
 
 
   match '/rekisteroidy',  to: 'users#new'
