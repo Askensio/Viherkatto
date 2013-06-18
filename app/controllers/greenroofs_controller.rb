@@ -1,8 +1,11 @@
 # encoding: UTF-8
 
+require 'RMagick'
+
 class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
+  before_filter :owner, only: [:upload]
 
   def search
 
@@ -155,7 +158,9 @@ class GreenroofsController < ApplicationController
 
     if @greenroof.save!
       flash[:success] = "Viherkaton lisäys onnistui!"
-      render :js => "window.location = '/'"
+      respond_to do |format|
+        format.json { render :json => {id: @greenroof.id} }
+      end
 
     else
       if not params[:plants].nil? and not params[:environment][:id].empty?
@@ -190,6 +195,7 @@ class GreenroofsController < ApplicationController
       @greenroofs.each do |groof|
         @user = User.find_by_id(groof.user_id)
         hash = groof.attributes
+        hash[:thumb] = groof.images.first.thumb unless groof.images.first.nil?
         hash[:user] = @user.name unless @user.nil?
         if (signed_in?)
           hash[:owner] = (@user.id == current_user.id)
@@ -211,14 +217,63 @@ class GreenroofsController < ApplicationController
     @greenroof = Greenroof.find(params[:id])
     respond_to do |format|
       @response = ""
-      if (@greenroof.user_id == current_user.id ) or current_user.admin?
+      if (@greenroof.user_id == current_user.id) or current_user.admin?
         @greenroof.destroy
         @response = "success"
       else
         @response = "error"
       end
 
-      format.json { render :json => { response: @response }}
+      format.json { render :json => {response: @response} }
+    end
+  end
+
+  def upload
+    @groof = Greenroof.find_by_id(params[:id])
+
+    unless params["file-0"].nil?
+      # The path to the directory for the photos of the created greenroof.
+      directory = "/public/greenroofs/photos/" + params[:id]
+
+      # If the directory does not exists a new one will be created.
+      FileUtils.mkdir_p Dir.pwd + directory if not File.directory? Dir.pwd + directory
+
+      # The filename for the new photo.
+      photoFilename = params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+
+      # The full path for the photo.
+      photoPath = Dir.pwd + directory + "/" + photoFilename
+
+      file = File.read(params["file-0"].tempfile) if params["file-0"]
+      f = File.new(photoPath, "w+")
+      f.write file
+      f.close
+
+      # Filename for the thumbnail
+      thumbFilename = params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+
+      thumb = Magick::Image.read(photoPath).first
+      thumb.crop_resized!(120, 120, Magick::NorthGravity)
+      thumbPath = Dir.pwd + directory + "/" + thumbFilename
+      thumb.write(thumbPath)
+
+      # photo = "/photos/" + params[:id]
+
+      img = Image.new(photo: photoFilename, thumb: thumbFilename)
+      @groof.images << img
+    end
+    if @groof.save!
+      flash[:success] = "Viherkaton lisäys onnistui!"
+      render :js => "window.location = '/'"
+    end
+
+  end
+
+  private
+
+  def owner
+    unless Greenroof.find_by_id(params[:id]).user_id == current_user.id
+      redirect_to root_url
     end
   end
 end

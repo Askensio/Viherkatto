@@ -46,6 +46,7 @@ describe 'Greenroof' do
 
       before do
         fill_in "greenroof_address", with: "Some address"
+        fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
         fill_in "roof_area", with: "100"
@@ -99,11 +100,12 @@ describe 'Greenroof' do
       @base.layers << @layer2
 
       address = Faker::Lorem.words(3).join(" ")
+      locality = Faker::Lorem.words(3).join(" ")
       purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       @user = FactoryGirl.create(:user)
 
-      @groof = Greenroof.new(year: 2010, address: address, purpose: purpose, note: note)
+      @groof = Greenroof.new(year: 2010, locality: locality, address: address, purpose: purpose, note: note)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
