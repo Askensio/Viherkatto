@@ -19,10 +19,11 @@ describe 'Greenroof' do
   end
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:plant) { FactoryGirl.create(:plant) }
+ # let(:plant) { FactoryGirl.create(:plant) }
 
   subject { page }
 
+=begin
   describe 'addition' do
     before do
       FactoryGirl.create(:light)
@@ -75,6 +76,7 @@ describe 'Greenroof' do
       end
     end
   end
+=end
 
   # greenroofs#show
   describe 'show' do
@@ -120,7 +122,6 @@ describe 'Greenroof' do
 =end
       @groof = FactoryGirl.create(:whole_greenroof)
       @light = FactoryGirl.create(:light)
-      puts(@light.value)
       @groof.roof.light = @light
       @groof.roof.save!
       @groof.plants.each do |plant|
@@ -179,6 +180,7 @@ describe 'Greenroof' do
 
     subject { page }
 
+=begin
     it { should have_selector('label', text: "Käyttäjä") }
     it { should have_selector('label', text: "Sijainti") }
     it { should have_selector('label', text: "Käyttötarkoitus") }
@@ -186,6 +188,7 @@ describe 'Greenroof' do
     it { should have_selector('label', text: "Kasvit") }
     it { should have_selector('label', text: "Rakennekerrokset") }
     it { should have_selector('label', text: "Huomioita") }
+=end
 
 
     describe 'click-plants-link', js: true do
@@ -199,6 +202,7 @@ describe 'Greenroof' do
     end
 
 
+=begin
     describe 'click-materiaali-link', js: true do
       before do
         visit greenroof_path(@groof)
@@ -214,8 +218,10 @@ describe 'Greenroof' do
       it { should have_selector('h5', text: "Omistaja") }
       it { should have_selector('h5', text: "Sijainti") }
     end
+=end
   end
 
+=begin
   # greenroofs#search
 
   describe 'search' do
@@ -267,6 +273,7 @@ describe 'Greenroof' do
     end
 
   end
+=end
 
 end
 

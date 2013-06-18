@@ -1,5 +1,4 @@
 <% provide(:title, 'Kasvinäkymä') %>
-<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 
 <div class="row">
   <div class="span5 offset3">
@@ -8,7 +7,7 @@
       <%= @plant.name %>
     </h1>
 
-    <%= form_for(@plant) do |f| %>
+    <%= fields_for :plant do |f| %>
         <%= render 'shared/error_plants' %>
         <table class="table">
           <tr>
@@ -56,10 +55,12 @@
               </tr>
           <% end %>
 
-          <tr>
-            <td><%= f.label :maintenance %></td>
-            <td><%= f.label @plant.maintenance.name %></td>
-          </tr>
+          <% unless @plant.maintenance.nil? %>
+              <tr>
+                <td><%= f.label :maintenance %></td>
+                <td><%= f.label @plant.maintenance.name %></td>
+              </tr>
+          <% end %>
 
           <tr>
             <td><%= f.label :min_soil_thickness %></td>
@@ -103,10 +104,10 @@
             <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
         <% end %>
 
-        </div>
-        </div>
 
-        <%= javascript_include_tag "bootstrap-select" %>
 
-        <script>$('.selectpicker').selectpicker();</script>
     <% end %>
+
+
+  </div>
+</div>
