@@ -68,7 +68,7 @@
     <%= f.text_area :note, style: 'height: 100px' %>
 
     <%=
-        if current_page?(new_plant_path)
+        if ((content_for :title) == "Kasvien lisäys")
           f.submit "Lisää uusi kasvi", class: "btn btn-large btn-custom"
         else
           f.submit "Päivitä", class: "btn btn-large btn-custom"
