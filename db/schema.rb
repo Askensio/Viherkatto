@@ -183,6 +183,15 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
 
   add_index "plants", ["name"], :name => "index_plants_on_name", :unique => true
 
+  create_table "purposes", :force => true do |t|
+    t.string   "value"
+    t.integer  "greenroof_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "purposes", ["greenroof_id"], :name => "index_purposes_on_greenroof_id"
+
   create_table "roofs", :force => true do |t|
     t.integer  "declination"
     t.integer  "load_capacity"

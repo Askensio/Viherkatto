@@ -25,8 +25,7 @@ class ContactController < ApplicationController
     end
   end
 
-       private
-
-
-
+  def about
+    render 'contact/about'
+  end
 end

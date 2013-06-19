@@ -1,0 +1,2 @@
+module PurposeHelper
+end
