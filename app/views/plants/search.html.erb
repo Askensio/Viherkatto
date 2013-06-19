@@ -19,7 +19,7 @@
                             :id, :environment, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'growth_environment', :multiple => true) %>
 
       <label>Valontarve:</label>
-      <%= collection_select(:light, :id, Light.all, :id, :desc, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness', :multiple => true) %>
+      <%= collection_select(:light, :id, Light.all, :id, :value, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness', :multiple => true) %>
 
       <label>Hoidontarve:</label>
       <%= collection_select(:maintenances, :id, Maintenance.all,
