@@ -107,7 +107,7 @@ namespace :db do
       @roof.environments << Environment.find(id)
 
       @plants = [Plant.find(1), Plant.find(2)]
-      @base = Base.new(absorbancy: 20)
+      @base = Base.new(name: "base "+n.to_s ,absorbancy: 20)
       @layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
       @layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
       @base.layers << @layer1

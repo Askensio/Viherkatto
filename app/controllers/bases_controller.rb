@@ -21,6 +21,17 @@ class BasesController < ApplicationController
   end
 
   def index
+    respond_to do |format|
+      @bases = Base.paginate(page: params[:page])
+      format.html { render :html => @bases } # index.html.erb
+      if params[:page].present?
+        @jsonBases = Base.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        @jsonBases = Base.all
+      end
+
+      format.json { render :json => {admin: admin?, count: @jsonBases.total_entries, bases: @jsonBases} }
+    end
   end
 
   def show
