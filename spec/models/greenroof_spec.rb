@@ -36,6 +36,9 @@ describe Greenroof do
     @plant2.save!
     @groof.plants << @plant1
     @groof.plants << @plant2
+    @groof.owner = "Kumpulan Sorto & Riisto"
+    @groof.constructor = "superlol"
+
 
 
     @groof.save!
@@ -63,6 +66,16 @@ describe Greenroof do
   describe "note is too long" do
     before { @groof.note = "a"*5001 }
     it { should_not be_valid }
+  end
+
+  describe "constructor is too short" do
+    before { @groof.constructor = "a" }
+    it { should_not be_valid }
+  end
+
+  describe "constructor is just fine" do
+    before { @groof.constructor = "Raipen urakka & putki" }
+    it { should be_valid }
   end
 
 #=begin
