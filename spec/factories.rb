@@ -12,6 +12,7 @@ FactoryGirl.define do
     end
   end
 
+
   factory :light do
     value "Aurinkoinen"
   end

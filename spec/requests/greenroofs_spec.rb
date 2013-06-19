@@ -9,12 +9,13 @@ describe 'Greenroof' do
     Environment.create!(name: "Kaupunki")
     Environment.create!(name: "Muu")
 
+    Purpose.create!(value: "Maisemakatto")
+
 =begin
     @light = Light.create!(desc: "Varjoisa")
     Light.create!(desc: "Puolivarjoisa")
     Light.create!(desc: "Aurinkoinen")
 =end
-    Maintenance.create!(name: "Helppo")
 
   end
 
@@ -59,7 +60,8 @@ describe 'Greenroof' do
         select "Tasakatto", from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
-        #select "Pelto",               from: "environment_id"
+        find(:xpath, "//button[@data-id='purpose_id']", :visible => true).click
+        find(:xpath, "//*[@id=\"purpose-choose\"]/div/ul/li[1]/a").click
         fill_in "roof_load_capacity", with: "500"
         fill_in "base_absorbancy", with: "400"
         find("#" + (-1 * plant.id).to_s).click
@@ -276,4 +278,3 @@ describe 'Greenroof' do
 =end
 
 end
-

@@ -1,9 +1,12 @@
+#encoding: utf-8
+
 class Greenroof < ActiveRecord::Base
 
   belongs_to :user
 
   has_many :planteds
   has_many :plants, through: :planteds
+  has_many :purposes
 
   has_one :roof, :dependent => :destroy
   has_many :bases, :dependent => :destroy
@@ -45,4 +48,5 @@ class Greenroof < ActiveRecord::Base
   def search(conditions)
     Greenroof.where(conditions: conditions)
   end
+
 end
