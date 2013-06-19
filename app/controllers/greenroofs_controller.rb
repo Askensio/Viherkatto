@@ -44,6 +44,9 @@ class GreenroofsController < ApplicationController
         layername = "%#{params[:layername]}%"
         @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
       end
+      if params[:status]
+        puts params[:status].to_s
+      end
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
       @count = @greenroofs.total_entries

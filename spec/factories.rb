@@ -24,9 +24,20 @@ FactoryGirl.define do
     environments { Array.new(2) { FactoryGirl.build(:environment) } }
   end
 
+
   factory :environment do
-    name 'Merenranta'
+    sequence(:name, ['Merenranta', 'Pelto', 'Metsä', 'Kaupunki', 'Muu'].cycle) { |n| "#{n}" }
   end
+
+
+=begin
+  factory :env do
+    sequence(:env_name, ['Merenranta', 'Pelto', 'Metsä', 'Kaupunki', 'Muu']) {|env| "#{env}" }
+    factory :environment do
+      name { FactoryGirl.generate(:env_name) }
+    end
+  end
+=end
 
 
   factory :plant do
