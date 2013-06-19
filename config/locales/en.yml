@@ -17,6 +17,7 @@ en:
 
       plant:
         name: "Nimi"
+        growth_environment: "Kasvuympäristö"
         latin_name: "Latinankielinen nimi"
         colour: "Kukan väri"
         light: "Valon tarve"
@@ -28,6 +29,8 @@ en:
         weight: "Paino"
         note: "Huomioita"
         height: "Korkeus"
+        max_height: "Maksimikorkeus"
+        min_height: "Minimikorkeus"
         Blue: "Sininen"
         Red: "Punainen"
         Yellow: "Keltainen"
@@ -84,7 +87,11 @@ en:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
-            height:
+            min_height:
+                blank: "puuttuu."
+                inclusion: "ei ole sallittujen arvojen rajoissa."
+                not_a_number: "ei ole numero."
+            max_height:
                 blank: "puuttuu."
                 inclusion: "ei ole sallittujen arvojen rajoissa."
                 not_a_number: "ei ole numero."
