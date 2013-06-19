@@ -266,12 +266,10 @@ function createLayerObjectArray(baseElement) {
 function createGreenroofObject() {
 
     var greenroof = new Object()
-    greenroof.purpose = $
     greenroof.address = $('#greenroof_address').val()
     greenroof.locality = $('#greenroof_locality').val()
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
-    greenroof.purpose = 1
     greenroof.year = $('#greenroof_year').val()
     return greenroof
 }

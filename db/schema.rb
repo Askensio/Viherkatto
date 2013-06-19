@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.string   "locality"
     t.string   "constructor"
     t.integer  "year"
-    t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
     t.string   "status"

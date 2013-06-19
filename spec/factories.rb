@@ -45,7 +45,6 @@ FactoryGirl.define do
     address "Emminkatu 1"
     locality "Helsinki"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
-    purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
     usage_experience "Jee"

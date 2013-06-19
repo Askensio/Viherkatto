@@ -182,7 +182,6 @@ describe 'Greenroof' do
 
     it { should have_selector('label', text: "Käyttäjä") }
     it { should have_selector('label', text: "Sijainti") }
-    it { should have_selector('label', text: "Käyttötarkoitus") }
     it { should have_selector('label', text: "Katon tiedot") }
     it { should have_selector('label', text: "Kasvit") }
     it { should have_selector('label', text: "Rakennekerrokset") }
