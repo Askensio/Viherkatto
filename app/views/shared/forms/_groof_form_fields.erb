@@ -9,8 +9,12 @@
     <%= f.label :address, h('Osoite') %>
     <%= f.text_field :address %>
 
-    <%= f.label :status, h('Lisään viherkaton roolissa:') %>
-    <%= f.select :status, [['Yksityishenkilö', '0'],['Yritys', '1'],['Tutkija','2'],['Muu/En halua kertoa', '3']], {}, :class => "selectpicker show-menu-arrow show-tick span3" %>
+    <%= f.label :role, h('Lisään viherkaton roolissa:') %>
+    <div class="required" id="role-choose">
+    <%= collection_select(:roles, :id, Role.all,
+                            :id, :value, {}, :title => "Valitse rooli:", :class => "selectpicker show-menu-arrow span5", :required => true )%>
+    </div>
+
 
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
     <%= f.text_field :constructor%>

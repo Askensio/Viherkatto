@@ -44,8 +44,13 @@
           <% end %>
 
           <tr>
-            <td><%= f.label :purpose, h("Käyttötarkoitus: ") %></td>
-            <td><%= f.label @greenroof.purpose %></td>
+            <td><%= f.label @greenroof.purposes, h("Käyttötarkoitukset: ") %></td>
+            <% groof_purposes = "" %>
+            <% @greenroof.purposes.each do |purpose| %>
+                <% groof_purposes += (purpose.value + " ") %>
+            <% end %>
+            <td><%= groof_purposes %></td>
+
           </tr>
 
           <tr>

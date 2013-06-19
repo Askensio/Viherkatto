@@ -29,6 +29,10 @@ FactoryGirl.define do
     sequence(:name, ['Merenranta', 'Pelto', 'Metsä', 'Kaupunki', 'Muu'].cycle) { |n| "#{n}" }
   end
 
+  factory :role do
+    sequence(:value, ['Yksityishenkilö', 'Yritys', 'Tutkija', 'Kunta', 'Muu/En halua kertoa'].cycle) { |n| "#{n}" }
+  end
+
 
 =begin
   factory :env do
@@ -56,11 +60,10 @@ FactoryGirl.define do
     address "Emminkatu 1"
     locality "Helsinki"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
-    purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
     usage_experience "Jee"
-    status 1
+    self.role { |a| a.association(:role) }
     plants { Array.new(3) { FactoryGirl.create(:plant) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|

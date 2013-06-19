@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617100626) do
+ActiveRecord::Schema.define(:version => 20130619113005) do
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
@@ -81,10 +81,9 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.string   "locality"
     t.string   "constructor"
     t.integer  "year"
-    t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
-    t.string   "status"
+    t.integer  "role_id"
     t.text     "usage_experience"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
@@ -130,6 +129,16 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "links", ["plant_id"], :name => "index_links_on_plant_id"
 
   create_table "locations", :force => true do |t|
     t.integer  "roof_id"
@@ -181,6 +190,12 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
   end
 
   add_index "purposes", ["greenroof_id"], :name => "index_purposes_on_greenroof_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roofs", :force => true do |t|
     t.integer  "declination"

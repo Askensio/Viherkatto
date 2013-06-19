@@ -46,7 +46,8 @@ describe 'Greenroof' do
         fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
-        select "Yksityishenkilö", from: "greenroof_status"
+        find(:xpath, "//*[@id=\"role-choose\"]/div/button", :visible => true).click
+        find(:xpath, "//*[@id=\"role-choose\"]/div/ul/li[1]/a").click
         fill_in "roof_area", with: "100"
         select "Tasakatto", from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
@@ -90,7 +91,6 @@ describe 'Greenroof' do
 
     it { should have_selector('label', text: "Käyttäjä") }
     it { should have_selector('label', text: "Sijainti") }
-    it { should have_selector('label', text: "Käyttötarkoitus") }
     it { should have_selector('label', text: "Katon tiedot") }
     it { should have_selector('label', text: "Kasvit") }
     it { should have_selector('label', text: "Rakennekerrokset") }
