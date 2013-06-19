@@ -78,6 +78,9 @@ describe 'Plant pages' do
       @plant1.maintenance = Maintenance.create!(name: "Helppo")
       @plant1.update_attributes(:light_id => Light.first.id);
       @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
+      @plant1.links << Link.create(name: "eka", link: "http://eka.com")
+      @plant1.links << Link.create(name: "toka", link: "http://toka.com")
+      @plant1.links << Link.create(name: "kolmas", link: "http://kolmas.com")
       @plant1.save
     end
 
@@ -91,6 +94,7 @@ describe 'Plant pages' do
       it { should have_selector('h1', text: 'Example Plant') }
       it { should have_selector('title', text: 'Kasvinäkymä') }
       it { should have_selector('label', for: 'plant_latin_name') }
+      it { should have_selector('label', for: 'plant_links') }
       it { should have_selector('label', content: 'Plantus Examplus') }
       it { should_not have_selector('a', text: "Muokkaa") }
     end

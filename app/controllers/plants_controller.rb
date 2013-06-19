@@ -37,17 +37,25 @@ class PlantsController < ApplicationController
 
   def new
     @plant = Plant.new
+    3.times do
+      @plant.links.build
+    end
   end
 
   def edit
     @plant = Plant.find(params[:id])
+
+    if @plant.links.empty?
+      3.times do
+        @plant.links.build
+      end
+    end
   end
 
   def create
     @plant = Plant.new(params[:plant])
 
     params[:colour][:id].shift
-
     if not params[:colour][:id].empty?
       params[:colour][:id].each do |col|
         @col = Colour.find_by_id col
@@ -59,6 +67,18 @@ class PlantsController < ApplicationController
 
     @plant.light = Light.find_by_id(params[:light][:id])
 
+    if params[:plant][:links_attributes]
+      for i in 0..2
+        @curLink = @plant.links[i]
+
+        if !params[:plant][:links_attributes][i.to_s][:name].empty?
+          @curLink.name = params[:plant][:links_attributes][i.to_s][:name]
+        end
+        if !params[:plant][:links_attributes][i.to_s][:link].empty?
+          @curLink.link = params[:plant][:links_attributes][i.to_s][:link]
+        end
+      end
+    end
 
     if params[:maintenances][:id]
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
@@ -98,6 +118,23 @@ class PlantsController < ApplicationController
       end
     else
       @plant.growth_environments.clear
+    end
+
+    if params[:plant][:links_attributes]
+      for i in 0..2
+        @curLink = @plant.links[i]
+
+        if (@curLink.nil?)
+          @curLink = Link.new
+        end
+
+        if !params[:plant][:links_attributes][i.to_s][:name].empty?
+          @curLink.name = params[:plant][:links_attributes][i.to_s][:name]
+        end
+        if !params[:plant][:links_attributes][i.to_s][:link].empty?
+          @curLink.link = params[:plant][:links_attributes][i.to_s][:link]
+        end
+      end
     end
 
     if params[:maintenances][:id]

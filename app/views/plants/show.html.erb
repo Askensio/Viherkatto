@@ -97,12 +97,29 @@
               </tr>
           <% end %>
 
-
+          <tr>
+            <td><%= f.label :links %></td>
+            <td>
+              <% for i in 0..2 %>
+                  <% if !@plant.links[i].nil? && !@plant.links[i].link.empty? %>
+                      <%= if @plant.links[i].name.empty?
+                            link_to @plant.links[i].link, @plant.links[i].link
+                          else
+                            link_to @plant.links[i].name, @plant.links[i].link
+                          end %>
+                      <br>
+                  <% end %>
+              <% end %>
+            </td>
+          </tr>
         </table>
 
-        <% if signed_in? && current_user.admin? %>
-            <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
-        <% end %>
+        <div class="row">
+          <% if signed_in? && current_user.admin? %>
+              <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
+          <% end %>
+          <%= link_to "Takaisin selaukseen", plants_path, class: "btn btn-large btn-custom" %>
+        </div>
 
         <h4>
           Tämä kasvi löytyy esimerkiksi seuraavilta viherkatoilta
@@ -111,7 +128,7 @@
           <% if @plant.greenroofs.empty? %>
               <td> Tätä kasvia ei löydy yhdeltäkään viherkatolta</td>
           <% else %>
-              <% @plant.greenroofs.all(:limit => 3).each do | groof | %>
+              <% @plant.greenroofs.all(:limit => 3).each do |groof| %>
                   <li><%= link_to "Käyttäjän " + groof.user.name + " viherkatto", url_for(groof) %></li>
               <% end %>
           <% end %>
@@ -119,7 +136,7 @@
 
         </div>
 
-<!--        <div class="span5">
+        <!--        <div class="span5">
           <legend>
             <h4>
               Tämä kasvi löytyy mm. seuraavilta viherkatoilta
@@ -128,7 +145,7 @@
           <% if @plant.greenroofs.empty? %>
               <td> Tätä kasvia ei löydy yhdeltäkään viherkatolta</td>
           <% else %>
-              <% @plant.greenroofs.all(:limit => 3).each do | groof | %>
+              <% @plant.greenroofs.all(:limit => 3).each do |groof| %>
                   <ul class="unstyled">
                     <td><%= link_to "Käyttäjän " + groof.user.name + " viherkatto", url_for(groof) %></td>
                   </ul>

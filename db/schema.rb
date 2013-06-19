@@ -130,6 +130,16 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "links", ["plant_id"], :name => "index_links_on_plant_id"
+
   create_table "locations", :force => true do |t|
     t.integer  "roof_id"
     t.integer  "environment_id"
