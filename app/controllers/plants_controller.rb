@@ -44,7 +44,6 @@ class PlantsController < ApplicationController
 
   def edit
     @plant = Plant.find(params[:id])
-
     if @plant.links.empty?
       3.times do
         @plant.links.build
@@ -61,7 +60,6 @@ class PlantsController < ApplicationController
       if @plant.light_id.nil?
         @plant.update_attribute(:light_id, Light.first.id)
       end
-
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
     else
@@ -189,5 +187,4 @@ class PlantsController < ApplicationController
       end
     end
   end
-
 end
