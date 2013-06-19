@@ -7,6 +7,7 @@
     <h1>
       <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
     </h1>
+
     <div id="slider-holder">
       <div class="flexslider span4">
         <ul class="slides">
@@ -51,15 +52,19 @@
           <tr>
             <td><%= f.label "Katon tiedot:" %></td>
             <td>
-              Pinta-ala: <%= @greenroof.roof.area %>
+              Pinta-ala: <%= @greenroof.roof.area %> m²
               <br>
-              Kaltevuus: <%= @greenroof.roof.declination %>
+              Kaltevuus: <%= getDeclination(@greenroof.roof.declination) %>
               <br>
-              Kantavuus: <%= @greenroof.roof.load_capacity %>
+              Kantavuus: <%= @greenroof.roof.load_capacity%> kg/m²
               <br>
-              Valoisuus: <%= @greenroof.roof.light.value %>
+              Valoisuus:
+              <% if !@greenroof.roof.light.nil? %>
+                  <%= @greenroof.roof.light.value %>
+              <% end %>
               <br>
-              Ympäristö: <% @greenroof.roof.environments.each do |env| %>
+              Ympäristö:
+              <% @greenroof.roof.environments.each do |env| %>
                   <%= env.name %>
                   <br>
               <% end %>

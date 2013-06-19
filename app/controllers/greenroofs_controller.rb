@@ -6,6 +6,7 @@ class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
   before_filter :owner, only: [:upload]
+  before_filter :user_with_edit_rights, only: [:edit]
 
   def search
 
@@ -266,7 +267,15 @@ class GreenroofsController < ApplicationController
       flash[:success] = "Viherkaton lisäys onnistui!"
       render :js => "window.location = '/'"
     end
+  end
 
+  def edit
+    @greenroof = Greenroof.find(params[:id])
+    @roof = @greenroof.roof
+    respond_to do |format|
+      format.json {render :json => {plants: @greenroof.plants }}
+      format.html { render :html => @greenroof } # index.html.erb
+    end
   end
 
   private
@@ -277,9 +286,11 @@ class GreenroofsController < ApplicationController
     end
   end
 
-  def edit
+  def user_with_edit_rights
     @greenroof = Greenroof.find(params[:id])
-    @roof = @greenroof.roof
     redirect_to root_path unless (signed_in? && (current_user.email == @greenroof.user.email || admin?))
   end
+
+
+
 end
