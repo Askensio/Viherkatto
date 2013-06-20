@@ -127,13 +127,15 @@ namespace :db do
       note = Faker::Lorem.words(5).join(" ")
       usage_experience = "Jee"
       status = "yksityisyrittäjä"
+      owner = "Kumpulan Sorto & Riisto"
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(year: 2010, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience, status: status)
+      @groof = Greenroof.new(year: 2010, owner: owner, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience, status: status)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
+      @groof.purposes << Purpose.find(rand(2)+1)
       @groof.save!
     end
 

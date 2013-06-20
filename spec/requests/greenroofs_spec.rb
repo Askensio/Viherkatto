@@ -55,6 +55,8 @@ describe 'Greenroof' do
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
         fill_in "roof_area", with: "100"
+        fill_in "greenroof_owner", with: "Jytkylän jätkä & jyystö"
+        fill_in "greenroof_constructor", with: "PATEN PUTKI JA JUNA"
         select "Tasakatto", from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
@@ -180,12 +182,12 @@ describe 'Greenroof' do
 
     subject { page }
 
-    it { should have_selector('label', text: "Käyttäjä") }
+    it { should have_selector('label', text: "Omistaja") }
     it { should have_selector('label', text: "Sijainti") }
     it { should have_selector('label', text: "Katon tiedot") }
     it { should have_selector('label', text: "Kasvit") }
     it { should have_selector('label', text: "Rakennekerrokset") }
-    it { should have_selector('label', text: "Huomioita") }
+    it { should have_selector('label', text: "Kuvaus") }
 
 =begin
     describe 'click-plants-link', js: true do
