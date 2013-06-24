@@ -133,10 +133,12 @@ class PlantsController < ApplicationController
       end
 
       if (params[:lightness])
+
         @lights = []
-        Light.where(:desc => params[:lightness]).each do |id|
+        Light.where(:value => params[:lightness]).each do |id|
           @lights.push(id)
         end
+        puts @lights
         @plants = @plants.where(:light_id => @lights)
       end
 
