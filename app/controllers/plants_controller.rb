@@ -38,45 +38,28 @@ class PlantsController < ApplicationController
 
   def new
     @plant = Plant.new
+    3.times do
+      @plant.links.build
+    end
   end
 
   def edit
     @plant = Plant.find(params[:id])
+    if @plant.links.empty?
+      3.times do
+        @plant.links.build
+      end
+    end
   end
 
   def create
     @plant = Plant.new(params[:plant])
 
-    params[:colour][:id].shift
-
-    if not params[:colour][:id].empty?
-      params[:colour][:id].each do |col|
-        @col = Colour.find_by_id col
-        if not @col.equal? nil
-          @plant.colours << @col
-        end
-      end
-    end
-
-    @plant.light = Light.find_by_id(params[:light][:id])
-
-
-    if params[:maintenances][:id]
-      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
-    end
+    processAssociatedParams
 
     if @plant.save
       if @plant.light_id.nil?
-        @plant.update_attribute(:light_id, 1)
-      end
-      params[:growth_environments][:id].shift
-      if (!params[:growth_environments][:id].empty?)
-        params[:growth_environments][:id].each do |env|
-          @env = GrowthEnvironment.find_by_id(env)
-          if (@env != nil)
-            @plant.growth_environments << @env
-          end
-        end
+        @plant.update_attribute(:light_id, Light.first.id)
       end
       flash[:success] = "Kasvin lisäys onnistui!"
       redirect_to plants_url
@@ -88,23 +71,7 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
 
-    params[:growth_environments][:id].shift
-    if (!params[:growth_environments][:id].empty?)
-      @plant.growth_environments.clear
-      params[:growth_environments][:id].each do |env|
-        @env = GrowthEnvironment.find_by_id(env)
-        if (@env != nil)
-          @plant.growth_environments << @env
-        end
-      end
-    else
-      @plant.growth_environments.clear
-    end
-
-    if params[:maintenances][:id]
-      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
-      @plant.save!
-    end
+    processAssociatedParams
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
       redirect_to plant_url
@@ -168,6 +135,57 @@ class PlantsController < ApplicationController
 
       @plants = @plants.paginate(page: params[:page], per_page: params[:per_page]) unless @plants.nil?
       format.json { render :json => {admin: admin?, count: @plants.total_entries, plants: @plants} }
+    end
+  end
+
+  private
+
+  def processAssociatedParams
+    @plant.light = Light.find_by_id(params[:light][:id])
+    processColours
+    processGrowthEnvironments
+    processLinks
+    if params[:maintenances][:id]
+      @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
+    end
+  end
+
+  def processGrowthEnvironments
+    params[:growth_environments][:id].shift
+    if (!params[:growth_environments][:id].empty?)
+      params[:growth_environments][:id].each do |env|
+        @env = GrowthEnvironment.find_by_id(env)
+        if (@env != nil)
+          @plant.growth_environments << @env
+        end
+      end
+    end
+  end
+
+  def processColours
+    params[:colour][:id].shift
+    if not params[:colour][:id].empty?
+      params[:colour][:id].each do |col|
+        @col = Colour.find_by_id col
+        if not @col.equal? nil
+          @plant.colours << @col
+        end
+      end
+    end
+  end
+
+  def processLinks
+    if params[:plant][:links_attributes]
+      for i in 0..2
+        @curLink = @plant.links[i]
+
+        if !params[:plant][:links_attributes][i.to_s][:name].empty?
+          @curLink.name = params[:plant][:links_attributes][i.to_s][:name]
+        end
+        if !params[:plant][:links_attributes][i.to_s][:link].empty?
+          @curLink.link = params[:plant][:links_attributes][i.to_s][:link]
+        end
+      end
     end
   end
 end

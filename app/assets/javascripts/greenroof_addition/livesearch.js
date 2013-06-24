@@ -177,6 +177,16 @@ $(document).ready(function () {
         $('.location').append('Sijainti: ' + input)
     })
 
+    $("#purpose_id").change(function() {
+        var input = $("#purpose_id option:selected").text();
+        input = input.match(/[A-Z][a-z-ä-ö]+/g);
+        if (input === null) {
+            input = 'Ei käyttötarkoitusta'
+        }
+        $('.purpose').empty();
+        $('.purpose').append('Käyttötarkoitus: ' + input)
+    })
+
     /**
      * Roof load capacity value for the Synopsis-view.
      */
@@ -244,7 +254,14 @@ $(document).ready(function () {
         $('.note').empty();
         $('.note').append('Vapaa kuvaus: ' + input);
     })
-
+    /**
+     * Greenroof usage_experience value for the Synopsis-view.
+     */
+    $("#greenroof_usage_experience").keyup(function() {
+        var input = $("#greenroof_usage_experience").val();
+        $('.usage_experience').empty();
+        $('.usage_experience').append('Käyttökokemuksia: ' + input);
+    })
     /**
      * Base absorbancy value for the Synopsis-view.
      */

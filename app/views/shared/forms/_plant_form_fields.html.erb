@@ -13,7 +13,7 @@
 
     <%= f.label :light_id %>
     <%= collection_select(:light, :id, Light.all,
-                          :id, :desc, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
+                          :id, :value, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
 
     <%= f.label :growth_environment %>
     <%= if @plant.growth_environments.empty?
@@ -50,11 +50,25 @@
     <%= f.label "weight (kg/m2)" %>
     <%= f.text_field :weight %>
 
+
+    <div class="row">
+      <div class="span2"><%= f.label "Linkin nimi" %></div>
+      <div class="span3"><%= f.label "Linkin osoite" %></div>
+    </div>
+
+    <%= f.fields_for :links do |l| %>
+        <div class="row">
+          <div class="span2"><%= l.text_field :name %></div>
+          <div class="span3"><%= l.text_field :link %></div>
+        </div>
+
+    <% end %>
+
     <%= f.label :note %>
-    <%= f.text_field :note %>
+    <%= f.text_area :note, style: 'height: 100px' %>
 
     <%=
-        if current_page?(new_plant_path)
+        if ((content_for :title) == "Kasvien lisäys")
           f.submit "Lisää uusi kasvi", class: "btn btn-large btn-custom"
         else
           f.submit "Päivitä", class: "btn btn-large btn-custom"

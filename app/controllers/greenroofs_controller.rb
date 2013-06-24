@@ -130,7 +130,7 @@ class GreenroofsController < ApplicationController
 
     @bases = params[:bases]
     @bases.each do |key, value|
-      @base = Base.new(value[:bases])
+      @base = Base.new(value[:base])
       if not value[:layers].nil?
         value[:layers].each do |key, value|
           @layer = Layer.new(value)

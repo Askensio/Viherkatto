@@ -6,9 +6,9 @@ describe Roof do
   before do
 
 
-    Light.create!(desc: "Varjoisa")
-    Light.create!(desc: "Puolivarjoisa")
-    Light.create!(desc: "Aurinkoinen")
+    Light.create!(value: "Varjoisa")
+    Light.create!(value: "Puolivarjoisa")
+    Light.create!(value: "Aurinkoinen")
 
     @roof = Roof.new(area: 50, declination: 1, load_capacity: 480)
     @roof.update_attribute(:light_id, 2)

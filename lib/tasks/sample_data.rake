@@ -4,15 +4,24 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
+    Role.create!(value: "Yksityishenkilö")
+    Role.create!(value: "Yritys")
+    Role.create!(value: "Tutkija")
+    Role.create!(value: "Kunta")
+    Role.create!(value: "Muu/En halua kertoa")
 
-    Light.create!(desc: "Aurinkoinen")
-    Light.create!(desc: "Varjoisa")
-    Light.create!(desc: "Puolivarjoisa")
+    Light.create!(value: "Aurinkoinen")
+    Light.create!(value: "Varjoisa")
+    Light.create!(value: "Puolivarjoisa")
 
     Colour.create!(value: "Keltainen")
     Colour.create!(value: "Punainen")
     Colour.create!(value: "Sininen")
     Colour.create!(value: "Vihreä")
+
+    Purpose.create!(value: "Käyttökatto")
+    Purpose.create!(value: "Maisemakatto")
+    Purpose.create!(value: "Hyötykatto")
 
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
@@ -40,6 +49,9 @@ namespace :db do
       colour =  Colour.last
       @plant.colours << colour
       colour =  Colour.first
+      @plant.links << Link.new(name: "eka", link: "http://eka.com")
+      @plant.links << Link.new(name: "toka", link: "http://toka.com")
+      @plant.links << Link.new(name: "kolmas", link: "http://kolmas.com")
       @plant.colours << colour
       @plant.light = Light.first
       @plant.maintenance = Maintenance.first
@@ -105,6 +117,7 @@ namespace :db do
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
+      @roof.light = Light.first
 
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
@@ -117,15 +130,19 @@ namespace :db do
       address = Faker::Lorem.words(3).join(" ")
       locality = Faker::Lorem.words(1)
       constructor = "Laurin viherpiperrys kommandiittiyhtiö"
-      purpose = 1
+      @role = Role.first
       note = Faker::Lorem.words(5).join(" ")
+      usage_experience = "Jee"
+      owner = "Kumpulan Sorto & Riisto"
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(year: 2010, locality: locality, address: address, constructor: constructor, purpose: purpose, note: note)
+      @groof = Greenroof.new(year: 2010, owner: owner, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience)
       @groof.user = @user
+      @groof.role = @role
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
+      @groof.purposes << Purpose.find(rand(2)+1)
       @groof.save!
     end
 
