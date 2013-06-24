@@ -108,26 +108,20 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-      params[:colour].try(:each) do |colour|
-        #@plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
-
-        if colour
-          @plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%')
+      #@tempPlants
+      if params[:colour]
+        params[:colour].try(:each) do |colour|
+          @tempPlants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
         end
-
-
-        #@badplants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
-
-        #@plants = @plants.where('colour like ?')
-        #@plants = @plants.where()
-        #puts "-----------------"
-        #puts colour
-        #puts "-----------------"
-        #@plants -= @badplants
+        @plants = @tempPlants
       end
 
-      params[:growth_environments].try(:each) do |env|
-        @plants = @plants.where('growth_environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%') if env
+      if params[:growth_environment]
+        @tempEnvPlants
+        params[:growth_environment].try(:each) do |env|
+          @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
+        end
+        @plants = @tempEnvPlants
       end
 
       if (params[:maintenance])
