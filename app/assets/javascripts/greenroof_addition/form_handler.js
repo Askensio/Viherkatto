@@ -265,6 +265,9 @@ function createLayerObjectArray(baseElement) {
         //console.log($(this).children($('h4')))
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
+        if(typeof name === 'undefined'){
+            return
+        }
         layer.name = name
         var product_name = $(this).children('[name="layer[product_name]"]').val()
         layer.product_name = product_name
@@ -280,7 +283,7 @@ function createLayerObjectArray(baseElement) {
         layer.weight = weight
         layerArray.push(layer)
     });
-    //console.log(JSON.stringify(layerArray))
+    console.log(JSON.stringify(layerArray))
     return layerArray
 }
 

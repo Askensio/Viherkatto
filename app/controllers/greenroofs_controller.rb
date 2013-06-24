@@ -18,9 +18,9 @@ class GreenroofsController < ApplicationController
         address = "%#{params[:address]}%"
         @greenroofs = @greenroofs.where("address like ?", address)
       end
-      if params[:locality]
-        locality = "%#{params[:locality]}%"
-        @greenroofs = @greenroofs.where("locality like ?", locality)
+      if params[:groofnote]
+        groofnote = "%#{params[:groofnote]}%"
+        @greenroofs = @greenroofs.where("greenroofs.note like ?", groofnote)
       end
       if params[:plantname]
         plantname = "%#{params[:plantname]}%"
@@ -30,8 +30,8 @@ class GreenroofsController < ApplicationController
         maintenance = params[:maintenance].to_i
         @greenroofs = @greenroofs.joins(:plants).where("plants.maintenance = ?", maintenance)
       end
-      @greenroofs = @greenroofs.joins(:plants).where("plants.height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
-      @greenroofs = @greenroofs.joins(:plants).where("plants.height >= ?", params[:plantminheight]) if params[:plantminheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.max_height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]) if params[:plantminheight]
       if params[:envname]
         envname = "%#{params[:envname]}%"
         @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)
@@ -43,6 +43,9 @@ class GreenroofsController < ApplicationController
       if params[:layername]
         layername = "%#{params[:layername]}%"
         @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
+      end
+      if params[:status]
+        puts params[:status].to_s
       end
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
@@ -101,6 +104,17 @@ class GreenroofsController < ApplicationController
 
     @roof = Roof.new(params[:roof])
 
+    if not params[:purpose].nil?
+      params[:purpose].each do |purp|
+        purp[1].each do |toAddPurp|
+          @purp = Purpose.find(toAddPurp)
+          if (@purp != nil)
+            @greenroof.purposes << @purp
+          end
+        end
+      end
+    end
+
     if not params[:environment].nil?
       params[:environment][:id].shift
       params[:environment][:id].each do |env|
@@ -115,6 +129,10 @@ class GreenroofsController < ApplicationController
         #format.js { render :action => 'new' }
       end
       return
+    end
+
+    unless params[:role].nil?
+      @greenroof.role = Role.where("value like ?", params[:role][:value]).first
     end
 
     if not params[:customPlants].nil?
@@ -133,9 +151,10 @@ class GreenroofsController < ApplicationController
       @base = Base.new(value[:base])
       if not value[:layers].nil?
         value[:layers].each do |key, value|
-          @layer = Layer.new(value)
+          @layer = Layer.create!(value)
           @base.layers << @layer
         end
+        @base.save!
       end
       @greenroof.bases << @base
     end
@@ -196,12 +215,15 @@ class GreenroofsController < ApplicationController
         @user = User.find_by_id(groof.user_id)
         hash = groof.attributes
         hash[:thumb] = groof.images.first.thumb unless groof.images.first.nil?
-        hash[:user] = @user.name unless @user.nil?
         if (signed_in?)
-          hash[:owner] = (@user.id == current_user.id)
+          hash[:creator] = (@user.id == current_user.id)
         else
-          hash[:owner] = false
+          hash[:creator] = false
         end
+
+        # TÄMÄ FUNKTIO YLIKIRJOITTAA OSAN AIKAISEMMASTA FUNKTIOSTA EIKÄ SE OLE TURHA :D
+        hash[:user] = groof.owner.to_s
+
         @jsonGreenroofs << hash
       end
 

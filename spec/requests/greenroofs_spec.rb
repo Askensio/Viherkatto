@@ -69,7 +69,7 @@ describe 'Greenroof' do
         expect do
           click_button submit
 
-          sleep 60.seconds
+          sleep 1.seconds
         end.to change(Greenroof, :count).by(1)
 
       end
