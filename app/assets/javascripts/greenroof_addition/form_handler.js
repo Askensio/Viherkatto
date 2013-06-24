@@ -153,17 +153,17 @@ var save = function () {
     var bases = createBasesArray()
     var greenroof = createGreenroofObject()
     var customplant = createCustomplantsObject()
-    var purposes = createPurposeObject()
-    var role = createRoleObject()
+   /* var purposes = createPurposeObject()
+    var role = createRoleObject()*/
 
     var data = new Object()
 
-    data.purpose = purposes
+   // data.purpose = purposes
     data.roof = roof
     data.environment = environments
     data.bases = bases
     data.customPlants = customplant
-    data.role = role
+   // data.role = role
     if (plants.length < 1) {
         alert("Et valinnut yhtään kasvia")
     }

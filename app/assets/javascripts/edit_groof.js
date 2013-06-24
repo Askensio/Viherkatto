@@ -18,6 +18,7 @@ $(document).ready(function () {
             $('.location').append($("#environment_id option:selected").text());
             $('.capacity').append($("#roof_load_capacity").val() + "kg/m²");
             var id = $('#form').attr('data-for')
+
             var addedPlants = []
             $.getJSON("/greenroofs/" + id + "/edit.json", function(data) {
                 console.log(JSON.stringify(data))
@@ -60,6 +61,7 @@ $(document).ready(function () {
                 })
             })
             $('.absorbancy').append($("#base_absorbancy").val());
+            $('#save').unbind('click')
             $('#save').click(save_edits)
         }
 }
@@ -71,12 +73,13 @@ function save_edits() {
 }
 
 function sendEditData(data) {
+
     var id = $('#form').attr('data-for')
 
     $.ajax({
 
         url: "/greenroofs/" + id,
-        type: 'UPDATE',
+        type: 'PUT',
         data: data,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
@@ -90,7 +93,7 @@ function sendEditData(data) {
                 imageData.append('file-'+i, file);
             });
 
-            sendEditImage(imageData, response.id)
+
         }
     });
 }
@@ -98,7 +101,7 @@ function sendEditData(data) {
 function sendEditImage(imageData, id) {
     $.ajax({
         url: '/greenroofs/' +id + '/upload',
-        type: 'UPDATE',
+        type: 'PUT',
         data: imageData,
         cache: false,
         contentType: false,

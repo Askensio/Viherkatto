@@ -70,6 +70,7 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
 
+
     processAssociatedParams
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])

@@ -292,6 +292,13 @@ class GreenroofsController < ApplicationController
     end
   end
 
+  def update
+    @greenroof = Greenroof.find(params[:id])
+    @greenroof.update_attributes(params[:greenroofs])
+    redirect_to root_url
+
+  end
+
   private
 
   def owner
