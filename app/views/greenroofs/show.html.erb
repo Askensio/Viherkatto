@@ -65,12 +65,16 @@
               Kaltevuus: <%= @greenroof.roof.declination %>
               <br>
               Kantavuus: <%= @greenroof.roof.load_capacity %>
-              <br>
-              Valoisuus: <%= @greenroof.roof.light.value %>
-              <br>
-              Ympäristö: <% @greenroof.roof.environments.each do |env| %>
-                  <%= env.name %>
+              <% unless @greenroof.roof.light.nil? %>
                   <br>
+                  Valoisuus: <%= @greenroof.roof.light.value %>
+              <% end %>
+              <% unless @greenroof.roof.environments.empty? %>
+                  <br>
+                  Ympäristö: <% @greenroof.roof.environments.each do |env| %>
+                      <%= env.name %>
+                      <br>
+                  <% end %>
               <% end %>
             </td>
           </tr>
