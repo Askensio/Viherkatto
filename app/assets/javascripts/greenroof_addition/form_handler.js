@@ -21,7 +21,12 @@ function init() {
         //console.log($(this).parent())
     })
     //$('#add-base-button').click(addBase)
-    $('#save').click(save)
+    $('#save').click(create_groof)
+    function create_groof(event) {
+        var data = save()
+        sendData(data)
+    }
+
     $('#add-layer-button').click(function(e) {
         e.preventDefault()
     })
@@ -141,7 +146,7 @@ function generateLayerForm(layerName) {
     return layerFormElement
 }
 
-var save = function (event) {
+var save = function () {
 
     var roof = createRoofObject()
     var environments = createEnvironmentsObject()
@@ -161,7 +166,7 @@ var save = function (event) {
     data.plants = plants
     data.greenroof = greenroof
 
-    sendData(data)
+    return data
 }
 
 

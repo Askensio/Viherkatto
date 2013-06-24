@@ -59,12 +59,63 @@ $(document).ready(function () {
 
                 })
             })
-
-
-
+            $('.absorbancy').append($("#base_absorbancy").val());
+            $('#save').click(save_edits)
         }
-   }
+}
 });
+
+function save_edits() {
+    var data = save()
+    sendEditData(data)
+}
+
+function sendEditData(data) {
+    var id = $('#form').attr('data-for')
+
+    $.ajax({
+
+        url: "/greenroofs/" + id,
+        type: 'UPDATE',
+        data: data,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        success: function (response) {
+            console.log('Greenroof id: ' + response.id + ' saved')
+
+            var imageData = new FormData()
+
+            jQuery.each($('#image-upload')[0].files, function(i, file) {
+                imageData.append('file-'+i, file);
+            });
+
+            sendEditImage(imageData, response.id)
+        }
+    });
+}
+
+function sendEditImage(imageData, id) {
+    $.ajax({
+        url: '/greenroofs/' +id + '/upload',
+        type: 'UPDATE',
+        data: imageData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        success: function (response) {
+            console.log(response)
+        }
+    });
+}
+
+
+
+
+
 
 function determineDeclination() {
     var input = $("#roof_declination").val();
