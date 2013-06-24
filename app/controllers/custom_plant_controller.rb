@@ -8,4 +8,6 @@ class CustomPlantController < ApplicationController
     @customPlant = CustomPlant.new(params[:cplant])
   end
 
+
+
 end

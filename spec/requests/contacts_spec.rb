@@ -25,14 +25,15 @@ describe Contact do
     it { should_not have_button("Muokkaa") }
   end
 
+  begin
+    describe "View with admin" do
+      before do
+        sign_in admin
+        visit contacts_path
+      end
 
-  describe "View with admin" do
-    before do
-      sign_in admin
-      visit contacts_path
+      it { should have_selector('a',text: "Muokkaa") }
     end
-
-    it { should have_selector('a',text: "Muokkaa") }
   end
 
 end

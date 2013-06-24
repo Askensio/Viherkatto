@@ -5,10 +5,9 @@ class CreateGreenroofs < ActiveRecord::Migration
       t.string :locality
       t.string :constructor
       t.integer :year
-      t.integer :purpose
       t.text :note
       t.references :user
-      t.string :status
+      t.references :role
       t.text :usage_experience
 
       t.timestamps

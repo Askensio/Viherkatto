@@ -9,11 +9,26 @@
     <%= f.label :address, h('Osoite') %>
     <%= f.text_field :address %>
 
-    <%= f.label :status, h('Lisään viherkaton roolissa:') %>
-    <%= f.select :status, [['Yksityishenkilö', '0'],['Yritys', '1'],['Tutkija','2'],['Muu/En halua kertoa', '3']], {}, :class => "selectpicker show-menu-arrow show-tick span3" %>
+    <%= f.label :role, h('Lisään viherkaton roolissa:') %>
+    <div class="required" id="role-choose">
+    <%= collection_select(:roles, :id, Role.all,
+                            :id, :value, {}, :title => "Valitse rooli:", :class => "selectpicker show-menu-arrow span5", :required => true )%>
+    </div>
+
 
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
     <%= f.text_field :constructor%>
+
+    <%= f.label :purpose, h('Viherkaton käyttötarkoitus') %>
+    <div class="required" id="purpose-choose">
+      <% if @greenroof.purposes.empty? %>
+          <%= collection_select :purpose, :id, Purpose.all, :id, :value,
+                                {}, :title => "Valitse käyttötarkoitus", :class => "selectpicker show-menu-arrow show-tick span3 chosen-env", :multiple => true, :required => true %>
+      <% else %>
+          <%= collection_select :purpose, :id, Purpose.all, :id, :value,
+                                {:selected => @greenroof.purposes.map { |purp| purp.id }},  :class => "selectpicker show-menu-arrow show-tick span3", :multiple => true, :required => true %>
+      <% end %>
+    </div>
 
     <%= f.label :note, h('Vapaa kuvaus viherkatosta ja rakentamisesta') %>
     <%= f.text_area :note %>
@@ -22,3 +37,4 @@
     <%= f.text_area :usage_experience %>
 
 <% end %>
+

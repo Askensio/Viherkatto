@@ -4,6 +4,11 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
+    Role.create!(value: "Yksityishenkilö")
+    Role.create!(value: "Yritys")
+    Role.create!(value: "Tutkija")
+    Role.create!(value: "Kunta")
+    Role.create!(value: "Muu/En halua kertoa")
 
     Light.create!(value: "Aurinkoinen")
     Light.create!(value: "Varjoisa")
@@ -13,6 +18,10 @@ namespace :db do
     Colour.create!(value: "Punainen")
     Colour.create!(value: "Sininen")
     Colour.create!(value: "Vihreä")
+
+    Purpose.create!(value: "Käyttökatto")
+    Purpose.create!(value: "Maisemakatto")
+    Purpose.create!(value: "Hyötykatto")
 
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
@@ -40,6 +49,9 @@ namespace :db do
       colour =  Colour.last
       @plant.colours << colour
       colour =  Colour.first
+      @plant.links << Link.new(name: "eka", link: "http://eka.com")
+      @plant.links << Link.new(name: "toka", link: "http://toka.com")
+      @plant.links << Link.new(name: "kolmas", link: "http://kolmas.com")
       @plant.colours << colour
       @plant.light = Light.first
       @plant.maintenance = Maintenance.first
@@ -118,13 +130,11 @@ namespace :db do
       address = Faker::Lorem.words(3).join(" ")
       locality = Faker::Lorem.words(1)
       constructor = "Laurin viherpiperrys kommandiittiyhtiö"
-      purpose = 1
       note = Faker::Lorem.words(5).join(" ")
       usage_experience = "Jee"
-      status = 1
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(year: 2010, locality: locality, address: address, constructor: constructor, purpose: purpose, note: note, usage_experience: usage_experience, status: status)
+      @groof = Greenroof.new(year: 2010, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience)
       @groof.user = @user
       @groof.roof = @roof
       @groof.plants = @plants
