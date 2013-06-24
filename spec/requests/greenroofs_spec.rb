@@ -6,6 +6,9 @@ describe 'Greenroof' do
     5.times do
       FactoryGirl.create(:environment)
     end
+    5.times do
+      FactoryGirl.create(:role)
+    end
     FactoryGirl.create(:light)
     Purpose.create!(value: "Maisemakatto")
 
@@ -46,8 +49,11 @@ describe 'Greenroof' do
         fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
+        sleep 5.seconds
         find(:xpath, "//*[@id=\"role-choose\"]/div/button", :visible => true).click
-        find(:xpath, "//*[@id=\"role-choose\"]/div/ul/li[1]/a").click
+        sleep 5.seconds
+        find(:xpath, "//*[@id=\"role-choose\"]/div/ul/li[3]/a").click
+        sleep 5.seconds
         fill_in "roof_area", with: "100"
         fill_in "greenroof_owner", with: "Jytkylän jätkä & jyystö"
         fill_in "greenroof_constructor", with: "PATEN PUTKI JA JUNA"

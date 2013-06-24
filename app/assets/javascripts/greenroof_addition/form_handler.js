@@ -172,15 +172,13 @@ var save = function (event) {
 
 function createRoleObject() {
     var role = new Object()
-    var id = []
 
-    $("#role_id option:selected").each(function (index) {
-        id.push($(this).attr('value'))
-    });
-    if (id.length < 1) {
-        alert("Valitse rooli.")
+    var selected = $("#role_id option:selected")
+
+    if (selected === null) {
+       alert("Valitse rooli")
     }
-    role.id = id
+    role.value = selected.text()
     return role
 }
 

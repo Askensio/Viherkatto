@@ -131,6 +131,10 @@ class GreenroofsController < ApplicationController
       return
     end
 
+    unless params[:role].nil?
+      @greenroof.role = Role.where("value like ?", params[:role][:value]).first
+    end
+
     if not params[:customPlants].nil?
       params[:customPlants].each do |cplant|
         cplant[1].each do |toAddPlant|

@@ -46,9 +46,4 @@ class Greenroof < ActiveRecord::Base
       img.save!
     end
   end
-
-  def search(conditions)
-    Greenroof.where(conditions: conditions)
-  end
-
 end
