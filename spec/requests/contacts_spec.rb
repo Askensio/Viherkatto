@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Contact do
 
   before do
-  Contact.create!(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
+    Contact.create!(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
   end
 
   let(:admin) { FactoryGirl.create(:admin) }
@@ -35,4 +35,5 @@ describe Contact do
       it { should have_selector('a',text: "Muokkaa") }
     end
   end
+
 end

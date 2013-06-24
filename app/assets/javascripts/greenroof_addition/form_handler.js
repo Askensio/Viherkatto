@@ -141,6 +141,7 @@ function generateLayerForm(layerName) {
     return layerFormElement
 }
 
+
 var save = function (event) {
 
     var roof = createRoofObject()
@@ -149,6 +150,7 @@ var save = function (event) {
     var greenroof = createGreenroofObject()
     var customplant = createCustomplantsObject()
     var purposes = createPurposeObject()
+    var role = createRoleObject()
 
     var data = new Object()
 
@@ -157,6 +159,7 @@ var save = function (event) {
     data.environment = environments
     data.bases = bases
     data.customPlants = customplant
+    data.role = role
     if (plants.length < 1) {
         alert("Et valinnut yhtään kasvia")
     }
@@ -166,6 +169,18 @@ var save = function (event) {
     sendData(data)
 }
 
+
+function createRoleObject() {
+    var role = new Object()
+
+    var selected = $("#role_id option:selected")
+
+    if (selected === null) {
+       alert("Valitse rooli")
+    }
+    role.value = selected.text()
+    return role
+}
 
 
 function createCustomplantsObject() {
@@ -271,6 +286,8 @@ function createGreenroofObject() {
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
     greenroof.year = $('#greenroof_year').val()
+    greenroof.owner = $('#greenroof_owner').val()
+    greenroof.usage_experience = $('#greenroof_usage_experience').val()
     return greenroof
 }
 

@@ -4,11 +4,9 @@ require 'spec_helper'
 
 describe 'Roof' do
   before do
-    Environment.create!(name: "Merenranta")
-    Environment.create!(name: "Pelto")
-    Environment.create!(name: "Metsä")
-    Environment.create!(name: "Kaupunki")
-    Environment.create!(name: "Muu")
+    5.times do
+      FactoryGirl.create(:environment)
+    end
   end
 
   subject { page }

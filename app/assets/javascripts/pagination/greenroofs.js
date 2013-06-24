@@ -48,6 +48,7 @@ var addElement = function (entry, admin) {
     var infoElement = $('<div></div>')
     var ownerHeading = $('<h5>Omistaja:</h5>')
     var owner = $('<p></p>').append(entry.user)
+    console.log(entry.owner.toString())
     infoElement.append(ownerHeading).append(owner)
     var addressHeading = $('<h5>Sijainti:</h5>')
     var address = $('<p></p>').append(entry.locality)
@@ -58,7 +59,7 @@ var addElement = function (entry, admin) {
     })
     mainElement.attr('style', 'cursor: pointer;')
 
-    if (admin) {
+    if (admin || entry.creator) {
         var deleteElement = $('<a href=\"#\"\"></a>')
         deleteElement.attr('class', 'pull-right')
         var removeElement = $('<img />').attr({
