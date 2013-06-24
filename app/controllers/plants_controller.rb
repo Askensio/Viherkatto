@@ -109,12 +109,15 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-      #@tempPlants
       if params[:colour]
+        @tempPlants
         params[:colour].try(:each) do |colour|
-          @tempPlants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
+          #scope @plants, joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+          @tempPlants = @plants & @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
+          #@plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
         end
-        @plants = @tempPlants
+        puts @tempPlants
+        #@plants = @tempPlants
       end
 
       if params[:growth_environment]
