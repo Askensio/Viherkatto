@@ -2,6 +2,8 @@
 
 class Greenroof < ActiveRecord::Base
 
+  include ActiveModel::Validations
+
   belongs_to :user
 
   has_many :planteds
@@ -24,9 +26,9 @@ class Greenroof < ActiveRecord::Base
   validates :address, length: {maximum: 200}
   validates :constructor, length: { minimum: 2, maximum: 200 }
   validates :note, length: { maximum: 5000 }
-  validates :year, numericality: true, inclusion: {in: (1900...2100)}
+  validates :year, numericality: true, inclusion: {in: (1900...2100)}, presence: true
   validates :usage_experience, length: {maximum: 5000}
-  validates :owner, length: {minimum: 2, maximum: 100}
+  validates :owner, length: {minimum: 2, maximum: 100}, presence: true
 
 
   def save_bases
