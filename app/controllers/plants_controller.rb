@@ -109,7 +109,21 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
       params[:colour].try(:each) do |colour|
-        @plants = @plants.where('colour like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+        #@plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+
+        if colour
+          @plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%')
+        end
+
+
+        #@badplants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+
+        #@plants = @plants.where('colour like ?')
+        #@plants = @plants.where()
+        #puts "-----------------"
+        #puts colour
+        #puts "-----------------"
+        #@plants -= @badplants
       end
 
       params[:growth_environments].try(:each) do |env|
@@ -152,6 +166,7 @@ class PlantsController < ApplicationController
   def processGrowthEnvironments
     params[:growth_environments][:id].shift
     if (!params[:growth_environments][:id].empty?)
+      @plant.growth_environments.clear
       params[:growth_environments][:id].each do |env|
         @env = GrowthEnvironment.find_by_id(env)
         if (@env != nil)
@@ -164,6 +179,7 @@ class PlantsController < ApplicationController
   def processColours
     params[:colour][:id].shift
     if not params[:colour][:id].empty?
+      @plant.colours.clear
       params[:colour][:id].each do |col|
         @col = Colour.find_by_id col
         if not @col.equal? nil
