@@ -31,6 +31,7 @@ en:
         height: "Korkeus"
         max_height: "Maksimikorkeus"
         min_height: "Minimikorkeus"
+        links: Lisää tietoa
         Blue: "Sininen"
         Red: "Punainen"
         Yellow: "Keltainen"
