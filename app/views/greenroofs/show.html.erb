@@ -27,8 +27,12 @@
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
-            <td><%= f.label :owner, h("Omistaja: ") %><p>Lisääjä:</p></td>
-            <td><%= f.label @greenroof.owner %><%= @greenroof.user.name %></td>
+            <td><%= f.label :owner, h("Omistaja: ") %></td>
+            <td><%= f.label @greenroof.owner%></td>
+          </tr>
+          <tr>
+            <td><%= f.label :user, h("Lisääjä: ") %></td>
+            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")"%></td>
           </tr>
 
           <tr>
@@ -91,6 +95,18 @@
               <div class="well"> <%= @greenroof.note %> </div>
             </td>
           </tr>
+          <% if !@greenroof.usage_experience.nil? or !@greenroof.usage_experience.blank? %>
+              <tr>
+                <td>
+                  <%= f.label :usage_experience, h("Käyttökokemuksia") %>
+                </td>
+                <td>
+                  <div class="well">
+                    <%= @greenroof.usage_experience %>
+                  </div>
+                </td>
+              </tr>
+          <% end %>
 
         </table>
 

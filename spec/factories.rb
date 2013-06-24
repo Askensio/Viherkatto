@@ -29,7 +29,7 @@ FactoryGirl.define do
   end
 
   factory :role do
-    sequence(:value, ['Yksityishenkilö', 'Yritys', 'Tutkija', 'Kunta', 'Muu/En halua kertoa'].cycle) { |n| "#{n}" }
+    sequence(:value, ['Yksityishenkilö', 'Yritys', 'Tutkija', 'Kunta', 'Muu'].cycle) { |n| "#{n}" }
   end
 
   factory :plant do

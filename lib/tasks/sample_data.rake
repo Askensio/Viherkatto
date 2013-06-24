@@ -130,6 +130,7 @@ namespace :db do
       address = Faker::Lorem.words(3).join(" ")
       locality = Faker::Lorem.words(1)
       constructor = "Laurin viherpiperrys kommandiittiyhtiö"
+      @role = Role.first
       note = Faker::Lorem.words(5).join(" ")
       usage_experience = "Jee"
       owner = "Kumpulan Sorto & Riisto"
@@ -137,6 +138,7 @@ namespace :db do
 
       @groof = Greenroof.new(year: 2010, owner: owner, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience)
       @groof.user = @user
+      @groof.role = @role
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base

@@ -287,6 +287,7 @@ function createGreenroofObject() {
     greenroof.note = $('#greenroof_note').val()
     greenroof.year = $('#greenroof_year').val()
     greenroof.owner = $('#greenroof_owner').val()
+    greenroof.usage_experience = $('#greenroof_usage_experience').val()
     return greenroof
 }
 

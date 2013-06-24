@@ -49,11 +49,9 @@ describe 'Greenroof' do
         fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
-        sleep 5.seconds
+        fill_in "greenroof_usage_experience", with: "Tätä on helppo pitää kunnossa"
         find(:xpath, "//*[@id=\"role-choose\"]/div/button", :visible => true).click
-        sleep 5.seconds
         find(:xpath, "//*[@id=\"role-choose\"]/div/ul/li[3]/a").click
-        sleep 5.seconds
         fill_in "roof_area", with: "100"
         fill_in "greenroof_owner", with: "Jytkylän jätkä & jyystö"
         fill_in "greenroof_constructor", with: "PATEN PUTKI JA JUNA"
@@ -103,11 +101,13 @@ describe 'Greenroof' do
     it { should have_selector('label', text: "Kasvit") }
     it { should have_selector('label', text: "Rakennekerrokset") }
     it { should have_selector('label', text: "Kuvaus") }
+    it { should have_selector('label', text: "Lisääjä") }
+    it { should have_selector('label', text: "Käyttökokemuksia") }
 
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
       end
       it { should have_selector('label', text: "Latinankielinen nimi")  }
     end
@@ -115,7 +115,7 @@ describe 'Greenroof' do
     describe 'click-materiaali-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[8]/td[2]/div/a[1]", :visible => true).click
         sleep 1.seconds
       end
       it { should have_selector('td', text: "Paino") }

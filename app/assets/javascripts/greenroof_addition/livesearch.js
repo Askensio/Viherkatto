@@ -254,7 +254,14 @@ $(document).ready(function () {
         $('.note').empty();
         $('.note').append('Vapaa kuvaus: ' + input);
     })
-
+    /**
+     * Greenroof usage_experience value for the Synopsis-view.
+     */
+    $("#greenroof_usage_experience").keyup(function() {
+        var input = $("#greenroof_usage_experience").val();
+        $('.usage_experience').empty();
+        $('.usage_experience').append('Käyttökokemuksia: ' + input);
+    })
     /**
      * Base absorbancy value for the Synopsis-view.
      */
