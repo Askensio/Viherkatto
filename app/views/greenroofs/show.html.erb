@@ -5,7 +5,7 @@
 <div class="row-fluid marketing">
   <div>
     <h1>
-      <%= 'Käyttäjän '<< @greenroof.user.name << " viherkatto" %>
+      <%= 'Omistajan '<< @greenroof.owner << " viherkatto" %>
     </h1>
     <div id="slider-holder">
       <div class="flexslider span4">
@@ -27,8 +27,8 @@
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
-            <td><%= f.label :user, h("Käyttäjä: ") %></td>
-            <td><%= f.label @greenroof.user.name %></td>
+            <td><%= f.label :owner, h("Omistaja: ") %><p>Lisääjä:</p></td>
+            <td><%= f.label @greenroof.owner %><%= @greenroof.user.name %></td>
           </tr>
 
           <tr>
@@ -36,7 +36,7 @@
             <td><%= f.label printAddress(@greenroof) << (@greenroof.locality).titleize.to_s %></td>
           </tr>
 
-          <% if !@greenroof.constructor.nil? %>
+          <% if !@greenroof.constructor.nil? or !@greenroof.constructr.blank? %>
               <tr>
                 <td><%= f.label :constructor, h("Rakentaja: ") %></td>
                 <td><%= f.label @greenroof.constructor %></td>
@@ -86,7 +86,7 @@
           </tr>
 
           <tr>
-            <td><%= f.label :note, h("Huomioita") %></td>
+            <td><%= f.label :note, h("Kuvaus") %></td>
             <td>
               <div class="well"> <%= @greenroof.note %> </div>
             </td>

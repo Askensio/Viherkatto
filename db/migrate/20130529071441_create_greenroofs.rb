@@ -9,6 +9,7 @@ class CreateGreenroofs < ActiveRecord::Migration
       t.references :user
       t.references :role
       t.text :usage_experience
+      t.string :owner
 
       t.timestamps
     end

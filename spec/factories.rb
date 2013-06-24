@@ -12,7 +12,6 @@ FactoryGirl.define do
     end
   end
 
-
   factory :light do
     value "Aurinkoinen"
   end
@@ -32,17 +31,6 @@ FactoryGirl.define do
   factory :role do
     sequence(:value, ['Yksityishenkilö', 'Yritys', 'Tutkija', 'Kunta', 'Muu/En halua kertoa'].cycle) { |n| "#{n}" }
   end
-
-
-=begin
-  factory :env do
-    sequence(:env_name, ['Merenranta', 'Pelto', 'Metsä', 'Kaupunki', 'Muu']) {|env| "#{env}" }
-    factory :environment do
-      name { FactoryGirl.generate(:env_name) }
-    end
-  end
-=end
-
 
   factory :plant do
     sequence(:name) { |n| "Example Plant #{n}" }
@@ -64,6 +52,7 @@ FactoryGirl.define do
     year 1984
     usage_experience "Jee"
     self.role { |a| a.association(:role) }
+    owner "Kumpulan Sorto & Riisto"
     plants { Array.new(3) { FactoryGirl.create(:plant) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|

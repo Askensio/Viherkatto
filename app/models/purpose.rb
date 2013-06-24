@@ -1,6 +1,6 @@
 class Purpose < ActiveRecord::Base
 
-  has_many :greenroofs
+  has_and_belongs_to_many :greenroofs
 
   attr_accessible :value
 
