@@ -3,9 +3,10 @@ function iconMinus() {
     return icon;
 };
 
+
 $(document).ready(function () {
 
-    /**
+        /**
      * Fetches the plants through the designated function.
      */
     (function () {

@@ -1,10 +1,10 @@
 <%= fields_for (@greenroof) do |f| %>
 
-    <%= f.label :year, h('Viherkaton valmistumisvuosi') %>
-    <%= f.number_field :year %>
+    <%= f.label :year, h('Viherkaton valmistumisvuosi *') %>
+    <%= f.number_field :year, :required => true %>
 
-    <%= f.label :locality, h('Paikkakunta') %>
-    <%= f.text_field :locality %>
+    <%= f.label :locality, h('Paikkakunta *') %>
+    <%= f.text_field :locality, :required => true %>
 
     <%= f.label :address, h('Osoite') %>
     <%= f.text_field :address %>
@@ -20,7 +20,7 @@
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
     <%= f.text_field :constructor%>
 
-    <%= f.label :purpose, h('Viherkaton käyttötarkoitus') %>
+    <%= f.label :purpose, h('Viherkaton käyttötarkoitus *') %>
     <div class="required" id="purpose-choose">
       <% if @greenroof.purposes.empty? %>
           <%= collection_select :purpose, :id, Purpose.all, :id, :value,
