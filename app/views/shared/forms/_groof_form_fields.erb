@@ -9,8 +9,13 @@
     <%= f.label :address, h('Osoite') %>
     <%= f.text_field :address %>
 
-    <%= f.label :owner, h("Viherkaton omistaja *") %>
-    <%= f.text_field :owner, :required => true %>
+    <%= f.label :role, h('Lisään viherkaton roolissa:') %>
+    <div class="required" id="role-choose">
+      <%= collection_select :role, :id, Role.all, :id, :value, {}, :title => "Valitse rooli:", :class => "selectpicker show-menu-arrow show-tick span3", :required => true %>
+    </div>
+
+    <%= f.label :owner, h("Viherkaton omistaja") %>
+    <%= f.text_field :owner %>
 
     <%= f.label :constructor, h("Viherkaton rakennuttaja") %>
     <%= f.text_field :constructor%>
@@ -26,7 +31,11 @@
       <% end %>
     </div>
 
-    <%= f.label :note, h('Vapaa kuvaus') %>
+    <%= f.label :note, h('Vapaa kuvaus viherkatosta ja rakentamisesta') %>
     <%= f.text_area :note %>
 
+    <%= f.label :usage_experience, h('Käyttökokemuksia ja huomioita') %>
+    <%= f.text_area :usage_experience %>
+
 <% end %>
+

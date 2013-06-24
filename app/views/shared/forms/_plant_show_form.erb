@@ -46,10 +46,12 @@
           </tr>
       <% end %>
 
-      <tr>
-        <td><%= f.label :maintenance %></td>
-        <td><%= f.label @plant.maintenance.name %></td>
-      </tr>
+      <% unless @plant.maintenance.nil? %>
+          <tr>
+            <td><%= f.label :maintenance %></td>
+            <td><%= f.label @plant.maintenance.name %></td>
+          </tr>
+      <% end %>
 
       <tr>
         <td><%= f.label :min_soil_thickness %></td>

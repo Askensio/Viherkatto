@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20130620082045) do
     t.integer  "year"
     t.text     "note"
     t.integer  "user_id"
-    t.string   "status"
+    t.integer  "role_id"
     t.text     "usage_experience"
     t.string   "owner"
     t.datetime "created_at",       :null => false
@@ -196,6 +196,12 @@ ActiveRecord::Schema.define(:version => 20130620082045) do
   end
 
   add_index "purposes", ["greenroof_id"], :name => "index_purposes_on_greenroof_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roofs", :force => true do |t|
     t.integer  "declination"

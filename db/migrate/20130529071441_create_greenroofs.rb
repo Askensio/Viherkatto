@@ -7,7 +7,7 @@ class CreateGreenroofs < ActiveRecord::Migration
       t.integer :year
       t.text :note
       t.references :user
-      t.string :status
+      t.references :role
       t.text :usage_experience
       t.string :owner
 

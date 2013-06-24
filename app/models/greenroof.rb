@@ -10,6 +10,7 @@ class Greenroof < ActiveRecord::Base
   has_many :plants, through: :planteds
   has_and_belongs_to_many :purposes
 
+  belongs_to :role
   has_one :roof, :dependent => :destroy
   has_many :bases, :dependent => :destroy
   has_many :custom_plants, :dependent => :destroy
@@ -20,11 +21,12 @@ class Greenroof < ActiveRecord::Base
 
   before_save :save_bases, :save_roof, :save_images
 
-  attr_accessible :address, :locality, :constructor, :note, :year, :usage_experience, :status, :owner
+  attr_accessible :address, :locality, :constructor, :note, :year, :usage_experience, :owner
 
   validates :locality, presence: true, length: { maximum: 200 }
   validates :address, length: {maximum: 200}
   validates :constructor, length: { minimum: 2, maximum: 200 }
+
   validates :note, length: { maximum: 5000 }
   validates :year, numericality: true, inclusion: {in: (1900...2100)}, presence: true
   validates :usage_experience, length: {maximum: 5000}
@@ -46,9 +48,4 @@ class Greenroof < ActiveRecord::Base
       img.save!
     end
   end
-
-  def search(conditions)
-    Greenroof.where(conditions: conditions)
-  end
-
 end

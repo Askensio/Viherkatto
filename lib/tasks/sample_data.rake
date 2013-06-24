@@ -4,6 +4,11 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
+    Role.create!(value: "Yksityishenkilö")
+    Role.create!(value: "Yritys")
+    Role.create!(value: "Tutkija")
+    Role.create!(value: "Kunta")
+    Role.create!(value: "Muu/En halua kertoa")
 
     Light.create!(value: "Aurinkoinen")
     Light.create!(value: "Varjoisa")
@@ -112,6 +117,7 @@ namespace :db do
 
       @roof = Roof.new(area: area, declination: declination, load_capacity: load_capacity)
       @roof.environments << Environment.find(id)
+      @roof.light = Light.first
 
       @plants = [Plant.find(1), Plant.find(2)]
       @base = Base.new(absorbancy: 20)
@@ -122,16 +128,17 @@ namespace :db do
 
 
       address = Faker::Lorem.words(3).join(" ")
-      locality = Faker::Lorem.words(1)
+      locality = Faker::Lorem.words(1).join(" ")
       constructor = "Laurin viherpiperrys kommandiittiyhtiö"
+      @role = Role.first
       note = Faker::Lorem.words(5).join(" ")
       usage_experience = "Jee"
-      status = "yksityisyrittäjä"
       owner = "Kumpulan Sorto & Riisto"
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(year: 2010, owner: owner, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience, status: status)
+      @groof = Greenroof.new(year: 2010, owner: owner, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience)
       @groof.user = @user
+      @groof.role = @role
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base

@@ -18,9 +18,9 @@ class GreenroofsController < ApplicationController
         address = "%#{params[:address]}%"
         @greenroofs = @greenroofs.where("address like ?", address)
       end
-      if params[:groofnote]
-        groofnote = "%#{params[:groofnote]}%"
-        @greenroofs = @greenroofs.where("greenroofs.note like ?", groofnote)
+      if params[:locality]
+        locality = "%#{params[:locality]}%"
+        @greenroofs = @greenroofs.where("locality like ?", locality)
       end
       if params[:plantname]
         plantname = "%#{params[:plantname]}%"
@@ -43,6 +43,9 @@ class GreenroofsController < ApplicationController
       if params[:layername]
         layername = "%#{params[:layername]}%"
         @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
+      end
+      if params[:status]
+        puts params[:status].to_s
       end
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
@@ -126,6 +129,10 @@ class GreenroofsController < ApplicationController
         #format.js { render :action => 'new' }
       end
       return
+    end
+
+    unless params[:role].nil?
+      @greenroof.role = Role.where("value like ?", params[:role][:value]).first
     end
 
     if not params[:customPlants].nil?
