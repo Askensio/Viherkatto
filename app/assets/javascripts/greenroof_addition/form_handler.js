@@ -238,8 +238,14 @@ function createLayerObjectArray(baseElement) {
         var product_name = $(this).children('[name="layer[product_name]"]').val()
         layer.product_name = product_name
         var thickness = $(this).children('[name="layer[thickness]"]').val()
+        if(isNaN(thickness)) {
+            thickness = 0;
+        }
         layer.thickness = thickness
         var weight = $(this).children('[name="layer[weight]"]').val()
+        if(isNaN(weight)) {
+            weight = 0;
+        }
         layer.weight = weight
         layerArray.push(layer)
     });

@@ -107,7 +107,7 @@ namespace :db do
       @roof.environments << Environment.find(id)
 
       @plants = [Plant.find(1), Plant.find(2)]
-      @base = Base.new(name: "base "+n.to_s ,absorbancy: 20)
+      @base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
       @layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
       @layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
       @base.layers << @layer1
@@ -132,6 +132,15 @@ namespace :db do
     @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
     @contact.save
 
+    10.times do |n|
+      base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
+      base.plants << Plant.first
+      layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
+      base.layers << layer1
+      base.layers << layer2
+      base.save!
+    end
   end
 end
 

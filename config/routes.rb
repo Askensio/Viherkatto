@@ -33,6 +33,13 @@ Viherkatto::Application.routes.draw do
     end
   end
 
+  resources :bases do
+    member do
+      post 'attach'
+      post 'detach'
+    end
+  end
+
   resources :greenroofs do
     member do
       post 'upload'

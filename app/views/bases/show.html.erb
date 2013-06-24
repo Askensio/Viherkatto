@@ -1,2 +1,65 @@
-<h1>Base#show</h1>
-<p>Find me in app/views/base/show.html.erb</p>
+<% provide(:title, 'Rakennepaketti') %>
+
+<div class="row">
+  <div class="span5">
+    <h1>
+      <%= @base.name %>
+    </h1>
+
+    <%= fields_for :base do |f| %>
+        <table class="table" id="base-table" data-id="<%= @base.id %>">
+          <tr>
+            <td><label>Paketin ID numero</label></td>
+            <td><%= f.label @base.id %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :name %></td>
+            <td><%= f.label @base.name %></td>
+          </tr>
+          <% unless @base.note.nil? or @base.note.empty? %>
+              <tr>
+                <td><%= f.label :note %></td>
+                <td><%= f.label @base.note %></td>
+              </tr>
+          <% end %>
+
+          <% @base.layers.each do |layer| %>
+              <tr>
+                <% unless layer.name.nil? %>
+                    <td>
+                      <label><%= layer.name %></label>
+                    </td>
+                <% end %>
+                <td>
+                  <div class="well">
+                    <% unless layer.product_name.nil? %>
+                        <label><h5>Tuotteen nimi:</h5> <%= layer.product_name %></label>
+                    <% end %>
+
+                    <% unless layer.thickness.nil? %>
+                        <label><h5>Paksuus:</h5> <%= layer.thickness %></label>
+                    <% end %>
+
+                    <% unless layer.weight.nil? %>
+                        <label><h5>Paino:</h5> <%= layer.weight %></label>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+    <% end %>
+  </div>
+  <div class="span5 offset1">
+    <p class="pagination"></p>
+    <p class="content"></p>
+    <section data-object="plant" data-id="list-section">
+      <img id="loading-icon" class="loading-icon" src="/assets/ajax-loader.gif" />
+      <ul class="plant-list list">
+      </ul>
+    </section>
+  </div>
+</div>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "base-plant-linking" %>
+<%= javascript_include_tag "pagination/paginator" %>

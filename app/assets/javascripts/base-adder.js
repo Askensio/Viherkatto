@@ -23,12 +23,21 @@ function attachClickListeners() {
             layer.name = $(this).children('#layer_name').val()
             layer.product_name = $(this).children('#layer_product_name').val()
             layer.thickness = $(this).children('#layer_thickness').val()
+            if(isNaN(layer.thickness) || layer.thickness == "") {
+                layer.thickness = 0;
+            }
             layer.weight = $(this).children('#layer_weight').val()
+            if(isNaN(layer.weight)  || layer.weight == "") {
+                layer.weight = 0;
+            }
             layer_array.push(layer)
         })
 
         var base = new Object()
         base.name = $('#base_name').val()
+        if(base.name == "") {
+            base.name = "nimetön rakennepaketti"
+        }
         base.absorbancy = $('#base_absorbancy').val()
         base.note = $('#base_note').val()
 

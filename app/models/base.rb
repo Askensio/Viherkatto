@@ -5,7 +5,11 @@ class Base < ActiveRecord::Base
   has_many :consists, :dependent => :destroy
   has_many :layers, :through  => :consists
 
+  has_many :base_plants
+  has_many :plants, through: :base_plants
+
   attr_accessible :name, :absorbancy, :note
+  attr_readonly :id
 
   validates :name, length: { maximum: 100 }
   validates :absorbancy, allow_blank: true, :numericality => { only_integer: true, :greater_than => 0 }
@@ -23,7 +27,7 @@ class Base < ActiveRecord::Base
 
   def save_layers
     self.layers.each do |layer|
-      check_layer layer
+      layer.save!
     end
   end
 end

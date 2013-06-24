@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617100626) do
+ActiveRecord::Schema.define(:version => 20130619131536) do
+
+  create_table "base_plants", :force => true do |t|
+    t.integer  "base_id"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "base_plants", ["base_id"], :name => "index_base_plants_on_base_id"
+  add_index "base_plants", ["plant_id"], :name => "index_base_plants_on_plant_id"
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"

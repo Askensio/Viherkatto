@@ -75,7 +75,6 @@ class UsersController < ApplicationController
   end
 
   def admin
-    puts params[:id]
     respond_to do |format|
       @user = User.find(params[:id])
       if @user and @user.id != current_user.id

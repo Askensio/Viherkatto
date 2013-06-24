@@ -12,10 +12,11 @@ class PlantsController < ApplicationController
 
   def index
     respond_to do |format|
-      @plants = Plant.paginate(page: params[:page])
+
+      @plants = Plant.order('name ASC').paginate(page: params[:page])
       format.html { render :html => @plants } # index.html.erb
       if params[:page].present?
-        @jsonPlants = Plant.paginate(page: params[:page], per_page: params[:per_page])
+        @jsonPlants = Plant.order('name ASC').paginate(page: params[:page], per_page: params[:per_page])
       else
         @jsonPlants = Plant.all
       end
