@@ -109,7 +109,7 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
       params[:colour].try(:each) do |colour|
-        @plants = @plants.where('colour like?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+        @plants = @plants.where('colour like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
       end
 
       params[:growth_environments].try(:each) do |env|
