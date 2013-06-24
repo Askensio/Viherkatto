@@ -19,7 +19,7 @@
     <%= if @plant.growth_environments.empty?
 
           collection_select(:growth_environments, :id, GrowthEnvironment.all,
-                            :id, :environment, {}, :class => "selectpicker show-menu-arrow span5", :multiple => true)
+                            :id, :environment, {}, :class => "selectpicker show-menu-arrow span5", :title => "Valitse kasvin kasvuympäristö", :multiple => true)
 
         else
           collection_select(:growth_environments, :id, GrowthEnvironment.all,

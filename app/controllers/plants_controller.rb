@@ -109,12 +109,20 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-      params[:colour].try(:each) do |colour|
-        @plants = @plants.where('colour like?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+      #@tempPlants
+      if params[:colour]
+        params[:colour].try(:each) do |colour|
+          @tempPlants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
+        end
+        @plants = @tempPlants
       end
 
-      params[:growth_environments].try(:each) do |env|
-        @plants = @plants.where('growth_environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%') if env
+      if params[:growth_environment]
+        @tempEnvPlants
+        params[:growth_environment].try(:each) do |env|
+          @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
+        end
+        @plants = @tempEnvPlants
       end
 
       if (params[:maintenance])
@@ -126,10 +134,12 @@ class PlantsController < ApplicationController
       end
 
       if (params[:lightness])
+
         @lights = []
-        Light.where(:desc => params[:lightness]).each do |id|
+        Light.where(:value => params[:lightness]).each do |id|
           @lights.push(id)
         end
+        puts @lights
         @plants = @plants.where(:light_id => @lights)
       end
 
@@ -153,6 +163,7 @@ class PlantsController < ApplicationController
   def processGrowthEnvironments
     params[:growth_environments][:id].shift
     if (!params[:growth_environments][:id].empty?)
+      @plant.growth_environments.clear
       params[:growth_environments][:id].each do |env|
         @env = GrowthEnvironment.find_by_id(env)
         if (@env != nil)
@@ -165,6 +176,7 @@ class PlantsController < ApplicationController
   def processColours
     params[:colour][:id].shift
     if not params[:colour][:id].empty?
+      @plant.colours.clear
       params[:colour][:id].each do |col|
         @col = Colour.find_by_id col
         if not @col.equal? nil

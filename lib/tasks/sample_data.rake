@@ -128,7 +128,7 @@ namespace :db do
 
 
       address = Faker::Lorem.words(3).join(" ")
-      locality = Faker::Lorem.words(1)
+      locality = Faker::Lorem.words(1).join(" ")
       constructor = "Laurin viherpiperrys kommandiittiyhtiö"
       @role = Role.first
       note = Faker::Lorem.words(5).join(" ")
