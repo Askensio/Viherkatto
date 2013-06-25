@@ -308,6 +308,7 @@ class GreenroofsController < ApplicationController
       end
     end
 
+=begin
     if not params[:environment].nil?
       params[:environment][:id].shift
       @greenroof.roof.environments.clear
@@ -324,6 +325,7 @@ class GreenroofsController < ApplicationController
       end
       return
     end
+=end
 
     if not params[:customPlants].nil?
       @greenroof.custom_plants = nil
@@ -335,7 +337,9 @@ class GreenroofsController < ApplicationController
       end
     end
 
-    @greenroof.roof = @roof
+    @greenroof.roof.update_attributes(params[:roof])
+    @greenroof.roof.save
+
     @greenroof.bases.clear
     @bases = params[:bases]
     @bases.each do |key, value|
