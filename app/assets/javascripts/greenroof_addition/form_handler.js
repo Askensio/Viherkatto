@@ -160,6 +160,7 @@ var save = function (event) {
     data.customPlants = customplant
     data.plants = plants
     data.greenroof = greenroof
+    data.role = role
 
     if (validateData(data)) {
         sendData(data)
