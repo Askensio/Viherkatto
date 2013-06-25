@@ -135,13 +135,17 @@ class GreenroofsController < ApplicationController
       return
     end
 
+    puts(params[:role][:value])
+
     if params[:role].nil?
+      flash.now[:error] = "Et valinnut roolia."
+    elsif params[:role][:value] === "Valitse rooli"
       flash.now[:error] = "Et valinnut roolia."
     else
       @greenroof.role = Role.where("value like ?", params[:role][:value]).first
     end
 
-    if not params[:customPlants].nil?
+      if not params[:customPlants].nil?
       params[:customPlants].each do |cplant|
         cplant[1].each do |toAddPlant|
           @cplant = CustomPlant.new(name: toAddPlant)

@@ -251,20 +251,13 @@ $(document).ready(function () {
      * Greenroof role value for the Synopsis-view.
      */
     $("#role_id").change(function () {
-        var input = $("#role_id").text();
-        console.log(input);
-        /*if (input === 0) {
-            input = "Yksityishenkilö"
-        } else if (input === 1) {
-            input = "Yritys"
-        } else if (input === 2) {
-            input = "Tutkija"
-        } else if (input === 3) {
-            input = "Kunta"
-        } else {
-            input = "Muu"
-        }*/
+        var input = $("#role_id").find(":selected").text();
         $('.role').empty();
+        if (input === null) {
+          input = "Ei valittu"
+        } else if (input === "Valitse rooli") {
+          input = "Ei valittu"
+        }
         $('.role').append('Lisätty roolissa: ' + input);
     })
     /**
