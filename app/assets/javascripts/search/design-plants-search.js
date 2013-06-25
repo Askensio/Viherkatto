@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var searcher = new Search();
-    var paginator = new Pagination("search/plants",1,20)
+    var paginator = new Pagination("search/plants",1,10)
 
     var clickListener = function () {
 
@@ -16,15 +16,11 @@ $(document).ready(function () {
 
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
+
+    var addButton = $('<button class="btn btn-mini link-base-to-plant-button" id="' + entry.id + '">Lisää</button>')
+    listElement.append(addButton)
+
     var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + entry.name + '</a>');
     listElement.append(link);
-//    console.log(admin)
-    if (admin) {
-        listElement.append(' | ');
-        var deleteElement = $('<a href=\"#\" id="/' + this.object + 's/' + entry.id + '\">' + 'poista' + '</a>').click(this.deleteRequest);
-        listElement.append(deleteElement).append(' | ');
-        var editElement = $('<a href=\"/' + this.object + 's/' + entry.id + '/edit\">' + 'muokkaa' + '</a>');
-        listElement.append(editElement);
-    }
     $('.' + this.object + '-list').append(listElement);
 }
