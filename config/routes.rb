@@ -1,5 +1,9 @@
 Viherkatto::Application.routes.draw do
 
+  #get "design_tool/design"
+
+  #get "design_tool/show"
+
   resources :contacts
   resources :users
   resources :plants
@@ -9,7 +13,7 @@ Viherkatto::Application.routes.draw do
   resources :greenroofs
   resources :bases
 
-
+  match '/suunnittele', to: 'design_tool#design'
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
   match '/add_plant', to: 'plants#new'

@@ -1,0 +1,47 @@
+<% provide(:title, 'Viherkaton suunnittelu') %>
+
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+
+<div class="row">
+  <div class="span5 offset3">
+    <div data-id="plant" id="search-form">
+
+      <label>Väri:</label>
+      <%= collection_select(:colour, :id, Colour.all,
+                            :id, :value, {}, :class => "selectpicker show-menu-arrow show-tick span5 search-input", 'data-id' => "colour",
+                            :title => "Valitse kukan väri", :multiple => true) %>
+
+      <label>Kasvuympäristö:</label>
+      <%= collection_select(:growth_environments, :id, GrowthEnvironment.all,
+                            :id, :environment, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'growth_environment', :multiple => true) %>
+
+      <label>Valontarve:</label>
+      <%= collection_select(:light, :id, Light.all, :id, :value, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness', :multiple => true) %>
+
+      <label>Hoidontarve:</label>
+      <%= collection_select(:maintenances, :id, Maintenance.all,
+                            :id, :name, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'maintenance', :multiple => true) %>
+
+
+      <button class="btn btn-custom span2" name="hae">Hae</button>
+    </div>
+  </div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<p class="pagination"></p>
+<p class="content"></p>
+<section data-object="plant" data-id="list-section">
+  <ul class="plant-list list">
+  </ul>
+</section>
+
+<%= javascript_include_tag "bootstrap-select" %>
+<script>$('.selectpicker').selectpicker();</script>
+
+<%= javascript_include_tag "search/search" %>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "search/design-plants-search" %>
+<%= javascript_include_tag "pagination/paginator" %>
