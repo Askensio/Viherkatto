@@ -6,6 +6,9 @@
   <div class="span5 offset3">
     <div data-id="plant" id="search-form">
 
+      <label>Kasvin nimi:</label>
+      <input type="text" class="search-input" name="name" data-id="name">
+
       <label>Väri:</label>
       <%= collection_select(:colour, :id, Colour.all,
                             :id, :value, {}, :class => "selectpicker show-menu-arrow show-tick span5 search-input", 'data-id' => "colour",
@@ -34,6 +37,7 @@
 <p class="pagination"></p>
 <p class="content"></p>
 <section data-object="plant" data-id="list-section">
+  <img id="loading-icon" class="loading-icon" src="/assets/ajax-loader.gif" />
   <ul class="plant-list list">
   </ul>
 </section>
