@@ -109,12 +109,20 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-      #@tempPlants
+      #@tempPlants = @plants
       if params[:colour]
-        params[:colour].try(:each) do |colour|
-          @tempPlants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
-        end
-        @plants = @tempPlants
+        #@tempPlants
+        scope :plants => :colours.where(flower_colours: {colour_id: @plants.id })
+        #params[:colour].try(:each) do |colour|
+          #scope @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
+          #scope @plants, joins(:colours).where(colours: { value: colour }) if colour
+          #@tempPlants = @plants & @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
+          #@plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
+          #@plants = @plants.joins(:flower_colours).where('flower_colours.id like ?', @plants.id).uniq if colour
+          #@tempPlants & @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%')
+        #end
+        #puts @tempPlants
+        #@plants = @tempPlants
       end
 
       if params[:growth_environment]
