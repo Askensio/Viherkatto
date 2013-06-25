@@ -26,3 +26,4 @@ log/.nfs*
 /public/greenroofs
 /coverage/*
 /coverage
+coverage/
