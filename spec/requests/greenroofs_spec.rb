@@ -6,6 +6,9 @@ describe 'Greenroof' do
     5.times do
       FactoryGirl.create(:environment)
     end
+    5.times do
+      FactoryGirl.create(:role)
+    end
     FactoryGirl.create(:light)
     Purpose.create!(value: "Maisemakatto")
 
@@ -46,9 +49,12 @@ describe 'Greenroof' do
         fill_in "greenroof_locality", with: "Helsinki"
         fill_in "greenroof_year", with: "1992"
         fill_in "greenroof_note", with: "This is a test greenroof"
+        fill_in "greenroof_usage_experience", with: "Tätä on helppo pitää kunnossa"
         find(:xpath, "//*[@id=\"role-choose\"]/div/button", :visible => true).click
-        find(:xpath, "//*[@id=\"role-choose\"]/div/ul/li[1]/a").click
+        find(:xpath, "//*[@id=\"role-choose\"]/div/ul/li[3]/a").click
         fill_in "roof_area", with: "100"
+        fill_in "greenroof_owner", with: "Jytkylän jätkä & jyystö"
+        fill_in "greenroof_constructor", with: "PATEN PUTKI JA JUNA"
         select "Tasakatto", from: "roof_declination"
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
@@ -86,20 +92,21 @@ describe 'Greenroof' do
       visit greenroof_path(@groof)
     end
 
-
     subject { page }
 
-    it { should have_selector('label', text: "Käyttäjä") }
+    it { should have_selector('label', text: "Omistaja") }
     it { should have_selector('label', text: "Sijainti") }
     it { should have_selector('label', text: "Katon tiedot") }
     it { should have_selector('label', text: "Kasvit") }
     it { should have_selector('label', text: "Rakennekerrokset") }
-    it { should have_selector('label', text: "Huomioita") }
+    it { should have_selector('label', text: "Kuvaus") }
+    it { should have_selector('label', text: "Lisääjä") }
+    it { should have_selector('label', text: "Käyttökokemuksia") }
 
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[6]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
       end
       it { should have_selector('label', text: "Latinankielinen nimi")  }
     end
@@ -107,7 +114,7 @@ describe 'Greenroof' do
     describe 'click-materiaali-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[8]/td[2]/div/a[1]", :visible => true).click
         sleep 1.seconds
       end
       it { should have_selector('td', text: "Paino") }
@@ -137,15 +144,15 @@ describe 'Greenroof' do
         fill_in 'address', with: "Emminkatu"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Helsinki") }
+      it { should have_link("Emminkatu") }
     end
 
-    describe "find by greenroof note", js:true do
+    describe "find by locality", js: true do
       before do
-        fill_in 'groofnote', with: "kattotiimi"
+        fill_in 'locality', with: "Helsinki"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Helsinki") }
+      it { should have_link("Emminkatu") }
     end
 
     describe "find by plantname", js:true do
@@ -153,7 +160,7 @@ describe 'Greenroof' do
         fill_in 'plantname', with: "xam"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Helsinki") }
+      it { should have_link("Emminkatu") }
     end
 
     describe "find by plantmaxheight", js:true do
@@ -161,7 +168,7 @@ describe 'Greenroof' do
         fill_in 'plantmaxheight', with: 10
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Helsinki") }
+      it { should have_link("Emminkatu") }
     end
 
     describe "find by plantminheight", js:true do
@@ -169,8 +176,10 @@ describe 'Greenroof' do
         fill_in 'plantminheight', with: 1
         find(:xpath, '//*[@id="search-button"]', visible: true).click
       end
-      it { should have_link("Helsinki") }
+      it { should have_link("Emminkatu") }
     end
+
+
 
   end
 

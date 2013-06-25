@@ -120,7 +120,7 @@ namespace :db do
       @roof.light = Light.first
 
       @plants = [Plant.find(1), Plant.find(2)]
-      @base = Base.new(absorbancy: 20)
+      @base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
       @layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
       @layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
       @base.layers << @layer1
@@ -128,23 +128,36 @@ namespace :db do
 
 
       address = Faker::Lorem.words(3).join(" ")
-      locality = Faker::Lorem.words(1)
+      locality = Faker::Lorem.words(1).join(" ")
       constructor = "Laurin viherpiperrys kommandiittiyhtiö"
+      @role = Role.first
       note = Faker::Lorem.words(5).join(" ")
       usage_experience = "Jee"
+      owner = "Kumpulan Sorto & Riisto"
       @user = User.find(n+1)
 
-      @groof = Greenroof.new(year: 2010, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience)
+      @groof = Greenroof.new(year: 2010, owner: owner, locality: locality, address: address, constructor: constructor, note: note, usage_experience: usage_experience)
       @groof.user = @user
+      @groof.role = @role
       @groof.roof = @roof
       @groof.plants = @plants
       @groof.bases << @base
+      @groof.purposes << Purpose.find(rand(2)+1)
       @groof.save!
     end
 
     @contact = Contact.new(otsikko: "Viherkattotietokanta!", email: "viher@katto.fi", puhelin: "040-040040", note: "Testi", osoite: "Kumpula rock city")
     @contact.save
 
+    10.times do |n|
+      base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
+      base.plants << Plant.first
+      layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
+      base.layers << layer1
+      base.layers << layer2
+      base.save!
+    end
   end
 end
 

@@ -8,6 +8,9 @@ class Plant < ActiveRecord::Base
   has_many :flower_colours
   has_many :colours, through: :flower_colours
 
+  has_many :base_plants
+  has_many :bases, through: :base_plants
+
   has_many :growths, :dependent => :destroy
   has_many :growth_environments, :through => :growths
 

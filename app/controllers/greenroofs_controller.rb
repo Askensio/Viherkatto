@@ -132,6 +132,10 @@ class GreenroofsController < ApplicationController
       return
     end
 
+    unless params[:role].nil?
+      @greenroof.role = Role.where("value like ?", params[:role][:value]).first
+    end
+
     if not params[:customPlants].nil?
       params[:customPlants].each do |cplant|
         cplant[1].each do |toAddPlant|
@@ -148,9 +152,10 @@ class GreenroofsController < ApplicationController
       @base = Base.new(value[:base])
       if not value[:layers].nil?
         value[:layers].each do |key, value|
-          @layer = Layer.new(value)
+          @layer = Layer.create!(value)
           @base.layers << @layer
         end
+        @base.save!
       end
       @greenroof.bases << @base
     end
@@ -211,12 +216,15 @@ class GreenroofsController < ApplicationController
         @user = User.find_by_id(groof.user_id)
         hash = groof.attributes
         hash[:thumb] = groof.images.first.thumb unless groof.images.first.nil?
-        hash[:user] = @user.name unless @user.nil?
         if (signed_in?)
-          hash[:owner] = (@user.id == current_user.id)
+          hash[:creator] = (@user.id == current_user.id)
         else
-          hash[:owner] = false
+          hash[:creator] = false
         end
+
+        # TÄMÄ FUNKTIO YLIKIRJOITTAA OSAN AIKAISEMMASTA FUNKTIOSTA EIKÄ SE OLE TURHA :D
+        hash[:user] = groof.owner.to_s
+
         @jsonGreenroofs << hash
       end
 

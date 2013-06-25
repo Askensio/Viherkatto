@@ -14,7 +14,7 @@
             </a>
             <ul class="dropdown-menu">
               <% if signed_in? %>
-                  <li><%= link_to "Uusi viherkatto", new_greenroof_path %></li>
+                  <li><%= link_to "Lisää viherkatto", new_greenroof_path %></li>
                   <li class="divider"></li>
               <% end %>
               <li><%= link_to "Selaa viherkattoja", greenroofs_path %></li>
@@ -49,6 +49,10 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Hallinnoi käyttäjiä", users_path %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Lisää rakennepaketti", '/bases/new' %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Selaa rakennepaketteja", '/bases' %></li>
                 </ul>
               </li>
           <% end %>

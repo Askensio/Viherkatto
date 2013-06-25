@@ -81,6 +81,7 @@ describe 'Plant pages' do
       @plant1.links << Link.create(name: "eka", link: "http://eka.com")
       @plant1.links << Link.create(name: "toka", link: "http://toka.com")
       @plant1.links << Link.create(name: "kolmas", link: "http://kolmas.com")
+      @plant1.colours << Colour.create(value: "Sininen")
       @plant1.save
     end
 
@@ -132,6 +133,74 @@ describe 'Plant pages' do
 
       it { should have_selector("title", :content => "Kasvit") }
       it { should have_selector("a", :content => "Example Plant") }
+
+      describe "deleting plant works" do
+        before do
+          before do
+            click_link plant_path(@plant1.id)
+          end
+
+          it { should_not have_selector("a", :content => "Example Plant") }
+        end
+      end
+
+    end
+
+    describe "search-page" do
+
+      before { visit '/search/plants' }
+
+      it { should have_selector("title", :content => "Kasvien haku") }
+
+      describe "when nothing is selected a plant is found" do
+
+        before { click_link "Hae" }
+
+        it { should have_selector("title", :content => "Kasvien haku") }
+        it { should have_selector("a", :content => @plant1.name) }
+      end
+
+      describe "when correct name is selected a plant is found" do
+        before do
+          fill_in "name", with: @plant1.name
+          click_link "Hae"
+        end
+
+        it { should have_selector("a", :content => @plant1.name) }
+      end
+
+      describe "when correct latin name is selected a plant is found" do
+        before do
+          fill_in "latin_name", with: @plant1.latin_name
+          click_link "Hae"
+        end
+
+        it { should have_selector("a", :content => @plant1.latin_name) }
+      end
+
+      describe "when multiple attributes are selected a plant is found" do
+        before do
+          fill_in "latin_name", with: @plant1.latin_name
+          fill_in "latin_name", with: @plant1.latin_name
+          select "Sammalikko", :from => "growth_environments_id"
+          select "Sininen", :from => "colour_id"
+
+          click_link "Hae"
+        end
+
+        it { should have_selector("a", :content => @plant1.latin_name) }
+      end
+
+      describe "when too strict search parameters are given nothing is found" do
+        before do
+          fill_in "name", with: "@plant1.name"
+
+          click_link "Hae"
+        end
+
+        it { should have_selector("a", :content => @plant1.latin_name) }
+
+      end
     end
   end
 end

@@ -4,23 +4,25 @@
     <% end %>
     <%= render 'shared/error_messages_roof' %>
 
-    <%= f.label :area, h('Pinta-ala m2') %>
+    <%= f.label :area, h('Pinta-ala m2 *') %>
     <%= f.text_field :area, :required => true, :class => "span3" %>
 
     <%= f.label :load_capacity, h('Kantavuus kg/m2') %>
-    <%= f.text_field :load_capacity, :required => true, :class => "span3" %>
+    <%= f.text_field :load_capacity, :class => "span3" %>
 
     <%= f.label :declination, h('Kaltevuusaste') %>
-    <%= f.select :declination, [['Tasakatto (1-4 astetta)', '0'],['Loiva (5-27 astetta)', '1'],['Jyrkkä (Yli 27 astetta)','2']], {}, :class => "selectpicker show-menu-arrow show-tick span3" %>
+
+    <%= f.select :declination, [['Tasakatto (1-4 astetta)', '0'],['Loiva (5-27 astetta)', '1'],['Jyrkkä (Yli 27 astetta)','2']], {}, :class => "selectpicker show-menu-arrow show-tick span3 deklination" %>
+
 
     <%= f.label :environment, h('Sijainti') %>
     <div class="required">
       <% if @roof.environments.empty? %>
           <%= collection_select :environment, :id, Environment.all, :id, :name,
-                                {}, :title => "Valitse miljöö",  :class => "selectpicker show-menu-arrow show-tick span3 chosen-env", :multiple => true, :required => true %>
+                                {}, :title => "Valitse miljöö",  :class => "selectpicker show-menu-arrow show-tick span3 chosen-env envs", :multiple => true, :required => true %>
       <% else %>
           <%= collection_select :environment, :id, Environment.all, :id, :name,
-                                {:selected => @roof.environments.map { |env| env.id }},  :class => "selectpicker show-menu-arrow show-tick span3", :multiple => true, :required => true %>
+                                {:selected => @roof.environments.map { |env| env.id }},  :class => "selectpicker show-menu-arrow show-tick span3 envs", :multiple => true, :required => true %>
       <% end %>
     </div>
 

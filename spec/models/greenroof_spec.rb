@@ -36,6 +36,9 @@ describe Greenroof do
     @plant2.save!
     @groof.plants << @plant1
     @groof.plants << @plant2
+    @groof.owner = "Kumpulan Sorto & Riisto"
+    @groof.constructor = "superlol"
+
 
 
     @groof.save!
@@ -70,7 +73,16 @@ describe Greenroof do
     it { should_not be_valid }
   end
 
-#=begin
+  describe "constructor is too short" do
+    before { @groof.constructor = "a" }
+    it { should_not be_valid }
+  end
+
+  describe "constructor is just fine" do
+    before { @groof.constructor = "Raipen urakka & putki" }
+    it { should be_valid }
+  end
+
   describe "year is too big" do
     before { @groof.year = 2101 }
     it { should_not be_valid }
@@ -80,6 +92,5 @@ describe Greenroof do
     before { @groof.year = 1899 }
     it { should_not be_valid }
   end
-#=end
 
 end

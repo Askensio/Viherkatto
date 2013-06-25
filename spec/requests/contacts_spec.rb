@@ -35,5 +35,4 @@ describe Contact do
       it { should have_selector('a',text: "Muokkaa") }
     end
   end
-
 end

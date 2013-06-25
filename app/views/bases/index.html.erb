@@ -1,0 +1,17 @@
+<% provide(:title, 'Kasvit') %>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+<h1>Rakennekerrospaketit</h1>
+<p class="pagination"></p>
+<p class="content"></p>
+<section data-object="base" data-id="list-section">
+  <img id="loading-icon" class="loading-icon" src="/assets/ajax-loader.gif" />
+  <ul class="base-list list">
+  </ul>
+</section>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "pagination/bases" %>
+<%= javascript_include_tag "pagination/paginator" %>

@@ -1,7 +1,5 @@
 Viherkatto::Application.routes.draw do
 
-
-
   resources :contacts
   resources :users
   resources :plants
@@ -9,6 +7,7 @@ Viherkatto::Application.routes.draw do
   resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
+  resources :bases
 
 
   match '/rekisteroidy',  to: 'users#new'
@@ -33,6 +32,13 @@ Viherkatto::Application.routes.draw do
   resources :users do
     member do
       post 'admin'
+    end
+  end
+
+  resources :bases do
+    member do
+      post 'attach'
+      post 'detach'
     end
   end
 
