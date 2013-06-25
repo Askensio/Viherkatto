@@ -151,18 +151,18 @@ var save = function () {
     var bases = createBasesArray()
     var greenroof = createGreenroofObject()
     var customplant = createCustomplantsObject()
-   /* var purposes = createPurposeObject()
-    var role = createRoleObject()*/
+    var purposes = createPurposeObject()
+    var role = createRoleObject()
 
     var data = new Object()
 
-   // data.purpose = purposes
+    data.purpose = purposes
     data.roof = roof
     data.environment = environments
     data.bases = bases
     data.customPlants = customplant
 
-   // data.role = role
+    data.role = role
     if (plants.length < 1) {
         alert("Et valinnut yhtään kasvia")
     }
@@ -415,7 +415,22 @@ function sendImage(imageData, id) {
     });
 }
 
-function setPlants(plantIDs) {
-    plants = plantIDs
+var plantHandler = (function() {
+
+    var ids = []
+
+    this.push = function(id) {
+        ids.push(id)
+    }
+    this.remove = function(id) {
+        ids.removeItem(id)
+    }
+    this.getArray = function() {
+        return ids;
+    }
+}          )
+
+function setCustomPlants(plantIDs) {
+    customPlants = plantIDs
 }
 

@@ -295,7 +295,7 @@ class GreenroofsController < ApplicationController
     @greenroof = Greenroof.find(params[:id])
     @roof = @greenroof.roof
     respond_to do |format|
-      format.json {render :json => {plants: @greenroof.plants }}
+      format.json { render :json => {plants: @greenroof.plants} }
       format.html { render :html => @greenroof } # index.html.erb
     end
   end
@@ -305,16 +305,18 @@ class GreenroofsController < ApplicationController
     @greenroof.update_attributes(params[:greenroof])
     @roof = Roof.new(params[:roof])
 
+
     if not params[:purpose].nil?
+      @greenroof.purposes.clear
       params[:purpose].each do |purp|
         purp[1].each do |toAddPurp|
           @purp = Purpose.find(toAddPurp)
           if (@purp != nil)
-            @greenroof.purposes = @purp
+            @greenroof.purposes << @purp
           end
         end
       end
-    end
+
 
 =begin
     if not params[:environment].nil?
@@ -335,65 +337,60 @@ class GreenroofsController < ApplicationController
     end
 =end
 
-    if not params[:customPlants].nil?
-      @greenroof.custom_plants = nil
-      params[:customPlants].each do |cplant|
-        cplant[1].each do |toAddPlant|
-          @cplant = CustomPlant.new(name: toAddPlant)
-          @greenroof.custom_plants << @cplant
+      if not params[:customPlants].nil?
+        @greenroof.custom_plants.clear
+        params[:customPlants].each do |cplant|
+          cplant[1].each do |toAddPlant|
+            @cplant = CustomPlant.new(name: toAddPlant)
+            @greenroof.custom_plants << @cplant
+          end
         end
       end
-    end
 
-    @greenroof.roof.update_attributes(params[:roof])
-    @greenroof.roof.save
+      @greenroof.roof.update_attributes(params[:roof])
+      @greenroof.roof.save
 
-    @greenroof.bases.clear
-    @bases = params[:bases]
-    @bases.each do |key, value|
-      @base = Base.new(value[:base])
-      if not value[:layers].nil?
-        value[:layers].each do |key, value|
-          @layer = Layer.new(value)
-          @base.layers << @layer
+      @greenroof.bases.clear
+      @bases = params[:bases]
+      if !@bases.nil?
+        @bases.each do |key, value|
+          @base = Base.new(value[:base])
+          if not value[:layers].nil?
+            value[:layers].each do |key, value|
+              @layer = Layer.new(value)
+              @base.layers << @layer
+            end
+          end
+          @greenroof.bases << @base
         end
       end
-      @greenroof.bases << @base
-    end
 
 
-    if params[:plants].nil?
-
-      #flash.now[:error] = "Et lisännyt yhtään kasvia."
-      respond_to do |format|
-        #format.js { render :action => 'new' }
-      end
-      return
-    else
       @greenroof.plants.clear
       params[:plants].each do |id|
         @plant = Plant.find_by_id(id)
-        if not @plant.nil?
+        if not @plant.nil? && @greenroof.plants.find(@plant)
           @greenroof.plants << @plant
         end
       end
-    end
 
-    if @greenroof.save!
-      flash[:success] = "Viherkaton lisäys onnistui!"
 
-    else
-      if not params[:plants].nil? and not params[:environment][:id].empty?
-        respond_to do |format|
-          #format.js { render :action => 'new' }
+      if @greenroof.save!
+        flash[:success] = "Viherkaton muokkaaminen onnistui!"
+
+      else
+        if not params[:plants].nil? and not params[:environment][:id].empty?
+          respond_to do |format|
+            #format.js { render :action => 'new' }
+          end
         end
       end
+      render :js => "window.location = '/'"
+
+
     end
-    render :js => "window.location = '/'"
-
-
-
   end
+
 
   private
 
@@ -407,7 +404,6 @@ class GreenroofsController < ApplicationController
     @greenroof = Greenroof.find(params[:id])
     redirect_to root_path unless (signed_in? && (current_user.email == @greenroof.user.email || admin?))
   end
-
 
 
 end

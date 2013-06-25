@@ -306,8 +306,7 @@ $(document).ready(function () {
         var chosenOne = $('#' + id)
         var parent = chosenOne.parent()
 
-        addedPlants.push(id)
-        setPlants(addedPlants)
+        plantHandler.push(id)
 
         chosenOne.click(
             function(e) {
@@ -320,10 +319,11 @@ $(document).ready(function () {
         listElement.append('<br>');
         listElement.click(function(e)
         {
-            console.log(addedPlants.indexOf(id))
-            addedPlants.splice(addedPlants.indexOf(id), 1)
+
+
+            plantHandler.remove(id)
             $(this).remove();
-            console.log(addedPlants)
+
         });
         $('.chosen-list').append(listElement);
         //console.log(parent)

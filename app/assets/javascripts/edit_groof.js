@@ -17,9 +17,15 @@ $(document).ready(function () {
             $('.declination').append("Kaltevuus: " + determineDeclination());
             $('.location').append($("#environment_id option:selected").text());
             $('.capacity').append($("#roof_load_capacity").val() + "kg/m²");
+            $('.purpose').append($("#purpose_id option:selected").text());
+
             var id = $('#form').attr('data-for')
 
             var addedPlants = []
+            function addToPlants (id) {
+                plants.push(id)
+                console.log("Added!")
+            }
             $.getJSON("/greenroofs/" + id + "/edit.json", function(data) {
                 console.log(JSON.stringify(data))
                 console.log(JSON.stringify(data["plants"]))
@@ -28,9 +34,10 @@ $(document).ready(function () {
                     console.log((index))
                     console.log((plant_object["name"]))
                     var id = plant_object["id"]
+                    addToPlants(id)
 
                     addedPlants.push(id)
-                    setPlants(addedPlants)
+
 
                     var listElement = $('<li></li>');
                     var plant = $('<a href="/plants/' + id + '">' + (plant_object["name"]) + '</a>');
@@ -60,6 +67,7 @@ $(document).ready(function () {
 
                 })
             })
+
             $('.absorbancy').append($("#base_absorbancy").val());
             $('#save').unbind('click')
             $('#save').click(save_edits)
@@ -69,7 +77,9 @@ $(document).ready(function () {
 
 function save_edits() {
     var data = save()
+    if (data != null) {
     sendEditData(data)
+    }
 }
 
 function sendEditData(data) {
