@@ -11,7 +11,7 @@
 
     <%= f.label :role, h('Lisään viherkaton roolissa:') %>
     <div class="required" id="role-choose">
-      <%= collection_select :role, :id, Role.all, :id, :value, {}, :title => "Valitse rooli:", :class => "selectpicker show-menu-arrow show-tick span3", :required => true %>
+      <%= collection_select(:role, :id, Role.all, :id, :value, options = {prompt: "Valitse rooli"}, :class => "selectpicker show-menu-arrow show-tick span3", :required => true ) %>
     </div>
 
     <%= f.label :owner, h("Viherkaton omistaja") %>

@@ -248,6 +248,26 @@ $(document).ready(function () {
         $('.locality').append('Paikkakunta: ' + input);
     })
     /**
+     * Greenroof role value for the Synopsis-view.
+     */
+    $("#role_id").change(function () {
+        var input = $("#role_id").text();
+        console.log(input);
+        /*if (input === 0) {
+            input = "Yksityishenkilö"
+        } else if (input === 1) {
+            input = "Yritys"
+        } else if (input === 2) {
+            input = "Tutkija"
+        } else if (input === 3) {
+            input = "Kunta"
+        } else {
+            input = "Muu"
+        }*/
+        $('.role').empty();
+        $('.role').append('Lisätty roolissa: ' + input);
+    })
+    /**
      * Greenroof note value for the Synopsis-view.
      */
     $("#greenroof_note").keyup(function() {

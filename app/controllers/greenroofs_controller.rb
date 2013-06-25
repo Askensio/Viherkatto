@@ -18,6 +18,10 @@ class GreenroofsController < ApplicationController
         address = "%#{params[:address]}%"
         @greenroofs = @greenroofs.where("address like ?", address)
       end
+      if params[:locality]
+        locality = "%#{params[:locality]}%"
+        @greenroofs = @greenroofs.where("locality like ?", locality)
+      end
       if params[:groofnote]
         groofnote = "%#{params[:groofnote]}%"
         @greenroofs = @greenroofs.where("greenroofs.note like ?", groofnote)
@@ -131,7 +135,9 @@ class GreenroofsController < ApplicationController
       return
     end
 
-    unless params[:role].nil?
+    if params[:role].nil?
+      flash.now[:error] = "Et valinnut roolia."
+    else
       @greenroof.role = Role.where("value like ?", params[:role][:value]).first
     end
 

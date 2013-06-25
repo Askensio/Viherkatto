@@ -152,6 +152,7 @@ var save = function (event) {
 
     var data = new Object()
 
+    data.role = role
     data.purpose = purposes
     data.roof = roof
     data.environment = environments
@@ -326,6 +327,10 @@ function validateData(data) {
     }
     if (data.purpose.id.length < 1) {
         createValidationAlert('Et valinnut viherkattosi käyttötarkoitusta').insertAfter('#purpose-choose')
+        problems++
+    }
+    if (data.role.length < 1) {
+        createValidationAlert('Et valinnut roolia.').insertAfter('#role-choose')
         problems++
     }
 
