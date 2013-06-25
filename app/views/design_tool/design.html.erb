@@ -2,81 +2,84 @@
 
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 
+<div class="row span10 text-center" style="margin-bottom: 3em; margin-top: 2em">
+  <button class="btn btn-large btn-custom" id="generate-button">Generoi suunitelma</button>
+</div>
+
 <div class="row">
-  <div class="span5">
-    <h2>Kattosi tiedot</h2>
+  <div class="row span6">
+    <div class="span5">
+      <h2>Kattosi tiedot</h2>
 
-    <%= fields_for (@roof) do |f| %>
+      <%= fields_for (@roof) do |f| %>
 
-        <%= f.label :area, h('Pinta-ala m2 *')%>
-        <%= f.text_field :area, :required => true %>
+          <%= f.label :area, h('Pinta-ala m2 *') %>
+          <%= f.text_field :area, :required => true %>
 
-        <%= f.label :load_capacity, h('Kantavuus kg/m2') %>
-        <%= f.text_field :load_capacity %>
+          <%= f.label :load_capacity, h('Kantavuus kg/m2') %>
+          <%= f.text_field :load_capacity %>
 
-        <%= f.label :declination, h('Kaltevuusaste') %>
-        <%= f.select :declination, [['Tasakatto', '0'], ['Loiva', '1'], ['Jyrkkä', '2']], {}, :class => "selectpicker show-menu-arrow show-tick span5 deklination" %>
+          <%= f.label :declination, h('Kaltevuusaste') %>
+          <%= f.select :declination, [['Tasakatto', '0'], ['Loiva', '1'], ['Jyrkkä', '2']], {}, :class => "selectpicker show-menu-arrow show-tick span5 deklination" %>
 
-        <%= f.label :environment, h('Sijainti') %>
+          <%= f.label :environment, h('Sijainti') %>
 
-        <%= collection_select :environment, :id, Environment.all, :id, :name,
-                              {}, :title => "Valitse miljöö", :class => "selectpicker show-menu-arrow show-tick span5 chosen-env envs", :multiple => true, :required => true %>
+          <%= collection_select :environment, :id, Environment.all, :id, :name,
+                                {}, :title => "Valitse miljöö", :class => "selectpicker show-menu-arrow show-tick span5 chosen-env envs", :multiple => true, :required => true %>
 
-    <% end %>
+      <% end %>
 
-  </div>
-  <div class="span5">
-    <h2>Valitsemasi kasvit</h2>
-    <ul class="list">
-      <li>afklsjfklöajf</li>
-      <li>afklsjfklöajf</li>
-      <li>afklsjfklöajf</li>
-      <li>afklsjfklöajf</li>
-      <li>afklsjfklöajf</li>
-      <li>afklsjfklöajf</li>
-    </ul>
-  </div>
-  <div class="span5">
-    <h2>Viherkatolle haluamasi kasvit</h2>
+    </div>
 
-    <div data-id="plant" id="search-form">
+    <div class="span5">
+      <h2>Viherkatolle haluamasi kasvit</h2>
 
-      <label>Kasvin nimi:</label>
-      <input type="text" class="search-input" name="name" data-id="name">
+      <div data-id="plant" id="search-form">
 
-      <label>Värit:</label>
-      <%= collection_select(:colour, :id, Colour.all,
-                            :id, :value, {}, :class => "selectpicker show-menu-arrow show-tick span5 search-input", 'data-id' => "colour",
-                            :title => "Kukkien värit", :multiple => true) %>
+        <label>Kasvin nimi:</label>
+        <input type="text" class="search-input" name="name" data-id="name">
 
-      <label>Ympäristö:</label>
-      <%= collection_select(:growth_environments, :id, GrowthEnvironment.all,
-                            :id, :environment, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'growth_environment',
-                            :title => "Kasvien kasvuympäristö", :multiple => true) %>
+        <label>Värit:</label>
+        <%= collection_select(:colour, :id, Colour.all,
+                              :id, :value, {}, :class => "selectpicker show-menu-arrow show-tick span5 search-input", 'data-id' => "colour",
+                              :title => "Kukkien värit", :multiple => true) %>
 
-      <label>Valoisuus:</label>
-      <%= collection_select(:light, :id, Light.all, :id, :value, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness',
-                            :title => "Katon valoisuus", :multiple => true) %>
+        <label>Ympäristö:</label>
+        <%= collection_select(:growth_environments, :id, GrowthEnvironment.all,
+                              :id, :environment, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'growth_environment',
+                              :title => "Kasvien kasvuympäristö", :multiple => true) %>
 
-      <label>Hoidon tarve:</label>
-      <%= collection_select(:maintenances, :id, Maintenance.all,
-                            :id, :name, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'maintenance',
-                            :title => "Kasvien tarvitsema hoidon aste", :multiple => true) %>
+        <label>Valoisuus:</label>
+        <%= collection_select(:light, :id, Light.all, :id, :value, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness',
+                              :title => "Katon valoisuus", :multiple => true) %>
 
-      <div class="span5 pull left" style="margin-bottom:1em;margin-left:0px">
-        <button class="btn btn-small btn-custom pull-left" name="hae">Hae</button>
+        <label>Hoidon tarve:</label>
+        <%= collection_select(:maintenances, :id, Maintenance.all,
+                              :id, :name, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'maintenance',
+                              :title => "Kasvien tarvitsema hoidon aste", :multiple => true) %>
+
+        <div class="span5 pull left" style="margin-bottom:1em;margin-left:0px">
+          <button class="btn btn-small btn-custom pull-left" name="hae">Hae</button>
+        </div>
+
+        <p class="pagination"></p>
+
+        <p class="content"></p>
+        <section data-object="plant" data-id="list-section">
+          <img id="loading-icon" class="loading-icon" src="/assets/ajax-loader.gif"/>
+          <ul class="plant-list list">
+          </ul>
+        </section>
+
+
       </div>
-
-      <p class="pagination"></p>
-
-      <p class="content"></p>
-      <section data-object="plant" data-id="list-section">
-        <img id="loading-icon" class="loading-icon" src="/assets/ajax-loader.gif"/>
-        <ul class="plant-list list">
-        </ul>
-      </section>
-
-
+    </div>
+  </div>
+  <div class="row">
+    <div class="span5">
+      <h2>Valitsemasi kasvit</h2>
+      <ul class="list" id="selected-plants">
+      </ul>
     </div>
   </div>
 </div>
