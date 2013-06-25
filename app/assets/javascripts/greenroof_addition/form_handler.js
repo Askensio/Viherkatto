@@ -163,11 +163,11 @@ var save = function () {
     data.customPlants = customplant
 
     data.role = role
-    if (plants.length < 1) {
+    if (plantHandler.getArray().length < 1) {
         alert("Et valinnut yhtään kasvia")
     }
 
-    data.plants = plants
+    data.plants = plantHandler.getArray()
     data.greenroof = greenroof
 
     if (validateData(data)) {
@@ -415,7 +415,7 @@ function sendImage(imageData, id) {
     });
 }
 
-var plantHandler = (function() {
+var plantHandler = new function() {
 
     var ids = []
 
@@ -423,12 +423,12 @@ var plantHandler = (function() {
         ids.push(id)
     }
     this.remove = function(id) {
-        ids.removeItem(id)
+        ids.splice(ids.indexOf(id), 1)
     }
     this.getArray = function() {
         return ids;
     }
-}          )
+}
 
 function setCustomPlants(plantIDs) {
     customPlants = plantIDs

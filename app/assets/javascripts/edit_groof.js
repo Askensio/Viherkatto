@@ -22,10 +22,7 @@ $(document).ready(function () {
             var id = $('#form').attr('data-for')
 
             var addedPlants = []
-            function addToPlants (id) {
-                plants.push(id)
-                console.log("Added!")
-            }
+
             $.getJSON("/greenroofs/" + id + "/edit.json", function(data) {
                 console.log(JSON.stringify(data))
                 console.log(JSON.stringify(data["plants"]))
@@ -34,9 +31,7 @@ $(document).ready(function () {
                     console.log((index))
                     console.log((plant_object["name"]))
                     var id = plant_object["id"]
-                    addToPlants(id)
-
-                    addedPlants.push(id)
+                    plantHandler.push(id)
 
 
                     var listElement = $('<li></li>');
@@ -55,6 +50,7 @@ $(document).ready(function () {
 
                         addedPlants.splice(addedPlants.indexOf(id), 1)
                         $(this).parent().remove();
+                        plantHandler.remove(id)
                         console.log(addedPlants.length)
                     });
                     listElement.append(icon);
