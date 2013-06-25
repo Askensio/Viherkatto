@@ -152,7 +152,6 @@ var save = function (event) {
 
     var data = new Object()
 
-    data.role = role
     data.purpose = purposes
     data.roof = roof
     data.environment = environments
