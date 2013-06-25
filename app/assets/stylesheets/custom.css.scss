@@ -261,6 +261,8 @@ ul, ol {
   font-family: Arial, Helvetica, Times;
   /*border-style:solid;
   border-width:1px;*/
+  display:block;
+  overflow: auto;
   border-radius: 15px;
   background-color: #DBEDD8;
   padding-left: 10px;
@@ -269,7 +271,7 @@ ul, ol {
   top: 100px;
   li {
     font-size: 0.9em;
-    font-weight: bold;
+    //font-weight: bold;
   }
 
   #theplants {
@@ -321,6 +323,8 @@ ul, ol {
     background-color: $grayMediumLight;
   }
 }
+
+
 
 #note_ {
   height: 200px;
@@ -486,4 +490,8 @@ a {
   .plant-add-list {
     margin-bottom: 0.7em;
   }
+}
+
+.link-base-to-plant-button {
+  margin-right: 1em;
 }

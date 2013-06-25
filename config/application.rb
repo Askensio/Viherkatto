@@ -18,8 +18,6 @@ end
 module Viherkatto
   class Application < Rails::Application
 
-    config.paperclip_defaults = {:storage => :fog, :fog_credentials => {:provider => "Local", :local_root => "#{Rails.root}/public"}, :fog_directory => "", :fog_host => "localhost"}
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -46,6 +44,8 @@ module Viherkatto
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
+
+	config.assets.precompile = true
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]

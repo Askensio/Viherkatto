@@ -3,9 +3,10 @@ function iconMinus() {
     return icon;
 };
 
+
 $(document).ready(function () {
 
-    /**
+        /**
      * Fetches the plants through the designated function.
      */
     (function () {
@@ -71,7 +72,7 @@ $(document).ready(function () {
             }
             if (reloadPaginateNeeded) {
                 paginate(entry_count, page, per_page)
-                console.log("reloadin pagination")
+                //console.log("reloadin pagination")
                 reloadPaginateNeeded = false;
             }
             // Clears the plant list.
@@ -135,7 +136,7 @@ $(document).ready(function () {
 
     $("#greenroof_year").keyup(function() {
         var input = $("#greenroof_year").val();
-        console.log("foo");
+        //console.log("foo");
         $('.construction_year').empty();
         $('.construction_year').append('Valmistumisvuosi: '+input);
     })
@@ -157,10 +158,17 @@ $(document).ready(function () {
             input = "Tasakatto"
         } else if (input === '1') {
             input = "Loiva"
-        } else {
+        } else if (input === '2') {
             input = "Jyrkkä"
+        } else {
+            input = null
         }
         $('.declination').empty();
+        if (input === null) {
+            $('.declination').hide();
+        } else {
+            $('.declination').show();
+        }
         $('.declination').append('Kaltevuus: ' + input);
     })
 
@@ -175,6 +183,16 @@ $(document).ready(function () {
         }
         $('.location').empty();
         $('.location').append('Sijainti: ' + input)
+    })
+
+    $("#purpose_id").change(function() {
+        var input = $("#purpose_id option:selected").text();
+        input = input.match(/[A-Z][a-z-ä-ö]+/g);
+        if (input === null) {
+            input = 'Ei valittu'
+        }
+        $('.purpose').empty();
+        $('.purpose').append('Käyttötarkoitus: ' + input)
     })
 
     /**
@@ -228,18 +246,64 @@ $(document).ready(function () {
     $("#greenroof_address").keyup(function() {
         var input = $("#greenroof_address").val();
         $('.address').empty();
+        if (input === "") {
+            $('.address').hide();
+        } else {
+            $('.address').show();
+        }
         $('.address').append('Osoite: ' + input);
     })
 
+    $("#greenroof_locality").keyup(function() {
+        var input = $("#greenroof_locality").val();
+        $('.locality').empty();
+        $('.locality').append('Paikkakunta: ' + input);
+    })
+    /**
+     * Greenroof role value for the Synopsis-view.
+     */
+    $("#role_id").change(function () {
+        var input = $("#role_id").find(":selected").text();
+        $('.role').empty();
+        if (input === null) {
+          input = "Ei valittu"
+        } else if (input === "Valitse rooli") {
+          input = "Ei valittu"
+        }
+        $('.role').append('Lisätty roolissa: ' + input);
+    })
     /**
      * Greenroof note value for the Synopsis-view.
      */
     $("#greenroof_note").keyup(function() {
         var input = $("#greenroof_note").val();
         $('.note').empty();
+        if (input === "") {
+            $('.note').hide();
+        } else {
+            $('.note').show();
+        }
+        if (input.length > 40) {
+            input = input.substring(0, 40) + "..."
+        }
         $('.note').append('Vapaa kuvaus: ' + input);
     })
-
+    /**
+     * Greenroof usage_experience value for the Synopsis-view.
+     */
+    $("#greenroof_usage_experience").keyup(function() {
+        var input = $("#greenroof_usage_experience").val();
+        $('.usage_experience').empty();
+        if (input === "") {
+            $('.usage_experience').hide();
+        } else {
+            $('.usage_experience').show();
+        }
+        if (input.length > 35) {
+            input = input.substring(0, 35) + "..."
+        }
+        $('.usage_experience').append('Käyttökokemuksia: ' + input);
+    })
     /**
      * Base absorbancy value for the Synopsis-view.
      */
