@@ -171,7 +171,6 @@ function createRoleObject() {
     var role = new Object()
 
     var selected = $('#role_id').find(":selected");
-    console.log(selected)
 
     if (selected === null) {
        alert("Valitse rooli")
