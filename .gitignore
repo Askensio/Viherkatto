@@ -24,5 +24,5 @@ doc/
 db/.nfs*
 log/.nfs*
 /public/greenroofs
-
+coverage/
 /coverage
