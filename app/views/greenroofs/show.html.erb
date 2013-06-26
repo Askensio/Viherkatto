@@ -7,6 +7,7 @@
     <h1>
       <%= 'Omistajan '<< @greenroof.owner << " viherkatto" %>
     </h1>
+
     <div id="slider-holder">
       <div class="flexslider span4">
         <ul class="slides">
@@ -28,11 +29,11 @@
         <table class="table span5">
           <tr>
             <td><%= f.label :owner, h("Omistaja: ") %></td>
-            <td><%= f.label @greenroof.owner%></td>
+            <td><%= f.label @greenroof.owner %></td>
           </tr>
           <tr>
             <td><%= f.label :user, h("Lisääjä: ") %></td>
-            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")"%></td>
+            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")" %></td>
           </tr>
 
           <tr>
@@ -60,18 +61,21 @@
           <tr>
             <td><%= f.label "Katon tiedot:" %></td>
             <td>
-              Pinta-ala: <%= @greenroof.roof.area %>
+              Pinta-ala: <%= @greenroof.roof.area %> m²
               <br>
-              Kaltevuus: <%= @greenroof.roof.declination %>
+              Kaltevuus: <%= getDeclination(@greenroof.roof.declination) %>
               <br>
-              Kantavuus: <%= @greenroof.roof.load_capacity %>
+
+              Kantavuus: <%= @greenroof.roof.load_capacity %> kg/m²
               <% unless @greenroof.roof.light.nil? %>
+
                   <br>
                   Valoisuus: <%= @greenroof.roof.light.value %>
               <% end %>
               <% unless @greenroof.roof.environments.empty? %>
                   <br>
-                  Ympäristö: <% @greenroof.roof.environments.each do |env| %>
+                  Ympäristö:
+                  <% @greenroof.roof.environments.each do |env| %>
                       <%= env.name %>
                       <br>
                   <% end %>

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module GreenroofsHelper
 
   def printPlants (greenroof)
@@ -96,5 +98,15 @@ module GreenroofsHelper
       end
     }
     output.html_safe
+  end
+
+  def getDeclination(declination)
+    if (declination == 0)
+      return "Tasakatto"
+    elsif (declination == 1)
+      return "Loiva"
+    else
+      return "Jyrkkä"
+    end
   end
  end

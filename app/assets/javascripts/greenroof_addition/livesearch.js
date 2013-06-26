@@ -348,7 +348,8 @@ $(document).ready(function () {
         var parent = chosenOne.parent()
 
         addedPlants.push(id)
-        setPlants(addedPlants)
+        plantHandler.push(id)
+        console.log(event.target)
 
         chosenOne.click(
             function(e) {
@@ -364,6 +365,7 @@ $(document).ready(function () {
             console.log(addedPlants.indexOf(id))
             addedPlants.splice(addedPlants.indexOf(id), 1)
             $(this).remove();
+            plantHandler.remove(id)
             console.log(addedPlants)
         });
         $('.chosen-list').append(listElement);
