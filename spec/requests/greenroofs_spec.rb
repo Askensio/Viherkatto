@@ -55,7 +55,8 @@ describe 'Greenroof' do
         fill_in "roof_area", with: "100"
         fill_in "greenroof_owner", with: "Jytkylän jätkä & jyystö"
         fill_in "greenroof_constructor", with: "PATEN PUTKI JA JUNA"
-        select "Tasakatto", from: "roof_declination"
+        find(:xpath, "//button[@data-id='roof_declination']", :visible => true).click
+        find(:xpath, "//*[@id=\"large-input-right\"]/div[1]/ul/li[3]/a").click
         find(:xpath, "//button[@data-id='environment_id']", :visible => true).click
         find(:xpath, "//*[@id=\"large-input-right\"]/div/div/ul/li[2]/a").click
         find(:xpath, "//button[@data-id='purpose_id']", :visible => true).click

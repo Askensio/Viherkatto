@@ -158,10 +158,17 @@ $(document).ready(function () {
             input = "Tasakatto"
         } else if (input === '1') {
             input = "Loiva"
-        } else {
+        } else if (input === '2') {
             input = "Jyrkkä"
+        } else {
+            input = null
         }
         $('.declination').empty();
+        if (input === null) {
+            $('.declination').hide();
+        } else {
+            $('.declination').show();
+        }
         $('.declination').append('Kaltevuus: ' + input);
     })
 
@@ -182,7 +189,7 @@ $(document).ready(function () {
         var input = $("#purpose_id option:selected").text();
         input = input.match(/[A-Z][a-z-ä-ö]+/g);
         if (input === null) {
-            input = 'Ei käyttötarkoitusta'
+            input = 'Ei valittu'
         }
         $('.purpose').empty();
         $('.purpose').append('Käyttötarkoitus: ' + input)
@@ -239,6 +246,11 @@ $(document).ready(function () {
     $("#greenroof_address").keyup(function() {
         var input = $("#greenroof_address").val();
         $('.address').empty();
+        if (input === "") {
+            $('.address').hide();
+        } else {
+            $('.address').show();
+        }
         $('.address').append('Osoite: ' + input);
     })
 
@@ -248,11 +260,32 @@ $(document).ready(function () {
         $('.locality').append('Paikkakunta: ' + input);
     })
     /**
+     * Greenroof role value for the Synopsis-view.
+     */
+    $("#role_id").change(function () {
+        var input = $("#role_id").find(":selected").text();
+        $('.role').empty();
+        if (input === null) {
+          input = "Ei valittu"
+        } else if (input === "Valitse rooli") {
+          input = "Ei valittu"
+        }
+        $('.role').append('Lisätty roolissa: ' + input);
+    })
+    /**
      * Greenroof note value for the Synopsis-view.
      */
     $("#greenroof_note").keyup(function() {
         var input = $("#greenroof_note").val();
         $('.note').empty();
+        if (input === "") {
+            $('.note').hide();
+        } else {
+            $('.note').show();
+        }
+        if (input.length > 40) {
+            input = input.substring(0, 40) + "..."
+        }
         $('.note').append('Vapaa kuvaus: ' + input);
     })
     /**
@@ -261,6 +294,14 @@ $(document).ready(function () {
     $("#greenroof_usage_experience").keyup(function() {
         var input = $("#greenroof_usage_experience").val();
         $('.usage_experience').empty();
+        if (input === "") {
+            $('.usage_experience').hide();
+        } else {
+            $('.usage_experience').show();
+        }
+        if (input.length > 35) {
+            input = input.substring(0, 35) + "..."
+        }
         $('.usage_experience').append('Käyttökokemuksia: ' + input);
     })
     /**

@@ -8,7 +8,7 @@ namespace :db do
     Role.create!(value: "Yritys")
     Role.create!(value: "Tutkija")
     Role.create!(value: "Kunta")
-    Role.create!(value: "Muu/En halua kertoa")
+    Role.create!(value: "Muu")
 
     Light.create!(value: "Aurinkoinen")
     Light.create!(value: "Varjoisa")

@@ -19,6 +19,10 @@ class GreenroofsController < ApplicationController
         address = "%#{params[:address]}%"
         @greenroofs = @greenroofs.where("address like ?", address)
       end
+      if params[:locality]
+        locality = "%#{params[:locality]}%"
+        @greenroofs = @greenroofs.where("locality like ?", locality)
+      end
       if params[:groofnote]
         groofnote = "%#{params[:groofnote]}%"
         @greenroofs = @greenroofs.where("greenroofs.note like ?", groofnote)
@@ -132,11 +136,17 @@ class GreenroofsController < ApplicationController
       return
     end
 
-    unless params[:role].nil?
+    puts(params[:role][:value])
+
+    if params[:role].nil?
+      flash.now[:error] = "Et valinnut roolia."
+    elsif params[:role][:value] === "Valitse rooli"
+      flash.now[:error] = "Et valinnut roolia."
+    else
       @greenroof.role = Role.where("value like ?", params[:role][:value]).first
     end
 
-    if not params[:customPlants].nil?
+      if not params[:customPlants].nil?
       params[:customPlants].each do |cplant|
         cplant[1].each do |toAddPlant|
           @cplant = CustomPlant.new(name: toAddPlant)
