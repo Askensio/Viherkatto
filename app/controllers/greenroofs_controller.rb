@@ -303,7 +303,7 @@ class GreenroofsController < ApplicationController
   def update
     @greenroof = Greenroof.find(params[:id])
     @greenroof.update_attributes(params[:greenroof])
-    @roof = Roof.new(params[:roof])
+    @roof = @greenroof.roof
 
 
     if not params[:purpose].nil?
@@ -318,14 +318,13 @@ class GreenroofsController < ApplicationController
       end
 
 
-=begin
+
     if not params[:environment].nil?
-      params[:environment][:id].shift
-      @greenroof.roof.environments.clear
+     @roof.environments.clear
       params[:environment][:id].each do |env|
         @env = Environment.find_by_id(env)
         if (@env != nil)
-          @roof.environments = @env
+          @roof.environments << @env
         end
       end
     else
@@ -335,7 +334,7 @@ class GreenroofsController < ApplicationController
       end
       return
     end
-=end
+
 
       if not params[:customPlants].nil?
         @greenroof.custom_plants.clear

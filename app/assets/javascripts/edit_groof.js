@@ -19,6 +19,7 @@ $(document).ready(function () {
             $('.capacity').append($("#roof_load_capacity").val() + "kg/m²");
             $('.purpose').append($("#purpose_id option:selected").text());
 
+
             var id = $('#form').attr('data-for')
 
             var addedPlants = []
