@@ -11,10 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617100626) do
+ActiveRecord::Schema.define(:version => 20130620082045) do
+
+  create_table "base_plants", :force => true do |t|
+    t.integer  "base_id"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "base_plants", ["base_id"], :name => "index_base_plants_on_base_id"
+  add_index "base_plants", ["plant_id"], :name => "index_base_plants_on_plant_id"
 
   create_table "bases", :force => true do |t|
     t.integer  "absorbancy"
+    t.string   "name"
     t.integer  "greenroof_id"
     t.text     "note"
     t.datetime "created_at",   :null => false
@@ -81,16 +92,21 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.string   "locality"
     t.string   "constructor"
     t.integer  "year"
-    t.integer  "purpose"
     t.text     "note"
     t.integer  "user_id"
-    t.string   "status"
+    t.integer  "role_id"
     t.text     "usage_experience"
+    t.string   "owner"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
 
   add_index "greenroofs", ["user_id"], :name => "index_greenroofs_on_user_id"
+
+  create_table "greenroofs_purposes", :id => false, :force => true do |t|
+    t.integer "purpose_id"
+    t.integer "greenroof_id"
+  end
 
   create_table "growth_environments", :force => true do |t|
     t.string   "environment"
@@ -130,6 +146,16 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.integer  "plant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "links", ["plant_id"], :name => "index_links_on_plant_id"
 
   create_table "locations", :force => true do |t|
     t.integer  "roof_id"
@@ -172,6 +198,21 @@ ActiveRecord::Schema.define(:version => 20130617100626) do
   end
 
   add_index "plants", ["name"], :name => "index_plants_on_name", :unique => true
+
+  create_table "purposes", :force => true do |t|
+    t.string   "value"
+    t.integer  "greenroof_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "purposes", ["greenroof_id"], :name => "index_purposes_on_greenroof_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roofs", :force => true do |t|
     t.integer  "declination"

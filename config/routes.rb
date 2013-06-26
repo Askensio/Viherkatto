@@ -1,14 +1,13 @@
 Viherkatto::Application.routes.draw do
 
-
-
-  resources :contact
+  resources :contacts
   resources :users
   resources :plants
   resources :layers, except: :destroy
   resources :roofs
   resources :sessions, only: [:new, :create, :destroy]
   resources :greenroofs
+  resources :bases
 
 
   match '/rekisteroidy',  to: 'users#new'
@@ -24,14 +23,22 @@ Viherkatto::Application.routes.draw do
   match '/add_layer', to: 'layers#new'
   #match '/add_greenroof', to: 'greenroof#new'
 
-  match '/contacts', to: 'contact#show'
+
   match ':about', :controller => 'contact', :action => 'about', :as => 'contact'
+
   get 'pages/home'
   root :to => 'pages#home'
 
   resources :users do
     member do
       post 'admin'
+    end
+  end
+
+  resources :bases do
+    member do
+      post 'attach'
+      post 'detach'
     end
   end
 

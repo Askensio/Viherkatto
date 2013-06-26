@@ -17,16 +17,20 @@ FactoryGirl.define do
   end
 
   factory :roof do
-    area '70'
-    declination '1'
-    load_capacity '500'
+    area 70
+    declination 1
+    load_capacity 500
     environments { Array.new(2) { FactoryGirl.build(:environment) } }
   end
 
+
   factory :environment do
-    name 'Merenranta'
+    sequence(:name, ['Merenranta', 'Pelto', 'Metsä', 'Kaupunki', 'Muu'].cycle) { |n| "#{n}" }
   end
 
+  factory :role do
+    sequence(:value, ['Yksityishenkilö', 'Yritys', 'Tutkija', 'Kunta', 'Muu'].cycle) { |n| "#{n}" }
+  end
 
   factory :plant do
     sequence(:name) { |n| "Example Plant #{n}" }
@@ -44,11 +48,11 @@ FactoryGirl.define do
     address "Emminkatu 1"
     locality "Helsinki"
     constructor "Laurin viherpiperrys kommandiittiyhtiö"
-    purpose 1
     note "Viherkattotiimi on hienoin"
     year 1984
     usage_experience "Jee"
-    status "yksityisyrittäjä"
+    self.role { |a| a.association(:role) }
+    owner "Kumpulan Sorto & Riisto"
     plants { Array.new(3) { FactoryGirl.create(:plant) } }
     factory :whole_greenroof do
       after(:create) do |greenroof|

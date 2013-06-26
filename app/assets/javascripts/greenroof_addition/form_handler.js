@@ -70,11 +70,9 @@ function generateBaseForm() {
     baseFormElement.append(absorbancyInputElement)
 
     var addLayerButton = $('#add-layer-btn-grp').clone()
-    console.log(addLayerButton)
     var linkList = addLayerButton.children('ul')
     linkList.each(function(index, value) {
         $(this).parent().click(addLayer)
-        console.log($(this).parent())
     })
     baseFormElement.append(addLayerButton)
     return baseFormElement
@@ -141,6 +139,7 @@ function generateLayerForm(layerName) {
     return layerFormElement
 }
 
+
 var save = function (event) {
 
     var roof = createRoofObject()
@@ -148,22 +147,37 @@ var save = function (event) {
     var bases = createBasesArray()
     var greenroof = createGreenroofObject()
     var customplant = createCustomplantsObject()
+    var purposes = createPurposeObject()
+    var role = createRoleObject()
 
     var data = new Object()
 
+    data.purpose = purposes
     data.roof = roof
     data.environment = environments
     data.bases = bases
     data.customPlants = customplant
-    if (plants.length < 1) {
-        alert("Et valinnut yhtään kasvia")
-    }
     data.plants = plants
     data.greenroof = greenroof
+    data.role = role
 
-    sendData(data)
+    if (validateData(data)) {
+        sendData(data)
+    }
 }
 
+
+function createRoleObject() {
+    var role = new Object()
+
+    var selected = $('#role_id').find(":selected");
+
+    if (selected === null) {
+       alert("Valitse rooli")
+    }
+    role.value = selected.text()
+    return role
+}
 
 
 function createCustomplantsObject() {
@@ -187,6 +201,17 @@ function createRoofObject() {
     return roof
 }
 
+function createPurposeObject() {
+    var purposes = new Object()
+    var id = []
+
+    $("#purpose_id option:selected").each(function (index) {
+       id.push($(this).attr('value'))
+    });
+    purposes.id = id
+    return purposes
+}
+
 function createEnvironmentsObject() {
 
     var environments = new Object()
@@ -196,9 +221,6 @@ function createEnvironmentsObject() {
         id.push($(this).attr('value'))
         //console.log($(this).attr('value'))
     });
-    if (id.length < 1) {
-        alert("Valitse sijainti")
-    }
     environments.id = id
 
     //console.log(JSON.stringify(environments))
@@ -222,7 +244,7 @@ function createBasesArray() {
         baseAndLayers.layers = layers
         bases.push(baseAndLayers)
     });
-    //console.log(JSON.stringify(bases))
+    console.log(JSON.stringify(bases))
     return bases
 }
 
@@ -234,16 +256,25 @@ function createLayerObjectArray(baseElement) {
         //console.log($(this).children($('h4')))
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
+        if(typeof name === 'undefined'){
+            return
+        }
         layer.name = name
         var product_name = $(this).children('[name="layer[product_name]"]').val()
         layer.product_name = product_name
         var thickness = $(this).children('[name="layer[thickness]"]').val()
+        if(isNaN(thickness)) {
+            thickness = 0;
+        }
         layer.thickness = thickness
         var weight = $(this).children('[name="layer[weight]"]').val()
+        if(isNaN(weight)) {
+            weight = 0;
+        }
         layer.weight = weight
         layerArray.push(layer)
     });
-    //console.log(JSON.stringify(layerArray))
+    console.log(JSON.stringify(layerArray))
     return layerArray
 }
 
@@ -254,10 +285,93 @@ function createGreenroofObject() {
     greenroof.locality = $('#greenroof_locality').val()
     greenroof.constructor = $('#greenroof_constructor').val()
     greenroof.note = $('#greenroof_note').val()
-    greenroof.purpose = 1
     greenroof.year = $('#greenroof_year').val()
+    greenroof.owner = $('#greenroof_owner').val()
+    greenroof.usage_experience = $('#greenroof_usage_experience').val()
     return greenroof
 }
+
+var createdAlerts = []
+
+/*
+    Validates the data processed by the save-variable. Alerts will be created and shown to the user if data is not correct.
+    Data that is not correct will not be sent.
+ */
+function validateData(data) {
+
+
+    for (var i = 0; i < createdAlerts.length; i++) {
+        createdAlerts[i].remove()
+    }
+
+
+    var problems = 0
+    var ladiesOfSuspiciousBackground = 0
+    if (ladiesOfSuspiciousBackground === 1 && problems === 99) {
+        console.log('CHECK YOUR STANDARDS FRIEND')
+    }
+
+    // Greenroof validations
+
+    if (data.greenroof.year < 1900 || data.greenroof.year > 2100) {
+        createValidationAlert('Valmistumisvuoden tulee olla välillä 1900 - 2100').insertAfter('#greenroof_year')
+        problems++
+    }
+    if (data.greenroof.locality.length < 1) {
+        createValidationAlert('Valitse viherkatollesi paikkakunta').insertAfter('#greenroof_locality')
+        problems++
+    }
+    if (data.greenroof.owner.length < 1) {
+        createValidationAlert('Anna viherkatollesi omistaja').insertAfter('#greenroof_owner')
+        problems++
+    }
+    if (data.purpose.id.length < 1) {
+        createValidationAlert('Et valinnut viherkattosi käyttötarkoitusta').insertAfter('#purpose-choose')
+        problems++
+    }
+    if (data.role.value === "Valitse rooli") {
+        createValidationAlert('Et valinnut roolia.').insertAfter('#role-choose')
+        problems++
+    }
+
+    // Roof validations
+    if (data.roof.area < 1) {
+        createValidationAlert('Aseta viherkattosi pinta-alaksi vähintään yksi').insertAfter('#roof_area')
+        problems++
+    }
+
+    if (data.roof.load_capacity < 1) {
+        createValidationAlert('Aseta kattosi kantavuudeksi vähintään yksi').insertAfter('#roof_load_capacity')
+        problems++
+    }
+
+    if (data.environment.id < 1) {
+        createValidationAlert('Valitse vielä viherkattosi sijainti').insertAfter('.envs.btn-group')
+        problems++
+    }
+
+    // Plant validations
+    if (data.plants.length < 1) {
+       createValidationAlert('Valitse ainakin yksi katollasi sijaitseva kasvi').insertAfter('.foundation-plants')
+    }
+
+
+    if (problems > 0) {
+        alert('Syöttämäsi viherkaton tiedoissa oli virheitä tai puutteita.')
+        return false
+    }
+    return true
+}
+
+
+
+function createValidationAlert(validationText) {
+    var createdAlert = $('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Virhe! </strong>'+validationText+'</div>')
+    createdAlerts.push(createdAlert)
+    return createdAlert
+
+}
+
 
 function sendData(data) {
 
@@ -302,3 +416,4 @@ function sendImage(imageData, id) {
 function setPlants(plantIDs) {
     plants = plantIDs
 }
+

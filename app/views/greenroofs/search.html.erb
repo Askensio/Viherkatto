@@ -1,28 +1,31 @@
 <% provide(:title, "Viherkattojen haku") %>
 <%= stylesheet_link_tag "bootstrap-select", media: "all" %>
-
+<div class="row">
+  <div class="span5 offset3">
+    <h1>Haku viherkatoista</h1>
+    <p>Täytä haluamasi kentät hakuehdoilla. Tulokset näkyvät sivun alalaidassa painettuasi Hae-nappia.</p>
+  </div>
+</div>
 <div class="row">
   <div class="span5 offset3">
     <div data-id="greenroof" id="search-form">
-      <label>Osoite</label>
+      <label>Osoite: </label>
       <input type="text" name="address" data-id="address" class="search-input">
-      <label>Paikkakunta</label>
+      <label>Paikkakunta: </label>
       <input type="text" name="locality" data-id="locality" class="search-input">
-      <label>Viherkaton kuvaus</label>
-      <input type="text" name="groofnote" data-id="groofnote" class="search-input">
-      <label>Kasvin nimi</label>
+      <label>Kasvin nimi: </label>
       <input type="text" name="plantname" data-id="plantname" class="search-input">
-      <label>Kasvin väri</label>
+      <label>Kukkien pääväri: </label>
       <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "colour", :multiple => true %>
-      <label>Hoidon tarve</label>
+      <label>Hoidon tarve: </label>
       <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => "maintenance" %>
-      <label>Maksimikorkeus kasville</label>
+      <label>Maksimikorkeus kasveille: </label>
       <input type="text" name="plantmaxheight" data-id="plantmaxheight" class="search-input">
-      <label>Minimikorkeus kasville</label>
+      <label>Minimikorkeus kasveille: </label>
       <input type="text" name="plantminheight" data-id="plantminheight" class="search-input">
-      <label>Ympäristö</label>
-      <input type="text" name="envname" data-id="envname" class="search-input">
-      <label>Kerros</label>
+      <label>Ympäristö: </label>
+      <%= collection_select :environment, :id, Environment.all, :id, :name, {}, :title => "Valitse",  :class => "selectpicker show-menu-arrow show-tick span5 chosen-env", :multiple => true %>
+      <label>Sisältää kerroksen: </label>
       <input type="text" name="layername" data-id="layername" class="search-input">
 
       <button class="btn btn-custom span2 search-button" id="search-button" name="hae">Hae</button>
