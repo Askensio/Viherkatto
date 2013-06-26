@@ -37,10 +37,10 @@ describe 'Greenroof' do
 
     # Alert crashes the test like a mofo.
     #describe 'with invalid information', js: true do
-     # it "should not create a greenroof" do
-     #   expect { click_button submit }.not_to change(Greenroof, :count)
+    # it "should not create a greenroof" do
+    #   expect { click_button submit }.not_to change(Greenroof, :count)
     #  end
-   # end
+    # end
 
     describe 'with valid information', js: true do
 
@@ -109,7 +109,7 @@ describe 'Greenroof' do
         visit greenroof_path(@groof)
         find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
       end
-      it { should have_selector('label', text: "Latinankielinen nimi")  }
+      it { should have_selector('label', text: "Latinankielinen nimi") }
     end
 
     describe 'click-materiaali-link', js: true do
@@ -156,7 +156,7 @@ describe 'Greenroof' do
       it { should have_link("Emminkatu") }
     end
 
-    describe "find by plantname", js:true do
+    describe "find by plantname", js: true do
       before do
         fill_in 'plantname', with: "xam"
         find(:xpath, '//*[@id="search-button"]', visible: true).click
@@ -164,7 +164,7 @@ describe 'Greenroof' do
       it { should have_link("Emminkatu") }
     end
 
-    describe "find by plantmaxheight", js:true do
+    describe "find by plantmaxheight", js: true do
       before do
         fill_in 'plantmaxheight', with: 10
         find(:xpath, '//*[@id="search-button"]', visible: true).click
@@ -172,7 +172,7 @@ describe 'Greenroof' do
       it { should have_link("Emminkatu") }
     end
 
-    describe "find by plantminheight", js:true do
+    describe "find by plantminheight", js: true do
       before do
         fill_in 'plantminheight', with: 1
         find(:xpath, '//*[@id="search-button"]', visible: true).click
@@ -181,7 +181,34 @@ describe 'Greenroof' do
     end
 
 
-
   end
 
+  describe 'edit' do
+    before do
+      @groof = FactoryGirl.create(:whole_greenroof)
+      @light = FactoryGirl.create(:light)
+      @groof.roof.light = @light
+      @groof.roof.save!
+      @groof.plants.each do |plant|
+        plant.light = @light
+        plant.save!
+        visit edit_greenroof_path(@groof)
+      end
+
+      subject { page }
+
+      describe "with a correct year" do
+          visit edit_greenroof_path(@groof)
+          fill_in 'greenroof[year]', with: "2013"
+          expect {
+          click_button "Tallenna"
+          }.to change(@groof, :year).to("2013")
+      end
+
+
+
+
+    end
+
+  end
 end

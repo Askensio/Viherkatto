@@ -21,14 +21,13 @@ class GreenroofsController < ApplicationController
         locality = "%#{params[:locality]}%"
         @greenroofs = @greenroofs.where("locality like ?", locality)
       end
-      if params[:groofnote]
-        groofnote = "%#{params[:groofnote]}%"
-        @greenroofs = @greenroofs.where("greenroofs.note like ?", groofnote)
-      end
       if params[:plantname]
         plantname = "%#{params[:plantname]}%"
         @greenroofs = @greenroofs.joins(:plants).where("plants.name like ?", plantname)
       end
+
+      #add colours search
+
       if params[:maintenance]
         maintenance = params[:maintenance].to_i
         @greenroofs = @greenroofs.joins(:plants).where("plants.maintenance = ?", maintenance)
@@ -39,30 +38,28 @@ class GreenroofsController < ApplicationController
         envname = "%#{params[:envname]}%"
         @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)
       end
+
+
+      #not yet in form
       @greenroofs = @greenroofs.joins(:roof).where("roofs.declination <= ?", params[:maxdeclination]) if params[:maxdeclination]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.load_capacity >= ?", params[:minload_capacity]) if params[:minload_capacity]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area >= ?", params[:minroofarea]) if params[:minroofarea]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area <= ?", params[:maxroofarea]) if params[:maxroofarea]
+
+
+
+
       if params[:layername]
         layername = "%#{params[:layername]}%"
         @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
       end
-      if params[:status]
-        puts params[:status].to_s
-      end
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
       @count = @greenroofs.total_entries
-=begin
-      if params[:colour]
-        colour = "%#{params[:colour]}%"
-        @greenroofs = @greenroofs.joins(:plants).where("plants.colour like ?", colour)
-      end
-=end
+
+
       #@greenroofs = @greenroofs.joins(:bases).where("bases.absorbancy >= ?", params[:minabsorbancy]) if params[:minabsorbancy]
       #@greenroofs = @greenroofs.joins(:layers).sum("layers.thickness => ?", params[:minthickness]) if params[:minthickness]
-
-      #Plant.where("name like ?", name).map{ |plant| plant.greenroofs }.flatten! if params[:name]
 
 
       @jsonGreenroofs = []
@@ -133,8 +130,6 @@ class GreenroofsController < ApplicationController
       end
       return
     end
-
-    puts(params[:role][:value])
 
     if params[:role].nil?
       flash.now[:error] = "Et valinnut roolia."
