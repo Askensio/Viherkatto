@@ -112,13 +112,41 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
+      #if params[:growth_environment]
+      #  @tempEnvPlants
+      #  params[:growth_environment].try(:each) do |env|
+      #    @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
+      #  end
+      #  @plants = @tempEnvPlants
+      #  #@tempEnvPlants.clear
+      #end
+
       if params[:growth_environment]
-        @tempEnvPlants
-        params[:growth_environment].try(:each) do |env|
-          @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
+
+        # Fixes the parameter encoding and downcases the colours.
+        index = 0
+        until index == params[:growth_environment].length
+          params[:growth_environment][index] = params[:growth_environment][index].force_encoding('iso-8859-1').encode('utf-8').downcase
+          #puts "At position #{index}: #{params[:colour][index]}"
+          index += 1
         end
-        @plants = @tempEnvPlants
-        #@tempEnvPlants.clear
+
+        plant_indexes = Array.new
+
+        @plants.all.each do |plant|
+          plant_indexes.push(plant.id)
+        end
+
+        params[:growth_environment].each do |env|
+          col = GrowthEnvironment.where('environment like ?', '%' + env + '%').first
+          plant_array = Growth.select('plant_id').where('growth_environment_id = ?', col.id).uniq
+          temp_array = Array.new
+          plant_array.each do |p|
+            temp_array.push p.plant_id
+          end
+          plant_indexes = plant_indexes & temp_array
+        end
+        @plants = @plants.where(:id => plant_indexes)
       end
 
       if (params[:maintenance])
@@ -135,13 +163,12 @@ class PlantsController < ApplicationController
         Light.where(:value => params[:lightness]).each do |id|
           @lights.push(id)
         end
-        puts @lights
+        #puts @lights
         @plants = @plants.where(:light_id => @lights)
       end
 
       @plants = @plants.order('name ASC')
 
-      @plants = @plants.all
 
       if params[:colour]
 
@@ -149,34 +176,27 @@ class PlantsController < ApplicationController
         index = 0
         until index == params[:colour].length
           params[:colour][index] = params[:colour][index].force_encoding('iso-8859-1').encode('utf-8').downcase
-          puts "At position #{index}: #{params[:colour][index]}"
+          #puts "At position #{index}: #{params[:colour][index]}"
           index += 1
         end
 
-        # Array to hold the ids of plants that has no all of the searched colours in it
-        @plant_array= []
+        plant_indexes = Array.new
 
-        # Goes trough all plants
-        @plants.each_with_index do |plant, i|
-          # Saves the current plants colours in an array
-          @plant_colours = []
-          plant.colours.each do |pc|
-            @plant_colours.push pc.value.downcase
-          end
-          params[:colour].each do |c|
-            unless @plant_colours.include? c
-              puts "the array did not contain the value " + c
-              #@plants.delete_at(@plants.index(plant))
-              @plant_array.push plant
-              break
-            end
-          end
+        @plants.all.each do |plant|
+          plant_indexes.push(plant.id)
         end
 
-        @plant_array.each do |plant|
-          @plants.delete plant
-          #@plants - plant
+        params[:colour].each do |colour|
+          col = Colour.where('value like ?', '%' + colour + '%').first
+          plant_array = FlowerColour.select('plant_id').where('colour_id = ?', col.id).uniq
+          temp_array = Array.new
+          plant_array.each do |p|
+            temp_array.push p.plant_id
+          end
+          plant_indexes = plant_indexes & temp_array
         end
+
+        @plants = @plants.where(:id => plant_indexes)
 
       end
 
