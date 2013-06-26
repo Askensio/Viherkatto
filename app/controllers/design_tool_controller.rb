@@ -8,20 +8,23 @@ class DesignToolController < ApplicationController
 
   def create_design
 
-    @plants = nil
-    @bases = nil
+    @bases = Array.new
+
     puts "-------------------------------"
 
     unless params[:plants].nil?
-      #@plants = Plant.where(:id => params[:plants])
-      @bases = Base.joins(:plants).where(:id => params[:plants])
+      @plants = Plant.where(:id => params[:plants]).uniq.all
+      @plants.each do |plant|
+        @bases += plant.bases
+      end
+      #Post.includes(:groups => :users).where('users.id' => current_user.id)
+      #@bases = Base.includes(:base_plants => :plants)
     else
-      #@plants = Plant.scoped
-      @bases = Base.joins(:plants)
+      @bases = Base.where("greenroof_id IS ?", nil).uniq.all
     end
-    #puts "Plant count : " + @plants.count.to_s
 
     puts "Bases count : " + @bases.count.to_s
+    #puts "Plant count : " + @plants.count.to_s
 
     puts "-------------------------------"
 

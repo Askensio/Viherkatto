@@ -97,10 +97,9 @@ function sendDesignData(data) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
         },
         success: function (response) {
-            document.open();
-            document.write(response);
-            document.close();
-            console.log(response)
+            document.open()
+            document.write(response)
+            document.close()
         }
     });
 }
