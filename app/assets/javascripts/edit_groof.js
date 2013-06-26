@@ -7,16 +7,16 @@ $(document).ready(function () {
             $(this).click(removeParent)
         })
         {
-            $('.construction_year').append($("#greenroof_year").val());
-            $('.locality').append($("#greenroof_locality").val());
-            $('.address').append($("#greenroof_address").val());
-            $('.constructor').append($("#greenroof_constructor").val());
-            $('.note').append($("#greenroof_note").val());
-            $('.area').append($("#roof_area").val()+' m²');
+            $('.construction_year').append(" " + ($("#greenroof_year").val()));
+            $('.locality').append(" " +($("#greenroof_locality").val()));
+            $('.address').append(" " + ($("#greenroof_address").val()));
+            $('.constructor').append(" " + ($("#greenroof_constructor").val()));
+            $('.note').append(" " + ($("#greenroof_note").val()));
+            $('.area').append(" " + ($("#roof_area").val()+' m²'));
             $('.declination').empty();
             $('.declination').append("Kaltevuus: " + determineDeclination());
-            $('.location').append($("#environment_id option:selected").text());
-            $('.capacity').append($("#roof_load_capacity").val() + "kg/m²");
+            $('.location').append(" " + ($("#environment_id option:selected").text()));
+            $('.capacity').append(" " + ($("#roof_load_capacity").val() + "kg/m²"));
             $('.purpose').append($("#purpose_id option:selected").text());
 
 
