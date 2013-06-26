@@ -133,18 +133,18 @@ class PlantsController < ApplicationController
 
         plant_indexes = Array.new
 
-        @plants.all.each do |plant|
-          plant_indexes.push(plant.id)
-        end
+        #@plants.all.each do |plant|
+        #  plant_indexes.push(plant.id)
+        #end
 
         params[:growth_environment].each do |env|
-          col = GrowthEnvironment.where('environment like ?', '%' + env + '%').first
-          plant_array = Growth.select('plant_id').where('growth_environment_id = ?', col.id).uniq
+          environment = GrowthEnvironment.where('environment like ?', '%' + env + '%').first
+          plant_array = Growth.select('plant_id').where('growth_environment_id = ?', environment.id).uniq
           temp_array = Array.new
           plant_array.each do |p|
             temp_array.push p.plant_id
           end
-          plant_indexes = plant_indexes & temp_array
+          plant_indexes = plant_indexes | temp_array
         end
         @plants = @plants.where(:id => plant_indexes)
       end
@@ -182,9 +182,9 @@ class PlantsController < ApplicationController
 
         plant_indexes = Array.new
 
-        @plants.all.each do |plant|
-          plant_indexes.push(plant.id)
-        end
+        #@plants.all.each do |plant|
+        #  plant_indexes.push(plant.id)
+        #end
 
         params[:colour].each do |colour|
           col = Colour.where('value like ?', '%' + colour + '%').first
@@ -193,7 +193,7 @@ class PlantsController < ApplicationController
           plant_array.each do |p|
             temp_array.push p.plant_id
           end
-          plant_indexes = plant_indexes & temp_array
+          plant_indexes = plant_indexes | temp_array
         end
 
         @plants = @plants.where(:id => plant_indexes)
