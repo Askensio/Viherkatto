@@ -397,21 +397,26 @@ $(document).ready(function () {
             }
         );
         var listElement = $('<li></li>');
-        listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
-        listElement.append(iconMinus());
-        listElement.append('<br>');
-        listElement.click(function(e)
-        {
+        var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function(e) {
             console.log(addedPlants.indexOf(id))
             addedPlants.splice(addedPlants.indexOf(id), 1)
+            $(this).parent().remove()
             $(this).remove();
             console.log(addedPlants)
         });
+        listElement.append(removeButton);
+        listElement.append(" ");
+        listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
+
+        listElement.append('<br>');
         $('.chosen-list').append(listElement);
+
+
         //console.log(parent)
         //console.log(addedPlants)
         //parent.remove()
     }
+
 
 
 
