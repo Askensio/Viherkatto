@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'will_paginate/array'
+
 class PlantsController < ApplicationController
 
   before_filter :admin_user, only: [:new, :create, :update, :destroy, :edit]
@@ -110,22 +112,6 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-      #@tempPlants = @plants
-      if params[:colour]
-        #@tempPlants
-        scope :plants => :colours.where(flower_colours: {colour_id: @plants.id })
-        #params[:colour].try(:each) do |colour|
-          #scope @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%') if colour
-          #scope @plants, joins(:colours).where(colours: { value: colour }) if colour
-          #@tempPlants = @plants & @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
-          #@plants = @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if colour
-          #@plants = @plants.joins(:flower_colours).where('flower_colours.id like ?', @plants.id).uniq if colour
-          #@tempPlants & @plants.joins(:colours).where('colours.value like ?', '%' + colour.force_encoding('iso-8859-1').encode('utf-8') + '%')
-        #end
-        #puts @tempPlants
-        #@plants = @tempPlants
-      end
-
       if params[:growth_environment]
         @tempEnvPlants
         params[:growth_environment].try(:each) do |env|
@@ -150,6 +136,46 @@ class PlantsController < ApplicationController
         end
         puts @lights
         @plants = @plants.where(:light_id => @lights)
+      end
+
+      @plants = @plants.order('name ASC')
+
+      @plants = @plants.all
+
+      if params[:colour]
+
+        # Fixes the parameter encoding and downcases the colours.
+        index = 0
+        until index == params[:colour].length
+          params[:colour][index] = params[:colour][index].force_encoding('iso-8859-1').encode('utf-8').downcase
+          puts "At position #{index}: #{params[:colour][index]}"
+          index += 1
+        end
+
+        # Array to hold the ids of plants that has no all of the searched colours in it
+        @plant_array= []
+
+        # Goes trough all plants
+        @plants.each_with_index do |plant, i|
+          # Saves the current plants colours in an array
+          @plant_colours = []
+          plant.colours.each do |pc|
+            @plant_colours.push pc.value.downcase
+          end
+          params[:colour].each do |c|
+            unless @plant_colours.include? c
+              puts "the array did not contain the value " + c
+              #@plants.delete_at(@plants.index(plant))
+              @plant_array.push plant
+              break
+            end
+          end
+        end
+
+        @plant_array.each do |plant|
+          @plants.delete plant
+        end
+
       end
 
       @plants = @plants.paginate(page: params[:page], per_page: params[:per_page]) unless @plants.nil?

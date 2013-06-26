@@ -12,8 +12,8 @@
 
     <%= f.label :declination, h('Kaltevuusaste') %>
 
+    <%= f.select :declination, [['Tasakatto (1-4 astetta)', '0'],['Loiva (5-27 astetta)', '1'],['Jyrkkä (Yli 27 astetta)','2']], {prompt: "Valitse"}, :class => "selectpicker show-menu-arrow show-tick span3 deklination" %>
 
-    <%= f.select :declination, [['Tasakatto (1-4 astetta)', '0'],['Loiva (5-27 astetta)', '1'],['Jyrkkä (Yli 27 astetta)','2']], {}, :class => "selectpicker show-menu-arrow show-tick span3 deklination" %>
 
 
     <%= f.label :environment, h('Sijainti *') %>
