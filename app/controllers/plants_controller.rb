@@ -73,6 +73,7 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
 
+
     processAssociatedParams
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
@@ -111,12 +112,41 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
+      #if params[:growth_environment]
+      #  @tempEnvPlants
+      #  params[:growth_environment].try(:each) do |env|
+      #    @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
+      #  end
+      #  @plants = @tempEnvPlants
+      #  #@tempEnvPlants.clear
+      #end
+
       if params[:growth_environment]
-        @tempEnvPlants
-        params[:growth_environment].try(:each) do |env|
-          @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
+
+        # Fixes the parameter encoding and downcases the colours.
+        index = 0
+        until index == params[:growth_environment].length
+          params[:growth_environment][index] = params[:growth_environment][index].force_encoding('iso-8859-1').encode('utf-8').downcase
+          #puts "At position #{index}: #{params[:colour][index]}"
+          index += 1
         end
-        @plants = @tempEnvPlants
+
+        plant_indexes = Array.new
+
+        #@plants.all.each do |plant|
+        #  plant_indexes.push(plant.id)
+        #end
+
+        params[:growth_environment].each do |env|
+          environment = GrowthEnvironment.where('environment like ?', '%' + env + '%').first
+          plant_array = Growth.select('plant_id').where('growth_environment_id = ?', environment.id).uniq
+          temp_array = Array.new
+          plant_array.each do |p|
+            temp_array.push p.plant_id
+          end
+          plant_indexes = plant_indexes | temp_array
+        end
+        @plants = @plants.where(:id => plant_indexes)
       end
 
       if (params[:maintenance])
@@ -140,7 +170,6 @@ class PlantsController < ApplicationController
       @plants = @plants.order('name ASC')
 
 
-
       if params[:colour]
 
         # Fixes the parameter encoding and downcases the colours.
@@ -153,10 +182,9 @@ class PlantsController < ApplicationController
 
         plant_indexes = Array.new
 
-        @plants.all.each do |plant|
-          plant_indexes.push(plant.id)
-        end
-
+        #@plants.all.each do |plant|
+        #  plant_indexes.push(plant.id)
+        #end
 
         params[:colour].each do |colour|
           col = Colour.where('value like ?', '%' + colour + '%').first
@@ -165,7 +193,7 @@ class PlantsController < ApplicationController
           plant_array.each do |p|
             temp_array.push p.plant_id
           end
-          plant_indexes = plant_indexes & temp_array
+          plant_indexes = plant_indexes | temp_array
         end
 
         @plants = @plants.where(:id => plant_indexes)
