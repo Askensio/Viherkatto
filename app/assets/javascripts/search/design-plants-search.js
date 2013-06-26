@@ -52,19 +52,19 @@ function generateRoofData() {
 
     var valid = true
 
-    roof.area = $('#roof_area').val()
-    if (roof.area === "" || isNaN(roof.area)) {
-        alertElement.html('Anna katon pinta-ala.')
-        $('#roof_area').after(alertElement.clone())
-        valid = false
-    }
-
     roof.load_capacity = $('#roof_load_capacity').val()
     if (roof.load_capacity === "" || isNaN(roof.load_capacity)) {
         alertElement.html('Anna katon kantavuus.')
         $('#roof_load_capacity').after(alertElement.clone())
         valid = false
     }
+
+    roof.area = $('#roof_area').val()
+    /*if (roof.area === "" || isNaN(roof.area)) {
+        alertElement.html('Anna katon pinta-ala.')
+        $('#roof_area').after(alertElement.clone())
+        valid = false
+    }*/
 
     roof.declination = $("#roof_declination option:selected").text()
 

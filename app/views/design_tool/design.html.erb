@@ -13,11 +13,11 @@
 
       <%= fields_for (@roof) do |f| %>
 
-          <%= f.label :area, h('Pinta-ala m2 *') %>
-          <%= f.text_field :area, :required => true %>
-
           <%= f.label :load_capacity, h('Kantavuus kg/m2') %>
           <%= f.text_field :load_capacity %>
+
+          <%= f.label :area, h('Pinta-ala m2 *') %>
+          <%= f.text_field :area, :required => true %>
 
           <%= f.label :declination, h('Kaltevuusaste') %>
           <%= f.select :declination, [['Tasakatto', '0'], ['Loiva', '1'], ['Jyrkkä', '2']], {}, :class => "selectpicker show-menu-arrow show-tick span5 deklination" %>

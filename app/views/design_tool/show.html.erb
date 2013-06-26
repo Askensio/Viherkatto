@@ -3,16 +3,31 @@
 
 <div class="container">
 
-  <h1>Suunnitteluehdotuksia</h1>
+  <% if @bases.empty? %>
+      <h1> Antamillasi kriteereillä ei löydy yhtään ehdotusta. </h1>
+
+      <div class="text-center">
+        <%= link_to "Palaa", "/suunnittele", class: "btn btn-large btn-custom span4" %>
+      </div>
+  <% else %>
+      <h1>Suunnitteluehdotuksia</h1>
+  <% end %>
   <ul class="list">
+
     <% @bases.each do |base| %>
 
         <li class="span12">
           <h3><%= base.name %></h3>
+
           <div class="mainWrapper">
             <div class="centerWrapper" style="margin:auto">
               <div class="well span3 design-proposal-well">
                 <% base.layers.each do |layer| %>
+                    <% unless base.absorbancy.nil? %>
+                        <label><b>Vedenimukyky:</b> </label>
+
+                        <p><%= base.absorbancy %></p>
+                    <% end %>
                     <h4><%= layer.name %></h4>
                     <% unless layer.product_name.nil? %>
                         <label><b>Tuotteen nimi:</b> </label>
@@ -31,12 +46,21 @@
               <div class="well span3 design-proposal-well">
                 <h4>Ratkaisuun sopivia kasveja:</h4>
                 <% base.plants.each do |plant| %>
-                    <label>- <%= plant.name %></label>
+                    <label>-  <%= link_to plant.name, plant_path(plant), :target => "_blank" %></label>
                 <% end %>
               </div>
 
               <div class="well span4 design-proposal-well">
                 <h4>Vastaavanlaisia rakennettuja:</h4>
+
+                <% greenroofs = get_matching_greenroofs base %>
+                <% if greenroofs.nil? || greenroofs.empty? %>
+                    <label>Vastaavanlaisia valmiita viherkattoja ei löytynyt.</label>
+                <% else %>
+                    <% greenroofs.each do |groof| %>
+                        <label>-  <%= link_to groof.id.to_s + " Omistajan " + groof.owner + " viherkatto, " + groof.locality, greenroof_path(groof), :target => "_blank" %></label>
+                    <% end %>
+                <% end %>
               </div>
             </div>
           </div>

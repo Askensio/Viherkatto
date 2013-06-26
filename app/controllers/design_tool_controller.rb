@@ -10,21 +10,41 @@ class DesignToolController < ApplicationController
 
     @bases = Array.new
 
-    puts "-------------------------------"
 
     unless params[:plants].nil?
       @plants = Plant.where(:id => params[:plants]).uniq.all
       @plants.each do |plant|
         @bases += plant.bases
       end
-      #Post.includes(:groups => :users).where('users.id' => current_user.id)
-      #@bases = Base.includes(:base_plants => :plants)
     else
       @bases = Base.where("greenroof_id IS ?", nil).uniq.all
     end
 
-    puts "Bases count : " + @bases.count.to_s
-    #puts "Plant count : " + @plants.count.to_s
+    puts "-------------------------------"
+
+    puts "Roof load capacity is " + params[:roof][:load_capacity].to_s
+
+    base_indexes = Array.new
+
+    @bases.each do |base|
+
+      weight = 0
+      weight += base.absorbancy unless base.absorbancy.nil?
+
+      base.layers.each do |layer|
+        weight += layer.weight
+      end
+
+      puts "Base total weight is : " + weight.to_s
+
+      unless weight > params[:roof][:load_capacity].to_i
+        puts "Total weight was more than roof capacity"
+        base_indexes.push base.id
+      end
+    end
+
+    @bases = Base.where(:id => base_indexes)
+    #puts "Bases count : " + @bases.count.to_s
 
     puts "-------------------------------"
 
