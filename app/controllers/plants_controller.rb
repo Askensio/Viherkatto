@@ -118,6 +118,7 @@ class PlantsController < ApplicationController
           @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
         end
         @plants = @tempEnvPlants
+        #@tempEnvPlants.clear
       end
 
       if (params[:maintenance])
@@ -174,6 +175,7 @@ class PlantsController < ApplicationController
 
         @plant_array.each do |plant|
           @plants.delete plant
+          #@plants - plant
         end
 
       end
