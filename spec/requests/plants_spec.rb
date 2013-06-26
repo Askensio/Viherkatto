@@ -173,9 +173,10 @@ describe 'Plant pages' do
         before do
           fill_in "latin_name", with: @plant1.latin_name
           click_link "Hae"
+          #@linkki = "/plants/" + @plant1.id.to_s
         end
 
-        it { should have_selector("a", :content => @plant1.latin_name) }
+        it { should have_selector("a", :content => @plant1.name) }
       end
 
       describe "when multiple attributes are selected a plant is found" do
@@ -188,17 +189,18 @@ describe 'Plant pages' do
           click_link "Hae"
         end
 
-        it { should have_selector("a", :content => @plant1.latin_name) }
+        it { should have_selector("a", :content => @plant1.name) }
       end
 
       describe "when too strict search parameters are given nothing is found" do
         before do
-          fill_in "name", with: "@plant1.name"
+          visit '/search/plants'
+          fill_in "name", with: "trololo"
 
           click_link "Hae"
         end
 
-        it { should have_selector("a", :content => @plant1.latin_name) }
+        it { should_not have_selector("a", :text => @plant1.name) }
 
       end
     end
