@@ -1,7 +1,5 @@
 # encoding: UTF-8
 
-require 'RMagick'
-
 class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]

@@ -9,7 +9,8 @@ Viherkatto::Application.routes.draw do
   resources :greenroofs
   resources :bases
 
-
+  match '/suunnittele', to: 'design_tool#design', via: [:get]
+  match '/suunnittele', to: 'design_tool#create_design', via: [:post]
   match '/rekisteroidy',  to: 'users#new'
   match '/kirjaudu', to: 'sessions#new'
   match '/add_plant', to: 'plants#new'
