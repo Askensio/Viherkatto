@@ -66,8 +66,11 @@ class UsersController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if User.find(params[:id]).destroy
-        @response = "success"
+      @user = User.find(params[:id])
+      unless current_user? @user
+        if @user.destroy
+          @response = "success"
+        end
       else
         @response = "error"
       end
