@@ -47,6 +47,18 @@
               </tr>
           <% end %>
 
+
+          <% unless @greenroof.roof.environments.empty? %>
+              <tr>
+                <td>Ympäristö:</td> <td><% @greenroof.roof.environments.each do |env| %>
+                    <%= env.name %>
+                    <br>
+                <% end %>
+              </td>
+              </tr>
+          <% end %>
+
+
           <tr>
             <td><%= f.label @greenroof.purposes, h("Käyttötarkoitukset: ") %></td>
             <% groof_purposes = "" %>
@@ -68,13 +80,6 @@
               <% unless @greenroof.roof.light.nil? %>
                   <br>
                   Valoisuus: <%= @greenroof.roof.light.value %>
-              <% end %>
-              <% unless @greenroof.roof.environments.empty? %>
-                  <br>
-                  Ympäristö: <% @greenroof.roof.environments.each do |env| %>
-                      <%= env.name %>
-                      <br>
-                  <% end %>
               <% end %>
             </td>
           </tr>

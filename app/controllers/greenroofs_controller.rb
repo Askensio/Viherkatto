@@ -48,7 +48,7 @@ class GreenroofsController < ApplicationController
       @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]) if params[:plantminheight]
 
       # --- Build's properties (Rakenteen ominaisuudet)
-
+      @greenroofs = @greenroofs.joins(:bases).where("bases.absorbancy >= ?", params[:minabsorbancy]) if params[:minabsorbancy]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area <= ?", params[:maxroofarea]) if params[:maxroofarea]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area >= ?", params[:minroofarea]) if params[:minroofarea]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.load_capacity >= ?", params[:minload_capacity]) if params[:minload_capacity]
