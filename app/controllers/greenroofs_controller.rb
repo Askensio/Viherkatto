@@ -27,25 +27,14 @@ class GreenroofsController < ApplicationController
         locality = "%#{params[:locality]}%"
         @greenroofs = @greenroofs.where("locality like ?", locality)
       end
-      if params[:envname]
-        envname = "%#{params[:envname]}%"
-        @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)
-      end
 
       # --- Plants' attributes (Kasvien ominaisuudet)
       if params[:plantname]
         plantname = "%#{params[:plantname]}%"
-        @greenroofs = @greenroofs.joins(:plants).where("plants.name like ?", plantname)
+        @greenroofs = @greenroofs.joins(:plants).where("plants.name like ?", plantname).uniq
       end
-
-      #add colours search
-
-      if params[:maintenance]
-        maintenance = params[:maintenance].to_i
-        @greenroofs = @greenroofs.joins(:plants).where("plants.maintenance = ?", maintenance)
-      end
-      @greenroofs = @greenroofs.joins(:plants).where("plants.max_height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
-      @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]) if params[:plantminheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.max_height <= ?", params[:plantmaxheight]).uniq if params[:plantmaxheight]
+      @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]).uniq if params[:plantminheight]
 
       # --- Build's properties (Rakenteen ominaisuudet)
       @greenroofs = @greenroofs.joins(:bases).where("bases.absorbancy >= ?", params[:minabsorbancy]) if params[:minabsorbancy]
@@ -56,11 +45,6 @@ class GreenroofsController < ApplicationController
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
       @count = @greenroofs.total_entries
-
-
-      #@greenroofs = @greenroofs.joins(:bases).where("bases.absorbancy >= ?", params[:minabsorbancy]) if params[:minabsorbancy]
-      #@greenroofs = @greenroofs.joins(:layers).sum("layers.thickness => ?", params[:minthickness]) if params[:minthickness]
-
 
       @jsonGreenroofs = []
 

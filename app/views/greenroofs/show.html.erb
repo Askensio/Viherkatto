@@ -140,7 +140,7 @@
                 </td>
               </tr>
           <% end %>
-          <% if signed_in? && current_user.admin? || signed_in? && current_user.id == @greenroof.user_idr %>
+          <% if signed_in? && current_user.admin? || signed_in? && current_user.id == @greenroof.user_id %>
               <td><%= link_to "Muokkaa", edit_greenroof_path(@greenroof), class: "btn btn-large btn-custom", id: "Muokkaabutton" %></td>
           <% else %>
               <td><a class="btn btn-large btn-custom disabled" id="Muokkaabutton">Muokkaa</a></td>

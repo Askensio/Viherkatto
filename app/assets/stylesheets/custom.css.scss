@@ -504,6 +504,10 @@ a {
   margin-right: 1em;
 }
 
+.h2left {
+    text-align: left;
+}
+
 .mainWrapper {
   text-align: center
 }
@@ -516,6 +520,9 @@ a {
   text-align: left
 }
 
-.jee {
-  text-align: left;
+.infocontainer {
+  p {
+    text-indent: 2em;
+  }
 }
+
