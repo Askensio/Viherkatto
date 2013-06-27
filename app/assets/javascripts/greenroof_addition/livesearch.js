@@ -376,11 +376,12 @@ $(document).ready(function () {
      * @param event
      */
     var listaClikkerListener = function(event) {
+
+
         var id = -1 * event.target.getAttribute('id')
         var chosenOne = $('#' + id)
         var parent = chosenOne.parent()
 
-        addedPlants.push(id)
         setPlants(addedPlants)
 
         chosenOne.click(
@@ -389,31 +390,45 @@ $(document).ready(function () {
             }
         );
 
-        /**
-         * Oh dog
-         * @type {*|jQuery|HTMLElement}
-         */
-        var listElement = $('<li></li>');
-        var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function(e) {
-            console.log(addedPlants.indexOf(id))
-            addedPlants.splice(addedPlants.indexOf(id), 1)
-            $(this).parent().remove()
-            $(this).remove();
-            console.log(addedPlants)
-        });
-        listElement.append(removeButton);
-        listElement.append(" ");
-        listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
 
-        listElement.append('<br>');
-        $('.chosen-list').append(listElement);
+        console.log(addedPlants)
+        console.log(id)
+        if (!inArray(addedPlants, id)) {
+            addedPlants.push(id)
+
+            var listElement = $('<li></li>');
+            var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function(e) {
+                console.log(addedPlants.indexOf(id))
+                addedPlants.splice(addedPlants.indexOf(id), 1)
+                $(this).parent().remove()
+                $(this).remove();
+                //console.log(addedPlants)
+            });
+            listElement.append(removeButton);
+            listElement.append(" ");
+            listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
+
+            listElement.append('<br>');
+            $('.chosen-list').append(listElement);
+        }
 
 
+
+        //console.log(uniquePlants)
         //console.log(parent)
         //console.log(addedPlants)
         //parent.remove()
+
+        addedPlants = jQuery.unique(addedPlants);
+
     }
 
+    function inArray(array, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == value) return true;
+        }
+        return false;
+    }
 
 
 
