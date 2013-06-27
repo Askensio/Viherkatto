@@ -170,7 +170,7 @@ var save = function (event) {
 function createRoleObject() {
     var role = new Object()
 
-    var selected = $("#role_id option:selected")
+    var selected = $('#role_id').find(":selected");
 
     if (selected === null) {
        alert("Valitse rooli")
@@ -329,10 +329,19 @@ function validateData(data) {
         createValidationAlert('Et valinnut viherkattosi käyttötarkoitusta').insertAfter('#purpose-choose')
         problems++
     }
+    if (data.role.value === "Valitse rooli") {
+        createValidationAlert('Et valinnut roolia.').insertAfter('#role-choose')
+        problems++
+    }
 
     // Roof validations
     if (data.roof.area < 1) {
         createValidationAlert('Aseta viherkattosi pinta-alaksi vähintään yksi').insertAfter('#roof_area')
+        problems++
+    }
+
+    if (data.roof.load_capacity < 1) {
+        createValidationAlert('Aseta kattosi kantavuudeksi vähintään yksi').insertAfter('#roof_load_capacity')
         problems++
     }
 

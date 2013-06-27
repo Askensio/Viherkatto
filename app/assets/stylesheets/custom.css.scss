@@ -271,11 +271,15 @@ ul, ol {
   top: 100px;
   li {
     font-size: 0.9em;
-    font-weight: bold;
+    //font-weight: bold;
   }
 
   #theplants {
     line-height: 0.3em;
+    li {
+      padding-bottom: 0.4em;
+      font-size: small;
+    }
   }
 
   #chevrons {
