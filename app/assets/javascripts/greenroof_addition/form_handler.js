@@ -16,7 +16,7 @@ function init() {
     var layerDropdownList = $("a[class='layer-option']")
     //console.log($("a[class='layer-option']"))
 
-    layerDropdownList.each(function(index, value) {
+    layerDropdownList.each(function (index, value) {
         $(this).parent().click(addLayer)
         //console.log($(this).parent())
     })
@@ -24,16 +24,19 @@ function init() {
     $('#save').click(create_groof)
     function create_groof(event) {
         var data = save()
-        sendData(data)
+        if (validateData(data)){
+            sendData(data)
+        }
+
     }
 
-    $('#add-layer-button').click(function(e) {
+    $('#add-layer-button').click(function (e) {
         e.preventDefault()
     })
 
 }
 
-var customPlant = function(event) {
+var customPlant = function (event) {
     event.preventDefault();
     var input = $('#custom-plant-name').val()
     if (input != "") {
@@ -41,7 +44,7 @@ var customPlant = function(event) {
     }
     $('#custom-plant-name').val("");
     var listElement = $('<li></li>')
-    var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').click(function(e) {
+    var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').click(function (e) {
         customPlants.splice(customPlants.indexOf(input), 1)
         $(this).parent().remove()
         $(this).remove();
@@ -78,7 +81,7 @@ function generateBaseForm() {
 
     var addLayerButton = $('#add-layer-btn-grp').clone()
     var linkList = addLayerButton.children('ul')
-    linkList.each(function(index, value) {
+    linkList.each(function (index, value) {
         $(this).parent().click(addLayer)
     })
     baseFormElement.append(addLayerButton)
@@ -100,34 +103,34 @@ var addLayer = function addLayer(event) {
     var textElementForLayer = $(event.target).parents('li:eq(0)')
     //console.log(spandexElement.text())
     var parentDiv = $(this).parents('div:eq(0)')
-    var layerElement = generateLayerForm(textElementForLayer    .text())
+    var layerElement = generateLayerForm(textElementForLayer.text())
     parentDiv.before(layerElement)
 }
 
 function generateLayerForm(layerName) {
     // creates a new container for the layer form
-    var layerFormElement = $('<div></div>').attr('class', 'layer' )
+    var layerFormElement = $('<div></div>').attr('class', 'layer')
 
-    if(layerName === 'Muu') {
+    if (layerName === 'Muu') {
         var nameLabel = $('<label for="layer_name">Kerroksen nimi *</label>')
         var nameInput = $('<input class="span4" id="layer_name" name="layer[name]" required="required" size="30" type="text">')
         layerFormElement.append(nameLabel)
         layerFormElement.append(nameInput)
     } else {
-        var name= $('<h4>' + layerName + '</h4>')
-        var nameInput = $('<input class="span4" id="layer_name" name="layer[name]" size="30" type="hidden" value="'+ layerName +'">')
+        var name = $('<h4>' + layerName + '</h4>')
+        var nameInput = $('<input class="span4" id="layer_name" name="layer[name]" size="30" type="hidden" value="' + layerName + '">')
         layerFormElement.append(name)
         layerFormElement.append(nameInput)
 
     }
-    var productLabel =  $('<label for="layer_product_name">Tuotteen nimi</label>')
+    var productLabel = $('<label for="layer_product_name">Tuotteen nimi</label>')
     var productInput = $('<input class="span4" id="layer_product_name" name="layer[product_name]" size="30" type="text">')
     var thicknessLabel = $('<label for="layer_thickness">Paksuus (cm) *</label>')
     var thicknessInput = $('<input class="span4" id="layer_thickness" name="layer[thickness]" required="required" size="30" type="text">')
     var weightLabel = $('<label for="layer_weight">Paino (kg/m2) *</label>')
     var weightInput = $('<input class="span4" id="layer_weight" name="layer[weight]" required="required" size="30" type="text">')
 
-    if(layerName == 'Suodatinkangas' || layerName == 'Asennussuoja') {
+    if (layerName == 'Suodatinkangas' || layerName == 'Asennussuoja') {
         thicknessInput.attr('value', '0').attr('disabled', 'true')
         weightInput.attr('value', '0').attr('disabled', 'true')
 
@@ -146,7 +149,6 @@ function generateLayerForm(layerName) {
     return layerFormElement
 }
 var save = function () {
-
 
     var roof = createRoofObject()
     var environments = createEnvironmentsObject()
@@ -173,10 +175,10 @@ var save = function () {
     data.greenroof = greenroof
     data.role = role
 
-    if (validateData(data)) {
-        return data
-    }
-    else return null
+//    if (validateData(data)) {
+    return data
+//    }
+//    else return null
 
 }
 
@@ -270,19 +272,19 @@ function createLayerObjectArray(baseElement) {
         //console.log($(this).children($('h4')))
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
-        if(typeof name === 'undefined'){
+        if (typeof name === 'undefined') {
             return
         }
         layer.name = name
         var product_name = $(this).children('[name="layer[product_name]"]').val()
         layer.product_name = product_name
         var thickness = $(this).children('[name="layer[thickness]"]').val()
-        if(isNaN(thickness)) {
+        if (isNaN(thickness)) {
             thickness = 0;
         }
         layer.thickness = thickness
         var weight = $(this).children('[name="layer[weight]"]').val()
-        if(isNaN(weight)) {
+        if (isNaN(weight)) {
             weight = 0;
         }
         layer.weight = weight
@@ -383,9 +385,8 @@ function validateData(data) {
 }
 
 
-
 function createValidationAlert(validationText) {
-    var createdAlert = $('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Virhe! </strong>'+validationText+'</div>')
+    var createdAlert = $('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Virhe! </strong>' + validationText + '</div>')
     createdAlerts.push(createdAlert)
     return createdAlert
 
@@ -406,8 +407,8 @@ function sendData(data) {
 
             var imageData = new FormData()
 
-            jQuery.each($('#image-upload')[0].files, function(i, file) {
-                imageData.append('file-'+i, file);
+            jQuery.each($('#image-upload')[0].files, function (i, file) {
+                imageData.append('file-' + i, file);
             });
 
             sendImage(imageData, response.id)
@@ -417,7 +418,7 @@ function sendData(data) {
 
 function sendImage(imageData, id) {
     $.ajax({
-        url: '/greenroofs/' +id + '/upload',
+        url: '/greenroofs/' + id + '/upload',
         type: 'POST',
         data: imageData,
         cache: false,
@@ -432,22 +433,22 @@ function sendImage(imageData, id) {
     });
 }
 
-var plantHandler = new function() {
+var plantHandler = new function () {
 
     var ids = []
 
-    this.push = function(id) {
+    this.push = function (id) {
         ids.push(id)
     }
-    this.remove = function(id) {
+    this.remove = function (id) {
         ids.splice(ids.indexOf(id), 1)
     }
 
-    this.makeUnique = function() {
+    this.makeUnique = function () {
         ids = jQuery.unique(ids)
     }
 
-    this.getArray = function() {
+    this.getArray = function () {
         return ids;
     }
 }

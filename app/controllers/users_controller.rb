@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     params[:user][:profession]
     if @user.save
       flash[:success] = "Tervetuloa käyttämään Viherkattotietokantaa " << @user.name.to_s << "!"
+      sign_in @user
       redirect_to root_url
     else
       render 'new'
