@@ -19,25 +19,24 @@
 
           <div class="mainWrapper">
             <div class="centerWrapper" style="margin:auto">
-              <div class="well span3 design-proposal-well">
-                <% base.layers.each do |layer| %>
-                    <% unless base.absorbancy.nil? %>
-                        <label><b>Vedenimukyky:</b> </label>
 
-                        <p><%= base.absorbancy %></p>
-                    <% end %>
+              <div class="well span3 design-proposal-well">
+                <% unless base.absorbancy.nil? %>
+                    <label><b style="display:inline;">Vedenpidätys:</b>
+                      <p style="display:inline;"><%= raw base.absorbancy %> l/m2</p></label>
+                <% end %>
+                <% base.layers.each do |layer| %>
+
                     <h4><%= layer.name %></h4>
                     <% unless layer.product_name.nil? %>
                         <label><b>Tuotteen nimi:</b> </label>
 
                         <p><%= layer.product_name %></p>
                     <% end %>
-                    <label><b>Paksuus:</b> </label>
-
-                    <p><%= layer.thickness %></p>
-                    <label><b>Paino:</b> </label>
-
-                    <p><%= layer.weight %></p>
+                    <label><b style="display:inline;">Paksuus:</b>
+                    <p style="display:inline;"><%= raw layer.thickness %> cm</p></label>
+                    <label><b style="display:inline;">Paino:</b>
+                    <p style="display:inline;"><%= raw layer.weight %> kg/m2</p></label>
                 <% end %>
               </div>
 
