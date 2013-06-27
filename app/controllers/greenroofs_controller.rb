@@ -307,8 +307,10 @@ class GreenroofsController < ApplicationController
 
   def update
     @greenroof = Greenroof.find(params[:id])
+    @greenroof.role = Role.where("value like ?", params[:role][:value]).first
     @greenroof.update_attributes(params[:greenroof])
     @roof = @greenroof.roof
+
 
 
     if not params[:purpose].nil?
@@ -389,7 +391,7 @@ class GreenroofsController < ApplicationController
           end
         end
       end
-      render :js => "window.location = '/greenroofs/" + @greenroof.id + "'"
+      render :js => "window.location = '/greenroofs/" << @greenroof.id.to_s << "'"
 
 
     end
