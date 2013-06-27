@@ -389,7 +389,7 @@ class GreenroofsController < ApplicationController
           end
         end
       end
-      render :js => "window.location = '/'"
+      render :js => "window.location = '/greenroofs/" + @greenroof.id + "'"
 
 
     end
