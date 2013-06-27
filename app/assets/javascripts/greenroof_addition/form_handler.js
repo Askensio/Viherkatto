@@ -41,12 +41,14 @@ var customPlant = function(event) {
     }
     $('#custom-plant-name').val("");
     var listElement = $('<li></li>')
-    listElement.append(input)
-    listElement.append(iconMinus());
-    listElement.click(function(e) {
+    var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').click(function(e) {
         customPlants.splice(customPlants.indexOf(input), 1)
+        $(this).parent().remove()
         $(this).remove();
     });
+    listElement.append(removeButton);
+    listElement.append(" ");
+    listElement.append(input)
     $('#theplants').append(listElement)
 }
 
