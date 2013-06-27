@@ -112,15 +112,6 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
-      #if params[:growth_environment]
-      #  @tempEnvPlants
-      #  params[:growth_environment].try(:each) do |env|
-      #    @tempEnvPlants = @plants.joins(:growth_environments).where('growth_environments.environment like?', '%' + env.force_encoding('iso-8859-1').encode('utf-8') + '%').uniq if env
-      #  end
-      #  @plants = @tempEnvPlants
-      #  #@tempEnvPlants.clear
-      #end
-
       if params[:growth_environment]
 
         # Fixes the parameter encoding and downcases the colours.
@@ -168,7 +159,6 @@ class PlantsController < ApplicationController
       end
 
       @plants = @plants.order('name ASC')
-
 
       if params[:colour]
 

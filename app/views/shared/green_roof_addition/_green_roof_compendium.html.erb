@@ -1,4 +1,4 @@
-<div id="chosenOnes" class="row span3">
+<div id="chosenOnes" class="row span4">
   <div id="chevrons">
     <i class="icon-chevron-down" id="clickDown"></i>
     <i class="icon-chevron-up" id="clickUp"></i>
@@ -7,29 +7,30 @@
   <div id="chosenOnesSlide" class="row">
     <button class="btn btn-small btn-custom span1" id="save">Tallenna</button>
     <h2>Yhteenveto</h2>
-    <div class="span2">
+    <div class="span3">
       <h5>Yleiset</h5>
       <ul class="unstyled">
         <li class="construction_year" required>Valmistumisvuosi: </li>
         <li class="locality" required>Paikkakunta: </li>
-        <li class="address" >Osoite: </li>
-        <li class="constructor" required>Rakennuttaja: </li>
-        <li class="role" required>Lisätty roolissa: </li>
-        <li class="note" required>Vapaa kuvaus: </li>
-        <li class="usage_experience">Käyttökokemuksia: </li>
-        <li class="purpose" required>Käyttötarkoitus: </li>
+        <li class="address" hidden="true">Osoite: </li>
+        <li class="role" required>Lisätty roolissa: Ei valittu</li>
+        <li class="owner" required>Omistaja: </li>
+        <li class="constructor" hidden="true">Rakennuttaja: </li>
+        <li class="purpose" required>Käyttötarkoitus: Ei valittu</li>
+        <li class="note" hidden="true">Vapaa kuvaus: </li>
+        <li class="usage_experience" hidden="true">Käyttökokemuksia: </li>
       </ul>
     </div>
-    <div class="span2">
+    <!--<div class="span2">
       <h5>Katto</h5>
       <ul class="unstyled">
         <li class="area" required>Pinta-ala: </li>
-        <li class="declination" required>Kaltevuus: Tasakatto </li>
-        <li class="location" required>Sijainti: </li>
         <li class="capacity" required>Kantavuus: </li>
+        <li class="declination" hidden="true">Kaltevuus: Ei valittu</li>
+        <li class="location" required>Sijainti: </li>
       </ul>
-    </div>
-    <div class="span2">
+    </div>-->
+    <div class="span3">
       <ul id="theplants" class="chosen-list unstyled ">
         <h5>Valitsemasi kasvit</h5>
       </ul>
