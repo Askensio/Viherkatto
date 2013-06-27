@@ -9,7 +9,7 @@ module DesignToolHelper
       end
       greenroof_indexes = greenroof_indexes | temp_array
     end
-    greenroof_indexes = greenroof_indexes[0,10]
+    greenroof_indexes = greenroof_indexes[0,3]
 
     groofs = Greenroof.where(id: greenroof_indexes).all
     return groofs

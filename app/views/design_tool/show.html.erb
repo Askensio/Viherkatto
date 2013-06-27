@@ -14,7 +14,7 @@
 
     <% @bases.each do |base| %>
 
-        <li class="span12">
+        <li class="span13">
           <h3><%= base.name %></h3>
 
           <div class="mainWrapper">
@@ -48,15 +48,32 @@
                 <% end %>
               </div>
 
-              <div class="well span4 design-proposal-well">
-                <h4>Vastaavanlaisia rakennettuja:</h4>
+              <div class="span4 design-proposal-well">
+                <h5>Vastaavanlaisia rakennettuja:</h5>
 
                 <% greenroofs = get_matching_greenroofs base %>
                 <% if greenroofs.nil? || greenroofs.empty? %>
                     <label>Vastaavanlaisia valmiita viherkattoja ei löytynyt.</label>
                 <% else %>
                     <% greenroofs.each do |groof| %>
-                        <label>-  <%= link_to groof.id.to_s + " Omistajan " + groof.owner + " viherkatto, " + groof.locality, greenroof_path(groof), :target => "_blank" %></label>
+                        <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
+                          <div class="thumbnail pull-left">
+                            <% unless groof.images %>
+                                <img src="/pubic/greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.thumb %>">
+                            <% else %>
+                                <img src="assets/no_image_small.jpg">
+                            <% end %>
+                          </div>
+                          <div>
+                            <h5>Omistaja:</h5>
+
+                            <p>Kumpulan Sorto &amp; Riisto</p>
+                            <h5>Sijainti:</h5>
+
+                            <p>repellendus</p>
+                          </div>
+                        </div>
+
                     <% end %>
                 <% end %>
               </div>
