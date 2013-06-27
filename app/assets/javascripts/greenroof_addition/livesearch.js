@@ -370,7 +370,9 @@ $(document).ready(function () {
         var chosenOne = $('#' + id)
         var parent = chosenOne.parent()
 
-        setPlants(addedPlants)
+        addedPlants.push(id)
+        plantHandler.push(id)
+        console.log(event.target)
 
         chosenOne.click(
             function (e) {
@@ -378,15 +380,14 @@ $(document).ready(function () {
             }
         );
 
-
-        console.log(addedPlants)
-        console.log(id)
+//        console.log(addedPlants)
+//        console.log(id)
         if (!inArray(addedPlants, id)) {
             addedPlants.push(id)
 
             var listElement = $('<li></li>');
             var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function (e) {
-                console.log(addedPlants.indexOf(id))
+//                console.log(addedPlants.indexOf(id))
                 addedPlants.splice(addedPlants.indexOf(id), 1)
                 $(this).parent().remove()
                 $(this).remove();
