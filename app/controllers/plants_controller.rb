@@ -113,20 +113,14 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
       if params[:growth_environment]
-
         # Fixes the parameter encoding and downcases the colours.
         index = 0
         until index == params[:growth_environment].length
           params[:growth_environment][index] = params[:growth_environment][index].force_encoding('iso-8859-1').encode('utf-8').downcase
-          #puts "At position #{index}: #{params[:colour][index]}"
           index += 1
         end
 
         plant_indexes = Array.new
-
-        #@plants.all.each do |plant|
-        #  plant_indexes.push(plant.id)
-        #end
 
         params[:growth_environment].each do |env|
           environment = GrowthEnvironment.where('environment like ?', '%' + env + '%').first
@@ -166,15 +160,10 @@ class PlantsController < ApplicationController
         index = 0
         until index == params[:colour].length
           params[:colour][index] = params[:colour][index].force_encoding('iso-8859-1').encode('utf-8').downcase
-          #puts "At position #{index}: #{params[:colour][index]}"
           index += 1
         end
 
         plant_indexes = Array.new
-
-        #@plants.all.each do |plant|
-        #  plant_indexes.push(plant.id)
-        #end
 
         params[:colour].each do |colour|
           col = Colour.where('value like ?', '%' + colour + '%').first

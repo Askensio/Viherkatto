@@ -21,7 +21,6 @@ class DesignToolController < ApplicationController
     end
 
 
-
     # In this part all the bases that does not match the load-capacity criteria are filtered out.
 
     base_indexes = Array.new
@@ -44,17 +43,31 @@ class DesignToolController < ApplicationController
     @bases = Base.where(:id => base_indexes)
 
 
-
     # Sorts the bases in a manner that the bases that has most plants attached to them are placed in the beginning
+    base_hash = Hash.new { |hash, key| hash[key] = Hash.new }
 
-    base_hash = Hash.new
+
+    puts "plants:"
+    puts params[:plants]
 
     @bases.each do |base|
-      base_hash[base] = base.plants.length
+      base_hash[base]['length'] = base.plants.length
+      unless params[:plants].nil?
+        count = 0
+        base.plants.each do |plant|
+          puts "Checking if " + plant.id.to_s + " is included"
+          if params[:plants].include? plant.id.to_s
+            count += 1
+          end
+        end
+        puts "base " + base.name  + " count :"
+        puts count.to_s
+
+      end
+      base_hash[base]['plant_hits'] = count
     end
 
-
-    base_hash = base_hash.sort_by {|_key, value| value} .reverse
+    base_hash = base_hash.sort_by { |x| [ x.last['plant_hits'], x.last['length']] } .reverse
 
     temp_bases = Array.new
     base_hash.each do |key, value|
@@ -62,7 +75,7 @@ class DesignToolController < ApplicationController
     end
     @bases = temp_bases
 
-    @bases = @bases[0,5]
+    @bases = @bases[0, 5]
 
     render 'show'
 

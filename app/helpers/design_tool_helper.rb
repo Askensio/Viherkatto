@@ -14,7 +14,7 @@ module DesignToolHelper
 
     groofs = Greenroof.where(id: greenroof_indexes).all
 
-    groof_hash = Hash.new
+    groof_hash = Hash.new { |hash, key| hash[key] = Hash.new }
 
 
     groofs.each do |groof|
@@ -26,40 +26,8 @@ module DesignToolHelper
           end
         end
       end
-      groof_hash[groof] = environment_hit_count
+      groof_hash[groof]['environment_count'] = environment_hit_count
     end
-
-    groof_hash = groof_hash.sort_by {|_key, value| value} .reverse
-    puts groof_hash
-
-    prev_value = 999999
-    i = 0
-    count = 0
-
-    groof_array_of_arrays = Array.new
-
-    temp_array = Array.new
-    groof_hash.each_with_index do |(key,value),index|
-      if value < prev_value
-        groof_array_of_arrays += sort_by_plants temp_array[index,i]
-        i = index
-        count = 1
-      end
-      count += 1
-      temp_array.push key
-    end
-
-    groofs = groof_array_of_arrays
-    groofs = groofs[0,3]
-
-    return groofs
-  end
-
-  private
-
-  def sort_by_plants groofs
-
-    groof_hash = Hash.new
 
     groofs.each do |groof|
       plant_count = 0
@@ -68,11 +36,33 @@ module DesignToolHelper
           plant_count += 1
         end
       end
-      groof_hash[groof] = plant_count
+      groof_hash[groof]['plant_count'] = plant_count
     end
 
-    groof_hash = groof_hash.sort_by {|_key, value| value} .reverse
+    groof_hash = groof_hash.sort_by { |x| [ x.last['plant_count'], x.last['environment_count']] }.reverse
 
+    temp_bases = Array.new
+    groof_hash.each do |key, value|
+      temp_bases.push key
+    end
+
+    groofs = temp_bases[0,3]
+
+    return groofs
+  end
+
+  private
+
+  def sort_by_plants groofs, plant_index_array
+
+    #puts "------------------"
+    #puts groofs
+
+    groof_hash = Hash.new
+
+
+
+    groof_hash = groof_hash.sort_by { |_key, value| value }.reverse
 
 
     temp_array = Array.new

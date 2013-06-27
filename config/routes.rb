@@ -25,8 +25,8 @@ Viherkatto::Application.routes.draw do
   #match '/add_greenroof', to: 'greenroof#new'
 
 
-  match ':about', :controller => 'contact', :action => 'about', :as => 'contact'
-
+  match '/about' => 'pages#about'
+  match '/info' => 'pages#info'
   get 'pages/home'
   root :to => 'pages#home'
 

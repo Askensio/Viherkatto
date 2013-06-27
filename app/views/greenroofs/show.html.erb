@@ -7,6 +7,7 @@
     <h1>
       <%= 'Omistajan '<< @greenroof.owner << " viherkatto" %>
     </h1>
+
     <div id="slider-holder">
       <div class="flexslider span4">
         <ul class="slides">
@@ -27,28 +28,46 @@
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
-            <td><%= f.label :owner, h("Omistaja: ") %></td>
-            <td><%= f.label @greenroof.owner%></td>
+            <td><%= f.label :owner, h("Omistaja ") %></td>
+            <td><%= f.label @greenroof.owner %></td>
           </tr>
           <tr>
-            <td><%= f.label :user, h("Lisääjä: ") %></td>
-            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")"%></td>
+            <td><%= f.label :user, h("Lisääjä ") %></td>
+            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")" %></td>
           </tr>
 
           <tr>
-            <td><%= f.label :address, h("Sijainti: ") %></td>
+            <td><%= f.label :address, h("Sijainti ") %></td>
             <td><%= f.label printAddress(@greenroof) << (@greenroof.locality).titleize.to_s %></td>
           </tr>
 
-          <% if !@greenroof.constructor.nil? or !@greenroof.constructr.blank? %>
+          <% if !@greenroof.constructor.empty? %>
               <tr>
-                <td><%= f.label :constructor, h("Rakentaja: ") %></td>
+                <td><%= f.label :constructor, h("Rakentaja ") %></td>
                 <td><%= f.label @greenroof.constructor %></td>
               </tr>
           <% end %>
 
+
+          <% unless @greenroof.roof.environments.empty? %>
+              <tr>
+                <td><%= f.label :environments, h("Ympäristö") %></td>
+                <td>
+                  <% @greenroof.roof.environments.each do |env| %>
+                      <%= env.name %>
+                      <br>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+
+
           <tr>
-            <td><%= f.label @greenroof.purposes, h("Käyttötarkoitukset: ") %></td>
+            <% if @greenroof.purposes.length == 1 %>
+                <td><%= f.label @greenroof.purposes, h("Käyttötarkoitus ") %></td>
+            <% else %>
+                <td><%= f.label @greenroof.purposes, h("Käyttötarkoitukset ") %></td>
+            <% end %>
             <% groof_purposes = "" %>
             <% @greenroof.purposes.each do |purpose| %>
                 <% groof_purposes += (purpose.value + " ") %>
@@ -58,24 +77,26 @@
           </tr>
 
           <tr>
-            <td><%= f.label "Katon tiedot:" %></td>
+            <td><%= f.label "Katon tiedot" %></td>
             <td>
-              Pinta-ala: <%= @greenroof.roof.area %>
-              <br>
-              Kaltevuus: <%= @greenroof.roof.declination %>
-              <br>
-              Kantavuus: <%= @greenroof.roof.load_capacity %>
-              <% unless @greenroof.roof.light.nil? %>
-                  <br>
-                  Valoisuus: <%= @greenroof.roof.light.value %>
-              <% end %>
-              <% unless @greenroof.roof.environments.empty? %>
-                  <br>
-                  Ympäristö: <% @greenroof.roof.environments.each do |env| %>
-                      <%= env.name %>
-                      <br>
-                  <% end %>
-              <% end %>
+              <div class="well">
+                Pinta-ala: <%= @greenroof.roof.area %> m2
+                <br>
+                Kaltevuus:
+                <% if @greenroof.roof.declination == 0 %>
+                    Tasakatto
+                <% elsif @greenroof.roof.declination == 1 %>
+                    Loiva
+                <% elsif @greenroof.roof.declination == 2 %>
+                    Jyrkkä
+                <% end %>
+                <br>
+                Kantavuus: <%= @greenroof.roof.load_capacity %> kg/m2
+                <% unless @greenroof.roof.light.nil? %>
+                    <br>
+                    Valoisuus: <%= @greenroof.roof.light.value %>
+                <% end %>
+              </div>
             </td>
           </tr>
 
@@ -87,19 +108,27 @@
           </tr>
 
           <tr>
-            <td><%= f.label :bases, h("Rakennekerrokset ") %></td>
+            <td><%= f.label :bases, h("Rakenteen tiedot ") %></td>
             <td>
-              <div class="well"> <%= printBases(@greenroof) %> </div>
+              <div class="well">
+                Kokonaisvedenpitokyky <%= @greenroof.bases.first.absorbancy %> l/m2
+                <% unless @greenroof.bases.first.layers.empty? %>
+                    <br><br>
+                    <%= printBases(@greenroof) %>
+                <% end %>
+              </div>
             </td>
           </tr>
 
-          <tr>
-            <td><%= f.label :note, h("Kuvaus") %></td>
-            <td>
-              <div class="well"> <%= @greenroof.note %> </div>
-            </td>
-          </tr>
-          <% if !@greenroof.usage_experience.nil? or !@greenroof.usage_experience.blank? %>
+          <% unless @greenroof.note.nil? or @greenroof.note.blank? %>
+              <tr>
+                <td><%= f.label :note, h("Kuvaus") %></td>
+                <td>
+                  <div class="well"> <%= @greenroof.note %> </div>
+                </td>
+              </tr>
+          <% end %>
+          <% unless @greenroof.usage_experience.nil? or @greenroof.usage_experience.blank? %>
               <tr>
                 <td>
                   <%= f.label :usage_experience, h("Käyttökokemuksia") %>
@@ -111,7 +140,11 @@
                 </td>
               </tr>
           <% end %>
-
+          <% if signed_in? && current_user.admin? || signed_in? && current_user.id == @greenroof.user_idr %>
+              <td><%= link_to "Muokkaa", edit_greenroof_path(@greenroof), class: "btn btn-large btn-custom", id: "Muokkaabutton" %></td>
+          <% else %>
+              <td><a class="btn btn-large btn-custom disabled" id="Muokkaabutton">Muokkaa</a></td>
+          <% end %>
         </table>
 
 
@@ -128,5 +161,4 @@
         });
     });
 </script>
-
 
