@@ -58,8 +58,8 @@
                     <% greenroofs.each do |groof| %>
                         <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
                           <div class="thumbnail pull-left">
-                            <% unless groof.images %>
-                                <img src="/pubic/greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.thumb %>">
+                            <% if not groof.images.first.nil? %>
+                                <img src="/pubic/greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.first.thumb %>">
                             <% else %>
                                 <img src="assets/no_image_small.jpg">
                             <% end %>
@@ -73,7 +73,6 @@
                             <p>repellendus</p>
                           </div>
                         </div>
-
                     <% end %>
                 <% end %>
               </div>

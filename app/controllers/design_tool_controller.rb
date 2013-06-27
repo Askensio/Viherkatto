@@ -53,7 +53,6 @@ class DesignToolController < ApplicationController
       base_hash[base] = base.plants.length
     end
 
-    puts base_hash
 
     base_hash = base_hash.sort_by {|_key, value| value} .reverse
 
@@ -61,14 +60,9 @@ class DesignToolController < ApplicationController
     base_hash.each do |key, value|
       temp_bases.push key
     end
-    puts temp_bases
     @bases = temp_bases
 
     @bases = @bases[0,5]
-
-
-
-
 
     render 'show'
 
