@@ -244,163 +244,162 @@ class GreenroofsController < ApplicationController
     return unless @groof.user.id == current_user.id
     unless params["file-0"].nil?
 
-        # The path to the directory for the photos of the created greenroof.
-        directory = "/public/greenroofs/photos/" + params[:id]
+      # The path to the directory for the photos of the created greenroof.
+      directory = "/public/greenroofs/photos/" + params[:id]
 
-        # If the directory does not exists a new one will be created.
-        FileUtils.mkdir_p Dir.pwd + directory if not File.directory? Dir.pwd + directory
+      # If the directory does not exists a new one will be created.
+      FileUtils.mkdir_p Dir.pwd + directory if not File.directory? Dir.pwd + directory
 
-        # The filename for the new photo.
-        if not (@groof.images.first.nil?)
-          photoFilename = @groof.images.first.photo
-          redirect_to_groof_show = true
-        else
-          photoFilename = params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
-        end
-        # The full path for the photo.
-        photoPath = Dir.pwd + directory + "/" + photoFilename
-
-        file = File.read(params["file-0"].tempfile) if params["file-0"]
-        f = File.new(photoPath, "w+")
-        f.write file
-        f.close
-
-        # Filename for the thumbnail
-        if not (@groof.images.first.nil?)
-          thumbFilename = @groof.images.first.thumb
-        else
-          thumbFilename = params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
-        end
-        thumb = Magick::Image.read(photoPath).first
-        thumb.crop_resized!(120, 120, Magick::NorthGravity)
-        thumbPath = Dir.pwd + directory + "/" + thumbFilename
-        thumb.write(thumbPath)
-
-        # photo = "/photos/" + params[:id]
-
-        img = Image.new(photo: photoFilename, thumb: thumbFilename)
-        @groof.images.clear
-        @groof.images << img
-    end
-      if @groof.save!
-        flash[:success] = "Viherkaton lisäys onnistui!"
-
-          render :js => "window.location = '/greenroofs/" << @groof.id.to_s << "'"
-
+      # The filename for the new photo.
+      if not (@groof.images.first.nil?)
+        photoFilename = @groof.images.first.photo
+        redirect_to_groof_show = true
+      else
+        photoFilename = params[:id] + "_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
       end
+      # The full path for the photo.
+      photoPath = Dir.pwd + directory + "/" + photoFilename
+
+      file = File.read(params["file-0"].tempfile) if params["file-0"]
+      f = File.new(photoPath, "w+")
+      f.write file
+      f.close
+
+      # Filename for the thumbnail
+      if not (@groof.images.first.nil?)
+        thumbFilename = @groof.images.first.thumb
+      else
+        thumbFilename = params[:id] + "_thumb_" + Time.now.to_i.to_s + "_" + Digest::MD5.hexdigest(params["file-0"].original_filename)
+      end
+      thumb = Magick::Image.read(photoPath).first
+      thumb.crop_resized!(120, 120, Magick::NorthGravity)
+      thumbPath = Dir.pwd + directory + "/" + thumbFilename
+      thumb.write(thumbPath)
+
+      # photo = "/photos/" + params[:id]
+
+      img = Image.new(photo: photoFilename, thumb: thumbFilename)
+      @groof.images.clear
+      @groof.images << img
+    end
+    if @groof.save!
+      flash[:success] = "Viherkaton lisäys onnistui!"
+
+      render :js => "window.location = '/greenroofs/" << @groof.id.to_s << "'"
+
+    end
 
 
   end
 
 
-    def edit
-      @greenroof = Greenroof.find(params[:id])
-      @roof = @greenroof.roof
-      respond_to do |format|
-        format.json { render :json => {plants: @greenroof.plants} }
-        format.html { render :html => @greenroof } # index.html.erb
-      end
+  def edit
+    @greenroof = Greenroof.find(params[:id])
+    @roof = @greenroof.roof
+    respond_to do |format|
+      format.json { render :json => {plants: @greenroof.plants} }
+      format.html { render :html => @greenroof } # index.html.erb
     end
+  end
 
 
-    def update
-      @greenroof = Greenroof.find(params[:id])
-      @greenroof.role = Role.where("value like ?", params[:role][:value]).first
-      @greenroof.update_attributes(params[:greenroof])
-      @roof = @greenroof.roof
+  def update
+    @greenroof = Greenroof.find(params[:id])
+    @greenroof.role = Role.where("value like ?", params[:role][:value]).first
+    @greenroof.update_attributes(params[:greenroof])
+    @roof = @greenroof.roof
 
 
-      if not params[:purpose].nil?
-        @greenroof.purposes.clear
-        params[:purpose].each do |purp|
-          purp[1].each do |toAddPurp|
-            @purp = Purpose.find(toAddPurp)
-            if (@purp != nil)
-              @greenroof.purposes << @purp
-            end
+    if not params[:purpose].nil?
+      @greenroof.purposes.clear
+      params[:purpose].each do |purp|
+        purp[1].each do |toAddPurp|
+          @purp = Purpose.find(toAddPurp)
+          if (@purp != nil)
+            @greenroof.purposes << @purp
           end
         end
+      end
 
 
-        if not params[:environment].nil?
-          @roof.environments.clear
-          params[:environment][:id].each do |env|
-            @env = Environment.find_by_id(env)
-            if (@env != nil)
-              @roof.environments << @env
+      if not params[:environment].nil?
+        @roof.environments.clear
+        params[:environment][:id].each do |env|
+          @env = Environment.find_by_id(env)
+          if (@env != nil)
+            @roof.environments << @env
+          end
+        end
+      else
+        flash.now[:error] = "Et valinnut ympäristöä."
+        respond_to do |format|
+          #format.js { render :action => 'new' }
+        end
+        return
+      end
+
+
+      if not params[:customPlants].nil?
+        @greenroof.custom_plants.clear
+        params[:customPlants].each do |cplant|
+          cplant[1].each do |toAddPlant|
+            @cplant = CustomPlant.new(name: toAddPlant)
+            @greenroof.custom_plants << @cplant
+          end
+        end
+      end
+
+      @greenroof.roof.update_attributes(params[:roof])
+      @greenroof.roof.save
+
+      @greenroof.bases.clear
+      @bases = params[:bases]
+      if !@bases.nil?
+        @bases.each do |key, value|
+          @base = Base.new(value[:base])
+          if not value[:layers].nil?
+            value[:layers].each do |key, value|
+              @layer = Layer.new(value)
+              @base.layers << @layer
             end
           end
-        else
-          flash.now[:error] = "Et valinnut ympäristöä."
+          @greenroof.bases << @base
+        end
+      end
+
+
+      @greenroof.plants.clear
+      params[:plants].each do |id|
+        @plant = Plant.find_by_id(id)
+        if not @plant.nil? && @greenroof.plants.find(@plant)
+          @greenroof.plants << @plant
+        end
+      end
+
+
+      if @greenroof.save!
+        flash[:success] = "Viherkaton muokkaaminen onnistui!"
+        respond_to do |format|
+          format.json { render :json => {id: @greenroof.id} }
+        end
+
+      else
+        if not params[:plants].nil? and not params[:environment][:id].empty?
           respond_to do |format|
             #format.js { render :action => 'new' }
           end
-          return
         end
-
-
-        if not params[:customPlants].nil?
-          @greenroof.custom_plants.clear
-          params[:customPlants].each do |cplant|
-            cplant[1].each do |toAddPlant|
-              @cplant = CustomPlant.new(name: toAddPlant)
-              @greenroof.custom_plants << @cplant
-            end
-          end
-        end
-
-        @greenroof.roof.update_attributes(params[:roof])
-        @greenroof.roof.save
-
-        @greenroof.bases.clear
-        @bases = params[:bases]
-        if !@bases.nil?
-          @bases.each do |key, value|
-            @base = Base.new(value[:base])
-            if not value[:layers].nil?
-              value[:layers].each do |key, value|
-                @layer = Layer.new(value)
-                @base.layers << @layer
-              end
-            end
-            @greenroof.bases << @base
-          end
-        end
-
-
-        @greenroof.plants.clear
-        params[:plants].each do |id|
-          @plant = Plant.find_by_id(id)
-          if not @plant.nil? && @greenroof.plants.find(@plant)
-            @greenroof.plants << @plant
-          end
-        end
-
-
-        if @greenroof.save!
-          flash[:success] = "Viherkaton muokkaaminen onnistui!"
-          respond_to do |format|
-            format.json { render :json => {id: @greenroof.id} }
-          end
-
-        else
-          if not params[:plants].nil? and not params[:environment][:id].empty?
-            respond_to do |format|
-              #format.js { render :action => 'new' }
-            end
-          end
-        end
-
-
-
       end
-    end
 
-    private
 
-    def owner
-      unless Greenroof.find_by_id(params[:id]).user_id == current_user.id
-        redirect_to root_url
-      end
     end
   end
+
+  private
+
+  def owner
+    unless Greenroof.find_by_id(params[:id]).user_id == current_user.id
+      redirect_to root_url
+    end
+  end
+end
