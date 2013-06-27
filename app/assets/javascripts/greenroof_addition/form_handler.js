@@ -185,7 +185,7 @@ function createRoleObject() {
     var selected = $('#role_id').find(":selected");
 
     if (selected === null) {
-       alert("Valitse rooli")
+        alert("Valitse rooli")
     }
     role.value = selected.text()
     return role
@@ -193,9 +193,9 @@ function createRoleObject() {
 
 
 function createCustomplantsObject() {
-   var customPlantArray = new Object()
-   customPlantArray.plants = customPlants
-   return customPlantArray
+    var customPlantArray = new Object()
+    customPlantArray.plants = customPlants
+    return customPlantArray
 }
 
 function createRoofObject() {
@@ -218,7 +218,7 @@ function createPurposeObject() {
     var id = []
 
     $("#purpose_id option:selected").each(function (index) {
-       id.push($(this).attr('value'))
+        id.push($(this).attr('value'))
     });
     purposes.id = id
     return purposes
@@ -306,8 +306,8 @@ function createGreenroofObject() {
 var createdAlerts = []
 
 /*
-    Validates the data processed by the save-variable. Alerts will be created and shown to the user if data is not correct.
-    Data that is not correct will not be sent.
+ Validates the data processed by the save-variable. Alerts will be created and shown to the user if data is not correct.
+ Data that is not correct will not be sent.
  */
 function validateData(data) {
 
@@ -364,7 +364,7 @@ function validateData(data) {
 
     // Plant validations
     if (data.plants.length < 1) {
-       createValidationAlert('Valitse ainakin yksi katollasi sijaitseva kasvi').insertAfter('.foundation-plants')
+        createValidationAlert('Valitse ainakin yksi katollasi sijaitseva kasvi').insertAfter('.foundation-plants')
     }
 
 
@@ -435,6 +435,11 @@ var plantHandler = new function() {
     this.remove = function(id) {
         ids.splice(ids.indexOf(id), 1)
     }
+
+    this.makeUnique = function() {
+        ids = jQuery.unique(ids)
+    }
+
     this.getArray = function() {
         return ids;
     }
@@ -443,4 +448,3 @@ var plantHandler = new function() {
 function setCustomPlants(plantIDs) {
     customPlants = plantIDs
 }
-
