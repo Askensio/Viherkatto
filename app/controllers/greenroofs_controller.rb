@@ -383,12 +383,6 @@ class GreenroofsController < ApplicationController
           format.json { render :json => {id: @greenroof.id} }
         end
 
-      else
-        if not params[:plants].nil? and not params[:environment][:id].empty?
-          respond_to do |format|
-            #format.js { render :action => 'new' }
-          end
-        end
       end
 
 
