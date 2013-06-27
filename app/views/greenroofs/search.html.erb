@@ -15,17 +15,11 @@
         <input type="text" name="address" data-id="address" class="search-input">
         <label>Paikkakunta </label>
         <input type="text" name="locality" data-id="locality" class="search-input">
-        <label>Ympäristö </label>
-        <%= collection_select :environment, :id, Environment.all, :id, :name, {}, :title => "Valitse",  :class => "selectpicker show-menu-arrow show-tick span4 chosen-env", :multiple => true %>
       </div>
       <div class="well">
         <h2 class="h2left">Kasvin ominaisuudet</h2>
         <label>Kasvin nimi </label>
         <input type="text" name="plantname" data-id="plantname" class="search-input">
-        <label>Kukkien pääväri </label>
-        <%= select :plant, :colour, colour_categories, {}, :class => "selectpicker show-menu-arrow span4 search-input", 'data-id' => "colour", :multiple => true %>
-        <label>Hoidon tarve </label>
-        <%= select :plant, :maintenance, [['Helppo', 1], ['Keskivaikea', 2], ['Vaikea', 3]], {}, :class => "selectpicker show-menu-arrow span4 search-input", 'data-id' => "maintenance" %>
         <label>Maksimikorkeus kasveille </label>
         <input type="text" name="plantmaxheight" data-id="plantmaxheight" class="search-input">
         <label>Minimikorkeus kasveille </label>
