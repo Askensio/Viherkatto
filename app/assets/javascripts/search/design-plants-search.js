@@ -59,14 +59,11 @@ function generateRoofData() {
         valid = false
     }
 
-    roof.declination = $("#roof_declination option:selected").text()
-
     if (valid) {
         return roof
     } else {
         return valid
     }
-
 }
 
 function generateEnvironmentsData() {

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module DesignToolHelper
 
   def get_matching_greenroofs base
@@ -17,16 +19,17 @@ module DesignToolHelper
     groof_hash = Hash.new { |hash, key| hash[key] = Hash.new }
 
 
-    groofs.each do |groof|
-      environment_hit_count = 0
-      groof.roof.environments do |env|
-        params[:environments].each do |e|
-          if env.id == e.id
+    unless params[:environments].nil?
+      groofs.each do |groof|
+        environment_hit_count = 0
+        groof.roof.environments.each do |env|
+          if params[:environments].include? env.id.to_s
             environment_hit_count += 1
           end
         end
+        puts environment_hit_count.to_s
+        groof_hash[groof]['environment_count'] = environment_hit_count
       end
-      groof_hash[groof]['environment_count'] = environment_hit_count
     end
 
     groofs.each do |groof|
@@ -39,14 +42,14 @@ module DesignToolHelper
       groof_hash[groof]['plant_count'] = plant_count
     end
 
-    groof_hash = groof_hash.sort_by { |x| [ x.last['plant_count'], x.last['environment_count']] }.reverse
+    groof_hash = groof_hash.sort_by { |x| [x.last['environment_count'], x.last['plant_count']] }.reverse
 
     temp_bases = Array.new
     groof_hash.each do |key, value|
       temp_bases.push key
     end
 
-    groofs = temp_bases[0,3]
+    groofs = temp_bases[0, 3]
 
     return groofs
   end
@@ -59,7 +62,6 @@ module DesignToolHelper
     #puts groofs
 
     groof_hash = Hash.new
-
 
 
     groof_hash = groof_hash.sort_by { |_key, value| value }.reverse

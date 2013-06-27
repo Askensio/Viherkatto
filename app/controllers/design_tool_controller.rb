@@ -47,15 +47,12 @@ class DesignToolController < ApplicationController
     base_hash = Hash.new { |hash, key| hash[key] = Hash.new }
 
 
-    puts "plants:"
-    puts params[:plants]
 
     @bases.each do |base|
       base_hash[base]['length'] = base.plants.length
       unless params[:plants].nil?
         count = 0
         base.plants.each do |plant|
-          puts "Checking if " + plant.id.to_s + " is included"
           if params[:plants].include? plant.id.to_s
             count += 1
           end

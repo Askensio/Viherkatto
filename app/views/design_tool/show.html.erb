@@ -58,11 +58,11 @@
                     <label>Vastaavanlaisia valmiita viherkattoja ei löytynyt.</label>
                 <% else %>
                     <% greenroofs.each do |groof| %>
-                        <%= link_to '/greenroofs/' + groof.id.to_s do %>
+                        <%= link_to '/greenroofs/' + groof.id.to_s,  :target => "_blank" do %>
                             <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
                               <div class="thumbnail pull-left">
-                                <% unless groof.images %>
-                                    <img src="/pubic/greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.thumb %>">
+                                <% unless groof.images.first.nil? %>
+                                    <img src="greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.first.thumb %>">
                                 <% else %>
                                     <img src="assets/no_image_small.jpg">
                                 <% end %>
@@ -70,10 +70,10 @@
                               <div>
                                 <h5>Omistaja:</h5>
 
-                                <p>Kumpulan Sorto &amp; Riisto</p>
+                                <p><%= groof.owner %></p>
                                 <h5>Sijainti:</h5>
 
-                                <p>repellendus</p>
+                                <p><%= groof.locality %></p>
                               </div>
                             </div>
                         <% end %>

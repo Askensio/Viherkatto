@@ -257,7 +257,7 @@ class GreenroofsController < ApplicationController
   def upload
     redirect_to_groof_show = false
     @groof = Greenroof.find_by_id(params[:id])
-    return unless @groof.user.id == current_user.id
+    #return unless @groof.user.id == current_user.id
     unless params["file-0"].nil?
 
         # The path to the directory for the photos of the created greenroof.
