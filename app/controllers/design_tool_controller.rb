@@ -10,7 +10,7 @@ class DesignToolController < ApplicationController
 
     @bases = Array.new
 
-
+    # Fills the array with bases that are attached to the selected plants, if no plants are selected all bases are selected.
     unless params[:plants].nil?
       @plants = Plant.where(:id => params[:plants]).uniq.all
       @plants.each do |plant|
@@ -20,9 +20,9 @@ class DesignToolController < ApplicationController
       @bases = Base.where("greenroof_id IS ?", nil).uniq.all
     end
 
-    puts "-------------------------------"
 
-    puts "Roof load capacity is " + params[:roof][:load_capacity].to_s
+
+    # In this part all the bases that does not match the load-capacity criteria are filtered out.
 
     base_indexes = Array.new
 
@@ -35,17 +35,33 @@ class DesignToolController < ApplicationController
         weight += layer.weight
       end
 
-      puts "Base total weight is : " + weight.to_s
-
       unless weight > params[:roof][:load_capacity].to_i
-        puts "Total weight was more than roof capacity"
+
         base_indexes.push base.id
       end
     end
 
     @bases = Base.where(:id => base_indexes)
-    #puts "Bases count : " + @bases.count.to_s
 
+
+
+    # Sorts the bases in a manner that the bases that has most plants attached to them are placed in the beginning
+
+    base_hash = Hash.new
+
+    @bases.each do |base|
+      base_hash[base] = base.plants.length
+    end
+
+    puts "-------------------------------"
+    puts "Hash before sort"
+
+    puts base_hash
+
+    base_hash.values.sort!
+    puts "Hash after sort"
+
+    puts base_hash
     puts "-------------------------------"
 
     render 'show'

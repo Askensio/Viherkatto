@@ -59,13 +59,6 @@ function generateRoofData() {
         valid = false
     }
 
-    roof.area = $('#roof_area').val()
-    /*if (roof.area === "" || isNaN(roof.area)) {
-        alertElement.html('Anna katon pinta-ala.')
-        $('#roof_area').after(alertElement.clone())
-        valid = false
-    }*/
-
     roof.declination = $("#roof_declination option:selected").text()
 
     if (valid) {
