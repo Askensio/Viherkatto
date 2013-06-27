@@ -99,7 +99,7 @@ describe 'Greenroof' do
     it { should have_selector('label', text: "Sijainti") }
     it { should have_selector('label', text: "Katon tiedot") }
     it { should have_selector('label', text: "Kasvit") }
-    it { should have_selector('label', text: "Rakennekerrokset") }
+    it { should have_selector('label', text: "Rakenteen tiedot") }
     it { should have_selector('label', text: "Kuvaus") }
     it { should have_selector('label', text: "Lisääjä") }
     it { should have_selector('label', text: "Käyttökokemuksia") }
@@ -107,7 +107,7 @@ describe 'Greenroof' do
     describe 'click-plants-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[7]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[8]/td[2]/div/a[1]", :visible => true).click
       end
       it { should have_selector('label', text: "Latinankielinen nimi")  }
     end
@@ -115,7 +115,7 @@ describe 'Greenroof' do
     describe 'click-materiaali-link', js: true do
       before do
         visit greenroof_path(@groof)
-        find(:xpath, "/html/body/div/div/div/table/tbody/tr[8]/td[2]/div/a[1]", :visible => true).click
+        find(:xpath, "/html/body/div/div/div/table/tbody/tr[9]/td[2]/div/a[1]", :visible => true).click
         sleep 1.seconds
       end
       it { should have_selector('td', text: "Paino") }

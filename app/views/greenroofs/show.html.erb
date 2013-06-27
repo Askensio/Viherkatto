@@ -51,7 +51,7 @@
 
           <% unless @greenroof.roof.environments.empty? %>
               <tr>
-                <td>Ympäristö</td>
+                <td><%= f.label :environments, h("Ympäristö") %></td>
                 <td>
                   <% @greenroof.roof.environments.each do |env| %>
                       <%= env.name %>
@@ -79,22 +79,24 @@
           <tr>
             <td><%= f.label "Katon tiedot" %></td>
             <td>
-              Pinta-ala: <%= @greenroof.roof.area %>
-              <br>
-              Kaltevuus:
-              <% if @greenroof.roof.declination == 0 %>
-                 Tasakatto
-              <% elsif @greenroof.roof.declination == 1 %>
-                 Loiva
-              <% elsif @greenroof.roof.declination == 2 %>
-                 Jyrkkä
-              <% end %>
-              <br>
-              Kantavuus: <%= @greenroof.roof.load_capacity %>
-              <% unless @greenroof.roof.light.nil? %>
-                  <br>
-                  Valoisuus: <%= @greenroof.roof.light.value %>
-              <% end %>
+              <div class="well">
+                Pinta-ala: <%= @greenroof.roof.area %> m2
+                <br>
+                Kaltevuus:
+                <% if @greenroof.roof.declination == 0 %>
+                    Tasakatto
+                <% elsif @greenroof.roof.declination == 1 %>
+                    Loiva
+                <% elsif @greenroof.roof.declination == 2 %>
+                    Jyrkkä
+                <% end %>
+                <br>
+                Kantavuus: <%= @greenroof.roof.load_capacity %> kg/m2
+                <% unless @greenroof.roof.light.nil? %>
+                    <br>
+                    Valoisuus: <%= @greenroof.roof.light.value %>
+                <% end %>
+              </div>
             </td>
           </tr>
 
@@ -106,10 +108,15 @@
           </tr>
 
           <tr>
-            <td><%= f.label :bases, h("Rakennekerrokset ") %></td>
+            <td><%= f.label :bases, h("Rakenteen tiedot ") %></td>
             <td>
               <div class="well">
-                <%= printBases(@greenroof) %> </div>
+                Kokonaisvedenpitokyky <%= @greenroof.bases.first.absorbancy %> l/m2
+                <% unless @greenroof.bases.first.layers.empty? %>
+                    <br><br>
+                    <%= printBases(@greenroof) %>
+                <% end %>
+              </div>
             </td>
           </tr>
 
