@@ -20,6 +20,17 @@
             <legend>Viherkaton yleiset tiedot</legend>
             <%= render 'shared/forms/groof_form_fields' %>
             <br/>
+
+            <br><br>
+            <label>Kuva viherkatostasi:</label>
+
+            <div class="fileupload fileupload-new" data-provides="fileupload" name="image-upload">
+              <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><input type="file" id="image-upload"/></span>
+              <span class="fileupload-preview"></span>
+              <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+            </div>
+            <br></br>
+
             <legend>Katon tekniset tiedot</legend>
             <div id="large-input-right">
               <%= render 'shared/forms/roof_form_fields' %>
@@ -97,4 +108,4 @@
 <%= javascript_include_tag "edit_groof" %>
 <%= javascript_include_tag "bootstrap-fileupload" %>
 <script>$('.selectpicker').selectpicker();</script>
-<script>$('.fileupload').fileupload()</script>
+<script>$('.fileupload').fileupload({uploadtype : "image"})</script>

@@ -108,14 +108,15 @@ function sendEditData(data) {
 
             jQuery.each($('#image-upload')[0].files, function(i, file) {
                 imageData.append('file-'+i, file);
+
             });
-
-
+                                             console.log(imageData)
+            sendImage(imageData, response.id)
         }
     });
 }
 
-function sendEditImage(imageData, id) {
+/*function sendEditImage(imageData, id) {
     $.ajax({
         url: '/greenroofs/' +id + '/upload',
         type: 'PUT',
@@ -130,7 +131,7 @@ function sendEditImage(imageData, id) {
             console.log(response)
         }
     });
-}
+}*/
 
 
 
