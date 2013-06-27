@@ -58,11 +58,21 @@ class DesignToolController < ApplicationController
 
     puts base_hash
 
-    base_hash.values.sort!
+    base_hash = base_hash.sort_by {|_key, value| value} .reverse
     puts "Hash after sort"
 
-    puts base_hash
+    temp_bases = Array.new
+    base_hash.each do |key, value|
+      temp_bases.push key
+    end
+    puts "Temp bases:"
+    puts temp_bases
+    @bases = temp_bases
     puts "-------------------------------"
+
+
+
+
 
     render 'show'
 
