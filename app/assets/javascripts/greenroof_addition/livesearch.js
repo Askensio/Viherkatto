@@ -1,12 +1,10 @@
-function iconMinus() {
-    var icon = $('<i class=\"icon-minus\ clickable  "></i>');
-    return icon;
-};
-
-
+//function iconMinus() {
+//    var icon = $('<i class=\"icon-minus\ clickable  "></i>');
+//    return icon;
+//};
 $(document).ready(function () {
 
-        /**
+    /**
      * Fetches the plants through the designated function.
      */
     (function () {
@@ -109,12 +107,6 @@ $(document).ready(function () {
         var icon = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Lisää</i>').attr('id', id).click( listaClikkerListener )
         return icon
     }
-
-    /**
-     * Creates the icon that is used to remove the plant from the Synopsis-view and the addedPlants -array.
-     * @returns {*|jQuery|HTMLElement}
-     */
-
 
     var $cells = $("li");
 
@@ -359,17 +351,17 @@ $(document).ready(function () {
      */
     $("#search").keyup(function() {
         var searchword = $("#search").val();
-            $.getJSON("/plants.json?name=" + searchword, function (data) {
-                plantdata = []
-                plantdata = data["plants"];
-                console.log(plantdata);
-                $('.plant-list').empty();
-                $.each(plantdata, function (i, item) {
-                    addPlantElementForSearch(item);
-                    console.log(searchword);
-                    console.log(item.name);
-                });
+        $.getJSON("/plants.json?name=" + searchword, function (data) {
+            plantdata = []
+            plantdata = data["plants"];
+            console.log(plantdata);
+            $('.plant-list').empty();
+            $.each(plantdata, function (i, item) {
+                addPlantElementForSearch(item);
+                console.log(searchword);
+                console.log(item.name);
             });
+        });
     });
 
     /**
@@ -393,9 +385,14 @@ $(document).ready(function () {
 
         chosenOne.click(
             function(e) {
-               // e.target.remove()
+                // e.target.remove()
             }
         );
+
+        /**
+         * Oh dog
+         * @type {*|jQuery|HTMLElement}
+         */
         var listElement = $('<li></li>');
         var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function(e) {
             console.log(addedPlants.indexOf(id))
