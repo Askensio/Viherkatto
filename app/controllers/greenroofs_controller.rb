@@ -48,16 +48,10 @@ class GreenroofsController < ApplicationController
       @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]) if params[:plantminheight]
 
       # --- Build's properties (Rakenteen ominaisuudet)
-      if params[:layername]
-        layername = "%#{params[:layername]}%"
-        @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
-      end
+
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area <= ?", params[:maxroofarea]) if params[:maxroofarea]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area >= ?", params[:minroofarea]) if params[:minroofarea]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.load_capacity >= ?", params[:minload_capacity]) if params[:minload_capacity]
-
-      # not yet in form
-      @greenroofs = @greenroofs.joins(:roof).where("roofs.declination <= ?", params[:maxdeclination]) if params[:maxdeclination]
 
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?

@@ -345,6 +345,11 @@ function validateData(data) {
         problems++
     }
 
+    if (data.roof.declination === "") {
+        createValidationAlert('Aseta katollesi kaltevuus').insertAfter('#roof_declination')
+        problems++
+    }
+
     if (data.environment.id < 1) {
         createValidationAlert('Valitse vielä viherkattosi sijainti').insertAfter('.envs.btn-group')
         problems++
