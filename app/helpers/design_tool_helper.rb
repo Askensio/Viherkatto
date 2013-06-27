@@ -16,6 +16,51 @@ module DesignToolHelper
 
     groof_hash = Hash.new
 
+
+    groofs.each do |groof|
+      environment_hit_count = 0
+      groof.roof.environments do |env|
+        params[:environments].each do |e|
+          if env.id == e.id
+            environment_hit_count += 1
+          end
+        end
+      end
+      groof_hash[groof] = environment_hit_count
+    end
+
+    groof_hash = groof_hash.sort_by {|_key, value| value} .reverse
+    puts groof_hash
+
+    prev_value = 999999
+    i = 0
+    count = 0
+
+    groof_array_of_arrays = Array.new
+
+    temp_array = Array.new
+    groof_hash.each_with_index do |(key,value),index|
+      if value < prev_value
+        groof_array_of_arrays += sort_by_plants temp_array[index,i]
+        i = index
+        count = 1
+      end
+      count += 1
+      temp_array.push key
+    end
+
+    groofs = groof_array_of_arrays
+    groofs = groofs[0,3]
+
+    return groofs
+  end
+
+  private
+
+  def sort_by_plants groofs
+
+    groof_hash = Hash.new
+
     groofs.each do |groof|
       plant_count = 0
       groof.plants.each do |plant|
@@ -26,11 +71,9 @@ module DesignToolHelper
       groof_hash[groof] = plant_count
     end
 
-
-
     groof_hash = groof_hash.sort_by {|_key, value| value} .reverse
 
-    puts groof_hash
+
 
     temp_array = Array.new
     groof_hash.each do |key, value|
@@ -38,8 +81,6 @@ module DesignToolHelper
     end
 
     groofs = temp_array
-
-    groofs = groofs[0,3]
 
     return groofs
   end
