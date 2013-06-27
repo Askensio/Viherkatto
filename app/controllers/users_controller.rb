@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     params[:user][:profession]
     if @user.save
       flash[:success] = "Tervetuloa käyttämään Viherkattotietokantaa " << @user.name.to_s << "!"
+      sign_in @user
       redirect_to root_url
     else
       render 'new'
@@ -65,8 +66,11 @@ class UsersController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if User.find(params[:id]).destroy
-        @response = "success"
+      @user = User.find(params[:id])
+      unless current_user? @user
+        if @user.destroy
+          @response = "success"
+        end
       else
         @response = "error"
       end
