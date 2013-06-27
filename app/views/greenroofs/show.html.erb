@@ -27,22 +27,22 @@
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
-            <td><%= f.label :owner, h("Omistaja: ") %></td>
+            <td><%= f.label :owner, h("Omistaja ") %></td>
             <td><%= f.label @greenroof.owner%></td>
           </tr>
           <tr>
-            <td><%= f.label :user, h("Lisääjä: ") %></td>
+            <td><%= f.label :user, h("Lisääjä ") %></td>
             <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")"%></td>
           </tr>
 
           <tr>
-            <td><%= f.label :address, h("Sijainti: ") %></td>
+            <td><%= f.label :address, h("Sijainti ") %></td>
             <td><%= f.label printAddress(@greenroof) << (@greenroof.locality).titleize.to_s %></td>
           </tr>
 
           <% if !@greenroof.constructor.nil? or !@greenroof.constructr.blank? %>
               <tr>
-                <td><%= f.label :constructor, h("Rakentaja: ") %></td>
+                <td><%= f.label :constructor, h("Rakentaja ") %></td>
                 <td><%= f.label @greenroof.constructor %></td>
               </tr>
           <% end %>
@@ -50,7 +50,7 @@
 
           <% unless @greenroof.roof.environments.empty? %>
               <tr>
-                <td>Ympäristö:</td> <td><% @greenroof.roof.environments.each do |env| %>
+                <td>Ympäristö</td> <td><% @greenroof.roof.environments.each do |env| %>
                     <%= env.name %>
                     <br>
                 <% end %>
@@ -60,7 +60,11 @@
 
 
           <tr>
-            <td><%= f.label @greenroof.purposes, h("Käyttötarkoitukset: ") %></td>
+            <% if @greenroof.purposes.length == 1 %>
+                <td><%= f.label @greenroof.purposes, h("Käyttötarkoitus ") %></td>
+            <% else %>
+                <td><%= f.label @greenroof.purposes, h("Käyttötarkoitukset ") %></td>
+            <% end %>
             <% groof_purposes = "" %>
             <% @greenroof.purposes.each do |purpose| %>
                 <% groof_purposes += (purpose.value + " ") %>
@@ -70,7 +74,7 @@
           </tr>
 
           <tr>
-            <td><%= f.label "Katon tiedot:" %></td>
+            <td><%= f.label "Katon tiedot" %></td>
             <td>
               Pinta-ala: <%= @greenroof.roof.area %>
               <br>
