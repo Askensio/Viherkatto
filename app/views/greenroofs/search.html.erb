@@ -10,7 +10,7 @@
   <div class="span5 offset3">
     <div data-id="greenroof" id="search-form">
       <div class="well">
-        <h2>Yleiset</h2>
+        <h2 class="jee">Yleiset</h2>
         <label>Osoite: </label>
         <input type="text" name="address" data-id="address" class="search-input">
         <label>Paikkakunta: </label>
@@ -19,7 +19,7 @@
         <%= collection_select :environment, :id, Environment.all, :id, :name, {}, :title => "Valitse",  :class => "selectpicker show-menu-arrow show-tick span4 chosen-env", :multiple => true %>
       </div>
       <div class="well">
-        <h2>Kasvin ominaisuudet</h2>
+        <h2 class="jee">Kasvin ominaisuudet</h2>
         <label>Kasvin nimi: </label>
         <input type="text" name="plantname" data-id="plantname" class="search-input">
         <label>Kukkien pääväri: </label>
@@ -32,7 +32,7 @@
         <input type="text" name="plantminheight" data-id="plantminheight" class="search-input">
       </div>
       <div class="well">
-        <h2>Rakenteen ominaisuudet</h2>
+        <h2 class="jee">Rakenteen ominaisuudet</h2>
         <label>Vedenpitokyky minimissään</label>
         <input type="text" name="minabsorbancy" data-id="minabsorbancy" class="search-input">
         <label>Katon pinta-ala maksimissaan: </label>
