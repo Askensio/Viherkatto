@@ -393,7 +393,7 @@ $(document).ready(function () {
         );
 
         if (!inArray(plantHandler.getArray(), id)) {
-        plantHandler.push(id)
+            plantHandler.push(id)
 
             var listElement = $('<li></li>');
             var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function(e) {

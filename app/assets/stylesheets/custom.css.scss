@@ -261,7 +261,7 @@ ul, ol {
   font-family: Arial, Helvetica, Times;
   /*border-style:solid;
   border-width:1px;*/
-  display:block;
+  display: block;
   overflow: auto;
   border-radius: 15px;
   background-color: #DBEDD8;
@@ -327,8 +327,6 @@ ul, ol {
     background-color: $grayMediumLight;
   }
 }
-
-
 
 #note_ {
   height: 200px;
@@ -403,6 +401,13 @@ ul, ol {
     top: -15px;
     right: -15px
   }
+
+  .edit-icon {
+    position: absolute;
+    top: 15px;
+    right: -15px
+  }
+
   i {
     position: absolute;
     top: -5px;
@@ -445,7 +450,6 @@ a {
 #Muokkaabutton {
   margin-left: 75%;
 }
-
 
 // User control label
 .user-controls {
@@ -503,3 +507,16 @@ a {
 .h2left {
     text-align: left;
 }
+
+.mainWrapper {
+  text-align: center
+}
+
+.centerWrapper {
+  margin: auto
+}
+
+.design-proposal-well {
+  text-align: left
+}
+

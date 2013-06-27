@@ -21,7 +21,10 @@ class Greenroof < ActiveRecord::Base
 
   before_save :save_bases, :save_roof, :save_images
 
+
   attr_accessible :address, :locality, :constructor, :note, :year, :usage_experience, :owner
+
+
 
   validates :locality, presence: true, length: { maximum: 200 }
   validates :address, length: {maximum: 200}

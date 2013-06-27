@@ -17,6 +17,8 @@
                   <li><%= link_to "Lisää viherkatto", new_greenroof_path %></li>
                   <li class="divider"></li>
               <% end %>
+              <li><%= link_to "Suunnittele viherkatto", '/suunnittele' %></li>
+              <li class="divider"></li>
               <li><%= link_to "Selaa viherkattoja", greenroofs_path %></li>
               <li class="divider"></li>
               <li><%= link_to "Hae viherkattoja", '/search/greenroofs' %></li>
@@ -73,6 +75,7 @@
                 </ul>
               </li>
           <% else %>
+              <li> <a class="qmark" id="headqmark" href="" data-placement="left" data-toggle="tooltip" title="Oman viherkaton lisääminen edellyttää rekisteröitymistä ja kirjautumista."><i class= "icon-question-sign"></i></a> </li>
               <li><%= link_to "Kirjaudu", kirjaudu_path %></li>
               <li><%= link_to "Rekisteröidy", rekisteroidy_path %></li>
           <% end %>
@@ -81,3 +84,9 @@
     </div>
   </div>
 </header>
+
+<script type="text/javascript">
+    $(function () {
+        $(".qmark").tooltip();
+    });
+</script>
