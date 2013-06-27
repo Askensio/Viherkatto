@@ -8,16 +8,25 @@ $(document).ready(function () {
         })
         {
             $('.construction_year').append(" " + ($("#greenroof_year").val()));
+            $('.construction_year').show()
             $('.locality').append(" " +($("#greenroof_locality").val()));
             $('.address').append(" " + ($("#greenroof_address").val()));
+            $('.address').show()
             $('.constructor').append(" " + ($("#greenroof_constructor").val()));
+            $('.constructor').show()
+            $('.owner').append(" " + ($("#greenroof_owner").val()));
+            $('.owner').show()
             $('.note').append(" " + ($("#greenroof_note").val()));
             $('.area').append(" " + ($("#roof_area").val()+' m²'));
+            $('.role').empty()
+            $('.role').append("Lisätty roolissa: " + ($("#role_id").find(":selected").text()));
+            $('.role').show()
             $('.declination').empty();
             $('.declination').append("Kaltevuus: " + determineDeclination());
             $('.location').append(" " + ($("#environment_id option:selected").text()));
             $('.capacity').append(" " + ($("#roof_load_capacity").val() + "kg/m²"));
-            $('.purpose').append($("#purpose_id option:selected").text());
+            $('.purpose').empty()
+            $('.purpose').append("Käyttötarkoitus: " + ($("#purpose_id").find(":selected").text() + " "));
 
 
             var id = $('#form').attr('data-for')
