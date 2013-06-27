@@ -73,11 +73,6 @@ describe Greenroof do
     it { should_not be_valid }
   end
 
-  describe "constructor is too short" do
-    before { @groof.constructor = "a" }
-    it { should_not be_valid }
-  end
-
   describe "constructor is just fine" do
     before { @groof.constructor = "Raipen urakka & putki" }
     it { should be_valid }
