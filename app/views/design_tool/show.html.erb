@@ -1,14 +1,12 @@
 <% provide(:title, 'Suunitelmat') %>
 
-
+<div class="text-center">
+  <%= link_to "Palaa", "/suunnittele", class: "btn btn-medium btn-custom span2 floating-return-button" %>
+</div>
 <div class="container">
 
   <% if @bases.empty? %>
       <h1> Antamillasi kriteereillä ei löydy yhtään ehdotusta. </h1>
-
-      <div class="text-center">
-        <%= link_to "Palaa", "/suunnittele", class: "btn btn-large btn-custom span4" %>
-      </div>
   <% else %>
       <h1>Suunnitteluehdotuksia</h1>
   <% end %>
