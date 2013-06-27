@@ -1,12 +1,10 @@
-function iconMinus() {
-    var icon = $('<i class=\"icon-minus\ clickable  "></i>');
-    return icon;
-};
-
-
+//function iconMinus() {
+//    var icon = $('<i class=\"icon-minus\ clickable  "></i>');
+//    return icon;
+//};
 $(document).ready(function () {
 
-        /**
+    /**
      * Fetches the plants through the designated function.
      */
     (function () {
@@ -34,16 +32,16 @@ $(document).ready(function () {
     /**
      * Slider click element for the Synopsis-view in the new green roof.
      */
-    $("#clickDown").click(function() {
-        $("#chosenOnesSlide").slideDown("slow", function() {
+    $("#clickDown").click(function () {
+        $("#chosenOnesSlide").slideDown("slow", function () {
         });
     });
 
     /**
      * Slider click element for the Synopsis-view in the new green roof.
      */
-    $("#clickUp").click(function() {
-        $("#chosenOnesSlide").slideUp("slow", function() {
+    $("#clickUp").click(function () {
+        $("#chosenOnesSlide").slideUp("slow", function () {
         });
 
     });
@@ -60,13 +58,13 @@ $(document).ready(function () {
         if (page === undefined) page = 1;
         if (onDelete === undefined)  onDelete = false;
 
-        if(onDelete) reloadPaginateNeeded = onDelete;
+        if (onDelete) reloadPaginateNeeded = onDelete;
 
         $.getJSON("/plants.json", function (data) {
 
             var entry_count = data["count"];
             var plants = data["plants"];
-            if(plants.length === 0) {
+            if (plants.length === 0) {
                 reloadPaginateNeeded = true
                 page -= 1
             }
@@ -106,15 +104,9 @@ $(document).ready(function () {
      * @returns {*|jQuery}
      */
     function createIconButton(id) {
-        var icon = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Lisää</i>').attr('id', id).click( listaClikkerListener )
+        var icon = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Lisää</i>').attr('id', id).click(listaClikkerListener)
         return icon
     }
-
-    /**
-     * Creates the icon that is used to remove the plant from the Synopsis-view and the addedPlants -array.
-     * @returns {*|jQuery|HTMLElement}
-     */
-
 
     var $cells = $("li");
 
@@ -125,23 +117,21 @@ $(document).ready(function () {
     var plantdata = [];
 
 
-
-
     // ---------------- GREENROOF VALUES FOR SYNOPSIS-VIEW
     /**
      * --- Construction year (Valmistumisvuosi)
      */
-    $("#greenroof_year").keyup(function() {
+    $("#greenroof_year").keyup(function () {
         var input = $("#greenroof_year").val();
         //console.log("foo");
         $('.construction_year').empty();
-        $('.construction_year').append('Valmistumisvuosi: '+input);
+        $('.construction_year').append('Valmistumisvuosi: ' + input);
     })
 
     /**
      * --- Locality (Sijainti/Paikkakunta)
      */
-    $("#greenroof_locality").keyup(function() {
+    $("#greenroof_locality").keyup(function () {
         var input = $("#greenroof_locality").val();
         $('.locality').empty();
         $('.locality').append('Paikkakunta: ' + input);
@@ -150,7 +140,7 @@ $(document).ready(function () {
     /**
      * --- Address (Osoite)
      */
-    $("#greenroof_address").keyup(function() {
+    $("#greenroof_address").keyup(function () {
         var input = $("#greenroof_address").val();
         $('.address').empty();
         if (input === "") {
@@ -178,17 +168,17 @@ $(document).ready(function () {
     /**
      * --- Owner (Omistaja)
      */
-    $("#greenroof_owner").keyup(function() {
+    $("#greenroof_owner").keyup(function () {
         var input = $("#greenroof_owner").val();
         //console.log("foo");
         $('.owner').empty();
-        $('.owner').append('Omistaja: '+input);
+        $('.owner').append('Omistaja: ' + input);
     })
 
     /**
      * --- Constructor (Rakennuttaja)
      */
-    $("#greenroof_constructor").keyup(function() {
+    $("#greenroof_constructor").keyup(function () {
         var input = $("#greenroof_constructor").val();
         //console.log("foo");
         $('.constructor').empty();
@@ -197,13 +187,13 @@ $(document).ready(function () {
         } else {
             $('.constructor').show();
         }
-        $('.constructor').append('Rakennuttaja: '+input);
+        $('.constructor').append('Rakennuttaja: ' + input);
     })
 
     /**
      * --- Purpose (Käyttötarkoitus)
      */
-    $("#purpose_id").change(function() {
+    $("#purpose_id").change(function () {
         var input = $("#purpose_id option:selected").text();
         input = input.match(/[A-Z][a-z-ä-ö]+/g);
         if (input === null) {
@@ -216,7 +206,7 @@ $(document).ready(function () {
     /**
      * --- Note (Vapaa kuvaus)
      */
-    $("#greenroof_note").keyup(function() {
+    $("#greenroof_note").keyup(function () {
         var input = $("#greenroof_note").val();
         $('.note').empty();
         if (input === "") {
@@ -232,7 +222,7 @@ $(document).ready(function () {
     /**
      * --- Usage experience (Käyttökokemuksia)
      */
-    $("#greenroof_usage_experience").keyup(function() {
+    $("#greenroof_usage_experience").keyup(function () {
         var input = $("#greenroof_usage_experience").val();
         $('.usage_experience').empty();
         if (input === "") {
@@ -247,25 +237,21 @@ $(document).ready(function () {
     })
 
 
-
-
-
-
     // ---------------- ROOF VALUES FOR SYNOPSIS-VIEW (not currently in use)
     /**
      * --- Area (Pinta-ala)
      */
-    $("#roof_area").keyup(function() {
+    $("#roof_area").keyup(function () {
         var input = $("#roof_area").val();
         console.log("foo");
         $('.area').empty();
-        $('.area').append('Pinta-ala: '+input+' (m2)');
+        $('.area').append('Pinta-ala: ' + input + ' (m2)');
     })
 
     /**
      * --- Load capacity (Kantavuus)
      */
-    $("#roof_load_capacity").keyup(function() {
+    $("#roof_load_capacity").keyup(function () {
         var input = $("#roof_load_capacity").val();
         $('.capacity').empty();
         $('.capacity').append('Kantavuus: ' + input + ' (kg/m2)');
@@ -276,7 +262,7 @@ $(document).ready(function () {
      * (Crappy if-thing because I had no idea how to make it fetch the text from the field
      * because the values are numbers)
      */
-    $("#roof_declination").change(function() {
+    $("#roof_declination").change(function () {
         var input = $("#roof_declination").val();
         if (input === '0') {
             input = "Tasakatto"
@@ -299,7 +285,7 @@ $(document).ready(function () {
     /**
      * Environment (Sijainti/Ympäristö)
      */
-    $("#environment_id").change(function() {
+    $("#environment_id").change(function () {
         var input = $("#environment_id option:selected").text();
         input = input.match(/[A-Z][a-z-ä]+/g);
         if (input === null) {
@@ -310,13 +296,11 @@ $(document).ready(function () {
     })
 
 
-
-
     // ---------------- BASE/LAYER VALUES FOR SYNOPSIS-VIEW (not currently in use)
     /**
      * Base absorbancy (vedenpito-/imukyky)
      */
-    $("#base_absorbancy").keyup(function() {
+    $("#base_absorbancy").keyup(function () {
         var input = $("#base_absorbancy").val();
         $('.absorbancy').empty();
         $('.absorbancy').append('Vedenimukyky: ' + input + ' (l/m2)');
@@ -325,7 +309,7 @@ $(document).ready(function () {
     /**
      * Layer name (Kerroksen nimi)
      */
-    $("#layer_name").keyup(function() {
+    $("#layer_name").keyup(function () {
         var input = $("#layer_name").val();
         $('.name').empty();
         $('.name').append('Materiaali: ' + input);
@@ -334,7 +318,7 @@ $(document).ready(function () {
     /**
      * Layer thickness (Kerroksen paksuus)
      */
-    $("#layer_thickness").keyup(function() {
+    $("#layer_thickness").keyup(function () {
         var input = $("#layer_thickness").val();
         $('.thickness').empty();
         $('.thickness').append('Paksuus: ' + input + ' (cm)');
@@ -343,33 +327,29 @@ $(document).ready(function () {
     /**
      * Layer weight (Kerroksen paino)
      */
-    $("#layer_weight").keyup(function() {
+    $("#layer_weight").keyup(function () {
         var input = $("#layer_weight").val();
         $('.weight').empty();
         $('.weight').append('Paino: ' + input + ' (kg/m2)');
     })
 
 
-
-
-
-
     /**
      * Real-time plant search functionality is mainly provided by this.
      */
-    $("#search").keyup(function() {
+    $("#search").keyup(function () {
         var searchword = $("#search").val();
-            $.getJSON("/plants.json?name=" + searchword, function (data) {
-                plantdata = []
-                plantdata = data["plants"];
-                console.log(plantdata);
-                $('.plant-list').empty();
-                $.each(plantdata, function (i, item) {
-                    addPlantElementForSearch(item);
-                    console.log(searchword);
-                    console.log(item.name);
-                });
+        $.getJSON("/plants.json?name=" + searchword, function (data) {
+            plantdata = []
+            plantdata = data["plants"];
+            console.log(plantdata);
+            $('.plant-list').empty();
+            $.each(plantdata, function (i, item) {
+                addPlantElementForSearch(item);
+                console.log(searchword);
+                console.log(item.name);
             });
+        });
     });
 
     /**
@@ -383,43 +363,59 @@ $(document).ready(function () {
      * It is a rather cool way of providing a function as a parameter so you are to admire and worship it with all your heart yo.
      * @param event
      */
-    var listaClikkerListener = function(event) {
+    var listaClikkerListener = function (event) {
+
+
         var id = -1 * event.target.getAttribute('id')
         var chosenOne = $('#' + id)
         var parent = chosenOne.parent()
 
-        addedPlants.push(id)
-        plantHandler.push(id)
-        console.log(event.target)
+        setPlants(addedPlants)
 
         chosenOne.click(
-            function(e) {
-               // e.target.remove()
+            function (e) {
+                // e.target.remove()
             }
         );
-        var listElement = $('<li></li>');
-        var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function(e) {
-            console.log(addedPlants.indexOf(id))
-            addedPlants.splice(addedPlants.indexOf(id), 1)
-            $(this).parent().remove()
-            $(this).remove();
-            plantHandler.remove(id)
-            console.log(addedPlants)
-        });
-        listElement.append(removeButton);
-        listElement.append(" ");
-        listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
-
-        listElement.append('<br>');
-        $('.chosen-list').append(listElement);
 
 
+        console.log(addedPlants)
+        console.log(id)
+        if (!inArray(addedPlants, id)) {
+            addedPlants.push(id)
+
+            var listElement = $('<li></li>');
+            var removeButton = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id).click(function (e) {
+                console.log(addedPlants.indexOf(id))
+                addedPlants.splice(addedPlants.indexOf(id), 1)
+                $(this).parent().remove()
+                $(this).remove();
+                //console.log(addedPlants)
+            });
+            listElement.append(removeButton);
+            listElement.append(" ");
+            listElement.append(chosenOne.clone().attr('id', 'selected_plant_id_' + chosenOne.attr('id')));
+
+            listElement.append('<br>');
+            $('.chosen-list').append(listElement);
+        }
+
+
+        //console.log(uniquePlants)
         //console.log(parent)
         //console.log(addedPlants)
         //parent.remove()
+
+        addedPlants = jQuery.unique(addedPlants);
+
     }
 
-
+    function inArray(array, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == value) return true;
+        }
+        return false;
+    }
 
 
 });
