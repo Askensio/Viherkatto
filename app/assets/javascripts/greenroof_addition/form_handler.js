@@ -404,14 +404,14 @@ function sendData(data) {
         success: function (response) {
             console.log('Greenroof id: ' + response.id + ' saved')
 
-            var imageData = new FormData()
+          /*  var imageData = new FormData()
 
             jQuery.each($('#image-upload')[0].files, function(i, file) {
                 imageData.append('file-'+i, file);
             });
 
             sendImage(imageData, response.id)
-        }
+    */    }
     });
 }
 
