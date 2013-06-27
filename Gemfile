@@ -10,7 +10,6 @@ gem 'jquery-rails', '2.0.2'
 gem 'travis'
 gem 'fog'
 gem 'simplecov', :require => false, :group => :test
-#gem "rmagick", "~> 2.13.2"
 gem "rmagick", "2.12.0", :require => 'RMagick'
 
 group :development, :test do

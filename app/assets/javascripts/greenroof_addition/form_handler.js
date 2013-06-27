@@ -21,7 +21,12 @@ function init() {
         //console.log($(this).parent())
     })
     //$('#add-base-button').click(addBase)
-    $('#save').click(save)
+    $('#save').click(create_groof)
+    function create_groof(event) {
+        var data = save()
+        sendData(data)
+    }
+
     $('#add-layer-button').click(function(e) {
         e.preventDefault()
     })
@@ -138,9 +143,8 @@ function generateLayerForm(layerName) {
 
     return layerFormElement
 }
+var save = function () {
 
-
-var save = function (event) {
 
     var roof = createRoofObject()
     var environments = createEnvironmentsObject()
@@ -157,13 +161,21 @@ var save = function (event) {
     data.environment = environments
     data.bases = bases
     data.customPlants = customplant
-    data.plants = plants
+
+    data.role = role
+    if (plantHandler.getArray().length < 1) {
+        alert("Et valinnut yhtään kasvia")
+    }
+
+    data.plants = plantHandler.getArray()
     data.greenroof = greenroof
     data.role = role
 
     if (validateData(data)) {
-        sendData(data)
+        return data
     }
+    else return null
+
 }
 
 
@@ -418,7 +430,27 @@ function sendImage(imageData, id) {
     });
 }
 
-function setPlants(plantIDs) {
-    plants = plantIDs
+var plantHandler = new function() {
+
+    var ids = []
+
+    this.push = function(id) {
+        ids.push(id)
+    }
+    this.remove = function(id) {
+        ids.splice(ids.indexOf(id), 1)
+    }
+
+    this.makeUnique = function() {
+        ids = jQuery.unique(ids)
+    }
+
+    this.getArray = function() {
+        return ids;
+    }
+}
+
+function setCustomPlants(plantIDs) {
+    customPlants = plantIDs
 }
 
