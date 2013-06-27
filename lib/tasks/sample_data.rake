@@ -158,6 +158,42 @@ namespace :db do
       base.layers << layer2
       base.save!
     end
+    2.times do |n|
+      base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
+      base.plants << Plant.last
+      layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
+      base.layers << layer1
+      base.layers << layer2
+      base.save!
+    end
+    2.times do |n|
+      base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
+      base.plants << Plant.first
+      base.plants << Plant.last
+      layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
+      base.layers << layer1
+      base.layers << layer2
+      base.save!
+    end
+    2.times do |n|
+      base = Base.new(name: "base "+n.to_s ,absorbancy: 20, note: "this is a note")
+      base.plants << [Plant.find(1), Plant.find(2)]
+      layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+      layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
+      base.layers << layer1
+      base.layers << layer2
+      base.save!
+    end
+    base = Base.new(name: "testibase" ,absorbancy: 20, note: "this is a note")
+    base.plants << [Plant.find(1), Plant.find(2), Plant.find(3), Plant.find(4)]
+    layer1 = Layer.new(name: "Materiaali1", product_name: "Repan piparkakku", thickness: 30, weight: 20)
+    layer2 = Layer.new(name: "Materiaali2", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 10)
+    base.layers << layer1
+    base.layers << layer2
+    base.layers << Layer.new(name: "Materiaali3", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 80)
+    base.save!
   end
 end
 
