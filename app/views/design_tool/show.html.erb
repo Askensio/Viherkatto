@@ -1,0 +1,47 @@
+<% provide(:title, 'Suunitelmat') %>
+
+
+<div class="container">
+
+  <h1>Suunnitteluehdotuksia</h1>
+  <ul class="list">
+    <% @bases.each do |base| %>
+
+        <li class="span12">
+          <h3><%= base.name %></h3>
+          <div class="mainWrapper">
+            <div class="centerWrapper" style="margin:auto">
+              <div class="well span3 design-proposal-well">
+                <% base.layers.each do |layer| %>
+                    <h4><%= layer.name %></h4>
+                    <% unless layer.product_name.nil? %>
+                        <label><b>Tuotteen nimi:</b> </label>
+
+                        <p><%= layer.product_name %></p>
+                    <% end %>
+                    <label><b>Paksuus:</b> </label>
+
+                    <p><%= layer.thickness %></p>
+                    <label><b>Paino:</b> </label>
+
+                    <p><%= layer.weight %></p>
+                <% end %>
+              </div>
+
+              <div class="well span3 design-proposal-well">
+                <h4>Ratkaisuun sopivia kasveja:</h4>
+                <% base.plants.each do |plant| %>
+                    <label>- <%= plant.name %></label>
+                <% end %>
+              </div>
+
+              <div class="well span4 design-proposal-well">
+                <h4>Vastaavanlaisia rakennettuja:</h4>
+              </div>
+            </div>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+
+</div>

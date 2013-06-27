@@ -6,7 +6,6 @@ class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
   before_filter :owner, only: [:upload]
-  before_filter :user_with_edit_rights, only: [:edit]
 
   def search
 
@@ -14,7 +13,12 @@ class GreenroofsController < ApplicationController
 
       format.html { render :html => {greenroofs: @greenroofs} }
 
+      # --- Takes the Greenroof relation into a variable
       @greenroofs = Greenroof.scoped
+
+      # --- Checks the search params and eliminates all non-matches
+
+      # --- General (Yleiset)
       if params[:address]
         address = "%#{params[:address]}%"
         @greenroofs = @greenroofs.where("address like ?", address)
@@ -23,6 +27,12 @@ class GreenroofsController < ApplicationController
         locality = "%#{params[:locality]}%"
         @greenroofs = @greenroofs.where("locality like ?", locality)
       end
+      if params[:envname]
+        envname = "%#{params[:envname]}%"
+        @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)
+      end
+
+      # --- Plants' attributes (Kasvien ominaisuudet)
       if params[:plantname]
         plantname = "%#{params[:plantname]}%"
         @greenroofs = @greenroofs.joins(:plants).where("plants.name like ?", plantname)
@@ -36,25 +46,13 @@ class GreenroofsController < ApplicationController
       end
       @greenroofs = @greenroofs.joins(:plants).where("plants.max_height <= ?", params[:plantmaxheight]) if params[:plantmaxheight]
       @greenroofs = @greenroofs.joins(:plants).where("plants.min_height >= ?", params[:plantminheight]) if params[:plantminheight]
-      if params[:envname]
-        envname = "%#{params[:envname]}%"
-        @greenroofs = @greenroofs.joins(:roof).joins(:roof => :environments).where("environments.name like ?", envname)
-      end
 
-
-      #not yet in form
-      @greenroofs = @greenroofs.joins(:roof).where("roofs.declination <= ?", params[:maxdeclination]) if params[:maxdeclination]
-      @greenroofs = @greenroofs.joins(:roof).where("roofs.load_capacity >= ?", params[:minload_capacity]) if params[:minload_capacity]
-      @greenroofs = @greenroofs.joins(:roof).where("roofs.area >= ?", params[:minroofarea]) if params[:minroofarea]
+      # --- Build's properties (Rakenteen ominaisuudet)
+      @greenroofs = @greenroofs.joins(:bases).where("bases.absorbancy >= ?", params[:minabsorbancy]) if params[:minabsorbancy]
       @greenroofs = @greenroofs.joins(:roof).where("roofs.area <= ?", params[:maxroofarea]) if params[:maxroofarea]
+      @greenroofs = @greenroofs.joins(:roof).where("roofs.area >= ?", params[:minroofarea]) if params[:minroofarea]
+      @greenroofs = @greenroofs.joins(:roof).where("roofs.load_capacity >= ?", params[:minload_capacity]) if params[:minload_capacity]
 
-
-
-
-      if params[:layername]
-        layername = "%#{params[:layername]}%"
-        @greenroofs = @greenroofs.joins(:layers).where("layers.name like ?", layername)
-      end
 
       @greenroofs = @greenroofs.paginate(page: params[:page], per_page: params[:per_page]) unless @greenroofs.nil?
       @count = @greenroofs.total_entries
@@ -294,6 +292,7 @@ class GreenroofsController < ApplicationController
       flash[:success] = "Viherkaton lisäys onnistui!"
       render :js => "window.location = '/'"
     end
+
   end
 
   def edit
@@ -304,6 +303,7 @@ class GreenroofsController < ApplicationController
       format.html { render :html => @greenroof } # index.html.erb
     end
   end
+
 
   def update
     @greenroof = Greenroof.find(params[:id])
@@ -397,7 +397,6 @@ class GreenroofsController < ApplicationController
     end
   end
 
-
   private
 
   def owner
@@ -405,11 +404,4 @@ class GreenroofsController < ApplicationController
       redirect_to root_url
     end
   end
-
-  def user_with_edit_rights
-    @greenroof = Greenroof.find(params[:id])
-    redirect_to root_path unless (signed_in? && (current_user.email == @greenroof.user.email || admin?))
-  end
-
-
 end
