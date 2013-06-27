@@ -52,8 +52,8 @@ $(document).ready(function () {
                             // e.target.remove()
                         }
                     );
-                    listElement.append(plant.attr('id', 'selected_plant_id_' + plant.attr("id")));
-                    var icon = iconMinus()
+
+                    var icon = $('<i class=\"btn btn-mini clickable add-plant-for-greenroof\">Poista</i>').attr('id', id)
 
                     icon.click(function(e)
                     {
@@ -64,6 +64,7 @@ $(document).ready(function () {
                         console.log(addedPlants.length)
                     });
                     listElement.append(icon);
+                    listElement.append(plant.attr('id', 'selected_plant_id_' + plant.attr("id")));
                     listElement.append('<br>');
                     $('.chosen-list').append(listElement);
                     //console.log(parent)
