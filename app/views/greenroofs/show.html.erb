@@ -40,7 +40,7 @@
             <td><%= f.label printAddress(@greenroof) << (@greenroof.locality).titleize.to_s %></td>
           </tr>
 
-          <% if !@greenroof.constructor.nil? or !@greenroof.constructr.blank? %>
+          <% if !@greenroof.constructor.empty? %>
               <tr>
                 <td><%= f.label :constructor, h("Rakentaja: ") %></td>
                 <td><%= f.label @greenroof.constructor %></td>

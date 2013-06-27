@@ -10,7 +10,7 @@
     <%= f.label :load_capacity, h('Kantavuus kg/m2 *') %>
     <%= f.text_field :load_capacity, :class => "span3" %>
 
-    <%= f.label :declination, h('Kaltevuusaste') %>
+    <%= f.label :declination, h('Kaltevuusaste *') %>
     <%= f.select :declination, [['Tasakatto', '0'],['Loiva', '1'],['Jyrkkä','2']], {prompt: "Valitse"}, :class => "selectpicker show-menu-arrow show-tick span3 deklination" %>
 
     <%= f.label :environment, h('Sijainti *') %>
