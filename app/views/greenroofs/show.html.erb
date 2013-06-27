@@ -7,6 +7,7 @@
     <h1>
       <%= 'Omistajan '<< @greenroof.owner << " viherkatto" %>
     </h1>
+
     <div id="slider-holder">
       <div class="flexslider span4">
         <ul class="slides">
@@ -28,11 +29,11 @@
         <table class="table span5">
           <tr>
             <td><%= f.label :owner, h("Omistaja ") %></td>
-            <td><%= f.label @greenroof.owner%></td>
+            <td><%= f.label @greenroof.owner %></td>
           </tr>
           <tr>
             <td><%= f.label :user, h("Lisääjä ") %></td>
-            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")"%></td>
+            <td><%= @greenroof.user.name + " (" + @greenroof.role.value.downcase + ")" %></td>
           </tr>
 
           <tr>
@@ -50,11 +51,13 @@
 
           <% unless @greenroof.roof.environments.empty? %>
               <tr>
-                <td>Ympäristö</td> <td><% @greenroof.roof.environments.each do |env| %>
-                    <%= env.name %>
-                    <br>
-                <% end %>
-              </td>
+                <td>Ympäristö</td>
+                <td>
+                  <% @greenroof.roof.environments.each do |env| %>
+                      <%= env.name %>
+                      <br>
+                  <% end %>
+                </td>
               </tr>
           <% end %>
 
@@ -78,7 +81,14 @@
             <td>
               Pinta-ala: <%= @greenroof.roof.area %>
               <br>
-              Kaltevuus: <%= @greenroof.roof.declination %>
+              Kaltevuus:
+              <% if @greenroof.roof.declination == 0 %>
+                 Tasakatto
+              <% elsif @greenroof.roof.declination == 1 %>
+                 Loiva
+              <% elsif @greenroof.roof.declination == 2 %>
+                 Jyrkkä
+              <% end %>
               <br>
               Kantavuus: <%= @greenroof.roof.load_capacity %>
               <% unless @greenroof.roof.light.nil? %>
@@ -102,13 +112,15 @@
             </td>
           </tr>
 
-          <tr>
-            <td><%= f.label :note, h("Kuvaus") %></td>
-            <td>
-              <div class="well"> <%= @greenroof.note %> </div>
-            </td>
-          </tr>
-          <% if !@greenroof.usage_experience.nil? or !@greenroof.usage_experience.blank? %>
+          <% unless @greenroof.note.nil? or @greenroof.note.blank? %>
+              <tr>
+                <td><%= f.label :note, h("Kuvaus") %></td>
+                <td>
+                  <div class="well"> <%= @greenroof.note %> </div>
+                </td>
+              </tr>
+          <% end %>
+          <% unless @greenroof.usage_experience.nil? or @greenroof.usage_experience.blank? %>
               <tr>
                 <td>
                   <%= f.label :usage_experience, h("Käyttökokemuksia") %>
