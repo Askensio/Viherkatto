@@ -19,31 +19,33 @@
 
           <div class="mainWrapper">
             <div class="centerWrapper" style="margin:auto">
-              <div class="well span3 design-proposal-well">
-                <% base.layers.each do |layer| %>
-                    <% unless base.absorbancy.nil? %>
-                        <label><b>Vedenimukyky:</b> </label>
 
-                        <p><%= base.absorbancy %></p>
-                    <% end %>
+              <div class="well span3 design-proposal-well">
+                <% unless base.absorbancy.nil? %>
+                    <label><b style="display:inline;">Vedenpidätys:</b>
+
+                      <p style="display:inline;"><%= raw base.absorbancy %> l/m2</p></label>
+                <% end %>
+                <% base.layers.each do |layer| %>
+
                     <h4><%= layer.name %></h4>
                     <% unless layer.product_name.nil? %>
                         <label><b>Tuotteen nimi:</b> </label>
 
                         <p><%= layer.product_name %></p>
                     <% end %>
-                    <label><b>Paksuus:</b> </label>
+                    <label><b style="display:inline;">Paksuus:</b>
 
-                    <p><%= layer.thickness %></p>
-                    <label><b>Paino:</b> </label>
+                      <p style="display:inline;"><%= raw layer.thickness %> cm</p></label>
+                    <label><b style="display:inline;">Paino:</b>
 
-                    <p><%= layer.weight %></p>
+                      <p style="display:inline;"><%= raw layer.weight %> kg/m2</p></label>
                 <% end %>
               </div>
 
               <div class="well span3 design-proposal-well">
                 <h4>Ratkaisuun sopivia kasveja:</h4>
-                <% base.plants.each do |plant| %>
+                <% base.plants.all(:order => "lower(name)").each do |plant| %>
                     <label>-  <%= link_to plant.name, plant_path(plant), :target => "_blank" %></label>
                 <% end %>
               </div>
@@ -56,23 +58,25 @@
                     <label>Vastaavanlaisia valmiita viherkattoja ei löytynyt.</label>
                 <% else %>
                     <% greenroofs.each do |groof| %>
-                        <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
-                          <div class="thumbnail pull-left">
-                            <% if not groof.images.first.nil? %>
-                                <img src="/pubic/greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.first.thumb %>">
-                            <% else %>
-                                <img src="assets/no_image_small.jpg">
-                            <% end %>
-                          </div>
-                          <div>
-                            <h5>Omistaja:</h5>
+                        <%= link_to '/greenroofs/' + groof.id.to_s do %>
+                            <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
+                              <div class="thumbnail pull-left">
+                                <% unless groof.images %>
+                                    <img src="/pubic/greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.thumb %>">
+                                <% else %>
+                                    <img src="assets/no_image_small.jpg">
+                                <% end %>
+                              </div>
+                              <div>
+                                <h5>Omistaja:</h5>
 
-                            <p>Kumpulan Sorto &amp; Riisto</p>
-                            <h5>Sijainti:</h5>
+                                <p>Kumpulan Sorto &amp; Riisto</p>
+                                <h5>Sijainti:</h5>
 
-                            <p>repellendus</p>
-                          </div>
-                        </div>
+                                <p>repellendus</p>
+                              </div>
+                            </div>
+                        <% end %>
                     <% end %>
                 <% end %>
               </div>

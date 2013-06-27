@@ -15,10 +15,10 @@ class PlantsController < ApplicationController
   def index
     respond_to do |format|
 
-      @plants = Plant.order('name ASC').paginate(page: params[:page])
+      @plants = Plant.order('lower(name) ASC').paginate(page: params[:page])
       format.html { render :html => @plants } # index.html.erb
       if params[:page].present?
-        @jsonPlants = Plant.order('name ASC').paginate(page: params[:page], per_page: params[:per_page])
+        @jsonPlants = Plant.order('lower(name) ASC').paginate(page: params[:page], per_page: params[:per_page])
       else
         @jsonPlants = Plant.all
       end
@@ -158,7 +158,7 @@ class PlantsController < ApplicationController
         @plants = @plants.where(:light_id => @lights)
       end
 
-      @plants = @plants.order('name ASC')
+      @plants = @plants.order('lower(name) ASC')
 
       if params[:colour]
 
