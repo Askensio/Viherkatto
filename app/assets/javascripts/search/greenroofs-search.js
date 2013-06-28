@@ -16,8 +16,15 @@ $(document).ready(function () {
 
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
-    console.log(entry)
-    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + 'Käyttäjän ' + entry.user + ' viherkatto paikassa ' + entry.address + '</a>');
+    console.log(entry.address)
+    console.log(entry.locality)
+    var location;
+    if (entry.address.length == 0) {
+        location = entry.locality
+    } else {
+        location = entry.address
+    }
+    var link = $('<a href=\"/' + this.object + 's/' + entry.id + '\">' + 'Omistajan ' + entry.owner + ' viherkatto paikassa ' + location + '</a>');
     listElement.append(link);
 //    console.log(admin)
     if (admin) {

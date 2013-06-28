@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module GreenroofsHelper
 
   def printPlants (greenroof)
@@ -21,15 +23,17 @@ module GreenroofsHelper
   end
 
   def printCustomPlants (greenroof)
-    plants = []
     output = '';
-    greenroof.custom_plants.each { |plant| plants.push((plant.name)) }
-    hash = Hash[plants.map.with_index.to_a]
-    if greenroof.plants.count != 0
-    output << ', '
+    if greenroof.custom_plants.count != 0
+      output << ', '
     end
-    plants.each_with_index { |plant|
-      if hash[plant] < plants.size - 1
+    customPlants = []
+
+    greenroof.custom_plants.each { |plant| customPlants.push((plant.name)) }
+    hash = Hash[customPlants.map.with_index.to_a]
+
+    customPlants.each_with_index { |plant|
+      if hash[plant] < customPlants.size - 1
         output << plant
         output << ', '
 
@@ -39,7 +43,15 @@ module GreenroofsHelper
       end
     }
     output.html_safe
-    end
+  end
+
+  def printAddress(greenroof)
+  if (greenroof.address.blank?)
+    return ""
+  else
+    return greenroof.address + ", "
+  end
+  end
 
 
 
@@ -48,19 +60,19 @@ module GreenroofsHelper
     output = '';
     output.html_safe
     index = 1;
-    greenroof.bases.each_with_index { |base| bases.push("Kerros " << index.to_s << ": " << printLayers(base) << "\n")
+    greenroof.bases.each_with_index { |base| bases.push(printLayers(base))
     index.next
     }
     hash = Hash[bases.map.with_index.to_a]
 
 
-    bases.each_with_index { |plant|
-      if hash[plant] < bases.size - 1
-        output << plant
+    bases.each_with_index { |base|
+      if hash[base] < bases.size - 1
+        output << base
         output << ', '
 
       else
-        output << plant
+        output << base
 
       end
     }
@@ -77,16 +89,26 @@ module GreenroofsHelper
     base.layers.each { |layer| layerpile.push((link_to layer.name, layer_path(layer)).html_safe) }
     hash = Hash[layerpile.map.with_index.to_a]
 
-    layerpile.each_with_index { |plant|
-      if hash[plant] < layerpile.size - 1
-        output << plant
+    layerpile.each_with_index { |layer|
+      if hash[layer] < layerpile.size - 1
+        output << layer
         output << ', '
 
       else
-        output << plant
+        output << layer
 
       end
     }
     output.html_safe
+  end
+
+  def getDeclination(declination)
+    if (declination == 0)
+      return "Tasakatto"
+    elsif (declination == 1)
+      return "Loiva"
+    else
+      return "Jyrkkä"
+    end
   end
  end

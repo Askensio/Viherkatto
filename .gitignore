@@ -23,6 +23,5 @@ doc/
 .idea
 db/.nfs*
 log/.nfs*
-/public/assets
-
-coverage
+/public/greenroofs
+coverage/

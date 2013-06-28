@@ -261,6 +261,8 @@ ul, ol {
   font-family: Arial, Helvetica, Times;
   /*border-style:solid;
   border-width:1px;*/
+  display: block;
+  overflow: auto;
   border-radius: 15px;
   background-color: #DBEDD8;
   padding-left: 10px;
@@ -269,11 +271,15 @@ ul, ol {
   top: 100px;
   li {
     font-size: 0.9em;
-    font-weight: bold;
+    //font-weight: bold;
   }
 
   #theplants {
     line-height: 0.3em;
+    li {
+      padding-bottom: 0.4em;
+      font-size: small;
+    }
   }
 
   #chevrons {
@@ -395,6 +401,13 @@ ul, ol {
     top: -15px;
     right: -15px
   }
+
+  .edit-icon {
+    position: absolute;
+    top: 15px;
+    right: -15px
+  }
+
   i {
     position: absolute;
     top: -5px;
@@ -437,7 +450,6 @@ a {
 #Muokkaabutton {
   margin-left: 75%;
 }
-
 
 // User control label
 .user-controls {
@@ -487,3 +499,30 @@ a {
     margin-bottom: 0.7em;
   }
 }
+
+.link-base-to-plant-button {
+  margin-right: 1em;
+}
+
+.h2left {
+    text-align: left;
+}
+
+.mainWrapper {
+  text-align: center
+}
+
+.centerWrapper {
+  margin: auto
+}
+
+.design-proposal-well {
+  text-align: left
+}
+
+.infocontainer {
+  p {
+    text-indent: 2em;
+  }
+}
+

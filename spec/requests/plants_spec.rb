@@ -5,9 +5,9 @@ require 'spec_helper'
 describe 'Plant pages' do
 
   before do
-    Light.create!(desc: "Varjoisa")
-    Light.create!(desc: "Puolivarjoisa")
-    @light = Light.create!(desc: "Aurinkoinen")
+    Light.create!(value: "Varjoisa")
+    Light.create!(value: "Puolivarjoisa")
+    @light = Light.create!(value: "Aurinkoinen")
 
     GrowthEnvironment.create!(environment: "Heinikko")
     GrowthEnvironment.create!(environment: "Sammalikko")
@@ -78,6 +78,10 @@ describe 'Plant pages' do
       @plant1.maintenance = Maintenance.create!(name: "Helppo")
       @plant1.update_attributes(:light_id => Light.first.id);
       @plant1.growth_environments << GrowthEnvironment.create!(environment: "Ruohikko")
+      @plant1.links << Link.create(name: "eka", link: "http://eka.com")
+      @plant1.links << Link.create(name: "toka", link: "http://toka.com")
+      @plant1.links << Link.create(name: "kolmas", link: "http://kolmas.com")
+      @plant1.colours << Colour.create(value: "Sininen")
       @plant1.save
     end
 
@@ -91,6 +95,7 @@ describe 'Plant pages' do
       it { should have_selector('h1', text: 'Example Plant') }
       it { should have_selector('title', text: 'Kasvinäkymä') }
       it { should have_selector('label', for: 'plant_latin_name') }
+      it { should have_selector('label', for: 'plant_links') }
       it { should have_selector('label', content: 'Plantus Examplus') }
       it { should_not have_selector('a', text: "Muokkaa") }
     end
@@ -128,6 +133,76 @@ describe 'Plant pages' do
 
       it { should have_selector("title", :content => "Kasvit") }
       it { should have_selector("a", :content => "Example Plant") }
+
+      describe "deleting plant works" do
+        before do
+          before do
+            click_link plant_path(@plant1.id)
+          end
+
+          it { should_not have_selector("a", :content => "Example Plant") }
+        end
+      end
+
+    end
+
+    describe "search-page" do
+
+      before { visit '/search/plants' }
+
+      it { should have_selector("title", :content => "Kasvien haku") }
+
+      describe "when nothing is selected a plant is found" do
+
+        before { click_link "Hae" }
+
+        it { should have_selector("title", :content => "Kasvien haku") }
+        it { should have_selector("a", :content => @plant1.name) }
+      end
+
+      describe "when correct name is selected a plant is found" do
+        before do
+          fill_in "name", with: @plant1.name
+          click_link "Hae"
+        end
+
+        it { should have_selector("a", :content => @plant1.name) }
+      end
+
+      describe "when correct latin name is selected a plant is found" do
+        before do
+          fill_in "latin_name", with: @plant1.latin_name
+          click_link "Hae"
+          #@linkki = "/plants/" + @plant1.id.to_s
+        end
+
+        it { should have_selector("a", :content => @plant1.name) }
+      end
+
+      describe "when multiple attributes are selected a plant is found" do
+        before do
+          fill_in "latin_name", with: @plant1.latin_name
+          fill_in "latin_name", with: @plant1.latin_name
+          select "Sammalikko", :from => "growth_environments_id"
+          select "Sininen", :from => "colour_id"
+
+          click_link "Hae"
+        end
+
+        it { should have_selector("a", :content => @plant1.name) }
+      end
+
+      describe "when too strict search parameters are given nothing is found" do
+        before do
+          visit '/search/plants'
+          fill_in "name", with: "trololo"
+
+          click_link "Hae"
+        end
+
+        it { should_not have_selector("a", :text => @plant1.name) }
+
+      end
     end
   end
 end

@@ -1,0 +1,88 @@
+<% provide(:title, 'Viherkaton suunnittelu') %>
+
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
+
+<div class="row span10 text-center" style="margin-bottom: 3em; margin-top: 2em">
+  <button class="btn btn-large btn-custom" id="generate-button">Generoi suunitelma</button>
+</div>
+
+<div class="row">
+  <div class="row span6">
+    <div class="span5">
+      <h2>Kattosi tiedot</h2>
+
+      <%= fields_for (@roof) do |f| %>
+
+          <%= f.label :load_capacity, h('Kantavuus kg/m2') %>
+          <%= f.text_field :load_capacity %>
+
+          <%= f.label :environment, h('Sijainti') %>
+
+          <%= collection_select :environment, :id, Environment.all, :id, :name,
+                                {}, :title => "Valitse miljöö", :class => "selectpicker show-menu-arrow show-tick span5 chosen-env envs", :multiple => true, :required => true %>
+
+      <% end %>
+
+    </div>
+
+    <div class="span5">
+      <h2>Viherkatolle haluamasi kasvit</h2>
+
+      <div data-id="plant" id="search-form">
+
+        <label>Kasvin nimi:</label>
+        <input type="text" class="search-input" name="name" data-id="name">
+
+        <label>Värit:</label>
+        <%= collection_select(:colour, :id, Colour.all,
+                              :id, :value, {}, :class => "selectpicker show-menu-arrow show-tick span5 search-input", 'data-id' => "colour",
+                              :title => "Kukkien värit", :multiple => true) %>
+
+        <label>Ympäristö:</label>
+        <%= collection_select(:growth_environments, :id, GrowthEnvironment.all,
+                              :id, :environment, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'growth_environment',
+                              :title => "Kasvien kasvuympäristö", :multiple => true) %>
+
+        <label>Valoisuus:</label>
+        <%= collection_select(:light, :id, Light.all, :id, :value, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'lightness',
+                              :title => "Katon valoisuus", :multiple => true) %>
+
+        <label>Hoidon tarve:</label>
+        <%= collection_select(:maintenances, :id, Maintenance.all,
+                              :id, :name, {}, :class => "selectpicker show-menu-arrow span5 search-input", 'data-id' => 'maintenance',
+                              :title => "Kasvien tarvitsema hoidon aste", :multiple => true) %>
+
+        <div class="span5 pull left" style="margin-bottom:1em;margin-left:0px">
+          <button class="btn btn-small btn-custom pull-left" name="hae">Hae</button>
+        </div>
+
+        <p class="pagination"></p>
+
+        <p class="content"></p>
+        <section data-object="plant" data-id="list-section">
+          <img id="loading-icon" class="loading-icon" src="/assets/ajax-loader.gif"/>
+          <ul class="plant-list list">
+          </ul>
+        </section>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span5">
+      <h2>Valitsemasi kasvit</h2>
+      <ul class="list" id="selected-plants">
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<%= javascript_include_tag "bootstrap-select" %>
+<script>$('.selectpicker').selectpicker();</script>
+
+<%= javascript_include_tag "search/search" %>
+<%= javascript_include_tag "pagination/bootpag" %>
+<%= javascript_include_tag "search/design-plants-search" %>
+<%= javascript_include_tag "pagination/paginator" %>

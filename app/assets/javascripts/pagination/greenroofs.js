@@ -35,18 +35,23 @@ ModalController.prototype.setListeners = function (paginator) {
 }
 
 var addElement = function (entry, admin) {
+    console.log(entry)
     var mainElement = $('<div></div>').attr('class', 'hero-unit greenroof-list-hero-unit span4');
     var thumbnailElement = $('<div></div>').attr('class', 'thumbnail pull-left')
-    var thumbnail = $('<img />').attr('src', '/assets/ei_kuvaa_placeholder.gif')
+    var thumbnail = $('<img />').attr('src', '/assets/no_image_small.jpg')
+    if( entry.thumb ) {
+        thumbnail.attr('src', '/greenroofs/photos/' + entry.id + '/' + entry.thumb)
+    }
     thumbnailElement.append(thumbnail)
     mainElement.append(thumbnailElement)
 
     var infoElement = $('<div></div>')
     var ownerHeading = $('<h5>Omistaja:</h5>')
     var owner = $('<p></p>').append(entry.user)
+    console.log(entry.owner.toString())
     infoElement.append(ownerHeading).append(owner)
     var addressHeading = $('<h5>Sijainti:</h5>')
-    var address = $('<p></p>').append(entry.address)
+    var address = $('<p></p>').append(entry.locality)
     infoElement.append(addressHeading).append(address)
 
     mainElement.click(function (event) {
@@ -54,7 +59,7 @@ var addElement = function (entry, admin) {
     })
     mainElement.attr('style', 'cursor: pointer;')
 
-    if (admin) {
+    if (admin || entry.creator) {
         var deleteElement = $('<a href=\"#\"\"></a>')
         deleteElement.attr('class', 'pull-right')
         var removeElement = $('<img />').attr({
@@ -72,9 +77,18 @@ var addElement = function (entry, admin) {
         })
 
         removeElement.attr('style', 'cursor: pointer;')
+        var editElement = $('<a href=/greenroofs/'+entry.id+ '/edit/></a>')
+        editElement.attr('class', 'pull-right')
+        var editButton  = $('<img />').attr({
+            class: 'edit-icon',
+            src: '/assets/edit-icon.png',
+            id: entry.id
+        })
 
         deleteElement.append(removeElement)
         mainElement.append(deleteElement)
+        editElement.append(editButton)
+        mainElement.append(editElement)
     }
 
     mainElement.append(infoElement)

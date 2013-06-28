@@ -1,0 +1,89 @@
+<% provide(:title, 'Suunitelmat') %>
+
+<div class="text-center">
+  <%= link_to "Palaa", "/suunnittele", class: "btn btn-medium btn-custom span2 floating-return-button" %>
+</div>
+<div class="container">
+
+  <% if @bases.empty? %>
+      <h1> Antamillasi kriteereillä ei löydy yhtään ehdotusta. </h1>
+  <% else %>
+      <h1>Suunnitteluehdotuksia</h1>
+  <% end %>
+  <ul class="list">
+
+    <% @bases.each do |base| %>
+
+        <li class="span13">
+          <h3><%= base.name %></h3>
+
+          <div class="mainWrapper">
+            <div class="centerWrapper" style="margin:auto">
+
+              <div class="well span3 design-proposal-well">
+                <% unless base.absorbancy.nil? %>
+                    <label><b style="display:inline;">Vedenpidätys:</b>
+
+                      <p style="display:inline;"><%= raw base.absorbancy %> l/m2</p></label>
+                <% end %>
+                <% base.layers.each do |layer| %>
+
+                    <h4><%= layer.name %></h4>
+                    <% unless layer.product_name.nil? %>
+                        <label><b>Tuotteen nimi:</b> </label>
+
+                        <p><%= layer.product_name %></p>
+                    <% end %>
+                    <label><b style="display:inline;">Paksuus:</b>
+
+                      <p style="display:inline;"><%= raw layer.thickness %> cm</p></label>
+                    <label><b style="display:inline;">Paino:</b>
+
+                      <p style="display:inline;"><%= raw layer.weight %> kg/m2</p></label>
+                <% end %>
+              </div>
+
+              <div class="well span3 design-proposal-well">
+                <h4>Ratkaisuun sopivia kasveja:</h4>
+                <% base.plants.all(:order => "lower(name)").each do |plant| %>
+                    <label>-  <%= link_to plant.name, plant_path(plant), :target => "_blank" %></label>
+                <% end %>
+              </div>
+
+              <div class="span4 design-proposal-well">
+                <h5>Vastaavanlaisia rakennettuja:</h5>
+
+                <% greenroofs = get_matching_greenroofs base %>
+                <% if greenroofs.nil? || greenroofs.empty? %>
+                    <label>Vastaavanlaisia valmiita viherkattoja ei löytynyt.</label>
+                <% else %>
+                    <% greenroofs.each do |groof| %>
+                        <%= link_to '/greenroofs/' + groof.id.to_s,  :target => "_blank" do %>
+                            <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
+                              <div class="thumbnail pull-left">
+                                <% unless groof.images.first.nil? %>
+                                    <img src="greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.first.thumb %>">
+                                <% else %>
+                                    <img src="assets/no_image_small.jpg">
+                                <% end %>
+                              </div>
+                              <div>
+                                <h5>Omistaja:</h5>
+
+                                <p><%= groof.owner %></p>
+                                <h5>Sijainti:</h5>
+
+                                <p><%= groof.locality %></p>
+                              </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </li>
+    <% end %>
+  </ul>
+
+</div>
