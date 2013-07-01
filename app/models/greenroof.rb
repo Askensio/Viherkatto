@@ -1,5 +1,4 @@
 #encoding: utf-8
-
 class Greenroof < ActiveRecord::Base
 
   include ActiveModel::Validations
