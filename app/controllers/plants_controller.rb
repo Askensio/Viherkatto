@@ -6,11 +6,14 @@ class PlantsController < ApplicationController
 
   before_filter :admin_user, only: [:new, :create, :update, :destroy, :edit]
 
-  #respond_to :html, :xml, :json
+  # Controller function for plant show, returns plant of given parameters
 
   def show
     @plant = Plant.find(params[:id])
   end
+
+  # Controller function for index page. Renders into json, also enables possibility
+  # to find plants by their names
 
   def index
     respond_to do |format|
@@ -38,12 +41,16 @@ class PlantsController < ApplicationController
     end
   end
 
+  # Controller function for new plant page
+
   def new
     @plant = Plant.new
     3.times do
       @plant.links.build
     end
   end
+
+  # Controller function for editing plant page
 
   def edit
     @plant = Plant.find(params[:id])
@@ -53,6 +60,11 @@ class PlantsController < ApplicationController
       end
     end
   end
+
+  # Controller function for creating of plant. Creates a new plant from given
+  # parameters and then uses processAssociatedParams function to update attributes
+  # and to keep function shorter. On succesful save redirects to plants index,
+  # otherwise renders new
 
   def create
     @plant = Plant.new(params[:plant])
@@ -70,9 +82,13 @@ class PlantsController < ApplicationController
     end
   end
 
+  # Controller function for updating a plant. Updates a plant with given
+  # parameters and then uses processAssociatedParams function to update
+  # attributes and to keep function shorter. On succesful save redicts to plants
+  # show page, otherwise renders edit
+
   def update
     @plant = Plant.find(params[:id])
-
 
     processAssociatedParams
 
@@ -82,6 +98,10 @@ class PlantsController < ApplicationController
       render 'edit'
     end
   end
+
+  # Destroy function to delete plants. Takes plant id as parameters and
+  # then tries to find it and calls its destroy function. Then returns appropriate
+  # response string
 
   def destroy
     respond_to do |format|
@@ -95,6 +115,10 @@ class PlantsController < ApplicationController
     #render :nothing => true
   end
 
+  # Enables searching for plants. Gets a list of parameters from where each
+  # are checked one by one and the list of remaining plants are narrowed down.
+  # Renders the remaining data into json.
+
   def search
     respond_to do |format|
 
@@ -102,24 +126,25 @@ class PlantsController < ApplicationController
 
       @plants = Plant.scoped
 
+      # Compares given attributes if params are given, otherwise narrowing of the
+      # list is skipped
+
       @plants = @plants.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
       @plants = @plants.where('latin_name like ?', '%' + params[:latin_name].downcase + '%') if params[:latin_name]
       @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness]) if params[:min_thickness]
       @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness]) if params[:max_thickness]
-
       @plants = @plants.where('max_height <= ?', params[:max_height]) if params[:max_height]
       @plants = @plants.where('min_height >= ?', params[:min_height]) if params[:min_height]
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
       if params[:growth_environment]
-        # Fixes the parameter encoding and downcases the colours.
+        # Fixes the parameter encoding and downcases the growth environments.
         index = 0
         until index == params[:growth_environment].length
           params[:growth_environment][index] = params[:growth_environment][index].force_encoding('iso-8859-1').encode('utf-8').downcase
           index += 1
         end
-
         plant_indexes = Array.new
 
         params[:growth_environment].each do |env|
@@ -143,12 +168,10 @@ class PlantsController < ApplicationController
       end
 
       if (params[:lightness])
-
         @lights = []
         Light.where(:value => params[:lightness]).each do |id|
           @lights.push(id)
         end
-        #puts @lights
         @plants = @plants.where(:light_id => @lights)
       end
 
@@ -186,6 +209,13 @@ class PlantsController < ApplicationController
 
   private
 
+  # Helper methods for updating plants.
+  #
+  # Handles updating of attributes by checking if parameters are given
+  # and then updating the attribute.
+
+  # Calls all the processing methods and manages updating attributes
+
   def processAssociatedParams
     @plant.light = Light.find_by_id(params[:light][:id])
     processColours
@@ -195,6 +225,8 @@ class PlantsController < ApplicationController
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
     end
   end
+
+  # Handles the updating of Growth Environments
 
   def processGrowthEnvironments
     params[:growth_environments][:id].shift
@@ -209,6 +241,8 @@ class PlantsController < ApplicationController
     end
   end
 
+  # Handles the updating of colours
+
   def processColours
     params[:colour][:id].shift
     if not params[:colour][:id].empty?
@@ -221,6 +255,8 @@ class PlantsController < ApplicationController
       end
     end
   end
+
+  # Handles the updating of links
 
   def processLinks
     if params[:plant][:links_attributes]
