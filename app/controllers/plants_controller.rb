@@ -99,7 +99,9 @@ class PlantsController < ApplicationController
     end
   end
 
-
+  # Destroy function to delete plants. Takes plant id as parameters and
+  # then tries to find it and calls its destroy function. Then returns appropriate
+  # response string
 
   def destroy
     respond_to do |format|
@@ -124,11 +126,13 @@ class PlantsController < ApplicationController
 
       @plants = Plant.scoped
 
+      # Compares given attributes if params are given, otherwise narrowing of the
+      # list is skipped
+
       @plants = @plants.where('name like ?', '%' + params[:name].downcase + '%') if params[:name]
       @plants = @plants.where('latin_name like ?', '%' + params[:latin_name].downcase + '%') if params[:latin_name]
       @plants = @plants.where('min_soil_thickness > ?', params[:min_thickness]) if params[:min_thickness]
       @plants = @plants.where('min_soil_thickness < ?', params[:max_thickness]) if params[:max_thickness]
-
       @plants = @plants.where('max_height <= ?', params[:max_height]) if params[:max_height]
       @plants = @plants.where('min_height >= ?', params[:min_height]) if params[:min_height]
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
@@ -141,7 +145,6 @@ class PlantsController < ApplicationController
           params[:growth_environment][index] = params[:growth_environment][index].force_encoding('iso-8859-1').encode('utf-8').downcase
           index += 1
         end
-
         plant_indexes = Array.new
 
         params[:growth_environment].each do |env|
@@ -165,7 +168,6 @@ class PlantsController < ApplicationController
       end
 
       if (params[:lightness])
-
         @lights = []
         Light.where(:value => params[:lightness]).each do |id|
           @lights.push(id)
