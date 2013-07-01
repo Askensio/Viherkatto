@@ -6,9 +6,14 @@ class PlantsController < ApplicationController
 
   before_filter :admin_user, only: [:new, :create, :update, :destroy, :edit]
 
+  # Controller function for plant show, returns plant of given parameters
+
   def show
     @plant = Plant.find(params[:id])
   end
+
+  # Controller function for index page. Renders into json, also enables possibility
+  # to find plants by their names
 
   def index
     respond_to do |format|
@@ -36,12 +41,16 @@ class PlantsController < ApplicationController
     end
   end
 
+  # Controller function for new plant page
+
   def new
     @plant = Plant.new
     3.times do
       @plant.links.build
     end
   end
+
+  # Controller function for editing plant page
 
   def edit
     @plant = Plant.find(params[:id])
@@ -51,6 +60,11 @@ class PlantsController < ApplicationController
       end
     end
   end
+
+  # Controller function for creating of plant. Creates a new plant from given
+  # parameters and then uses processAssociatedParams function to update attributes
+  # and to keep function shorter. On succesfull save redicted to plants index,
+  # otherwise renders new
 
   def create
     @plant = Plant.new(params[:plant])
@@ -92,6 +106,10 @@ class PlantsController < ApplicationController
     #render :nothing => true
   end
 
+  # Enables searching for plants. Gets a list of parameters from where each
+  # are checked one by one and the list of remaining plants are narrowed down.
+  # Renders the remaining data into json.
+
   def search
     respond_to do |format|
 
@@ -110,7 +128,7 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
       if params[:growth_environment]
-        # Fixes the parameter encoding and downcases the colours.
+        # Fixes the parameter encoding and downcases the growth environments.
         index = 0
         until index == params[:growth_environment].length
           params[:growth_environment][index] = params[:growth_environment][index].force_encoding('iso-8859-1').encode('utf-8').downcase
@@ -183,6 +201,9 @@ class PlantsController < ApplicationController
   private
 
   # Helper methods for updating plants.
+  #
+  # Handles updating of attributes by checking if parameters are given
+  # and then updating the attribute.
 
   # Calls all the processing methods and manages updating attributes
 
