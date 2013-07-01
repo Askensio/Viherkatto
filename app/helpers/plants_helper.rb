@@ -4,6 +4,7 @@
 
 module PlantsHelper
 
+  # Helper function to list all environment id's
   def listSelectedEnvironments (environments)
     envs = []
     environments.each do |env|
@@ -12,6 +13,7 @@ module PlantsHelper
     return envs
   end
 
+  # Helper function to list all environments
   def printEnvironments (environments)
     envs = ""
     counter = 1
@@ -23,9 +25,5 @@ module PlantsHelper
       counter += 1
     end
     return envs
-  end
-
-  def colour_categories
-    I18n.t(:colour_categories).map { |key, value| [value, key.to_s] }
   end
 end

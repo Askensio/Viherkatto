@@ -138,6 +138,7 @@ class PlantsController < ApplicationController
       @plants = @plants.where('weight <= ?', params[:max_weight]) if params[:max_weight]
       @plants = @plants.where('weight >= ?', params[:min_weight]) if params[:min_weight]
 
+      # --- Checks if growth environment is given as parameter and compares to given params
       if params[:growth_environment]
         # Fixes the parameter encoding and downcases the growth environments.
         index = 0
@@ -159,6 +160,7 @@ class PlantsController < ApplicationController
         @plants = @plants.where(:id => plant_indexes)
       end
 
+      # --- Checks if maintenance is given as parameter and compares to given params
       if (params[:maintenance])
         @maints = []
         Maintenance.where(:name => params[:maintenance]).each do |id|
@@ -167,6 +169,7 @@ class PlantsController < ApplicationController
         @plants = @plants.where(:maintenance_id => @maints)
       end
 
+      # --- Checks if lightness is given as parameter and compares to given params
       if (params[:lightness])
         @lights = []
         Light.where(:value => params[:lightness]).each do |id|
@@ -177,6 +180,7 @@ class PlantsController < ApplicationController
 
       @plants = @plants.order('lower(name) ASC')
 
+      # --- Checks if colour is given as parameter and compares to given params
       if params[:colour]
 
         # Fixes the parameter encoding and downcases the colours.
@@ -185,7 +189,6 @@ class PlantsController < ApplicationController
           params[:colour][index] = params[:colour][index].force_encoding('iso-8859-1').encode('utf-8').downcase
           index += 1
         end
-
         plant_indexes = Array.new
 
         params[:colour].each do |colour|
@@ -197,9 +200,7 @@ class PlantsController < ApplicationController
           end
           plant_indexes = plant_indexes | temp_array
         end
-
         @plants = @plants.where(:id => plant_indexes)
-
       end
 
       @plants = @plants.paginate(page: params[:page], per_page: params[:per_page]) unless @plants.nil?
