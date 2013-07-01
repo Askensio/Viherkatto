@@ -94,10 +94,17 @@
         <td>
           <% for i in 0..2 %>
               <% if !@plant.links[i].nil? && !@plant.links[i].link.empty? %>
+                  <% @link = @plant.links[i].link
+
+                     unless @link[/^http:\/\//] || @link[/^https:\/\//]
+                       @link = 'http://' + @link
+                     end
+                  %>
+
                   <%= if @plant.links[i].name.empty?
-                        link_to @plant.links[i].link, @plant.links[i].link
+                        link_to @link, @link
                       else
-                        link_to @plant.links[i].name, @plant.links[i].link
+                        link_to @plant.links[i].name, @link
                       end %>
                   <br>
               <% end %>
