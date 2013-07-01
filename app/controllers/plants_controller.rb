@@ -71,7 +71,6 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
 
-
     processAssociatedParams
 
     if @plant.update_attributes(params[:plant]) && @plant.update_attribute(:light_id, params[:light][:id])
@@ -146,7 +145,6 @@ class PlantsController < ApplicationController
         Light.where(:value => params[:lightness]).each do |id|
           @lights.push(id)
         end
-        #puts @lights
         @plants = @plants.where(:light_id => @lights)
       end
 
@@ -184,6 +182,10 @@ class PlantsController < ApplicationController
 
   private
 
+  # Helper methods for updating plants.
+
+  # Calls all the processing methods and manages updating attributes
+
   def processAssociatedParams
     @plant.light = Light.find_by_id(params[:light][:id])
     processColours
@@ -193,6 +195,8 @@ class PlantsController < ApplicationController
       @plant.maintenance = Maintenance.find_by_id(params[:maintenances][:id])
     end
   end
+
+  # Handles the updating of Growth Environments
 
   def processGrowthEnvironments
     params[:growth_environments][:id].shift
@@ -207,6 +211,8 @@ class PlantsController < ApplicationController
     end
   end
 
+  # Handles the updating of colours
+
   def processColours
     params[:colour][:id].shift
     if not params[:colour][:id].empty?
@@ -219,6 +225,8 @@ class PlantsController < ApplicationController
       end
     end
   end
+
+  # Handles the updating of links
 
   def processLinks
     if params[:plant][:links_attributes]
