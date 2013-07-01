@@ -1,3 +1,6 @@
+# Every Plant is associated with many different growth environments which can
+# be added by using console.
+
 class GrowthEnvironment < ActiveRecord::Base
   attr_accessible :environment
 

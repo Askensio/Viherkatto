@@ -1,3 +1,6 @@
+# Every plant is associated with single or multiple maintenances. New types of
+# maintenances can be added with console.
+
 class Maintenance < ActiveRecord::Base
   has_many :plants
 
