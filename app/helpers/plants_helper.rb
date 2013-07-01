@@ -25,7 +25,7 @@ module PlantsHelper
     return envs
   end
 
-  def colour_categories
-    I18n.t(:colour_categories).map { |key, value| [value, key.to_s] }
-  end
+  #def colour_categories
+  #  I18n.t(:colour_categories).map { |key, value| [value, key.to_s] }
+  #end
 end
