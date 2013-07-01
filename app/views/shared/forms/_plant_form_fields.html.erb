@@ -17,16 +17,21 @@
     <%= collection_select(:light, :id, Light.all,
                           :id, :value, {:selected => @plant.light_id}, :class => "selectpicker show-menu-arrow span5") %>
 
+    <!-- Collection select for growth environments, if nothing is selected the
+         first is shown, otherwise the second -->
+
     <%= f.label :growth_environment %>
     <%= if @plant.growth_environments.empty?
 
           collection_select(:growth_environments, :id, GrowthEnvironment.all,
                             :id, :environment, {}, :class => "selectpicker show-menu-arrow span5", :title => "Valitse kasvin kasvuympäristö", :multiple => true)
-
         else
           collection_select(:growth_environments, :id, GrowthEnvironment.all,
                             :id, :environment, {:selected => listSelectedEnvironments(@plant.growth_environments)}, :class => "selectpicker show-menu-arrow span5", :multiple => true)
         end %>
+
+    <!-- Collection select for maintenances, if nothing is selected the
+         first is shown, otherwise the second -->
 
     <%= f.label :maintenance %>
     <%= if @plant.maintenance.nil?
@@ -52,6 +57,8 @@
     <%= f.label "weight (kg/m2)" %>
     <%= f.text_field :weight %>
 
+    <!-- Links are hardcoded to have maximum of three links, if empty links are
+         handled in show by checking emptyness and not showing anything.-->
 
     <div class="row">
       <div class="span2"><%= f.label "Linkin nimi" %></div>
@@ -68,6 +75,9 @@
 
     <%= f.label :note %>
     <%= f.text_area :note, style: 'height: 100px' %>
+
+    <!-- If title equals "Kasvin lisäys", then we're on add plants page and so
+         the button says "Lisää uusi kasvi", otherwise we're on edit page. -->
 
     <%=
         if ((content_for :title) == "Kasvien lisäys")

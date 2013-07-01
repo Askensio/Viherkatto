@@ -13,6 +13,10 @@
           <td><%= f.label :latin_name %></td>
           <td><%= f.label @plant.latin_name %></td>
         </tr>
+
+        <!-- If colours size is larger than 0 then each colour is
+             appended and shown to the user -->
+
         <% if @plant.colours.size > 0 %>
             <tr>
               <td><%= f.label :colour %></td>
