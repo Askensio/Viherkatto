@@ -6,8 +6,6 @@ class PlantsController < ApplicationController
 
   before_filter :admin_user, only: [:new, :create, :update, :destroy, :edit]
 
-  #respond_to :html, :xml, :json
-
   def show
     @plant = Plant.find(params[:id])
   end

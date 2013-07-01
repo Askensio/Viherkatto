@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+# Helper methods for plants
+
 module PlantsHelper
 
   def listSelectedEnvironments (environments)
