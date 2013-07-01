@@ -5,7 +5,7 @@ require 'RMagick'
 class GreenroofsController < ApplicationController
 
   before_filter :signed_user, only: [:new, :create]
-  before_filter :ownerOrAdmin, only: [:edit, :removeImage]
+  before_filter :ownerOrAdmin, only: [:edit, :removeImage, :destroy, :upload]
 
 
   def search
@@ -242,7 +242,7 @@ class GreenroofsController < ApplicationController
   def upload
     redirect_to_groof_show = false
     @groof = Greenroof.find_by_id(params[:id])
-    return unless @groof.user.id == current_user.id || current_user.admin
+
     unless params["file-0"].nil?
 
       # The path to the directory for the photos of the created greenroof.
@@ -295,10 +295,6 @@ class GreenroofsController < ApplicationController
 
   def removeImage
     @groof = Greenroof.find(params[:id])
-    if not (signed_in? && (current_user == @groof.user || current_user.admin?))
-      redirect_to root_path
-      return
-    end
     if not (@groof.images.first.nil?)
 
 
@@ -312,9 +308,6 @@ class GreenroofsController < ApplicationController
       @groof.images.first.delete
     end
       redirect_to greenroof_path(@groof)
-
-
-
   end
 
 
@@ -417,7 +410,7 @@ class GreenroofsController < ApplicationController
   private
 
   def ownerOrAdmin
-    unless signed_in? && Greenroof.find_by_id(params[:id]).user_id == current_user.id || current_user.admin?
+    if not signed_in? && (Greenroof.find_by_id(params[:id]).user_id == current_user.id || current_user.admin?)
       redirect_to root_url
     end
   end
