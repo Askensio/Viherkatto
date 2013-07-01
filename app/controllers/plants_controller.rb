@@ -63,7 +63,7 @@ class PlantsController < ApplicationController
 
   # Controller function for creating of plant. Creates a new plant from given
   # parameters and then uses processAssociatedParams function to update attributes
-  # and to keep function shorter. On succesfull save redicted to plants index,
+  # and to keep function shorter. On succesful save redirects to plants index,
   # otherwise renders new
 
   def create
@@ -82,6 +82,11 @@ class PlantsController < ApplicationController
     end
   end
 
+  # Controller function for updating a plant. Updates a plant with given
+  # parameters and then uses processAssociatedParams function to update
+  # attributes and to keep function shorter. On succesful save redicts to plants
+  # show page, otherwise renders edit
+
   def update
     @plant = Plant.find(params[:id])
 
@@ -93,6 +98,8 @@ class PlantsController < ApplicationController
       render 'edit'
     end
   end
+
+
 
   def destroy
     respond_to do |format|
