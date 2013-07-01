@@ -23,8 +23,13 @@
               </li>
           <% end %>
         </ul>
+        <% if (signed_in? && (current_user == @greenroof.user || current_user.admin?)) && !@greenroof.images.first.nil? %>
+        <%= link_to "Poista kuva", removeImage_greenroof_path%>
+            <% end %>
       </div>
+
     </div>
+
     <%= fields_for(@greenroof) do |f| %>
         <table class="table span5">
           <tr>
@@ -142,8 +147,6 @@
           <% end %>
           <% if signed_in? && current_user.admin? || signed_in? && current_user.id == @greenroof.user_id %>
               <td><%= link_to "Muokkaa", edit_greenroof_path(@greenroof), class: "btn btn-large btn-custom", id: "Muokkaabutton" %></td>
-          <% else %>
-              <td><a class="btn btn-large btn-custom disabled" id="Muokkaabutton">Muokkaa</a></td>
           <% end %>
         </table>
 

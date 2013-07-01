@@ -25,6 +25,7 @@ Viherkatto::Application.routes.draw do
   #match '/add_greenroof', to: 'greenroof#new'
 
 
+
   match '/about' => 'pages#about'
   match '/info' => 'pages#info'
   get 'pages/home'
@@ -46,6 +47,7 @@ Viherkatto::Application.routes.draw do
   resources :greenroofs do
     member do
       post 'upload'
+      get 'removeImage'
     end
   end
 
