@@ -1,5 +1,7 @@
+
 <%= form_for(@plant) do |f| %>
     <%= render 'shared/error_plants' %>
+<div>
     <table class="table">
       <tr>
         <td><%= f.label :name %></td>
@@ -105,43 +107,43 @@
         </td>
       </tr>
     </table>
-
-    <div class="row">
+<div class="row">
       <% if signed_in? && current_user.admin? %>
           <%= link_to "Muokkaa", edit_plant_path(@plant), class: "btn btn-large btn-custom" %>
       <% end %>
       <%= link_to "Takaisin selaukseen", plants_path, class: "btn btn-large btn-custom" %>
     </div>
-
-    <h4>
-      Tämä kasvi löytyy esimerkiksi seuraavilta viherkatoilta
-    </h4>
-    <ul class="unstyled">
-      <% if @plant.greenroofs.empty? %>
-          <td> Tätä kasvia ei löydy yhdeltäkään viherkatolta</td>
-      <% else %>
-          <% @plant.greenroofs.all(:limit => 3).each do |groof| %>
-              <li><%= link_to "Käyttäjän " + groof.user.name + " viherkatto", url_for(groof) %></li>
-          <% end %>
-      <% end %>
-    </ul>
+</div>
 
     </div>
 
-    <!--        <div class="span5">
-          <legend>
-            <h4>
-              Tämä kasvi löytyy mm. seuraavilta viherkatoilta
-            </h4>
-          </legend>
-          <% if @plant.greenroofs.empty? %>
-              <td> Tätä kasvia ei löydy yhdeltäkään viherkatolta</td>
-          <% else %>
-        <% @plant.greenroofs.all(:limit => 3).each do |groof| %>
-                  <ul class="unstyled">
-                    <td><%= link_to "Käyttäjän " + groof.user.name + " viherkatto", url_for(groof) %></td>
-                  </ul>
-              <% end %>
-    <% end %>
-        </div>-->
+<div>
+    <h4>
+      Tämä kasvi löytyy esimerkiksi seuraavilta viherkatoilta
+    </h4>
+<% if @plant.greenroofs.empty? %>
+                    <label>Tätä kasvia ei löydy yhdeltäkään viherkatolta.</label>
+                <% else %>
+                    <% @plant.greenroofs.all(:limit => 3).each do |groof| %>
+                        <%= link_to '/greenroofs/' + groof.id.to_s,  :target => "_blank" do %>
+                            <div class="hero-unit greenroof-list-hero-unit span4" style="cursor: pointer;">
+                              <div class="thumbnail pull-left">
+                                <% unless groof.images.first.nil? %>
+                                    <img src="greenroofs/photos/<%= groof.id.to_s + "/" + groof.images.first.thumb %>">
+                                <% else %>
+                                    <img src="/assets/no_image_small.jpg">
+                                <% end %>
+                              </div>
+                              <div>
+                                <h5>Omistaja:</h5>
+
+                                <p><%= groof.owner %></p>
+                                <h5>Sijainti:</h5>
+
+                                <p><%= groof.locality %></p>
+                              </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
 <% end %>
