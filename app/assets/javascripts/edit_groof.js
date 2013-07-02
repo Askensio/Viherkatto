@@ -28,7 +28,6 @@ $(document).ready(function () {
             $('.purpose').empty()
             $('.purpose').append("Käyttötarkoitus: " + ($("#purpose_id").find(":selected").text() + " "));
 
-
             var id = $('#form').attr('data-for')
 
             var addedPlants = []
@@ -43,13 +42,12 @@ $(document).ready(function () {
                     var id = plant_object["id"]
                     plantHandler.push(id)
 
-
                     var listElement = $('<li></li>');
                     var plant = $('<a href="/plants/' + id + '">' + (plant_object["name"]) + '</a>');
 
                     plant.click(
                         function (e) {
-                            // e.target.remove()
+                            // Magically needs empty function to work
                         }
                     );
 
@@ -66,11 +64,6 @@ $(document).ready(function () {
                     listElement.append(plant.attr('id', 'selected_plant_id_' + plant.attr("id")));
                     listElement.append('<br>');
                     $('.chosen-list').append(listElement);
-                    //console.log(parent)
-                    //console.log(addedPlants)
-                    //parent.remove()
-
-
                 })
             })
 
@@ -114,24 +107,6 @@ function sendEditData(data) {
         }
     });
 }
-
-/*function sendEditImage(imageData, id) {
- $.ajax({
- url: '/greenroofs/' +id + '/upload',
- type: 'PUT',
- data: imageData,
- cache: false,
- contentType: false,
- processData: false,
- beforeSend: function (xhr) {
- xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
- },
- success: function (response) {
- console.log(response)
- }
- });
- }*/
-
 
 function determineDeclination() {
     var input = $("#roof_declination").val();

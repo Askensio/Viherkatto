@@ -4,10 +4,13 @@ class BasesController < ApplicationController
 
   before_filter :admin_user
 
+  # Prepares a new base for adding
   def new
     @base = Base.new
   end
 
+  # Handles the creation event of a new Base and if layer parameters are given
+  # appends all given layers
   def create
     @base = Base.new(params[:base])
 
@@ -25,6 +28,7 @@ class BasesController < ApplicationController
     end
   end
 
+  # Index function for listing of Bases
   def index
     respond_to do |format|
       #@bases = Base.paginate(page: params[:page])
@@ -42,6 +46,7 @@ class BasesController < ApplicationController
     end
   end
 
+  # Controller function for showing a base given as parameter
   def show
     @base = Base.find(params[:id])
     unless @base.greenroof_id.nil?
@@ -53,6 +58,7 @@ class BasesController < ApplicationController
     end
   end
 
+  # Takes plant_id and base as a parameter and attaches plant to base
   def attach
     @plant = Plant.find(params[:plant_id])
     @base = Base.find(params[:id])
@@ -67,6 +73,7 @@ class BasesController < ApplicationController
     end
   end
 
+  # Takes plant_id and base as a parameter and removes given plant from given base
   def detach
 
     base = Base.find(params[:id])
@@ -80,6 +87,7 @@ class BasesController < ApplicationController
     end
   end
 
+  # Controller function for removing a Base
   def destroy
     respond_to do |format|
       if Base.find(params[:id]).destroy
