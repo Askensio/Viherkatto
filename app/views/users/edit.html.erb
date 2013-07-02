@@ -1,5 +1,5 @@
 <% provide(:title, "Muokkaa tietoja") %>
-<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 <h1>Päivitä tietojasi täältä</h1>
 
 <div class="row">
@@ -8,23 +8,24 @@
         <%= render 'shared/error_messages' %>
 
         <%= f.label :name %>
-        <%= f.text_field :name, :class =>  "span4"%>
-
+        <%= f.text_field :name, :class => "span4" %>
 
         <%= f.label :email %>
-        <%= f.text_field :email, :class=>  "span4" %>
+        <%= f.text_field :email, :class => "span4" %>
 
         <%= f.label :phone %>
-        <%= f.text_field :phone, :class =>  "span4" %>
+        <%= f.text_field :phone, :class => "span4" %>
 
         <%= f.label :profession %>
-        <%= select :user, :profession, positions, {}, :class => "selectpicker title= 'Olen...' show-menu-arrow show-tick span4"%> <icon class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Missä ominaisuudessa käytät viherkattotietokantaa?"><i class= "icon-question-sign"></i></icon>
+        <%= select :user, :profession, positions, {}, :class => "selectpicker title= 'Olen...' show-menu-arrow show-tick span4" %>
+        <icon class="qmark" href="" data-placement="right" data-toggle="tooltip" title="Missä ominaisuudessa käytät viherkattotietokantaa?">
+          <i class="icon-question-sign"></i></icon>
 
         <%= f.label :password %>
-        <%= f.password_field :password, :class =>  "span4" %>
+        <%= f.password_field :password, :class => "span4" %>
 
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, :class =>  "span4" %>
+        <%= f.password_field :password_confirmation, :class => "span4" %>
 
         <%= f.submit "Tallenna", class: "btn btn-custom" %>
     <% end %>
