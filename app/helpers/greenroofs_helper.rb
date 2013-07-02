@@ -2,6 +2,8 @@
 
 module GreenroofsHelper
 
+# Prints plants nicely for show.
+
   def printPlants (greenroof)
     plants = []
     output = '';
@@ -21,6 +23,8 @@ module GreenroofsHelper
     }
     output.html_safe
   end
+  
+  # Prints custom plants nicely for show.
 
   def printCustomPlants (greenroof)
     output = '';
@@ -44,6 +48,8 @@ module GreenroofsHelper
     }
     output.html_safe
   end
+  
+  # Prints addresses and locations nicely for show.
 
   def printAddress(greenroof)
   if (greenroof.address.blank?)
@@ -53,7 +59,7 @@ module GreenroofsHelper
   end
   end
 
-
+# Prints bases nicely for show.
 
   def printBases (greenroof)
     bases = []
@@ -81,6 +87,8 @@ module GreenroofsHelper
 
 
   private
+  
+  # Prints Layers for printBases.
 
   def printLayers(base)
     layerpile = []
@@ -101,6 +109,8 @@ module GreenroofsHelper
     }
     output.html_safe
   end
+  
+  # Interprets declination values.
 
   def getDeclination(declination)
     if (declination == 0)
