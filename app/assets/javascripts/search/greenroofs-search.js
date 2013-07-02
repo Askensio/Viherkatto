@@ -14,6 +14,7 @@ $(document).ready(function () {
     $('[name="hae"]').click(clickListener);
 });
 
+// The function that the paginator needs, detemines what kind of elemets are put in the pagination.
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
     console.log(entry.address)

@@ -23,6 +23,7 @@ $(document).ready(function () {
     })
 });
 
+// Generates the data to be sent for the design-tool backend.
 function generate() {
     // Removes all error messages
     $('.alert-error').each(function () {
@@ -44,6 +45,7 @@ function generate() {
     sendDesignData(data)
 }
 
+// Generates the data about the roof
 function generateRoofData() {
 
     var alertElement = $('<div class="alert alert-error"></div>')
@@ -66,6 +68,7 @@ function generateRoofData() {
     }
 }
 
+// Generates the data from the environment checkobox.
 function generateEnvironmentsData() {
 
     var environments = []
@@ -77,6 +80,7 @@ function generateEnvironmentsData() {
     return environments
 }
 
+// As the name tells, sends the data for the design tool as an ajax call.
 function sendDesignData(data) {
 
     $.ajax({
@@ -94,6 +98,7 @@ function sendDesignData(data) {
     });
 }
 
+// The handler that controls what plants are selected in the design-tool.
 var PlantSelectionHandler = new function () {
 
     var plants = []
@@ -123,6 +128,7 @@ var PlantSelectionHandler = new function () {
     }
 }
 
+// Listener for the button to add a plant in the selecet list.
 function addButtonListener(event) {
 
     var parent = $(event.target).parent().clone()
@@ -137,7 +143,7 @@ function addButtonListener(event) {
 
     $(event.target).attr('disabled', 'true')
 }
-
+// Listener for removing a selected plant from the selected list.
 function removeButtonListener(event) {
     $(event.target).parent().remove()
     var id = parseInt($(event.target).attr('id'))
@@ -145,6 +151,7 @@ function removeButtonListener(event) {
     $('.plant-list #' + id).removeAttr('disabled')
 }
 
+// The add element function for the plant search pagination
 var addElement = function (entry, admin) {
     var listElement = $('<li></li>');
     var addButton = $('<button class="btn btn-mini link-base-to-plant-button" id="' + entry.id + '">Lisää</button>')

@@ -101,7 +101,6 @@ var addLayer = function addLayer(event) {
     event.preventDefault()
 
     var textElementForLayer = $(event.target).parents('li:eq(0)')
-    //console.log(spandexElement.text())
     var parentDiv = $(this).parents('div:eq(0)')
     var layerElement = generateLayerForm(textElementForLayer.text())
     parentDiv.before(layerElement)
@@ -148,6 +147,7 @@ function generateLayerForm(layerName) {
 
     return layerFormElement
 }
+// A function that gathers all the data in the form and places them in one object.
 var save = function () {
 
     var roof = createRoofObject()
@@ -175,11 +175,7 @@ var save = function () {
     data.greenroof = greenroof
     data.role = role
 
-//    if (validateData(data)) {
     return data
-//    }
-//    else return null
-
 }
 
 
@@ -213,7 +209,6 @@ function createRoofObject() {
     roof.declination = declination
     roof.load_capacity = load_capacity
 
-    //console.log(JSON.stringify(roof))
     return roof
 }
 
@@ -235,14 +230,14 @@ function createEnvironmentsObject() {
 
     $("#environment_id option:selected").each(function (index) {
         id.push($(this).attr('value'))
-        //console.log($(this).attr('value'))
     });
     environments.id = id
-
-    //console.log(JSON.stringify(environments))
+	
     return environments
 }
 
+// Saves the data of the base, because initially there was a possibility to create multiple
+// bases the function would support of gathering data from multiple bases.
 function createBasesArray() {
 
     var bases = []
@@ -263,13 +258,12 @@ function createBasesArray() {
     console.log(JSON.stringify(bases))
     return bases
 }
-
+// Creates an array from all the layers associated into a base.
 function createLayerObjectArray(baseElement) {
 
     var layerArray = []
     var layers = baseElement.children('div')
     layers.each(function (index) {
-        //console.log($(this).children($('h4')))
         var layer = new Object()
         var name = $(this).children('[name="layer[name]"]').val()
         if (typeof name === 'undefined') {
@@ -392,7 +386,9 @@ function createValidationAlert(validationText) {
 
 }
 
-
+// Sends the data to the servers. The success function receives as a response the id of the newly created
+// greenroof and the success function passes the id and the possibly attached file to the function that
+// sends the image data.
 function sendData(data) {
 
     $.ajax({
@@ -410,12 +406,12 @@ function sendData(data) {
             jQuery.each($('#image-upload')[0].files, function (i, file) {
                 imageData.append('file-' + i, file);
             });
-
+			
             sendImage(imageData, response.id)
         }
     });
 }
-
+// Sends the image data to the server.
 function sendImage(imageData, id) {
     $.ajax({
         url: '/greenroofs/' + id + '/upload',
