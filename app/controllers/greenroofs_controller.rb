@@ -238,6 +238,10 @@ class GreenroofsController < ApplicationController
       format.json { render :json => {response: @response} }
     end
   end
+  
+  # Uploads an image to the server and updates the database with paths to it. 
+  # The filename is generated with the current timestamp and the hash of the original filename, so it's likely to be unique.
+  # If an image already exists, it's overwritten.
 
   def upload
     redirect_to_groof_show = false
@@ -292,6 +296,8 @@ class GreenroofsController < ApplicationController
 
 
   end
+  
+  # Physically removes the image and thumbnail and the paths in the database.
 
   def removeImage
     @groof = Greenroof.find(params[:id])
@@ -408,6 +414,8 @@ class GreenroofsController < ApplicationController
   end
 
   private
+  
+  # Checks, if the current user is signed in and owner of the greenroof or an admin.
 
   def ownerOrAdmin
     if not signed_in? && (Greenroof.find_by_id(params[:id]).user_id == current_user.id || current_user.admin?)
