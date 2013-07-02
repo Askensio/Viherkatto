@@ -24,8 +24,8 @@
           <% end %>
         </ul>
         <% if (signed_in? && (current_user == @greenroof.user || current_user.admin?)) && !@greenroof.images.first.nil? %>
-        <%= link_to "Poista kuva", removeImage_greenroof_path%>
-            <% end %>
+            <%= link_to "Poista kuva", removeImage_greenroof_path %>
+        <% end %>
       </div>
 
     </div>

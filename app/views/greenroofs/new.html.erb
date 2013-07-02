@@ -15,6 +15,7 @@
           <fieldset>
             <legend class="greenroof-details">Viherkaton yleiset tiedot</legend>
             <br>
+
             <div id="purpose-select">
               <%= render 'shared/forms/groof_form_fields' %>
             </div>
@@ -26,7 +27,7 @@
               <span class="fileupload-preview"></span>
               <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
             </div>
-            <br></br>
+            <br>
             <legend class="roof-details">Katon tekniset tiedot</legend>
             <div id="large-input-right">
               <%= render 'shared/forms/roof_form_fields' %>
@@ -56,4 +57,4 @@
 <%= javascript_include_tag "greenroof_addition/form_handler" %>
 <%= javascript_include_tag "bootstrap-fileupload" %>
 <script>$('.selectpicker').selectpicker();</script>
-<script>$('.fileupload').fileupload({uploadtype : "image"})</script>
+<script>$('.fileupload').fileupload({uploadtype: "image"})</script>

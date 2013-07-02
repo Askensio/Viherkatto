@@ -1,9 +1,7 @@
 <% provide(:title, 'Katon muokkaus') %>
-<%= stylesheet_link_tag    "bootstrap-select", media: "all" %>
+<%= stylesheet_link_tag "bootstrap-select", media: "all" %>
 
 <h1>Katon muokkaus</h1>
-
-
 
 <div class="row">
   <div class="span4 offset3">
@@ -11,7 +9,6 @@
         <%= render 'shared/forms/roof_form_fields' %>
         <%= f.submit "Muokkaa", class: "btn btn-custom" %>
     <% end %>
-
   </div>
 </div>
 

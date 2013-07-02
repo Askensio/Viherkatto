@@ -11,24 +11,23 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.//-->
 
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <%= stylesheet_link_tag    "bootstrap", media: "all" %>
-    <%= stylesheet_link_tag    "bootstrap-responsive", media: "all" %>
-    <%= stylesheet_link_tag    "custom", media: "all" %>
-    <%= javascript_include_tag "jquery" %>
-    <%= javascript_include_tag "bootstrap" %>
-    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <%= render 'layouts/header' %>
-    <div class="container">
-      <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
-    </div>
-  </body>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag "bootstrap", media: "all" %>
+  <%= stylesheet_link_tag "bootstrap-responsive", media: "all" %>
+  <%= stylesheet_link_tag "custom", media: "all" %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "bootstrap" %>
+  <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/header' %>
+<div class="container">
+  <%= yield %>
+  <%= debug(params) if Rails.env.development? %>
+</div>
+</body>
 </html>
