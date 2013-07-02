@@ -1,49 +1,56 @@
-    <!-- Carousel
-    ================================================== -->
-    <%= javascript_include_tag "bootstrap-carousel" %>
-    <%= javascript_include_tag "bootstrap-transition" %>
-    <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
-        <div class="item active">
-          <%= image_tag("Panorama_versokuja.jpg", alt: "© Niina Ala-Fossi") %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Viherkattoinfo</h1>
-              <p class="lead">Viherkattoja kaupunkiin
-                Info- ja suunnittelusivusto.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <%= image_tag("Panorama linnanmaki_pieni-1 (2).jpg", alt: "R© Niina Ala-Fossi") %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1><a href= "http://www.luomus.fi/kasvitiede/tutkimus/viherkatot/">Viides ulottuvuus</a></h1>
-              <p class="lead">Viides ulottuvuus - viherkatot osaksi kaupunkia on tieteidenvälinen ja monialainen tutkimusohjelma, jonka tavoitteena on löytää suomalaisissa olosuhteissa toimivia, kestävän kehityksen mukaisia viherkattoratkaisuja.</p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <%= image_tag("DSC06030.jpg", alt: "© Niina Ala-Fossi") %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1><a href="https://blogs.helsinki.fi/greenroofs/">Viherkattoblogi!</a></h1>
-              <p class="lead">Tutustu viidennen ulottuvuuden viralliseen blogiin!</p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <%= image_tag("DSC09053.jpg", alt: "© Niina Ala-Fossi") %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1><a href= "http://www.niinaalafossi.com/index.html">Valokuvat</a></h1>
-              <p class="lead">Sivuston kuvien tekijänoikeudet omistaa Niina Ala-Fossi. Lisää kuvia voit löytää hänen kotisivuillaan.</p>
-            </div>
-          </div>
+<!-- Carousel
+================================================== -->
+<%= javascript_include_tag "bootstrap-carousel" %>
+<%= javascript_include_tag "bootstrap-transition" %>
+<div id="myCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag("Panorama_versokuja.jpg", alt: "© Niina Ala-Fossi") %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Viherkattoinfo</h1>
+
+          <p class="lead">Viherkattoja kaupunkiin
+            Info- ja suunnittelusivusto.
+          </p>
         </div>
       </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div><!-- /.carousel -->
+    </div>
+    <div class="item">
+      <%= image_tag("Panorama linnanmaki_pieni-1 (2).jpg", alt: "R© Niina Ala-Fossi") %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1><a href="http://www.luomus.fi/kasvitiede/tutkimus/viherkatot/">Viides ulottuvuus</a></h1>
+
+          <p class="lead">Viides ulottuvuus - viherkatot osaksi kaupunkia on tieteidenvälinen ja monialainen
+            tutkimusohjelma, jonka tavoitteena on löytää suomalaisissa olosuhteissa toimivia, kestävän kehityksen
+            mukaisia viherkattoratkaisuja.</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag("DSC06030.jpg", alt: "© Niina Ala-Fossi") %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1><a href="https://blogs.helsinki.fi/greenroofs/">Viherkattoblogi!</a></h1>
+
+          <p class="lead">Tutustu viidennen ulottuvuuden viralliseen blogiin!</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag("DSC09053.jpg", alt: "© Niina Ala-Fossi") %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1><a href="http://www.niinaalafossi.com/index.html">Valokuvat</a></h1>
+
+          <p class="lead">Sivuston kuvien tekijänoikeudet omistaa Niina Ala-Fossi. Lisää kuvia voit löytää hänen
+            kotisivuillaan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->
 

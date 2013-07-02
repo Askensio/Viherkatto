@@ -7,6 +7,6 @@ class Layer < ActiveRecord::Base
 
   validates :name, presence: true
   validates :product_name, length: {maximum: 180}
-  validates :thickness, allow_blank: false, :numericality => { only_integer: true, :greater_than => -1 }
-  validates :weight, allow_blank: false, :numericality => { only_integer: true, :greater_than => -1 }
+  validates :thickness, allow_blank: false, :numericality => {only_integer: true, :greater_than => -1}
+  validates :weight, allow_blank: false, :numericality => {only_integer: true, :greater_than => -1}
 end

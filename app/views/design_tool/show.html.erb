@@ -58,7 +58,7 @@
                     <label>Vastaavanlaisia valmiita viherkattoja ei löytynyt.</label>
                 <% else %>
                     <% greenroofs.each do |groof| %>
-                        <%= link_to '/greenroofs/' + groof.id.to_s,  :target => "_blank" do %>
+                        <%= link_to '/greenroofs/' + groof.id.to_s, :target => "_blank" do %>
                             <div class="hero-unit greenroof-list-hero-unit span3" style="cursor: pointer;">
                               <div class="thumbnail pull-left">
                                 <% unless groof.images.first.nil? %>
