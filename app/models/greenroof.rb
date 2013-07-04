@@ -1,4 +1,7 @@
 #encoding: utf-8
+
+# This model handles the bread and butter of this application: The Greenroof. In itself, it is pretty ascetic due to
+# holding most of its information through the relations.
 class Greenroof < ActiveRecord::Base
 
   include ActiveModel::Validations

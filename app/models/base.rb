@@ -1,3 +1,5 @@
+# Each base is a set of parameters that a roof can use, created by the administrators of the application. Design tool is using these Base-objects to suggest the
+# user with a possible green roof plan.
 class Base < ActiveRecord::Base
 
   belongs_to :greenroof

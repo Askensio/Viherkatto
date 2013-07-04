@@ -29,6 +29,7 @@ namespace :db do
     Maintenance.create!(name: "Hieman hoitoa vaativa")
     Maintenance.create!(name: "Paljon hoitoa vaativa")
 
+=begin
     99.times do |n|
       name = Faker::Lorem.words(4).join(" ")
       latin_name = Faker::Lorem.words(4).join(" ")
@@ -58,12 +59,16 @@ namespace :db do
       @plant.growth_environments << GrowthEnvironment.first
       @plant.save!
     end
+=end
 
+=begin
     Layer.create!(name: "Kivimurska",
                   product_name: "Murske 2000",
                   thickness: 60,
                   weight: 100)
+=end
 
+=begin
     99.times do |n|
       name = Faker::Lorem.words(1).join(" ")
       product_name = Faker::Lorem.words(1).join(" ")
@@ -75,6 +80,7 @@ namespace :db do
                     thickness: thickness,
                     weight: weight)
     end
+=end
 
 
     admin = User.create!(name: "Example User",
@@ -86,6 +92,7 @@ namespace :db do
                  email: "foo@bar.com",
                  password: "foobar12",
                  password_confirmation: "foobar12")
+=begin
     99.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@railstutorial.org"
@@ -95,6 +102,7 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+=end
 
     Environment.create!(name: "Esikaupunki")
     Environment.create!(name: "Keskusta")
@@ -105,6 +113,7 @@ namespace :db do
     Environment.create!(name: "Kaupunki")
     Environment.create!(name: "Muu")
 
+=begin
     id = 1
     40.times do |n|
       id = id + 1
@@ -195,5 +204,7 @@ namespace :db do
     base.layers << Layer.new(name: "Materiaali3", product_name: "Repan mansikkakiisseli", thickness: 80, weight: 80)
     base.save!
   end
+=end
+end
 end
 

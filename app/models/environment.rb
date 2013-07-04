@@ -1,3 +1,4 @@
+# Used to associate the green roof with an environment (e.g. 'City' or 'Countryside')
 class Environment < ActiveRecord::Base
   attr_accessible :name
 
